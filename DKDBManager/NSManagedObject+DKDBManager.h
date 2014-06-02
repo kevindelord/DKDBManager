@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Smartmobilefactory. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
 #import "DKDBManager.h"
 
 @protocol DKDBManagedObject <NSObject>

@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 smartmobilefactory. All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
 #import "DKDBManager.h"
-#import "DKHelper.h"
 
 // models
 //#import "xxx+Helpers.h"

@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import "DKHelper.h"
+#import "CoreData+MagicalRecord.h"
 #import "NSManagedObject+DKDBManager.h"
 
 @interface DKDBManager : NSObject
