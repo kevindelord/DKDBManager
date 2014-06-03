@@ -145,7 +145,6 @@
 }
 
 + (NSString *)sortingAttributeName {
-    NSLog(@"%@", __STRING_PRETTY_FUNCTION__);
     return nil;
 }
 

@@ -120,7 +120,7 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock {
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        [DKDBManager dump];
+        [self dump];
         if (completionBlock)
             completionBlock(success, error);
     }];
