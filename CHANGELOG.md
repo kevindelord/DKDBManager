@@ -2,4 +2,8 @@
 
 ## 0.1.0
 
-Initial release.
+- Missing license fix
+
+## 0.1.0
+
+- Initial release.
