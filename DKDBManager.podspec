@@ -8,7 +8,13 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/kevindelord/DKDBManager.git", :tag => s.version.to_s }
   s.platform         = :ios
   s.requires_arc     = true
+  s.framework        = 'CoreData'
   s.source_files     = 'DKDBManager/*'
   s.dependency         'MagicalRecord'
   s.dependency         'DKHelper'
+  s.prefix_header_contents = <<-EOS
+#import <CoreData/CoreData.h>
+#import "CoreData+MagicalRecord.h"
+#import "DKHelper.h"
+EOS
 end
