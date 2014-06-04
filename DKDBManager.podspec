@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.platform         = :ios
   s.requires_arc     = true
   s.framework        = 'CoreData'
-  s.source_files     = 'Classes/*'
+  s.source_files     = 'DKDBManager/*'
   s.dependency         'MagicalRecord'
   s.dependency         'DKHelper'
   s.prefix_header_contents = <<-EOS
