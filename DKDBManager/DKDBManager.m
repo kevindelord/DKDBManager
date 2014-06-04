@@ -145,7 +145,7 @@ static BOOL _needForcedUpdate = NO;
 
     if (DKDBManager.resetStoredEntities || newIdentifier || !storedIdentifier) {
         // remove the sqlite file
-        DKLog(DKDBManager.verbose, @"reset database: %@", K_DATABASE_NAME);
+        DKLog(DKDBManager.verbose, @"reset database: %@", databaseName);
         // do some cleanUp of MagicalRecord
         [MagicalRecord cleanUp];
         NSError *error;
