@@ -3,7 +3,7 @@
 //  WhiteWall
 //
 //  Created by kevin delord on 20/05/14.
-//  Copyright (c) 2014 Smartmobilefactory. All rights reserved.
+//  Copyright (c) 2014 Kevin Delord. All rights reserved.
 //
 
 #import "NSManagedObject+DKDBManager.h"

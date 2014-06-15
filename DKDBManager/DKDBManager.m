@@ -3,43 +3,10 @@
 //  WhiteWall
 //
 //  Created by kevin delord on 21/02/14.
-//  Copyright (c) 2014 smartmobilefactory. All rights reserved.
+//  Copyright (c) 2014 Kevin Delord. All rights reserved.
 //
 
 #import "DKDBManager.h"
-
-// models
-//#import "xxx+Helpers.h"
-
-// defines
-//#import "xxHelpers.h"
-
-/*
- 
- How to use MagicalRecord :
- 
- #1
- NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"title contains[cd] %@", query];
- NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"keywords contains[cd] %@", query];
- NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[predicate1, predicate2]];
- NSArray *result = [Note findAllWithPredicate:predicate];
- 
- #2
- NSArray *result = [Note findAllSortedBy:@"date" ascending:YES];
- 
- #3
- NSFetchRequest *fr = [[NSFetchRequest alloc] init];
- NSEntityDescription *ed = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:[NSManagedObjectContext defaultContext]];
- [fr setEntity:ed];
- NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
- [fr setSortDescriptors:@[sd]];
- NSError *error = nil;
- NSArray *result = [[NSManagedObjectContext defaultContext] executeFetchRequest:fr error:&error];
- 
- http://yannickloriot.com/2012/03/magicalrecord-how-to-make-programming-with-core-data-pleasant/#sthash.H89Qlrfm.tnJxdlS4.dpbs
- http://mobile.tutsplus.com/tutorials/iphone/easy-core-data-fetching-with-magical-record/
- 
- */
 
 static BOOL _allowUpdate = YES;
 static BOOL _verbose = NO;
@@ -79,12 +46,15 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - DB methods
 
-//
-// create an array of all identifiers for each entity
-// In each entity don't forget to save the ID of each child relation.
-// A saved child will be checked if deprecated and remove.
-// It will also be removed if the parent is removed.
-//
++ (void)removeDeprecatedEntities {
+}
+
+#pragma mark - Save methods
+
+- (NSArray *)savedEntitiesForKey:(NSString *)key {
+    return [_entities objectForKey:key];
+}
+
 + (void)saveId:(NSString *)id forEntity:(NSString *)entity {
     DKDBManager *manager = [DKDBManager sharedInstance];
 
@@ -94,33 +64,14 @@ static BOOL _needForcedUpdate = NO;
     [[manager->_entities objectForKey:entity] addObject:id];
 }
 
-//
-//
-//
-- (NSArray *)savedEntitiesForKey:(NSString *)key {
-    return [_entities objectForKey:key];
-}
-
-//
-// Remove deprecated entities.
-// i.e: not stored in the manager anymore
-//
-+ (void)removeDeprecatedEntities {
-// blabla child
-}
-
-//
-// Save the current context
-// This method should be called when minor changes have been done
-// It does NOT clean the database, just save the new changes.
-//
 + (void)save {
     [self saveToPersistentStoreWithCompletion:nil];
 }
 
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock {
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        [self dump];
+        if (self.verbose)
+            [self dump];
         if (completionBlock)
             completionBlock(success, error);
     }];
@@ -130,10 +81,8 @@ static BOOL _needForcedUpdate = NO;
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreAndWait];
 }
 
-//
-// Setup the core data stack
-// Reset it if needed.
-//
+#pragma mark - Setup
+
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName identifier:(NSString *)identifier forKey:(NSString *)storingKey {
 
     // Boolean to know if the database has been completely reset
@@ -208,7 +157,6 @@ static BOOL _needForcedUpdate = NO;
 
 // log
 + (void)dump {
-// blablabla child
 }
 
 @end
