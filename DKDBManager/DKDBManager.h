@@ -79,6 +79,8 @@
  */
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate;
 
+#pragma mark - Log
+
 /**
  * TODO
  */
@@ -96,6 +98,11 @@
  * @return A singleton instance of the manager.
  */
 + (instancetype)sharedInstance;
+
+/**
+ * TODO
+ */
++ (NSArray *)entities;
 
 /**
  * Asynchronously saves the current context into its persistent store.

@@ -1,5 +1,10 @@
 # DKDBManager CHANGELOG
 
+## 0.2.0
+
+- Improve log methods
+- Improve entities saving and deprecation removal
+
 ## 0.1.2
 
 - Database name bug fix
