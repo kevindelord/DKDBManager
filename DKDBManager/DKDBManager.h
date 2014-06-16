@@ -80,10 +80,14 @@
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate;
 
 /**
- * This method does nothing in this manager but could be overwritten inside a subclass to display some logs.
- * This method is not called if the manager.verbose value is set to NO.
+ * TODO
  */
 + (void)dump;
+
+/**
+ * TODO
+ */
++ (void)dumpCount;
 
 #pragma mark - DB methods
 
@@ -119,13 +123,6 @@
  * @param entity The NSString describing the entity name 
  */
 + (void)saveId:(NSString *)id forEntity:(NSString *)entity;
-
-/**
- * An array of not deprecated stored entities.
- *
- * @return An array containing all saved entities for the given key.
- */
-- (NSArray *)savedEntitiesForKey:(NSString *)key;
 
 /**
  * Reset (if needed) and setup the core data stack.

@@ -46,14 +46,30 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - DB methods
 
+ + (NSUInteger)count {
+     return 0;
+ }
+
+ + (NSArray *)all {
+     return nil;
+ }
+
++ (NSArray *)entities {
+    return nil;
+}
+
 + (void)removeDeprecatedEntities {
+    DKDBManager *manager = [DKDBManager sharedInstance];
+
+    DKLog(self.verbose, @"-------------- Removing deprecated entities -----------------");
+
+    for (NSString *className in self.entities) {
+        Class class = NSClassFromString(className);
+        [class removeDeprecatedEntitiesFromArray:[manager->_entities objectForKey:className]];
+    }
 }
 
 #pragma mark - Save methods
-
-- (NSArray *)savedEntitiesForKey:(NSString *)key {
-    return [_entities objectForKey:key];
-}
 
 + (void)saveId:(NSString *)id forEntity:(NSString *)entity {
     DKDBManager *manager = [DKDBManager sharedInstance];
@@ -155,8 +171,38 @@ static BOOL _needForcedUpdate = NO;
     _needForcedUpdate = needForcedUpdate;
 }
 
-// log
+#pragma mark - Log
+
++ (void)dumpCount {
+
+    if (!self.verbose) return ;
+
+    NSString *count = @"";
+
+    for (NSString *className in self.entities) {
+        Class class = NSClassFromString(className);
+        count = [NSString stringWithFormat:@"%@%ld %@, ", count, cUL(class.count), className];
+    }
+
+    DKLog(self.verbose, @"-------------------------------------");
+    DKLog(self.verbose, @"%@", count);
+    DKLog(self.verbose, @"-------------------------------------");
+}
+
 + (void)dump {
+
+    if (!self.verbose) return ;
+
+    [self dumpCount];
+
+    for (NSString *className in self.entities) {
+        Class class = NSClassFromString(className);
+        if (class.verbose) {
+            for (id entity in class.all)
+                DKLog(self.verbose, @"%@ %@", className, entity);
+            DKLog(self.verbose, @"-------------------------------------");
+        }
+    }
 }
 
 @end
