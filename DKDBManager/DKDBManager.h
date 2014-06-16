@@ -113,16 +113,15 @@
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock;
 
 /**
- * Depending on your database logic, app architecture, APIs, etc., each entity could be saved into a local array to save them as not deprecated.
+ * Depending on your database logic, app architecture, APIs, etc., each entity could be saved into a local array as not deprecated.
  * By doing so they won't be removed when the method "removeDeprecatedEntities" is called.
- * This method is called inside the 'createEntityFromDictionary:' method.
- * To improve the removal of deprecated entities it is extremely adviced to save the ID of each child entities/relations.
- * If implemented properly an entity will be removed if its parent is.
+ * The 'saveEntity:' method is called from the 'createEntityFromDictionary:' one.
+ * To improve the removal of deprecated entities it is extremely adviced to save the ID of each child entities and relationships.
+ * If implemented properly an entity will be removed also if its parent is.
  *
- * @param id The entity to store as not deprecated
- * @param entity The NSString describing the entity name 
+ * @param entity The entity object to store as not deprecated
  */
-+ (void)saveId:(NSString *)id forEntity:(NSString *)entity;
++ (void)saveEntity:(id)entity;
 
 /**
  * Reset (if needed) and setup the core data stack.
@@ -135,7 +134,7 @@
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName identifier:(NSString *)identifier forKey:(NSString *)storingKey;
 
 /**
- * TODO: logic should be improved
+ * TODO
  */
 + (void)removeDeprecatedEntities;
 

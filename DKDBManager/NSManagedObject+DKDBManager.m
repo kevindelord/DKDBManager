@@ -33,7 +33,7 @@
             return nil;
         } else {
             // save the product as not deprecated and go on the next question
-            [entity saveID];
+            [entity save];
             if (completion) completion(entity, DKDBManagedObjectStateSave);
             return entity;
         }
@@ -49,7 +49,7 @@
         return nil;
     }
     DKLog(DKDBManager.verbose && [self verbose], @"%@ %@ %@", (creating ? @"Creating" : @"Updating"), NSStringFromClass([self class]), entity);
-    [entity saveID];
+    [entity save];
     if (completion) completion(entity, creating? DKDBManagedObjectStateCreate : DKDBManagedObjectStateUpdate);
     return entity;
 }
@@ -79,15 +79,13 @@
     return [self MR_findAll];
 }
 
-- (void)saveID {
+- (void)save {
     //
     // Method to save/store the current object and all its child relations as not deprecated.
     // See: DKDBManager
     //
 
-    if ([self respondsToSelector:@selector(uniqueIdentifier)]) {
-        [DKDBManager saveId:[self performSelector:@selector(uniqueIdentifier)] forEntity:NSStringFromClass([self class])];
-    }
+    [DKDBManager saveEntity:self];
 }
 
 #pragma mark - UPDATE

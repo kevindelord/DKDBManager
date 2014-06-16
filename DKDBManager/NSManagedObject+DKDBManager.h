@@ -37,7 +37,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - READ
 
-- (void)saveID;
+- (void)save;
 + (NSArray *)all;
 + (NSInteger)count;
 

@@ -71,13 +71,19 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - Save methods
 
-+ (void)saveId:(NSString *)id forEntity:(NSString *)entity {
++ (void)saveEntity:(id)entity {
+
     DKDBManager *manager = [DKDBManager sharedInstance];
 
-    if (![manager->_entities objectForKey:entity])
-        [manager->_entities setValue:[NSMutableArray new] forKey:entity];
+    NSString *className = NSStringFromClass([entity class]);
 
-    [[manager->_entities objectForKey:entity] addObject:id];
+    if (![manager->_entities objectForKey:className]) {
+        [manager->_entities setValue:[NSMutableArray new] forKey:className];
+    }
+
+    if ([entity respondsToSelector:@selector(uniqueIdentifier)]) {
+        [[manager->_entities objectForKey:className] addObject:[entity performSelector:@selector(uniqueIdentifier)]];
+    }
 }
 
 + (void)save {
