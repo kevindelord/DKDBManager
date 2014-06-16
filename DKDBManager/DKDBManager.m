@@ -205,7 +205,7 @@ static BOOL _needForcedUpdate = NO;
         Class class = NSClassFromString(className);
         if (class.verbose) {
             for (id entity in class.all)
-                DKLog(self.verbose, @"%@ %@", className, entity);
+                NSLog(@"%@ %@", className, entity);
             DKLog(self.verbose, @"-------------------------------------");
         }
     }

@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 0.2.1
+
+- remove minor warning
+
 ## 0.2.0
 
 - Improve log methods
