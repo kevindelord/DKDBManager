@@ -41,10 +41,10 @@
         status = DKDBManagedObjectStateDelete;
     }
 
-    if (status != DKDBManagedObjectStateSave)
-        DKLog(DKDBManager.verbose && [self verbose], @"%@ %@ %@", (status == DKDBManagedObjectStateCreate ? @"Creating" : @"Updating"), NSStringFromClass([self class]), entity);
+    DKLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateCreate, @"Creating %@ %@", NSStringFromClass([self class]), entity);
+    DKLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateUpdate, @"Updating %@ %@", NSStringFromClass([self class]), entity);
 
-    // will svae the entity id if entity exists
+    // if entity exists then save the entity's id.
     [entity save];
 
     if (completion) completion(entity, status);
