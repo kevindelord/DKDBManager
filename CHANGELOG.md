@@ -1,5 +1,11 @@
 # DKDBManager CHANGELOG
 
+## 0.3.0
+
+- Add log after a saveToPersistentStoreAndWait call
+- New naming: 'shouldUpdateEntity:withDictionary:'
+- Minor code logic improvement
+
 ## 0.2.1
 
 - remove minor warning
