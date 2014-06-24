@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 0.3.1
+
+- Minor improvement on shouldUpdateEntity method
+
 ## 0.3.0
 
 - Add log after a saveToPersistentStoreAndWait call
