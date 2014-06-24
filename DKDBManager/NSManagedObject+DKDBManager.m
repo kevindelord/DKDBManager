@@ -128,7 +128,7 @@
 }
 
 + (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary {
-    return ((DKDBManager.allowUpdate) || (entity && DKDBManager.needForcedUpdate));
+    return ((entity && DKDBManager.allowUpdate) || (entity && DKDBManager.needForcedUpdate));
 }
 
 + (BOOL)verbose {
