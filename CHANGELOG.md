@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 0.3.2
+
+- Minor log improvement
+
 ## 0.3.1
 
 - Minor improvement on shouldUpdateEntity method

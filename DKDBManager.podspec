@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "DKDBManager"
-  s.version          = "0.3.1"
+  s.version          = "0.3.2"
   s.summary          = "Database manager to use around MagicalRecord to provide a complete CRUD logic for your entities."
   s.homepage         = "https://github.com/kevindelord/DKDBManager"
   s.license          = 'MIT'
