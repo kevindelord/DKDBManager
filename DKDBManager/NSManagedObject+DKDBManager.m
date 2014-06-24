@@ -18,39 +18,36 @@
 
 + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion {
 
-    // now create or update an entity
-    BOOL creating = false;
+    // now create, save or update an entity
+    DKDBManagedObjectState status = DKDBManagedObjectStateSave;
+
     // if the entity already exist then update it
     id entity = [self MR_findFirstWithPredicate:[self primaryPredicateWithDictionary:dictionary]];
     // else create a new entity in the current thread MOC
     if (!entity) {
         entity = [self MR_createEntity];
-        creating = true;
-    } else if ([self shouldUpdateEntity:entity withDictionary:dictionary] == false) {
-        if ([entity invalidReason]) {
-            [entity deleteEntityWithReason:[entity invalidReason]];
-            if (completion) completion(entity, DKDBManagedObjectStateDelete);
-            return nil;
-        } else {
-            // save the product as not deprecated and go on the next question
-            [entity save];
-            if (completion) completion(entity, DKDBManagedObjectStateSave);
-            return entity;
-        }
+        [entity updateWithDictionary:dictionary];
+        status = DKDBManagedObjectStateCreate;
+    } else if ([self shouldUpdateEntity:entity withDictionary:dictionary]) {
+        // update attributes
+        [entity updateWithDictionary:dictionary];
+        status = DKDBManagedObjectStateUpdate;
     }
 
-    // update attributes
-    [entity updateWithDictionary:dictionary];
-
-    // Just keeping the valid and managed products and ignored the unvalid, disabled, non-managed ones.
+    // Just keeping the valid and managed entities and ignored the unvalid, disabled, non-managed ones.
     if ([entity invalidReason]) {
         [entity deleteEntityWithReason:[entity invalidReason]];
-        if (completion) completion(entity, DKDBManagedObjectStateDelete);
-        return nil;
+        entity = nil;
+        status = DKDBManagedObjectStateDelete;
     }
-    DKLog(DKDBManager.verbose && [self verbose], @"%@ %@ %@", (creating ? @"Creating" : @"Updating"), NSStringFromClass([self class]), entity);
+
+    if (status != DKDBManagedObjectStateSave)
+        DKLog(DKDBManager.verbose && [self verbose], @"%@ %@ %@", (status == DKDBManagedObjectStateCreate ? @"Creating" : @"Updating"), NSStringFromClass([self class]), entity);
+
+    // will svae the entity id if entity exists
     [entity save];
-    if (completion) completion(entity, creating? DKDBManagedObjectStateCreate : DKDBManagedObjectStateUpdate);
+
+    if (completion) completion(entity, status);
     return entity;
 }
 
