@@ -101,6 +101,8 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)saveToPersistentStoreAndWait {
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreAndWait];
+    if (self.verbose)
+        [self dump];
 }
 
 #pragma mark - Setup
