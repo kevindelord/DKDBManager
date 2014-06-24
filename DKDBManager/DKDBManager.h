@@ -36,7 +36,7 @@
 /**
  * Returns a Boolean value indicating whether the manager allows updates to the different model entities.
  * If this boolean is set to NO then entities won't be updated anymore. Just new ones will be created with new values.
- * The result of the method: 'shouldNotUpdateEntity:withDictionary:' will be ignored.
+ * The result of the method: 'shouldUpdateEntity:withDictionary:' will be ignored.
  * Default value YES.
  *
  * @return YES if the manager allows updates to the model entities.
@@ -66,7 +66,7 @@
 /**
  * Returns a Boolean value indicating whether the manager will force the update to the different model entities..
  * If this boolean is set to yes then an entity will always be updated with a given dictionnary inside the method: 'createEntityWithDictionary:'.
- * The result of the method: 'shouldNotUpdateEntity:withDictionary:' will be ignored.
+ * The result of the method: 'shouldUpdateEntity:withDictionary:' will be ignored.
  * Default value NO.
  *
  * @return YES if the manager need to reset all stored entities.

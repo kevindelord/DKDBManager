@@ -26,7 +26,7 @@
     if (!entity) {
         entity = [self MR_createEntity];
         creating = true;
-    } else if ([self shouldNotUpdateEntity:entity withDictionary:dictionary]) {
+    } else if ([self shouldUpdateEntity:entity withDictionary:dictionary] == false) {
         if ([entity invalidReason]) {
             [entity deleteEntityWithReason:[entity invalidReason]];
             if (completion) completion(entity, DKDBManagedObjectStateDelete);
@@ -130,8 +130,8 @@
     // remove all the child of the current object
 }
 
-+ (BOOL)shouldNotUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary {
-    return ((!DKDBManager.allowUpdate) || (entity && !DKDBManager.needForcedUpdate));
++ (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary {
+    return ((DKDBManager.allowUpdate) || (entity && DKDBManager.needForcedUpdate));
 }
 
 + (BOOL)verbose {

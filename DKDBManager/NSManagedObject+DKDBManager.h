@@ -14,7 +14,7 @@
 @optional
 - (NSString *)invalidReason;
 - (void)deleteChildEntities;
-+ (BOOL)shouldNotUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
++ (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
 + (BOOL)verbose;
 + (NSString *)sortingAttributeName;
 + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
@@ -58,7 +58,7 @@ typedef enum : NSUInteger {
 
 - (NSString *)invalidReason;
 - (void)deleteChildEntities;
-+ (BOOL)shouldNotUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
++ (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
 + (BOOL)verbose;
 + (NSString *)sortingAttributeName;
 + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
