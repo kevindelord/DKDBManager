@@ -69,6 +69,10 @@ static BOOL _needForcedUpdate = NO;
     }
 }
 
++ (void)cleanUp {
+    [MagicalRecord cleanUp];
+}
+
 #pragma mark - Save methods
 
 + (void)saveEntity:(id)entity {

@@ -145,6 +145,11 @@
  */
 + (void)removeDeprecatedEntities;
 
+/**
+ * TODO: logic should be improved
+ */
++ (void)cleanUp;
+
 @end
 
 #endif
