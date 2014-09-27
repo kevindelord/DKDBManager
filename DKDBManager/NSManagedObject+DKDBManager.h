@@ -53,7 +53,7 @@ typedef enum : NSUInteger {
 #pragma mark - DKDBManagedObject Protocol
 
 //
-// As this class does NOT implement the DKDBManagedObject protocol we have to declare all methods in order to let the subclass overwrite them.
+// As this class does NOT implement the DKDBManagedObject protocol we have to declare all methods in order to let the subclass override them.
 //
 
 - (NSString *)invalidReason;
