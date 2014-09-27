@@ -1,6 +1,5 @@
 //
 //  DKDBManager.h
-//  WhiteWall
 //
 //  Created by kevin delord on 21/02/14.
 //  Copyright (c) 2014 Kevin Delord. All rights reserved.
@@ -29,6 +28,7 @@
 
 /**
  * Set a Boolean value indicating whether the manager is set as verbose or not.
+ *
  * @param Boolean value.
  */
 + (void)setVerbose:(BOOL)verbose;
@@ -64,7 +64,7 @@
 + (void)setResetStoredEntities:(BOOL)resetStoredEntities;
 
 /**
- * Returns a Boolean value indicating whether the manager will force the update to the different model entities..
+ * Returns a Boolean value indicating whether the manager will force the update to the different model entities.
  * If this boolean is set to yes then an entity will always be updated with a given dictionnary inside the method: 'createEntityWithDictionary:'.
  * The result of the method: 'shouldUpdateEntity:withDictionary:' will be ignored.
  * Default value NO.
@@ -82,12 +82,18 @@
 #pragma mark - Log
 
 /**
- * TODO
+ * Dump the database iff the log is enable.
+ *
+ * @discussion Will log in the console the number of entities per model and then get and display the description of every objects.
+ * The entities are sorted by class and then by following the DKDBManagedObject protocol. 
+ *
+ * @see + (BOOL)verbose;
+ * @see + (NSString *)sortingAttributeName;
  */
 + (void)dump;
 
 /**
- * TODO
+ * Dump the number of entities per model in the database iff the log is enable.
  */
 + (void)dumpCount;
 
@@ -100,9 +106,33 @@
 + (instancetype)sharedInstance;
 
 /**
- * TODO
+ * Return an array of class names as strings corresponding to the classes that should be proceed when deleting deprecated or loging entities.
+ *
+ * @discussion This method should be overridden in a subclass to match your project's datamodel.
  */
 + (NSArray *)entities;
+
+/**
+ * Cleanup the CoreData stack before the app exits.
+ *
+ * @discussion Should be called on the `applicationWillTerminate:` AppDelegate's method.
+ */
++ (void)cleanUp;
+
+/**
+ * Setup, and reset if needed, the CoreData stack using an auto migrating system.
+ *
+ * @discussion
+ * Of course you can play with the name to change your database on startup whenever you would like to.
+ * A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions`
+ * method of your `AppDelegate`.
+ *
+ * @param databaseName The NSString object containing the name of the database. Shouldn't be nil and can be modified on startup. 
+ * @return YES if the database has been reset. 
+ */
++ (BOOL)setupDatabaseWithName:(NSString *)databaseName;
+
+#pragma mark - Save methods
 
 /**
  * Asynchronously saves the current context into its persistent store.
@@ -120,8 +150,8 @@
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock;
 
 /**
- * Depending on your database logic, app architecture, APIs, etc., each entity could be saved into a local array as not deprecated.
- * By doing so they won't be removed when the method "removeDeprecatedEntities" is called.
+ * Depending on your database logic, app architecture, APIs, etc., each entity's uniqueIdentifier` could be saved into
+ * a local array as not deprecated. By doing so they won't be removed when the method "removeDeprecatedEntities" is called.
  * The 'saveEntity:' method is called from the 'createEntityFromDictionary:' one.
  * To improve the removal of deprecated entities it is extremely adviced to save the ID of each child entities and relationships.
  * If implemented properly an entity will be removed also if its parent is.
@@ -130,25 +160,25 @@
  */
 + (void)saveEntity:(id)entity;
 
-/**
- * Reset (if needed) and setup the core data stack.
- *
- * @param databaseName The NSString object containing the name of the database. Shouldn't be nil.
- * @param identifier The NSString object containing an identifier of the current database. For example if you want to have different database for different APIs. Shouldn't be nil.
- * @param storingKey The NSString object describing the key to use to save the identifier into the NSUserDefaults. Shouldn't be nil.
- * @return YES if the database has been reset. 
- */
-+ (BOOL)setupDatabaseWithName:(NSString *)databaseName identifier:(NSString *)identifier forKey:(NSString *)storingKey;
+#pragma mark - Delete methods
 
 /**
- * TODO
+ * Call `removeDeprecatedEntitiesFromArray:` method for every class returned by the `entities` one.
+ *
+ * @discussion
+ * Only the saved objects through the `saveEntity:` method will NOT be removed as they are saved as *not deprecated*.
+ * All other entities will be removed.
  */
 + (void)removeDeprecatedEntities;
 
 /**
- * TODO: logic should be improved
+ * Do a `cleanUp` and completely remove the sqlite file from the disk.
+ *
+ * @discussion If the file referenced by the given database name couldn't be find a UIAlertView will be shown.
+ *
+ * @return YES if the database has been reset. 
  */
-+ (void)cleanUp;
++ (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName;
 
 @end
 
