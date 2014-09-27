@@ -88,7 +88,7 @@
 #pragma mark - UPDATE
 
 - (void)updateWithDictionary:(NSDictionary *)dict {
-    // this methid should be overwriten on the subclass
+    // this method should be overridden on the subclass
 }
 
 #pragma mark - DELETE
