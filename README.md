@@ -11,6 +11,10 @@ DKDBManager is simple, yet very useful, helper/manager around [Magical Record](h
 This tutoriel will explain how to use the pod through a basic fake project having XY as prefix. 
 The data model consists on 3 classes: Plane, Pilot and Passenger.
 
+## Documentation
+
+The complete documentation is available on [CocoaDocs](http://cocoadocs.org/docsets/DKDBManager).
+
 ## Installation
 
 DKDBManager is available through [CocoaPods](http://cocoapods.org). To install
