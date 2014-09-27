@@ -6,6 +6,10 @@
 
 ## Concept
 
+DKDBManager is simple, yet very useful, helper/manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). *MR* already is a very helpful, easy-to-use, less-to-code, wonderful CoreData wrapper. The current library will implement a logic around this to help you to manage your entities. Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
+
+This tutoriel will explain how to use the pod through a basic fake project having XY as prefix. 
+The data model consists on 3 classes: Plane, Pilot and Passenger.
 
 ## Installation
 
@@ -91,12 +95,31 @@ In this file you have to `setup` the CoreData stack on start up and `cleanUp` be
 		[XYDKManager cleanUp];
 	}
 
+### Model : Plane
+
+To be explained soon...
+
+- DKDBManagedObject protocol
+- Categories/extensions
+- Completion block
+- MagicalRecord request
+
+## Projects
+
+`DKDBManager` is used in the following projects:
+
+- WhiteWall
+- Pons-SprachKalender
+- ZahnPlan
+- *Your project here*
+
 ## TODO
 
 - Improve log
 - Improve documentaion
 - Add method to delete all entities for a specific model.
 - Add tests
+- Add project links
 
 ## Author
 
