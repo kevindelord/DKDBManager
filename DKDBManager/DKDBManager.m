@@ -58,6 +58,12 @@ static BOOL _needForcedUpdate = NO;
     return nil;
 }
 
++ (void)cleanUp {
+    [MagicalRecord cleanUp];
+}
+
+#pragma mark - Delete methods
+
 + (void)removeDeprecatedEntities {
     DKDBManager *manager = [DKDBManager sharedInstance];
 
@@ -67,10 +73,6 @@ static BOOL _needForcedUpdate = NO;
         Class class = NSClassFromString(className);
         [class removeDeprecatedEntitiesFromArray:[manager->_entities objectForKey:className]];
     }
-}
-
-+ (void)cleanUp {
-    [MagicalRecord cleanUp];
 }
 
 #pragma mark - Save methods
