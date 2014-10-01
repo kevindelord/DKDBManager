@@ -125,20 +125,6 @@
  */
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName;
 
-#pragma mark - Delete methods
-
-/**
- * Delete all saved entities from the current context for all models in the current database. Does not 'hard' reset the entire sqlite file.
- */
-+ (void)deleteAllEntities;
-
-/**
- * Delete all saved entities from the current context for one specific model in the current database.
- *
- * @param class The Class object referencing the model to delete the entities. 
- */
-+ (void)deleteAllEntitiesForClass:(Class)class;
-
 #pragma mark - Save methods
 
 /**
@@ -186,6 +172,18 @@
  * @return YES if the database has been reset. 
  */
 + (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName;
+
+/**
+ * Delete all saved entities from the current context for all models in the current database. Does not 'hard' reset the entire sqlite file.
+ */
++ (void)deleteAllEntities;
+
+/**
+ * Delete all saved entities from the current context for one specific model in the current database.
+ *
+ * @param class The Class object referencing the model to delete the entities.
+ */
++ (void)deleteAllEntitiesForClass:(Class)class;
 
 @end
 

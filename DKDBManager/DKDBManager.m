@@ -105,6 +105,19 @@ static BOOL _needForcedUpdate = NO;
     }
 }
 
++ (void)deleteAllEntities {
+    for (NSString *className in self.entities) {
+        Class class = NSClassFromString(className);
+        [class deleteAllEntities];
+    }
+}
+
++ (void)deleteAllEntitiesForClass:(Class)class {
+    if ([self.entities containsObject:NSStringFromClass(class)]){
+        [class deleteAllEntities];
+    }
+}
+
 #pragma mark - Save methods
 
 + (void)saveEntity:(id)entity {
@@ -177,21 +190,6 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate {
     _needForcedUpdate = needForcedUpdate;
-}
-
-#pragma mark - Delete methods
-
-+ (void)deleteAllEntities {
-    for (NSString *className in self.entities) {
-        Class class = NSClassFromString(className);
-        [class deleteAllEntities];
-    }
-}
-
-+ (void)deleteAllEntitiesForClass:(Class)class {
-    if ([self.entities containsObject:NSStringFromClass(class)]){
-        [class deleteAllEntities];
-    }
 }
 
 #pragma mark - Log
