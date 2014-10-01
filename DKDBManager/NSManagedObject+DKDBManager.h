@@ -7,19 +7,6 @@
 
 #import "DKDBManager.h"
 
-@protocol DKDBManagedObject <NSObject>
-@required
-- (NSString *)uniqueIdentifier;
-@optional
-- (NSString *)invalidReason;
-- (void)deleteChildEntities;
-- (void)updateWithDictionary:(NSDictionary *)dict;
-+ (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
-+ (BOOL)verbose;
-+ (NSString *)sortingAttributeName;
-+ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
-@end
-
 typedef enum : NSUInteger {
     DKDBManagedObjectStateCreate,
     DKDBManagedObjectStateUpdate,
@@ -37,7 +24,13 @@ typedef enum : NSUInteger {
 
 #pragma mark - READ
 
+- (id)uniqueIdentifier;
 - (void)save;
+- (NSString *)invalidReason;
+- (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
++ (BOOL)verbose;
++ (NSString *)sortingAttributeName;
++ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)all;
 + (NSInteger)count;
 
@@ -47,21 +40,9 @@ typedef enum : NSUInteger {
 
 #pragma mark - DELETE
 
+- (void)deleteChildEntities;
 - (void)deleteEntityWithReason:(NSString *)reason;
 + (void)deleteAllEntities;
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
-
-#pragma mark - DKDBManagedObject Protocol
-
-//
-// As this class does NOT implement the DKDBManagedObject protocol we have to declare all methods in order to let the subclass override them.
-//
-
-- (NSString *)invalidReason;
-- (void)deleteChildEntities;
-+ (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
-+ (BOOL)verbose;
-+ (NSString *)sortingAttributeName;
-+ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
 
 @end
