@@ -28,12 +28,11 @@ and run `pod install` from the main directory.
 
 To get started, first, import the header file DKDBManager.h in your project's pch file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and CoredData.
 
-As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you first need to implement some minor and basic methods. The best way to use it would be to subclass the manager itself. Afterwhat you still have to update your AppDelegate and create categories (or extensions in Swift) implementing the `DKDBManagedObject` protolcol for your models.
+As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you first need to implement at least one minor and basic method. The best way to use it would be to subclass the manager itself. Afterwhat you still have to update your AppDelegate and create categories (or extensions in Swift) implementing the `DKDBManagedObject` protolcol for your models.
 
 ### XYDBManager subclass of DKDBManager
 
-In this subclass you need two methods. 
-The first one is needed to setup the CoreData stack with a specifc name. Of course you can play with the name to change your database on startup whenever you would like to.
+In this subclass you need to setup the CoreData stack with a specifc file name. Of course you can play with the name to change your database on startup whenever you would like to.
 A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
 
 	@implementation XYDBManager
@@ -50,20 +49,11 @@ A good practice will be to call this method at the beginning of the `application
 			// Starting this point your database is ready to use.
 			// You can now create any object you could need.
 		}
-
-The second method is required to tell the manager which models should be proceed when deleting deprecated or loging entities.
-
-		+ (NSArray *)entities {
-			// Simply return an array of class names as strings.
-		    return @[NSStringFromClass(Plane.class),
-		             NSStringFromClass(Pilot.class),
-		             NSStringFromClass(Passenger.class)];
-		}
 	@end
 
 ### Configuration
 
-Of course you can also configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName` inside the `setup` method:
+Of course you can also configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName:` inside the `setup` method:
 
 Enable the log or not. *default NO*
 
@@ -103,7 +93,7 @@ In this file you have to `setup` the CoreData stack on start up and `cleanUp` be
 
 To be explained soon...
 
-- DKDBManagedObject protocol
+- NSManagedObject subclass
 - Categories/extensions
 - Completion block
 - MagicalRecord request
@@ -121,7 +111,6 @@ To be explained soon...
 
 - Improve log
 - Improve documentaion
-- Add method to delete all entities for a specific model.
 - Add tests
 - Add project links
 
