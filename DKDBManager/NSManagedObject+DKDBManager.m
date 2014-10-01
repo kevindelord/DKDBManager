@@ -102,6 +102,10 @@
     [self MR_deleteEntity];
 }
 
++ (void)deleteAllEntities {
+    [self MR_deleteAllMatchingPredicate:nil];
+}
+
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array {
     // check if all entities are still in the dictionary
     for (id entity in [self MR_findAll]) {

@@ -13,6 +13,7 @@
 @optional
 - (NSString *)invalidReason;
 - (void)deleteChildEntities;
+- (void)updateWithDictionary:(NSDictionary *)dict;
 + (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary;
 + (BOOL)verbose;
 + (NSString *)sortingAttributeName;
@@ -47,6 +48,7 @@ typedef enum : NSUInteger {
 #pragma mark - DELETE
 
 - (void)deleteEntityWithReason:(NSString *)reason;
++ (void)deleteAllEntities;
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
 
 #pragma mark - DKDBManagedObject Protocol

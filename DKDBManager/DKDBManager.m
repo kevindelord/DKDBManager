@@ -44,6 +44,15 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (NSArray *)entities {
+    NSDictionary * dict = [NSManagedObjectModel MR_defaultManagedObjectModel].entitiesByName;
+    return dict.allKeys;
+}
+
++ (NSUInteger)count {
+    return 0;
+}
+
++ (NSArray *)all {
     return nil;
 }
 
@@ -168,6 +177,21 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate {
     _needForcedUpdate = needForcedUpdate;
+}
+
+#pragma mark - Delete methods
+
++ (void)deleteAllEntities {
+    for (NSString *className in self.entities) {
+        Class class = NSClassFromString(className);
+        [class deleteAllEntities];
+    }
+}
+
++ (void)deleteAllEntitiesForClass:(Class)class {
+    if ([self.entities containsObject:NSStringFromClass(class)]){
+        [class deleteAllEntities];
+    }
 }
 
 #pragma mark - Log

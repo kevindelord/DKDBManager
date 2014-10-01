@@ -106,13 +106,6 @@
 + (instancetype)sharedInstance;
 
 /**
- * Return an array of class names as strings corresponding to the classes that should be proceed when deleting deprecated or loging entities.
- *
- * @discussion This method should be overridden in a subclass to match your project's datamodel.
- */
-+ (NSArray *)entities;
-
-/**
  * Cleanup the CoreData stack before the app exits.
  *
  * @discussion Should be called on the `applicationWillTerminate:` AppDelegate's method.
@@ -131,6 +124,20 @@
  * @return YES if the database has been reset. 
  */
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName;
+
+#pragma mark - Delete methods
+
+/**
+ * Delete all saved entities from the current context for all models in the current database. Does not 'hard' reset the entire sqlite file.
+ */
++ (void)deleteAllEntities;
+
+/**
+ * Delete all saved entities from the current context for one specific model in the current database.
+ *
+ * @param class The Class object referencing the model to delete the entities. 
+ */
++ (void)deleteAllEntitiesForClass:(Class)class;
 
 #pragma mark - Save methods
 
