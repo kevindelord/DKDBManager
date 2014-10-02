@@ -49,10 +49,14 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (NSUInteger)count {
+    // This method is needed to make the compiler understands this method exists for the NSManagedObject classes.
+    // See: DKDBManager::dump and DKDBManager::dumpCount
     return 0;
 }
 
 + (NSArray *)all {
+    // This method is needed to make the compiler understands this method exists for the NSManagedObject classes.
+    // See: DKDBManager::dump and DKDBManager::dumpCount
     return nil;
 }
 
