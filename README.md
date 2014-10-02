@@ -6,6 +6,11 @@
 
 ## Concept
 
+DKDBManager is simple, yet very useful, helper/manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). *MR* already is a very helpful, easy-to-use, less-to-code, wonderful CoreData wrapper. The current library will implement a logic around this to help you to manage your entities. Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
+
+## Documentation
+
+The complete documentation is available on [CocoaDocs](http://cocoadocs.org/docsets/DKDBManager).
 
 ## Installation
 
@@ -20,42 +25,39 @@ and run `pod install` from the main directory.
 
 To get started, first, import the header file DKDBManager.h in your project's pch file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and CoredData.
 
-As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you first need to implement some minor and basic methods. The best way to use it would be to subclass the manager itself. Afterwhat you still have to update your AppDelegate and create categories (or extensions in Swift) implementing the `DKDBManagedObject` protolcol for your models.
+    #import "DKDBManager.h"
 
-### XYDBManager subclass of DKDBManager
+As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you first need to implement minor methods within your AppDelegate. Afterwhat you still have to generate your model classes and create categories (or extensions in Swift).
 
-In this subclass you need two methods. 
-The first one is needed to setup the CoreData stack with a specifc name. Of course you can play with the name to change your database on startup whenever you would like to.
+### AppDelegate using DKDBManager
+
+First you need to setup the CoreData stack with a specifc file name. Of course you can play with the name to change your database on startup whenever you would like to.
 A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
+You could also sublclass the DKDBManager and wrap the following in a dedicated class. 
 
-	@implementation XYDBManager
-		+ (void)setup {
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-		    BOOL didResetDB = [self setupDatabaseWithName:@"XYAwesomeDatabaseName.sqlite"];
-		    if (didResetDB) {
-				// The database is fresh new.
-				// Depending on your needs you might want to do something special right now as:.
-				// - Setting up some user defaults.
-				// - Deal with your api/store manager.
-				// etc.
-			}
-			// Starting this point your database is ready to use.
-			// You can now create any object you could need.
+		BOOL didResetDB = [DKDBManager setupDatabaseWithName:@"DKDatabaseName.sqlite"];
+	    if (didResetDB) {
+			// The database is fresh new.
+			// Depending on your needs you might want to do something special right now as:.
+			// - Setting up some user defaults.
+			// - Deal with your api/store manager.
+			// etc.
 		}
+		// Starting this point your database is ready to use.
+		// You can now create any object you could need.
 
-The second method is required to tell the manager which models should be proceed when deleting deprecated or loging entities.
+	    return YES;
+	}
 
-		+ (NSArray *)entities {
-			// Simply return an array of class names as strings.
-		    return @[NSStringFromClass(Plane.class),
-		             NSStringFromClass(Pilot.class),
-		             NSStringFromClass(Passenger.class)];
-		}
-	@end
+	- (void)applicationWillTerminate:(UIApplication *)application {
+		[DKDBManager cleanUp];
+	}
 
 ### Configuration
 
-Of course you can also configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName` inside the `setup` method:
+Of course you can also configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName:` inside the `setup` method:
 
 Enable the log or not. *default NO*
 
@@ -74,29 +76,46 @@ When parsing new entities force the manager to update the entities no matter wha
 
     XYDBManager.needForcedUpdate = NO;
 
+### Model : Plane
 
-### AppDelegate
+To be explained soon...
 
-In this file you have to `setup` the CoreData stack on start up and `cleanUp` before your app exits.
+- NSManagedObject subclass
+- Categories/extensions
+- Completion block
+- MagicalRecord request
 
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+## Logging
 
-	    [XYDBManager setup];
-	    // whatever else here...
+As you will when running your app Magical Record does log a lot of things. It's quite handy but could be a bit annoying. 
+Until the release version 2.3.0 the only [working solution](http://stackoverflow.com/questions/15284067/cocoapods-turning-magicalrecord-logging-off) to disable the log is to add the following to your Podfile as a 'post_install' hook:
 
-	    return YES;
-	}
+	post_install do |installer|
+	  target = installer.project.targets.find{|t| t.to_s == "Pods-MagicalRecord"}
+	    target.build_configurations.each do |config|
+	        s = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
+	        s = [ '$(inherited)' ] if s == nil;
+	        s.push('MR_ENABLE_ACTIVE_RECORD_LOGGING=0') if config.to_s == "Debug";
+	        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = s
+	    end
+	end
 
-	- (void)applicationWillTerminate:(UIApplication *)application {
-		[XYDKManager cleanUp];
-	}
+PS: disable the log once your database is working fine ;)
+
+## Projects
+
+`DKDBManager` is used in the following projects:
+
+- WhiteWall
+- Pons-SprachKalender
+- ZahnPlan
+- *Your project here*
 
 ## TODO
 
-- Improve log
 - Improve documentaion
-- Add method to delete all entities for a specific model.
 - Add tests
+- Add project links
 
 ## Author
 

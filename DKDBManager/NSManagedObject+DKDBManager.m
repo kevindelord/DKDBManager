@@ -1,6 +1,5 @@
 //
 //  NSManagedObject+DKDBManager.m
-//  WhiteWall
 //
 //  Created by kevin delord on 20/05/14.
 //  Copyright (c) 2014 Kevin Delord. All rights reserved.
@@ -24,11 +23,11 @@
     // if the entity already exist then update it
     id entity = [self MR_findFirstWithPredicate:[self primaryPredicateWithDictionary:dictionary]];
     // else create a new entity in the current thread MOC
-    if (!entity) {
+    if (entity == nil) {
         entity = [self MR_createEntity];
         [entity updateWithDictionary:dictionary];
         status = DKDBManagedObjectStateCreate;
-    } else if ([self shouldUpdateEntity:entity withDictionary:dictionary]) {
+    } else if (DKDBManager.needForcedUpdate || (DKDBManager.allowUpdate && [entity shouldUpdateEntityWithDictionary:dictionary])) {
         // update attributes
         [entity updateWithDictionary:dictionary];
         status = DKDBManagedObjectStateUpdate;
@@ -66,14 +65,8 @@
 
 #pragma mark - READ
 
-+ (NSInteger)count {
-    return [self MR_countOfEntities];
-}
-
-+ (NSArray *)all {
-    if (self.sortingAttributeName)
-        return [self MR_findAllSortedBy:self.sortingAttributeName ascending:YES];
-    return [self MR_findAll];
+- (id)uniqueIdentifier {
+    return self.objectID;
 }
 
 - (void)save {
@@ -85,13 +78,53 @@
     [DKDBManager saveEntity:self];
 }
 
+- (NSString *)invalidReason {
+    // Check if the current entity is valid.
+    // Return a NSString containing the reason, nil if the object is valid
+    return nil;
+}
+
+- (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary {
+    // will be ignored if needForcedUpdate == true OR if allowUpdate == true
+    return true;
+}
+
++ (BOOL)verbose {
+    return false;
+}
+
++ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary {
+    // If returns nil will only take the first entity created (if any) and update it.
+    // By doing so only ONE entity will ever be created.
+    // otherwise use the one find bu the predicate.
+    return nil;
+}
+
++ (NSString *)sortingAttributeName {
+    return nil;
+}
+
++ (NSInteger)count {
+    return [self MR_countOfEntities];
+}
+
++ (NSArray *)all {
+    if (self.sortingAttributeName)
+        return [self MR_findAllSortedBy:self.sortingAttributeName ascending:YES];
+    return [self MR_findAll];
+}
+
 #pragma mark - UPDATE
 
 - (void)updateWithDictionary:(NSDictionary *)dict {
-    // this methid should be overwriten on the subclass
+    // this method should be overridden on the subclass
 }
 
 #pragma mark - DELETE
+
+- (void)deleteChildEntities {
+    // remove all the child of the current object
+}
 
 - (void)deleteEntityWithReason:(NSString *)reason {
     DKLog(DKDBManager.verbose && self.class.verbose, @"delete %@: %@ Reason: %@", [self class], self, reason);
@@ -101,6 +134,10 @@
     
     // remove the current object
     [self MR_deleteEntity];
+}
+
++ (void)deleteAllEntities {
+    [self MR_deleteAllMatchingPredicate:nil];
 }
 
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array {
@@ -113,34 +150,6 @@
             }
         }
     }
-}
-
-#pragma mark - DKDBManagedObject Protocol
-
-- (NSString *)invalidReason {
-    // Check if the current entity is valid.
-    // Return a NSString containing the reason, nil if the object is valid
-    return nil;
-}
-
-- (void)deleteChildEntities {
-    // remove all the child of the current object
-}
-
-+ (BOOL)shouldUpdateEntity:(id)entity withDictionary:(NSDictionary *)dictionary {
-    return ((entity && DKDBManager.allowUpdate) || (entity && DKDBManager.needForcedUpdate));
-}
-
-+ (BOOL)verbose {
-    return NO;
-}
-
-+ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary {
-    return nil;
-}
-
-+ (NSString *)sortingAttributeName {
-    return nil;
 }
 
 @end

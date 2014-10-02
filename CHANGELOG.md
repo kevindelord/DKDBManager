@@ -1,5 +1,15 @@
 # DKDBManager CHANGELOG
 
+## 0.4.0
+
+- Update README
+- Improve documentation
+- Method 'entities' is not required anymore
+- Create new delete methods
+- The DKManagedObject protocol does not exist anymore
+- The setup coredata stack method takes only one argument
+- Bug fixes
+
 ## 0.3.2
 
 - Minor log improvement

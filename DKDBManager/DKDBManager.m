@@ -1,6 +1,5 @@
 //
 //  DKDBManager.m
-//  WhiteWall
 //
 //  Created by kevin delord on 21/02/14.
 //  Copyright (c) 2014 Kevin Delord. All rights reserved.
@@ -33,7 +32,7 @@ static BOOL _needForcedUpdate = NO;
     return self;
 }
 
-#pragma mark - static methods
+#pragma mark - DB methods
 
 + (instancetype)sharedInstance {
     static DKDBManager *manager = nil;
@@ -44,17 +43,20 @@ static BOOL _needForcedUpdate = NO;
     return manager;
 }
 
-#pragma mark - DB methods
-
- + (NSUInteger)count {
-     return 0;
- }
-
- + (NSArray *)all {
-     return nil;
- }
-
 + (NSArray *)entities {
+    NSDictionary * dict = [NSManagedObjectModel MR_defaultManagedObjectModel].entitiesByName;
+    return dict.allKeys;
+}
+
++ (NSUInteger)count {
+    // This method is needed to make the compiler understands this method exists for the NSManagedObject classes.
+    // See: DKDBManager::dump and DKDBManager::dumpCount
+    return 0;
+}
+
++ (NSArray *)all {
+    // This method is needed to make the compiler understands this method exists for the NSManagedObject classes.
+    // See: DKDBManager::dump and DKDBManager::dumpCount
     return nil;
 }
 
@@ -62,7 +64,39 @@ static BOOL _needForcedUpdate = NO;
     [MagicalRecord cleanUp];
 }
 
++ (BOOL)setupDatabaseWithName:(NSString *)databaseName {
+
+    // Boolean to know if the database has been completely reset
+    BOOL didResetDB = NO;
+    if (DKDBManager.resetStoredEntities) {
+        didResetDB = [self eraseDatabaseForStoreName:databaseName];
+    }
+
+    // setup the coredata stack
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
+
+    return didResetDB;
+}
+
 #pragma mark - Delete methods
+
++ (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName {
+
+    DKLog(DKDBManager.verbose, @"erase database: %@", databaseName);
+    // do some cleanUp of MagicalRecord
+    [self cleanUp];
+
+    // remove the sqlite file
+    BOOL didResetDB = YES;
+    NSError *error;
+    NSURL *fileURL = [NSPersistentStore MR_urlForStoreName:databaseName];
+    [[NSFileManager defaultManager] removeItemAtURL:fileURL error:&error];
+    if (error && error.code != NSFileNoSuchFileError) {
+        [[[UIAlertView alloc] initWithTitle:@"Error - cannot erase DB" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil] show];
+        didResetDB = NO;
+    }
+    return didResetDB;
+}
 
 + (void)removeDeprecatedEntities {
     DKDBManager *manager = [DKDBManager sharedInstance];
@@ -72,6 +106,19 @@ static BOOL _needForcedUpdate = NO;
     for (NSString *className in self.entities) {
         Class class = NSClassFromString(className);
         [class removeDeprecatedEntitiesFromArray:[manager->_entities objectForKey:className]];
+    }
+}
+
++ (void)deleteAllEntities {
+    for (NSString *className in self.entities) {
+        Class class = NSClassFromString(className);
+        [class deleteAllEntities];
+    }
+}
+
++ (void)deleteAllEntitiesForClass:(Class)class {
+    if ([self.entities containsObject:NSStringFromClass(class)]){
+        [class deleteAllEntities];
     }
 }
 
@@ -109,42 +156,6 @@ static BOOL _needForcedUpdate = NO;
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreAndWait];
     if (self.verbose)
         [self dump];
-}
-
-#pragma mark - Setup
-
-+ (BOOL)setupDatabaseWithName:(NSString *)databaseName identifier:(NSString *)identifier forKey:(NSString *)storingKey {
-
-    // Boolean to know if the database has been completely reset
-    BOOL didResetDB = NO;
-
-    // check if the DB's identifier has changed. If so erase the database and create a new one.
-    NSString *storedIdentifier = [[NSUserDefaults standardUserDefaults] objectForKey:storingKey];
-    BOOL newIdentifier = (storedIdentifier && ![storedIdentifier isEqualToString:identifier]);
-
-    if (DKDBManager.resetStoredEntities || newIdentifier || !storedIdentifier) {
-        // remove the sqlite file
-        DKLog(DKDBManager.verbose, @"reset database: %@", databaseName);
-        // do some cleanUp of MagicalRecord
-        [MagicalRecord cleanUp];
-        NSError *error;
-        // remove the sqlit file
-        NSURL *fileURL = [NSPersistentStore MR_urlForStoreName:databaseName];
-        [[NSFileManager defaultManager] removeItemAtURL:fileURL error:&error];
-        if (error && error.code != NSFileNoSuchFileError) {
-            [[[UIAlertView alloc] initWithTitle:@"Error - cannot reset DB" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil] show];
-        }
-        didResetDB = YES;
-    }
-
-    // save the current API base URL
-    [[NSUserDefaults standardUserDefaults] setObject:identifier forKey:storingKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    // setup the coredata stack
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
-
-    return didResetDB;
 }
 
 #pragma mark - DEBUG methods
