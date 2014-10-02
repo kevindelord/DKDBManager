@@ -1,0 +1,23 @@
+PODS:
+  - DKDBManager (0.3.2):
+    - DKHelper
+    - MagicalRecord
+  - DKHelper (0.7.1)
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.2)
+
+DEPENDENCIES:
+  - DKDBManager (from `..`)
+  - DKHelper
+
+EXTERNAL SOURCES:
+  DKDBManager:
+    :path: ..
+
+SPEC CHECKSUMS:
+  DKDBManager: 44ebe2e79a049b49c980b927777382c8d3cf6071
+  DKHelper: 097c1f339aa49ec2605a35fc745925983f46be8e
+  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
+
+COCOAPODS: 0.34.1
