@@ -22,4 +22,5 @@ deploy.sh
 
 #CocoaPods
 Pods
-*/Pods
+DBObjTest/Pods
+DBSwiftTest/Pods
