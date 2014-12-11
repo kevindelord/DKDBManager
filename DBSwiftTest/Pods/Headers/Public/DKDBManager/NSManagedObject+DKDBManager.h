@@ -1,0 +1,1 @@
+../../../../../DKDBManager/NSManagedObject+DKDBManager.h

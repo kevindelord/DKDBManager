@@ -13,6 +13,7 @@
 #import "DKHelper.h"
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObject+DKDBManager.h"
+#import "NSManagedObject+ExistingObject.h"
 
 @interface DKDBManager : NSObject
 

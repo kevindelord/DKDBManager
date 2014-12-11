@@ -1,0 +1,1 @@
+PODS_DKDBMANAGER_OTHER_LDFLAGS = -framework "CoreData"
