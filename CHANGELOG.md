@@ -1,5 +1,10 @@
 # DKDBManager CHANGELOG
 
+## 0.4.1
+
+- Add getter method for entities in current database
+- Add new categorised class to verify an NSManagedObject validity
+
 ## 0.4.0
 
 - Update README
