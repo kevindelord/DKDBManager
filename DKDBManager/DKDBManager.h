@@ -80,6 +80,13 @@
  */
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate;
 
+/**
+ * Returns an array of NSString objects corresponding to the class name of all model entities in the current database.
+ *
+ * @return A NSArray object containing all class names in the database.
+ */
++ (NSArray *)entities;
+
 #pragma mark - Log
 
 /**
