@@ -94,7 +94,7 @@
         @try
         {
             // If the property throws an exception, |managedObject| was deleted.
-            (void)[managedObjectClone valueForKey:[propertyNames objectAtIndex:0]];
+            (void)[managedObjectClone valueForKey:propertyNames[0]];
             return NO;                  // Not deleted.
         }
         @catch (NSException *exception)

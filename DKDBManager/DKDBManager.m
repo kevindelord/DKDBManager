@@ -23,7 +23,7 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - init method
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         _entities = [NSMutableDictionary new];
@@ -105,7 +105,7 @@ static BOOL _needForcedUpdate = NO;
 
     for (NSString *className in self.entities) {
         Class class = NSClassFromString(className);
-        [class removeDeprecatedEntitiesFromArray:[manager->_entities objectForKey:className]];
+        [class removeDeprecatedEntitiesFromArray:manager->_entities[className]];
     }
 }
 
@@ -130,12 +130,12 @@ static BOOL _needForcedUpdate = NO;
 
     NSString *className = NSStringFromClass([entity class]);
 
-    if (![manager->_entities objectForKey:className]) {
+    if (!manager->_entities[className]) {
         [manager->_entities setValue:[NSMutableArray new] forKey:className];
     }
 
     if ([entity respondsToSelector:@selector(uniqueIdentifier)]) {
-        [[manager->_entities objectForKey:className] addObject:[entity performSelector:@selector(uniqueIdentifier)]];
+        [manager->_entities[className] addObject:[entity performSelector:@selector(uniqueIdentifier)]];
     }
 }
 

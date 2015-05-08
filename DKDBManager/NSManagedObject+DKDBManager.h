@@ -7,12 +7,12 @@
 
 #import "DKDBManager.h"
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
     DKDBManagedObjectStateCreate,
     DKDBManagedObjectStateUpdate,
     DKDBManagedObjectStateSave,
     DKDBManagedObjectStateDelete,
-} DKDBManagedObjectState;
+} ;
 
 @interface NSManagedObject (DKDBManager)
 
@@ -24,9 +24,9 @@ typedef enum : NSUInteger {
 
 #pragma mark - READ
 
-- (id)uniqueIdentifier;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) id uniqueIdentifier;
 - (void)save;
-- (NSString *)invalidReason;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *invalidReason;
 - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
 + (BOOL)verbose;
 + (NSString *)sortingAttributeName;
