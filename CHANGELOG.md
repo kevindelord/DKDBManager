@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 0.4.2
+
+- Improve Swift portability
+
 ## 0.4.1
 
 - Add getter method for entities in current database
