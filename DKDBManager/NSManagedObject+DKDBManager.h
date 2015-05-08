@@ -24,9 +24,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 
 #pragma mark - READ
 
-@property (NS_NONATOMIC_IOSONLY, readonly, strong) id uniqueIdentifier;
+- (id)uniqueIdentifier;
 - (void)save;
-@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *invalidReason;
+- (NSString *)invalidReason;
 - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
 + (BOOL)verbose;
 + (NSString *)sortingAttributeName;

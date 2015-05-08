@@ -13,11 +13,11 @@ extension Runner {
     func description() -> String {
         return "\(self.objectID.URIRepresentation().lastPathComponent) : \(self.name) - \(self.position)"
     }
-    
+
     override public func uniqueIdentifier() -> AnyObject! {
         return self.objectID;
     }
-    
+
     override public func updateWithDictionary(dict: [NSObject : AnyObject]!) {
         self.name = GET_STRING(dict, "name")
         self.position = GET_NUMBER(dict, "position")

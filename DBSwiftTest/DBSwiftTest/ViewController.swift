@@ -30,7 +30,15 @@ class ViewController: UIViewController {
     }
 
     func createRunners() {
-        var array = [["name":"John", "position":13], ["name":"Toto", "position":14]]
+
+        let dict = ["name":"John", "position":13]
+        Runner.createEntityFromDictionary(dict) { (runner, state: DKDBManagedObjectState) -> Void in
+            if (runner != nil && state == .Create) {
+                // did create runner
+            }
+        }
+
+        let array = [dict, ["name":"Toto", "position":14]]
         Runner.createEntitiesFromArray(array)
         Runner.countEntity()
         DKDBManager.saveToPersistentStoreAndWait()
