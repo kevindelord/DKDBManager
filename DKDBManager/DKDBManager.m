@@ -44,8 +44,13 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (NSArray *)entities {
-    NSDictionary * dict = [NSManagedObjectModel MR_defaultManagedObjectModel].entitiesByName;
-    return dict.allKeys;
+    NSMutableArray *classNames = [NSMutableArray new];
+    for (NSEntityDescription *desc in [NSManagedObjectModel MR_defaultManagedObjectModel].entities) {
+        if (desc.isAbstract == false) {
+            [classNames addObject:desc.managedObjectClassName];
+        }
+    }
+    return classNames;
 }
 
 + (NSUInteger)count {
@@ -124,7 +129,7 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - Save methods
 
-+ (void)saveEntity:(id)entity {
++ (void)saveEntityAsNotDeprecated:(id)entity {
 
     DKDBManager *manager = [DKDBManager sharedInstance];
 

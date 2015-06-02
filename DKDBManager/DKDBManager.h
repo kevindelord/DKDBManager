@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "DKHelper.h"
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSManagedObject+DKDBManager.h"
 #import "NSManagedObject+ExistingObject.h"
 
@@ -82,6 +82,8 @@
 
 /**
  * Returns an array of NSString objects corresponding to the class name of all model entities in the current database.
+ *
+ * The Abstract entities are not including.
  *
  * @return A NSArray object containing all class names in the database.
  */
@@ -159,7 +161,7 @@
  *
  * @param entity The entity object to store as not deprecated
  */
-+ (void)saveEntity:(id)entity;
++ (void)saveEntityAsNotDeprecated:(id)entity;
 
 #pragma mark - Delete methods
 
