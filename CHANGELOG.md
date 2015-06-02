@@ -1,5 +1,10 @@
 # DKDBManager CHANGELOG
 
+## 0.5.0
+
+- Update to MagicalRecord 2.3.0
+- Functions `saveEntity:` and `save` have been renamed `saveEntityAsNotDeprecated`
+
 ## 0.4.2
 
 - Improve Swift portability

@@ -44,7 +44,7 @@
     DKLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateUpdate, @"Updating %@ %@", NSStringFromClass([self class]), entity);
 
     // if entity exists then save the entity's id.
-    [entity save];
+    [entity saveEntityAsNotDeprecated];
 
     if (completion) completion(entity, status);
     return entity;
@@ -69,13 +69,13 @@
     return self.objectID;
 }
 
-- (void)save {
+- (void)saveEntityAsNotDeprecated {
     //
     // Method to save/store the current object and all its child relations as not deprecated.
     // See: DKDBManager
     //
 
-    [DKDBManager saveEntity:self];
+    [DKDBManager saveEntityAsNotDeprecated:self];
 }
 
 - (NSString *)invalidReason {
