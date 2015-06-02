@@ -71,13 +71,16 @@ static BOOL _needForcedUpdate = NO;
 
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName {
 
+    // Refresh current/default log level
+    self.verbose = self.verbose;
+
     // Boolean to know if the database has been completely reset
     BOOL didResetDB = NO;
     if (DKDBManager.resetStoredEntities) {
         didResetDB = [self eraseDatabaseForStoreName:databaseName];
     }
 
-    // setup the coredata stack
+    // Setup the coredata stack
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
 
     return didResetDB;
@@ -168,6 +171,16 @@ static BOOL _needForcedUpdate = NO;
 // verbose
 + (void)setVerbose:(BOOL)verbose {
     _verbose = verbose;
+
+    NSUInteger logLevel = MagicalRecordLoggingLevelOff;
+    if (_verbose == true) {
+#ifdef DEBUG
+        logLevel = MagicalRecordLoggingLevelDebug;
+#else
+        logLevel = MagicalRecordLoggingLevelError;
+#endif
+    }
+    [MagicalRecord setLoggingLevel:logLevel];
 }
 
 + (BOOL)verbose {
