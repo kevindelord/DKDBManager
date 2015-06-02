@@ -4,6 +4,7 @@
 
 - Update to MagicalRecord 2.3.0
 - Functions `saveEntity:` and `save` have been renamed `saveEntityAsNotDeprecated`
+- Improve DB LogLevel. The post-install hack in the Podfile is no longer required.
 
 ## 0.4.2
 
