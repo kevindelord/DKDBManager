@@ -152,18 +152,26 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (self.verbose)
+        if (self.verbose) {
             [self dump];
-        if (completionBlock)
+        }
+        if (completionBlock) {
             completionBlock(success, error);
+        }
     }];
 }
 
 + (void)saveToPersistentStoreAndWait {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreAndWait];
-    if (self.verbose)
+    if (self.verbose) {
         [self dump];
+    }
+#pragma clang diagnostic pop
 }
 
 #pragma mark - DEBUG methods
