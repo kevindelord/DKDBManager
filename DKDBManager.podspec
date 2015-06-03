@@ -8,6 +8,8 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/kevindelord/DKDBManager.git", :tag => s.version.to_s }
   s.platform         = :ios
   s.requires_arc     = true
+  s.ios.deployment_target = '6.1'
+  s.osx.deployment_target = '10.8'
   s.framework        = 'CoreData'
   s.source_files     = 'DKDBManager/*'
   s.dependency         'MagicalRecord'
