@@ -34,8 +34,7 @@
     }
 
     // Just keeping the valid and managed entities and ignored the unvalid, disabled, non-managed ones.
-    if ([entity invalidReason]) {
-        [entity deleteEntityWithReason:[entity invalidReason]];
+    if ([entity deleteIfInvalid] == true) {
         entity = nil;
         status = DKDBManagedObjectStateDelete;
     }
@@ -121,6 +120,14 @@
 }
 
 #pragma mark - DELETE
+
+- (BOOL)deleteIfInvalid {
+    if ([self invalidReason]) {
+        [self deleteEntityWithReason:[self invalidReason]];
+        return true;
+    }
+    return false;
+}
 
 - (void)deleteChildEntities {
     // remove all the child of the current object

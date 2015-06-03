@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 
 #pragma mark - DELETE
 
+- (BOOL)deleteIfInvalid;
 - (void)deleteChildEntities;
 - (void)deleteEntityWithReason:(NSString *)reason;
 + (void)deleteAllEntities;
