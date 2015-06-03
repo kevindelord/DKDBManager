@@ -2,9 +2,11 @@
 
 ## 0.5.0
 
-- Update to MagicalRecord 2.3.0
+- Update to MagicalRecord 2.3.0.
 - Functions `saveEntity:` and `save` have been renamed `saveEntityAsNotDeprecated`
 - Improve DB LogLevel. The post-install hack in the Podfile is no longer required.
+- Abstract models are now ignored by the manager when loging or when searching for deprecated entities.
+- Add `deleteIfInvalid` function.
 
 ## 0.4.2
 
