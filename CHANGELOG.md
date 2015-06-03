@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 0.5.1
+
+- Add version requirement on dependencies.
+
 ## 0.5.0
 
 - Update to MagicalRecord 2.3.0.
