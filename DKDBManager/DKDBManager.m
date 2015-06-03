@@ -44,8 +44,13 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (NSArray *)entities {
-    NSDictionary * dict = [NSManagedObjectModel MR_defaultManagedObjectModel].entitiesByName;
-    return dict.allKeys;
+    NSMutableArray *classNames = [NSMutableArray new];
+    for (NSEntityDescription *desc in [NSManagedObjectModel MR_defaultManagedObjectModel].entities) {
+        if (desc.isAbstract == false) {
+            [classNames addObject:desc.managedObjectClassName];
+        }
+    }
+    return classNames;
 }
 
 + (NSUInteger)count {
@@ -66,13 +71,16 @@ static BOOL _needForcedUpdate = NO;
 
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName {
 
+    // Refresh current/default log level
+    self.verbose = self.verbose;
+
     // Boolean to know if the database has been completely reset
     BOOL didResetDB = NO;
     if (DKDBManager.resetStoredEntities) {
         didResetDB = [self eraseDatabaseForStoreName:databaseName];
     }
 
-    // setup the coredata stack
+    // Setup the coredata stack
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
 
     return didResetDB;
@@ -124,7 +132,7 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - Save methods
 
-+ (void)saveEntity:(id)entity {
++ (void)saveEntityAsNotDeprecated:(id)entity {
 
     DKDBManager *manager = [DKDBManager sharedInstance];
 
@@ -163,6 +171,16 @@ static BOOL _needForcedUpdate = NO;
 // verbose
 + (void)setVerbose:(BOOL)verbose {
     _verbose = verbose;
+
+    NSUInteger logLevel = MagicalRecordLoggingLevelOff;
+    if (_verbose == true) {
+#ifdef DEBUG
+        logLevel = MagicalRecordLoggingLevelDebug;
+#else
+        logLevel = MagicalRecordLoggingLevelError;
+#endif
+    }
+    [MagicalRecord setLoggingLevel:logLevel];
 }
 
 + (BOOL)verbose {

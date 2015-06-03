@@ -34,8 +34,7 @@
     }
 
     // Just keeping the valid and managed entities and ignored the unvalid, disabled, non-managed ones.
-    if ([entity invalidReason]) {
-        [entity deleteEntityWithReason:[entity invalidReason]];
+    if ([entity deleteIfInvalid] == true) {
         entity = nil;
         status = DKDBManagedObjectStateDelete;
     }
@@ -44,7 +43,7 @@
     DKLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateUpdate, @"Updating %@ %@", NSStringFromClass([self class]), entity);
 
     // if entity exists then save the entity's id.
-    [entity save];
+    [entity saveEntityAsNotDeprecated];
 
     if (completion) completion(entity, status);
     return entity;
@@ -69,13 +68,13 @@
     return self.objectID;
 }
 
-- (void)save {
+- (void)saveEntityAsNotDeprecated {
     //
     // Method to save/store the current object and all its child relations as not deprecated.
     // See: DKDBManager
     //
 
-    [DKDBManager saveEntity:self];
+    [DKDBManager saveEntityAsNotDeprecated:self];
 }
 
 - (NSString *)invalidReason {
@@ -121,6 +120,14 @@
 }
 
 #pragma mark - DELETE
+
+- (BOOL)deleteIfInvalid {
+    if ([self invalidReason]) {
+        [self deleteEntityWithReason:[self invalidReason]];
+        return true;
+    }
+    return false;
+}
 
 - (void)deleteChildEntities {
     // remove all the child of the current object
