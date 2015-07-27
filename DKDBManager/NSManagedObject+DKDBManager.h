@@ -13,7 +13,7 @@
  * @brief DBManager state of an entity.
  *
  * @discussion
- * The values of this enum represent wether an entity has been created, updated, saved or deleted.
+ * The values of this enum represent whether an entity has been created, updated, saved or deleted.
  *
  * @field .Create The entity has been created, it's all fresh new.
  *
@@ -136,10 +136,20 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (NSString *)invalidReason;
 
 /**
+ * @brief Override this function to inform the manager whether it should update the current entity or not.
  *
- * This predicate might be ignored if the debug states of the manager are set as 
- * Will be ignored if needForcedUpdate == true OR if allowUpdate == true
+ * @param dictionary A NSDictionary object containing information about the database entity to be updated with.
  *
+ * @discussion Depending on your app and architecture some entities should not be updated or do not need to.
+ * This function allows you to check that and avoid the update of the current entity during the CRUD process.
+ *
+ * For example you might want to verify the `lastUpdate` attribute or a version number from the given dictionary against the current entity.
+ * If they match return then `false` to NOT update the entity and avoid some useless actions.
+ *
+ * The result of this function is ignored when the debug states of the manager are set as
+ * `needForcedUpdate == true` or if `allowUpdate == false`.
+ *
+ * @return TRUE if the entity should be updated by the manager; default is TRUE.
  */
  - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
 
@@ -160,7 +170,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 /**
  * @brief Override this function to create a predicate that will find the right entity corresponding to the given dictionary.
  *
- * @param dictionary A NSDictionary object containing information about the database entity to fetch.
+ * @param dictionary A NSDictionary object containing information about the database entity to fetched with.
  *
  * @discussion This function is called during the CRUD process to fetch an entity from the database.
  * Depending on the returned predicate the manager will update an existing entity or will create a new one.
