@@ -104,8 +104,8 @@
 /**
  * @brief Dump the database if and only if the log is enabled.
  *
- * @discussion Will log in the console the number of entities per model and then get and display the description of every objects.
- * The entities are sorted by class and then by following the DKDBManagedObject protocol. 
+ * @discussion Will log the number of entities per model and then the description of every single object.
+ * The entities are sorted by class and by their default sorting attribute.
  *
  * @see + (BOOL)verbose;
  * @see + (NSString *)sortingAttributeName;
@@ -159,7 +159,7 @@
 + (void)saveToPersistentStoreAndWait;
 
 /**
- * @brief Asynchronously saves the current context into its persistent store and execute the completion block when is done.
+ * @brief Asynchronously saves the current context into its persistent store and execute the completion block when it is done.
  */
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock;
 
