@@ -265,17 +265,31 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (void)deleteChildEntities;
 
 /**
+ * @brief Delete the current entity and log the reason.
  *
+ * @discussion The reason will be logged only if the function `verbose:` returns TRUE for the current class model
+ *
+ * This function also calls the function `deleteChildEntities` for the current entity.
+ *
+ * @see - (void)deleteChildEntities;
+ * @see + (BOOL)verbose;
+ *
+ * @return nothing
  */
 - (void)deleteEntityWithReason:(NSString *)reason;
 
 /**
+ * @brief Delete all entities from the current class model.
  *
+ * @discussion All entites for the current class model will be removed.
+ * Functions `deleteChildEntities` or `deleteEntityWithReason:` will not be called.
+ *
+ * @return nothing
  */
 + (void)deleteAllEntities;
 
 /**
- *
+ * 
  */
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
 
