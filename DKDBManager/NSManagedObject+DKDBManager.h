@@ -38,8 +38,58 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 
 #pragma mark - CREATE
 
+/**
+ * @brief CRUD a database entity for the current class model from a NSDictionary object.
+ *
+ * @param dictionary The NSDictionary object used to CRUD an entity.
+ *
+ * @param completion A completion block containing the entity and its CRUD state.
+ *
+ * @discussion
+ * This function is the most important one in this library.
+ *
+ * At first it will try to fetch
+ * an entity in the persistent store by using the `primaryPredicateWithDictionary:`.
+ * If the entity does not exist/isn't found, a new one will be created.
+ * @see + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
+ *
+ * Then this new object (or the already existing one) will be updated with `updateWithDictionary:`.
+ * @see - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
+ *
+ * If the entity is now invalid it will get deleted and not returned.
+ * @see - (NSString *)invalidReason;
+ *
+ * In the end the current object will get saved as not deprecated by the manager and returned.
+ * @see - (void)saveEntityAsNotDeprecated
+ *
+ * @return A created/read/updated database entity.
+ */
 + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
+
+/**
+ * @brief CRUD a database entity for the current class model from a NSDictionary object. 
+ *
+ * @param dictionary The NSDictionary object used to CRUD an entity.
+ *
+ * @discussion The deleted entities are not returned.
+ *
+ * @see + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
+ *
+ * @return A created/read/updated database entitiy.
+ */
 + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary;
+
+/**
+ * @brief CRUD database entities for the current class model from an array of NSDictionary objects.
+ *
+ * @param array The NSArray object containing all the NSDictionary objects to CRUD the entities from.
+ *
+ * @discussion The deleted entities are not returned.
+ *
+ * @see + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
+ *
+ * @return An array of created/read/updated database entities.
+ */
 + (NSArray *)createEntitiesFromArray:(NSArray *)array;
 
 #pragma mark - READ
@@ -91,8 +141,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *   page.saveEntityAsNotDeprecated()
  * }
  * @endcode
- *
- * @return nothing
  */
 - (void)saveEntityAsNotDeprecated;
 
@@ -228,8 +276,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * // child entities
  * self.images = Images.createEntitiesFromArray(GET_ARRAY(dict, "images"))
  * @endcode
- *
- * @return nothing
  */
 - (void)updateWithDictionary:(NSDictionary *)dictionary;
 
@@ -259,8 +305,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * }
  * AssetManager.removeCachedImage(book.image)
  * @endcode
- *
- * @return nothing
  */
 - (void)deleteChildEntities;
 
@@ -275,8 +319,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @see - (void)deleteChildEntities;
  * @see + (BOOL)verbose;
- *
- * @return nothing
  */
 - (void)deleteEntityWithReason:(NSString *)reason;
 
@@ -285,8 +327,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @discussion All entites for the current class model will be removed.
  * Functions `deleteChildEntities` or `deleteEntityWithReason:` will not be called.
- *
- * @return nothing
  */
 + (void)deleteAllEntities;
 
@@ -299,8 +339,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * The ones that are not refreshed/saved before removing all deprecated entities will then disappear from the local store.
  *
  * @see - (void)saveEntityAsNotDeprecated;
- *
- * @return nothing
  */
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
 
