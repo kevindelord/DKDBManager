@@ -189,12 +189,20 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
 
 /**
+ * @brief Returns all entities of the current class model.
  *
+ * @discussion The values are sorted by the default sorting attribute.
+ *
+ * @see + (NSString *)sortingAttributeName;
+ *
+ * @return A NSArray object containing all entities from the current class model.
  */
 + (NSArray *)all;
 
 /**
+ * @brief Count all entities of the current class model.
  *
+ * @return A NSInteger value corresponding to the total number of entities of the current class model.
  */
  + (NSInteger)count;
 

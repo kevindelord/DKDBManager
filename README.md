@@ -92,10 +92,11 @@ To be explained soon...
 - WhiteWall
 - Pons-SprachKalender
 - Pons-Bildwörterbuch
-- ZahnPlan
+- ERGO ZahnPlan
 - Handhelp
 - RezeptBOX
 - Hüthig
+- Digster Music Deals
 - *Your project here*
 
 ## TODO
