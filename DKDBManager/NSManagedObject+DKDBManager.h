@@ -236,14 +236,16 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * If the current function returns:
  *
- * - nil then will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.`
+ * - nil then the CRUD process will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.`
  *
- * - a `false predicate` then a new entity will always be created.
+ * - a `false predicate` then the CRUD process will always create a new entity.
  *
- * Otherwise use the entity found by the predicate.
+ * Otherwise the CRUD process use the entity found by the predicate.
  * The predicate should be created depending on the parameter: `dictionary`.
  *
  * For example, your entity `Book` could be fetch through its `releaseDate` and `title` attributes.
+ *
+ * @see + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
  *
  * @return A NSPredicate object to find/fetch an entity in the local database.
  */
