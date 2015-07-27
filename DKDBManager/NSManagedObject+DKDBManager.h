@@ -7,10 +7,30 @@
 
 #import "DKDBManager.h"
 
+/**
+ * @typedef DKDBManagedObjectState
+ *
+ * @brief DBManager state of an entity.
+ *
+ * @discussion
+ * The values of this enum represent wether an entity has been created, updated, saved or deleted.
+ *
+ * @field .Create The entity has been created, it's all fresh new.
+ *
+ * @field .Update The entity has been updated, its attributes changed.
+ *
+ * @field .Save   The entity has been saved, nothing happened.
+ *
+ * @field .Delete The entity has been removed.
+ */
 typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
+    /** The entity has been created, it's all fresh new. */
     DKDBManagedObjectStateCreate,
+    /** The entity has been updated, its attributes changed. */
     DKDBManagedObjectStateUpdate,
+    /** The entity has been saved, nothing happened. */
     DKDBManagedObjectStateSave,
+    /** The entity has been removed. */
     DKDBManagedObjectStateDelete,
 } ;
 
@@ -25,7 +45,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - READ
 
 /**
- * @brief Returns the unique identifier of the current entity.
+ * @brief Override this function to return a custom unique identifier of the current entity.
  *
  * @discussion When using the DKDBManager to match a distant database (behind an API)
  * the logic to remove deprecated objects actually use a `uniqueIdentifier`
@@ -43,7 +63,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (id)uniqueIdentifier;
 
 /**
- * @brief Function to store the current object and all its child relations as not deprecated.
+ * @brief Override this function to store the current object and all its child relations as not deprecated.
  *
  * @discussion This function is important when matching an online database behind an API.
  * If the current class model does NOT have any child entities / relations, then 
@@ -56,16 +76,28 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * The default behavior of the current function is to forward the saving process to its child objects.
  * When the entity is created but its child can not be at the same time, then the developper has to create
  * another function to manually save the objects when they have been checked/created.
+ *
  * In few words, call this second function when the `pages` of a `book` has been created.
  * On the second start, when the `book` did not get updated it will got saved with `saveEntityAsNotDeprecated`.
  * The `pages` won't be saved until the second custom function is called.
+ *
+ * The super function should be called.
+ *
+ * For example, an entity `book` with many child entities `pages`.
+ *
+ * @code
+ * super.saveEntityAsNotDeprecated()
+ * for page in book.pages {
+ *   page.saveEntityAsNotDeprecated()
+ * }
+ * @endcode
  *
  * @return nothing
  */
 - (void)saveEntityAsNotDeprecated;
 
 /**
- * @brief OPTIONAL function to verify the validity of an entity; default returns nil.
+ * @brief Override this function to verify the validity of an entity; default returns nil.
  *
  * @discussion During the CRUD process an entity is tested to verify its validity.
  * If nil is returned no `invalidReason` has been found.
@@ -80,13 +112,11 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * If the log is activated for the current class, the terminal will display
  * all important modification.
  *
- * @return An invalid reason; nil if valid.
  *
- * Example:
- * If a `book` does not have a `title` anymore your application
- * could not want to display/handle the case. Same if its `pages`
- * are missing.
  * The super function should be called.
+ *
+ * For example, if a `book` does not have a `title` anymore your application
+ * could not want to display/handle the case. Same if its `pages` are missing.
  *
  * @code
  * if let invalidReason = super.invalidReason() {
@@ -99,28 +129,52 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *   return "invalid book title"
  * }
  * return nil
+ * @endcode
+ *
+ * @return An invalid reason; nil if valid.
  */
 - (NSString *)invalidReason;
 
 /**
  *
+ * This predicate might be ignored if the debug states of the manager are set as 
+ * Will be ignored if needForcedUpdate == true OR if allowUpdate == true
+ *
  */
  - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
 
 /**
- * @brief Function to enable all activitiy logs about the current class entity or not.
+ * @brief Override this function to enable all activitiy logs about the current class entity or not.
+ *
  * @return TRUE if log activated; default is FALSE.
  */
  + (BOOL)verbose;
 
 /**
- * @brief Implement this function to set a default sorting key for the current class entity.
+ * @brief Override this function to set a default sorting key for the current class entity.
+ *
  * @return Sorting key as a NSString object; default is nil.
  */
  + (NSString *)sortingAttributeName;
 
 /**
+ * @brief Override this function to create a predicate that will find the right entity corresponding to the given dictionary.
  *
+ * @param dictionary A NSDictionary object containing information about the database entity to fetch.
+ *
+ * @discussion This function is called during the CRUD process to fetch an entity from the database.
+ * Depending on the returned predicate the manager will update an existing entity or will create a new one.
+ *
+ * If returns nil then will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.`
+ *
+ * If returns a `false predicate` then a new entity will always be created.
+ *
+ * Otherwise use the entity found by the predicate.
+ * The predicate should be created depending on the parameter: `dictionary`.
+ *
+ * For example, your entity `Book` could be fetch through its `releaseDate` and `title` attributes.
+ *
+ * @return A NSPredicate object to find/fetch an entity in the local database.
  */
  + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
 
@@ -146,7 +200,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (BOOL)deleteIfInvalid;
 
 /**
- * @brief REQUIRED function to delete the child entities of a current entity.
+ * @brief Override this function to delete the child entities of a current entity.
  *
  * @discussion To remove an entity one should call `deleteEntityWithReason:`.
  * When doing so the current function is called.
@@ -157,17 +211,18 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * When implementing a DB that matches a distant database (behind an API) this function
  * might also be called when an entity gets deprecated/disabled.
  *
- * @return nothing
- *
- * Example:
  * The super function should be called.
- * If an entity `book` has many entities `pages` as children then a good practice is to do:
+ *
+ * For example, an entity `book` has many entities `pages` as children then a good practice is to do:
  * @code
  * super.deleteChildEntities()
  * for page in book.pages {
  *   page.deleteEntityWithReason("parent book removed")
  * }
  * AssetManager.removeCachedImage(book.image)
+ * @endcode
+ *
+ * @return nothing
  */
 - (void)deleteChildEntities;
 

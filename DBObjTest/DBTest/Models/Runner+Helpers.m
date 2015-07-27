@@ -28,7 +28,11 @@
 }
 
 - (void)deleteChildEntities {
-    
+    [super deleteChildEntities];
+}
+
+- (void)saveEntityAsNotDeprecated {
+    [super saveEntityAsNotDeprecated];
 }
 
 + (BOOL)verbose {
