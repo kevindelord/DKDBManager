@@ -25,9 +25,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - READ
 
 /**
- * Returns the unique identifier of the current entity.
+ * @brief Returns the unique identifier of the current entity.
  *
- * When using the DKDBManager to match a distant database (behind an API)
+ * @discussion When using the DKDBManager to match a distant database (behind an API)
  * the logic to remove deprecated objects actually use a `uniqueIdentifier`
  * for every class.
  * The identifer of each entity is saved when refreshing/creating the entities.
@@ -43,9 +43,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (id)uniqueIdentifier;
 
 /**
- * Function to store the current object and all its child relations as not deprecated.
+ * @brief Function to store the current object and all its child relations as not deprecated.
  *
- * This function is important when matching an online database behind an API.
+ * @discussion This function is important when matching an online database behind an API.
  * If the current class model does NOT have any child entities / relations, then 
  * it is not required to implement it.
  *
@@ -80,6 +80,8 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * If the log is activated for the current class, the terminal will display
  * all important modification.
  *
+ * @return An invalid reason; nil if valid.
+ *
  * Example:
  * If a `book` does not have a `title` anymore your application
  * could not want to display/handle the case. Same if its `pages`
@@ -113,6 +115,28 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - DELETE
 
 - (BOOL)deleteIfInvalid;
+
+/**
+ * @brief REQUIRED function to delete the child entities of a current entity.
+ *
+ * @discussion To remove an entity one should call `deleteEntityWithReason:`.
+ * When doing so the current function is called.
+ * The expected behavior is to remove any data store on the disk (like image assets)
+ * but also to forward the destruction process to its child entities.
+ * The super function should always be called.
+ *
+ * When implementing a DB that matches a distant database (behind an API) this function
+ * might also be called when an entity gets deprecated/disabled.
+ *
+ * @return nothing
+ *
+ * Example:
+ * If an entity `book` has many entities `pages` as children then a good practice is to do:
+ * @code for page in book.pages {
+ *   page.deleteEntityWithReason("parent book removed")
+ * }
+ * AssetManager.removeCachedImage(book.image)
+ */
 - (void)deleteChildEntities;
 - (void)deleteEntityWithReason:(NSString *)reason;
 + (void)deleteAllEntities;
