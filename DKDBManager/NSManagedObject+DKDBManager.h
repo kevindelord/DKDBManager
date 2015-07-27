@@ -267,6 +267,8 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 /**
  * @brief Delete the current entity and log the reason.
  *
+ * @param reason A NSString object explaining why the entity is getting removed from the local database.
+ *
  * @discussion The reason will be logged only if the function `verbose:` returns TRUE for the current class model
  *
  * This function also calls the function `deleteChildEntities` for the current entity.
@@ -289,7 +291,16 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 + (void)deleteAllEntities;
 
 /**
- * 
+ * @brief Check and remove all deprecated entities from the local database.
+ *
+ * @param array A NSArray object containing all not deprecated entities for the current class model.
+ *
+ * @discussion The entities are automatically set as not deprecated in the CRUD process.
+ * The ones that are not refreshed/saved before removing all deprecated entities will then disappear from the local store.
+ *
+ * @see - (void)saveEntityAsNotDeprecated;
+ *
+ * @return nothing
  */
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
 
