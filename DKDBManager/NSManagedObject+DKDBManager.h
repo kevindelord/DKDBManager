@@ -209,9 +209,29 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - UPDATE
 
 /**
+ * @brief Override to update the current entity with a given dictionary.
  *
+ * @param dictionary A NSDictionary object containing information about the database entity to fetched with.
+ *
+ * @discussion Use this function and the given parameter to update the attributes of the current entity.
+ *
+ * Depending on your project and architecture the information/data of the child entities could be inside the dictionary.
+ * In this case initiate the CRUD process from this function.
+ *
+ * The super function should be called.
+ *
+ * For example, a `Book` entity could have some `Images` as child entities.
+ * @code
+ * super.updateWithDictionary(dictionary)
+ * self.id = GET_NUMBER(dict, "id")
+ * self.title = GET_STRING(dict, "title")
+ * // child entities
+ * self.images = Images.createEntitiesFromArray(GET_ARRAY(dict, "images"))
+ * @endcode
+ *
+ * @return nothing
  */
-- (void)updateWithDictionary:(NSDictionary *)dict;
+- (void)updateWithDictionary:(NSDictionary *)dictionary;
 
 #pragma mark - DELETE
 

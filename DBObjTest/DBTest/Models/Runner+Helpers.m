@@ -18,9 +18,9 @@
     return self.objectID;
 }
 
-- (void)updateWithDictionary:(NSDictionary *)dict {
-    self.name = GET_STRING(dict, @"name");
-    self.position = GET_NUMBER(dict, @"position");
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
+    self.name = GET_STRING(dictionary, @"name");
+    self.position = GET_NUMBER(dictionary, @"position");
 }
 
 - (NSString *)invalidReason {

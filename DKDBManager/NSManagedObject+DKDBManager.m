@@ -115,7 +115,7 @@
 
 #pragma mark - UPDATE
 
-- (void)updateWithDictionary:(NSDictionary *)dict {
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
     // this method should be overridden on the subclass
 }
 
