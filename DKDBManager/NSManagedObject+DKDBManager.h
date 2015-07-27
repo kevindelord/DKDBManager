@@ -56,13 +56,24 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * Then this new object (or the already existing one) will be updated with `updateWithDictionary:`.
  * @see - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
  *
- * If the entity is now invalid it will get deleted and not returned.
+ * If the entity is now invalid it will get deleted; function returns nil.
  * @see - (NSString *)invalidReason;
  *
  * In the end the current object will get saved as not deprecated by the manager and returned.
  * @see - (void)saveEntityAsNotDeprecated
  *
- * @return A created/read/updated database entity.
+ * About the status in the completion block:
+ *
+ * .Create if the entity has been created and updated.
+ *
+ * .Update if the entity was already created and has just been updated.
+ *
+ * .Save if the entity was already created and nothing changed.
+ *
+ * .Delete if the entity has been deleted.
+ * @see typedef DKDBManagedObjectState
+ *
+ * @return A created/read/updated database entity; nil if deleted.
  */
 + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
 
