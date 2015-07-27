@@ -93,9 +93,9 @@
 }
 
 + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary {
-    // If returns nil will only take the first entity created (if any) and update it.
-    // By doing so only ONE entity will ever be created.
-    // otherwise use the one find bu the predicate.
+    // If returns nil will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.
+    // If returns a `false predicate` then a new entity will always be created.
+    // otherwise use the one find by the predicate.
     return nil;
 }
 
@@ -115,7 +115,7 @@
 
 #pragma mark - UPDATE
 
-- (void)updateWithDictionary:(NSDictionary *)dict {
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
     // this method should be overridden on the subclass
 }
 

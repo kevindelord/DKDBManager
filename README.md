@@ -6,7 +6,7 @@
 
 ## Concept
 
-DKDBManager is simple, yet very useful, helper/manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). *MR* already is a very helpful, easy-to-use, less-to-code, wonderful CoreData wrapper. The current library will implement a logic around this to help you to manage your entities. Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
+DKDBManager is simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). *MR* is already very easy-to-use, less-to-code, wonderful CoreData wrapper. The current library will implement a logic around this to help you to manage your entities. Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
 
 ## Documentation
 
@@ -57,24 +57,24 @@ You could also sublclass the DKDBManager and wrap the following in a dedicated c
 
 ### Configuration
 
-Of course you can also configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName:` inside the `setup` method:
+You can configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName:`:
 
 Enable the log or not. *default NO*
 
-	XYDBManager.verbose = YES;
+	DKDBManager.verbose = YES;
 
 Allow the manager to update the entities when parsing new data. *default YES*
 
-    XYDBManager.allowUpdate = YES;
+    DKDBManager.allowUpdate = YES;
 
 Completely reset the database on startup. *default NO*
 Instead of removing your app from the simulator just activate this flag and the local DB will be brand new when your app starts.
 
-    XYDBManager.resetStoredEntities = NO;
+    DKDBManager.resetStoredEntities = NO;
 
 When parsing new entities force the manager to update the entities no matter what. *default NO*
 
-    XYDBManager.needForcedUpdate = NO;
+    DKDBManager.needForcedUpdate = NO;
 
 ### Model : Plane
 
@@ -85,30 +85,18 @@ To be explained soon...
 - Completion block
 - MagicalRecord request
 
-## Logging
-
-As you will when running your app Magical Record does log a lot of things. It's quite handy but could be a bit annoying. 
-Until the release version 2.3.0 the only [working solution](http://stackoverflow.com/questions/15284067/cocoapods-turning-magicalrecord-logging-off) to disable the log is to add the following to your Podfile as a 'post_install' hook:
-
-	post_install do |installer|
-	  target = installer.project.targets.find{|t| t.to_s == "Pods-MagicalRecord"}
-	    target.build_configurations.each do |config|
-	        s = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
-	        s = [ '$(inherited)' ] if s == nil;
-	        s.push('MR_ENABLE_ACTIVE_RECORD_LOGGING=0') if config.to_s == "Debug";
-	        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = s
-	    end
-	end
-
-PS: disable the log once your database is working fine ;)
-
 ## Projects
 
 `DKDBManager` is used in the following projects:
 
 - WhiteWall
 - Pons-SprachKalender
-- ZahnPlan
+- Pons-Bildwörterbuch
+- ERGO ZahnPlan
+- Handhelp
+- RezeptBOX
+- Hüthig
+- Digster Music Deals
 - *Your project here*
 
 ## TODO
