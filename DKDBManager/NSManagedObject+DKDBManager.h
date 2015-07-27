@@ -30,8 +30,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * When using the DKDBManager to match a distant database (behind an API)
  * the logic to remove deprecated objects actually use a `uniqueIdentifier`
  * for every class.
- * The identifer of each entity is saved zhen refreshing/creating the entities.
+ * The identifer of each entity is saved when refreshing/creating the entities.
  * It is used when the function `removeDeprecatedEntities` is called.
+ *
  * The default value use the native `objectID` property of a NSManagedObject.
  *
  * Override this method to use a custom unique identifer build from a
@@ -42,14 +43,14 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (id)uniqueIdentifier;
 
 /**
- * Function to save/store the current object and all its child relations as not deprecated.
+ * Function to store the current object and all its child relations as not deprecated.
  *
- * This function is required when matching an online database behind an API.
+ * This function is important when matching an online database behind an API.
  * If the current class model does NOT have any child entities / relations, then 
  * it is not required to implement it.
  *
  * This function is automatically called after creating an entity with: `createEntityFromDictionary:`.
- * Unless the returned state is `.Delete` the current/new entity will be stored as not deprecated.
+ * Unless the CREATE method returns `.Delete` the current/new entity will be stored as not deprecated.
  * When overriden, call `super` and forward the process to all child entities.
  *
  * The default behavior of the current function is to forward the saving process to its child objects.
@@ -62,6 +63,41 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @return nothing
  */
 - (void)saveEntityAsNotDeprecated;
+
+/**
+ * @brief OPTIONAL function to verify the validity of an entity.
+ *
+ * @discussion During the CRUD process an entity is tested to verify its validity.
+ * If nil is returned no `invalidReason` has been found.
+ * Otherwise the reason will automatically be used and logged by
+ * the function `deleteEntityWithReason:`.
+ *
+ * Depending on the app and its architecture some entities could get invalid 
+ * when something important has been removed or updated.
+ * If this required field is verified in this function, the current entity
+ * will be, if needed, removed.
+ *
+ * If the log is activated for the current class, the terminal will display
+ * all important modification.
+ *
+ * Example:
+ * If a `book` does not have a `title` anymore your application
+ * could not want to display/handle the case. Same if its `pages`
+ * are missing.
+ * The super function should be called.
+ *
+ * @code
+ * if let invalidReason = super.invalidReason() {
+ *   return invalidReason
+ * }
+ * if self.pages.count == 0 {
+ *   return "invalid number of pages to display"
+ * }
+ * if self.title == nil {
+ *   return "invalid book title"
+ * }
+ * return nil
+ */
 - (NSString *)invalidReason;
 - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
 + (BOOL)verbose;
