@@ -295,7 +295,13 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - DELETE
 
 /**
- * TODO
+ * @brief Check and delete the current entity if invalid.
+ *
+ * @discussion This function verifies the validity of the current entity with the function `invalidReason`.
+ *
+ * @see - (NSString *)invalidReason
+ *
+ * @return TRUE is the entity has been deleted; otherwise FALSE.
  */
 - (BOOL)deleteIfInvalid;
 
