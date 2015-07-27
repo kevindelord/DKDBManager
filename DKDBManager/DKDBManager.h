@@ -190,9 +190,9 @@
 /**
  * @brief Do a `cleanUp` and completely remove the sqlite file from the disk.
  *
- * @discussion If the file referenced by the given database name couldn't be find a UIAlertView will be shown.
+ * @discussion If the file referenced by the given database name couldn't be find an UIAlertView will be shown.
  *
- * @return TRUE if the database has been reset. 
+ * @return TRUE if the database has been erased.
  */
 + (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName;
 
