@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * This function allows you to check that and avoid the update of the current entity during the CRUD process.
  *
  * For example you might want to verify the `lastUpdate` attribute or a version number from the given dictionary against the current entity.
- * If they match return then `false` to NOT update the entity and avoid some useless actions.
+ * If they match return `false` to NOT update the entity and avoid some useless actions.
  *
  * The result of this function is ignored when the debug states of the manager are set as
  * `needForcedUpdate == true` or if `allowUpdate == false`.
@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 /**
  * @brief Override this function to enable all activitiy logs about the current class entity or not.
  *
- * @return TRUE if log activated; default is FALSE.
+ * @return TRUE if log is activated; default is FALSE.
  */
  + (BOOL)verbose;
 
@@ -229,14 +229,16 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 /**
  * @brief Override this function to create a predicate that will find the right entity corresponding to the given dictionary.
  *
- * @param dictionary A NSDictionary object containing information about the database entity to fetched with.
+ * @param dictionary A NSDictionary object containing information about the database entity to be fetched with.
  *
  * @discussion This function is called during the CRUD process to fetch an entity from the database.
  * Depending on the returned predicate the manager will update an existing entity or will create a new one.
  *
- * If returns nil then will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.`
+ * If the current function returns:
  *
- * If returns a `false predicate` then a new entity will always be created.
+ * - nil then will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.`
+ *
+ * - a `false predicate` then a new entity will always be created.
  *
  * Otherwise use the entity found by the predicate.
  * The predicate should be created depending on the parameter: `dictionary`.
@@ -270,7 +272,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 /**
  * @brief Override to update the current entity with a given dictionary.
  *
- * @param dictionary A NSDictionary object containing information about the database entity to fetched with.
+ * @param dictionary A NSDictionary object containing new information about the database entity.
  *
  * @discussion Use this function and the given parameter to update the attributes of the current entity.
  *
@@ -292,6 +294,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 
 #pragma mark - DELETE
 
+/**
+ * TODO
+ */
 - (BOOL)deleteIfInvalid;
 
 /**
@@ -301,7 +306,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * When doing so the current function is called.
  * The expected behavior is to remove any data store on the disk (like image assets)
  * but also to forward the destruction process to its child entities.
- * The super function should always be called.
  *
  * When implementing a DB that matches a distant database (behind an API) this function
  * might also be called when an entity gets deprecated/disabled.
@@ -324,7 +328,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @param reason A NSString object explaining why the entity is getting removed from the local database.
  *
- * @discussion The reason will be logged only if the function `verbose:` returns TRUE for the current class model
+ * @discussion The reason will be logged only if the function `verbose` returns TRUE for the current class model
  *
  * This function also calls the function `deleteChildEntities` for the current entity.
  *
