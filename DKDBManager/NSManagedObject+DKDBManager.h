@@ -341,7 +341,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @brief Delete all entities from the current class model.
  *
  * @discussion All entites for the current class model will be removed.
- * Functions `deleteChildEntities` or `deleteEntityWithReason:` will not be called.
+ * Functions `deleteChildEntities` and `deleteEntityWithReason:` will not be called.
  */
 + (void)deleteAllEntities;
 
