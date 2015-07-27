@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 - (void)saveEntityAsNotDeprecated;
 
 /**
- * @brief OPTIONAL function to verify the validity of an entity.
+ * @brief OPTIONAL function to verify the validity of an entity; default returns nil.
  *
  * @discussion During the CRUD process an entity is tested to verify its validity.
  * If nil is returned no `invalidReason` has been found.
@@ -101,15 +101,44 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * return nil
  */
 - (NSString *)invalidReason;
-- (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
-+ (BOOL)verbose;
-+ (NSString *)sortingAttributeName;
-+ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
+
+/**
+ *
+ */
+ - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
+
+/**
+ * @brief Function to enable all activitiy logs about the current class entity or not.
+ * @return TRUE if log activated; default is FALSE.
+ */
+ + (BOOL)verbose;
+
+/**
+ * @brief Implement this function to set a default sorting key for the current class entity.
+ * @return Sorting key as a NSString object; default is nil.
+ */
+ + (NSString *)sortingAttributeName;
+
+/**
+ *
+ */
+ + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
+
+/**
+ *
+ */
 + (NSArray *)all;
-+ (NSInteger)count;
+
+/**
+ *
+ */
+ + (NSInteger)count;
 
 #pragma mark - UPDATE
 
+/**
+ *
+ */
 - (void)updateWithDictionary:(NSDictionary *)dict;
 
 #pragma mark - DELETE
@@ -131,15 +160,30 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @return nothing
  *
  * Example:
+ * The super function should be called.
  * If an entity `book` has many entities `pages` as children then a good practice is to do:
- * @code for page in book.pages {
+ * @code
+ * super.deleteChildEntities()
+ * for page in book.pages {
  *   page.deleteEntityWithReason("parent book removed")
  * }
  * AssetManager.removeCachedImage(book.image)
  */
 - (void)deleteChildEntities;
+
+/**
+ *
+ */
 - (void)deleteEntityWithReason:(NSString *)reason;
+
+/**
+ *
+ */
 + (void)deleteAllEntities;
+
+/**
+ *
+ */
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
 
 @end
