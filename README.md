@@ -122,13 +122,19 @@ In each extented class, implement the following methods:
 
 ### Required
 
-[+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
+[+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary. This function should create and return a `NSPredicate` object that match only one database entity.
 
 	override public class func primaryPredicateWithDictionary(dictionary: [NSObject:AnyObject]!) -> NSPredicate! {
+
 		// If returns nil then only ONE entity will ever be created and updated.
+		return nil
+
 		// If returns a `false predicate` then a new entity will always be created.
-		// Otherwise the CRUD process use the entity found by the predicate.
 		return NSPredicate(format: "FALSEPREDICATE")
+
+		// Otherwise the CRUD process use the entity found by the predicate.
+		let dictionaryName = GET_STRING(dictionary, "name")
+		return NSPredicate(format: "name ==[c] \(dictionaryName)")
     }
 
 [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) to update the current entity with a given dictionary.
@@ -175,7 +181,8 @@ If you have multiple entities to create inside an array feel free to use:
 [+ createEntitiesFromArray:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/createEntitiesFromArray:)
 
 To **update** or **save as not deprecated** just call the same function with the same dictionary.
-The most important values are the ones required by the function [primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to actually let the manager finds the entities again.
+The most important values are the ones required by the function [primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to actually let the manager finds the entities again. This function should create and return a `NSPredicate` object that match only one database entity.
+The values not used to create the primary predicate could be missing or changed, the valid entity will still be found correctly.
 
 	let entityInfo = ["name":"LOTR", "order":1]
 	Entity.createEntityFromDictionary(entityInfo) { (newEntity, state) -> Void in
@@ -223,6 +230,8 @@ Note that the call to `Entity.sortingAttributeName()` can be replaced by any oth
 This function returns the default sorting attribute previously set.
 
 ## How to DELETE entities
+
+Unlike the CREATE logic, many ways exist to **delete** an entity.
 
 - (BOOL)deleteIfInvalid;
 - (void)deleteChildEntities;
