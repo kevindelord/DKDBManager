@@ -61,22 +61,22 @@ You could also sublclass the DKDBManager and wrap the following in a dedicated c
 
 ### Configuration
 
-You can configure how the manager will react on execution. Add the following lines before calling `setupDatabaseWithName:`:
+You can configure how the manager will react on execution. Add the following **optional** lines before calling `setupDatabaseWithName:`:
 
-Enable the log or not. *default NO*
+[+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/verbose) to toggle the log.
 
 	DKDBManager.setVerbose(true)
 
-Allow the manager to update the entities when parsing new data. *default YES*
+[+ allowUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/allowUpdate) to allow the manager to update the entities when parsing new data.
 
 	DKDBManager.setAllowUpdate(true)
 
-Completely reset the database on startup. *default NO*
+[+ resetStoredEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/resetStoredEntities) to completely reset the database on startup.
 Instead of removing your app from the simulator just activate this flag and the local DB will be brand new when your app starts.
 
 	DKDBManager.setResetStoredEntities(true)
 
-When parsing new entities force the manager to update the entities no matter what. *default NO*
+[+ needForcedUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/needForcedUpdate) to force the manager to update the entities during the CRUD process.
 
     DKDBManager.setNeedForcedUpdate(false)
 
