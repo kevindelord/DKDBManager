@@ -6,9 +6,13 @@
 
 ## Concept
 
-DKDBManager is simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). *MR* is already very easy-to-use, less-to-code, wonderful CoreData wrapper. The current library will implement a logic around this to help you to manage your entities. Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
+DKDBManager is simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord) (a wonderful CoreData wrapper). The current library will implement a logic around it and helps the developer to manage his entities.
+
+Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
 
 The main concept is to use JSON dictionaries representing your entities. The logic to create, read or update your entities are done with just one single function. The delete logic has also been improved with a `deprecated` state.
+
+Extend the NSManagedObject subclasses is required.
 
 ## Documentation
 
@@ -63,20 +67,20 @@ You could also sublclass the DKDBManager and wrap the following in a dedicated c
 
 You can configure how the manager will react on execution. Add the following **optional** lines before calling `setupDatabaseWithName:`:
 
-[+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/verbose) to toggle the log.
+[+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/verbose) to toggle the log.
 
 	DKDBManager.setVerbose(true)
 
-[+ allowUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/allowUpdate) to allow the manager to update the entities when parsing new data.
+[+ allowUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/allowUpdate) to allow the manager to update the entities when parsing new data.
 
 	DKDBManager.setAllowUpdate(true)
 
-[+ resetStoredEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/resetStoredEntities) to completely reset the database on startup.
+[+ resetStoredEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/resetStoredEntities) to completely reset the database on startup.
 Instead of removing your app from the simulator just activate this flag and the local DB will be brand new when your app starts.
 
 	DKDBManager.setResetStoredEntities(true)
 
-[+ needForcedUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Classes/DKDBManager.html#//api/name/needForcedUpdate) to force the manager to update the entities during the CRUD process.
+[+ needForcedUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/needForcedUpdate) to force the manager to update the entities during the CRUD process.
 
     DKDBManager.setNeedForcedUpdate(false)
 
@@ -116,7 +120,7 @@ This data will get parsed and the library will apply a CRUD logic on it.
 
 In each extented class the following methods are **required**:
 
-[+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
+[+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
 
 	+ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary {
 		// If returns nil then only ONE entity will ever be created and updated.
@@ -125,7 +129,7 @@ In each extented class the following methods are **required**:
 		return NSPredicate(format: "FALSEPREDICATE");
 	}
 
-[- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) to update the current entity with a given dictionary.
+[- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) to update the current entity with a given dictionary.
 
 	override public func updateWithDictionary(dictionary: [NSObject : AnyObject]!) {
         // Update attributes
@@ -143,13 +147,13 @@ The following **optional** ones are also recommended:
         }
     }
 
-[+ sortingAttributeName](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/sortingAttributeName) to specify a default order for the [+ all](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/all) and and [+ count](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/count) functions.
+[+ sortingAttributeName](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/sortingAttributeName) to specify a default order for the [+ all](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/all) and and [+ count](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/count) functions.
 
     override public class func sortingAttributeName() -> String! {
         return "order"
     }
 
-[+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/verbose) to toggle the log for the receiving class.
+[+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/verbose) to toggle the log for the receiving class.
 
     override public class func verbose() -> Bool {
 		return true
