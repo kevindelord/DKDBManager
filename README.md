@@ -216,6 +216,8 @@ To do so use one of the following methods:
 
 [DKDBManager.saveToPersistentStoreWithCompletion(void ( ^ ) ( BOOL success , NSError *error ))](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/saveToPersistentStoreWithCompletion:)
 
+Those calls need to be done after creating, deleting or updating entities.
+Saving to the persistent store is not an easy task, please try to save the CPU usage and call those functions only when necessary.
 
 ## How to READ entities
 #### With MagicalRecord !
@@ -238,19 +240,19 @@ Instead, you could also provide a specific sorting attribute name (e.g.: "order"
 
 ## How to DELETE entities
 
-To **delete** an entity use [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:) as it deletes the current entity, logged the reason and forward the delete process to the child entities using the function [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities) (see _How to deal with child entities_).
+To **delete** an entity use [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:). It will delete the current entity, log the reason (if logging is enabled) and forward the delete process to the child entities using the function [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities) (see _How to deal with child entities_).
 
-	self.deleteEntityWithReason("removed by user")
+	anEntity.deleteEntityWithReason("removed by user")
 
-If you want to me more radical and remove all entities for the current class you can use [+ deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteAllEntities) or [+ deleteAllEntitiesForClass:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntitiesForClass:).
+If you want to be more radical and remove all entities for the current class you can use [+ deleteAllEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteAllEntities) or [+ deleteAllEntitiesForClass:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntitiesForClass:).
 
 	Entity.deleteAllEntities()
 
 	// - OR -
 
-	DKDBManager.AllEntitiesForClass(Entity)
+	DKDBManager.deleteAllEntitiesForClass(Entity)
 
-**Attention**, if you call [+ deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntities) on the DKDBManager all entities for all classes will be deleted.
+**Attention**, if you call [+ deleteAllEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntities) on the DKDBManager all entities for all classes will be deleted.
 
 	DKDBManager.deleteAllEntities()
 
@@ -262,25 +264,44 @@ If you want to me more radical and remove all entities for the current class you
 
 ## Database matching an API
 
-To implement:
+### Extended protocol
 
-- invalidReason
-- saveEntityAsNotDeprecated
-- deleteChildEntities
-- shouldUpdateEntityWithDictionary
+Implement the following functions inside the NSManagedObject subclasses:
 
-To call:
+- [- invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
+- [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated)
+- [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities)
+- [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:)
 
+### Deprecated entities
+
+A deprecated entity is an object not saved as `not deprecated` in the DKDBManager.
+TODO: explain more about deprecated entities
+
+To remove the deprecated entities call the function [+ removeDeprecatedEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/removeDeprecatedEntities) after the CRUD process (when refreshing the local database from an API) and before `saving` the current context to the persistent store.
+
+	// CRUD process
+	DKDBManager.createEntityFromDictionary(data)
+
+	// Remove all deprecated (not set as 'not deprecated')
 	DKDBManager.removeDeprecatedEntities()
+
 	//
-	// As the recipes are not directly integrated within the books,
+	// If some entities are not well integrated/linked to the other ones,
 	// they could become invalid after removing the deprecated entities.
-	// See Book+Helper for me information.
-	Book.checkAllDeprecatedEntities()
+	// It is then required do it manually:
+	Entity.checkAllDeprecatedEntities()
 
-Can be called:
+	// Save the current context to the persistent store
+	DKDBManager.saveToPersistentStoreWithCompletion() { /* Do something */}
 
-- (BOOL)deleteIfInvalid;
+TODO: explain more about .checkAllDeprecatedEntities()
+
+### Delete if invalid
+
+If the function [invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) has been implemented you can also manually delete invalid entities: [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
+
+	anEntity.deleteIfInvalid()
 
 ## Tips
 
