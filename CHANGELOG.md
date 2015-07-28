@@ -4,6 +4,7 @@
 
 - Add documentation.
 - Minor parameter renaming `updateWithDictionary:(NSDictionary *)dictionary`.
+- Remove DKHelper
 
 ## 0.5.1
 

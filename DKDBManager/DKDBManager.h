@@ -10,11 +10,21 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "DKHelper.h"
 #import "MagicalRecord.h"
 #import "NSManagedObject+DKDBManager.h"
 #import "NSManagedObject+ExistingObject.h"
 
+/**
+ * DKDBManager is simple, yet very useful, CRUD manager around Magical Record (a CoreData wrapper).
+ * The current library implement a CRUD logic around it and helps the developer to manage his entities.
+ *
+ * The main concept is to use JSON dictionaries representing the entities.
+ * The logic to create, read or update entities is done with just one single function.
+ * The delete logic has also been improved with a `deprecated` state.
+ *
+ * Extend the NSManagedObject subclasses is required.
+ * Please read the README.md for more information.
+ */
 @interface DKDBManager : NSObject
 
 #pragma mark - DEBUG

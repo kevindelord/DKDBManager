@@ -7,6 +7,20 @@
 
 #import "NSManagedObject+DKDBManager.h"
 
+void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
+#if defined (DEBUG)
+    if (logEnabled == true) {
+        va_list args;
+        va_start(args, format);
+        NSString *content = [[NSString alloc] initWithFormat:format arguments:args];
+        va_end(args);
+        NSLog(@"%@", content);
+    }
+#else
+    // do nothing
+#endif
+}
+
 @implementation NSManagedObject (DKDBManager)
 
 #pragma mark - CREATE
@@ -39,8 +53,8 @@
         status = DKDBManagedObjectStateDelete;
     }
 
-    DKLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateCreate, @"Creating %@ %@", NSStringFromClass([self class]), entity);
-    DKLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateUpdate, @"Updating %@ %@", NSStringFromClass([self class]), entity);
+    CRUDLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateCreate, @"Creating %@ %@", NSStringFromClass([self class]), entity);
+    CRUDLog(DKDBManager.verbose && [self verbose] && status == DKDBManagedObjectStateUpdate, @"Updating %@ %@", NSStringFromClass([self class]), entity);
 
     // if entity exists then save the entity's id.
     [entity saveEntityAsNotDeprecated];
@@ -134,7 +148,7 @@
 }
 
 - (void)deleteEntityWithReason:(NSString *)reason {
-    DKLog(DKDBManager.verbose && self.class.verbose, @"delete %@: %@ Reason: %@", [self class], self, reason);
+    CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete %@: %@ Reason: %@", [self class], self, reason);
     
     // remove all the child of the current object
     [self deleteChildEntities];

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "DKDBManager"
-  s.version          = "0.5.1"
+  s.version          = "0.5.2"
   s.summary          = "Database manager to use around MagicalRecord to provide a complete CRUD logic for your entities."
   s.homepage         = "https://github.com/kevindelord/DKDBManager"
   s.license          = 'MIT'
@@ -12,10 +12,8 @@ Pod::Spec.new do |s|
   s.framework        = 'CoreData'
   s.source_files     = 'DKDBManager/*'
   s.dependency         'MagicalRecord', '~> 2.3.0'
-  s.dependency         'DKHelper', '~> 0.9.2'
   s.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
-#import "DKHelper.h"
 EOS
 end

@@ -7,6 +7,8 @@
 
 #import "DKDBManager.h"
 
+#pragma mark - ENUM
+
 /**
  * @typedef DKDBManagedObjectState
  *
@@ -34,6 +36,12 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
     DKDBManagedObjectStateDelete,
 } ;
 
+#pragma mark - NSManagedObject
+
+/**
+ * Category of the NSManagedObject class. Add functions required by the CRUD process.
+ * Please read the README.md for more information.
+ */
 @interface NSManagedObject (DKDBManager)
 
 #pragma mark - CREATE
@@ -366,3 +374,10 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
 
 @end
+
+#pragma mark - Log
+
+/**
+ * Log a string if the verbose boolean is enabled.
+ */
+void        CRUDLog(BOOL logEnabled, NSString *format, ...);

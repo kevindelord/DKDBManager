@@ -90,7 +90,7 @@ static BOOL _needForcedUpdate = NO;
 
 + (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName {
 
-    DKLog(DKDBManager.verbose, @"erase database: %@", databaseName);
+    CRUDLog(DKDBManager.verbose, @"erase database: %@", databaseName);
     // do some cleanUp of MagicalRecord
     [self cleanUp];
 
@@ -109,7 +109,7 @@ static BOOL _needForcedUpdate = NO;
 + (void)removeDeprecatedEntities {
     DKDBManager *manager = [DKDBManager sharedInstance];
 
-    DKLog(self.verbose, @"-------------- Removing deprecated entities -----------------");
+    CRUDLog(self.verbose, @"-------------- Removing deprecated entities -----------------");
 
     for (NSString *className in self.entities) {
         Class class = NSClassFromString(className);
@@ -232,12 +232,12 @@ static BOOL _needForcedUpdate = NO;
 
     for (NSString *className in self.entities) {
         Class class = NSClassFromString(className);
-        count = [NSString stringWithFormat:@"%@%ld %@, ", count, cUL(class.count), className];
+        count = [NSString stringWithFormat:@"%@%ld %@, ", count, (unsigned long)(class.count), className];
     }
 
-    DKLog(self.verbose, @"-------------------------------------");
-    DKLog(self.verbose, @"%@", count);
-    DKLog(self.verbose, @"-------------------------------------");
+    CRUDLog(self.verbose, @"-------------------------------------");
+    CRUDLog(self.verbose, @"%@", count);
+    CRUDLog(self.verbose, @"-------------------------------------");
 }
 
 + (void)dump {
@@ -251,7 +251,7 @@ static BOOL _needForcedUpdate = NO;
         if (class.verbose) {
             for (id entity in class.all)
                 NSLog(@"%@ %@", className, entity);
-            DKLog(self.verbose, @"-------------------------------------");
+            CRUDLog(self.verbose, @"-------------------------------------");
         }
     }
 }
