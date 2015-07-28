@@ -27,7 +27,7 @@ and run `pod install` from the main directory.
 
 ## Getting Started
 
-To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and CoredData.
+To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and `CoredData`.
 
     #import "DKDBManager.h"
 
@@ -144,7 +144,7 @@ The following **optional** ones are also recommended:
         }
     }
 
-[+ sortingAttributeName](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/sortingAttributeName) to specify a default order for the [all()](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/all) and and [count()](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/count) functions.
+[+ sortingAttributeName](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/sortingAttributeName) to specify a default order for the [+ all](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/all) and and [+ count](http://cocoadocs.org/docsets/DKDBManager/0.5.1/Categories/NSManagedObject+DKDBManager.html#//api/name/count) functions.
 
     override public class func sortingAttributeName() -> String! {
         return "order"
