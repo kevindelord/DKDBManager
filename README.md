@@ -260,7 +260,7 @@ If you want to me more radical and remove all entities for the current class you
 - (void)saveEntityAsNotDeprecated;
 - (void)updateWithDictionary:(NSDictionary *)dictionary;
 
-## Database matching API
+## Database matching an API
 
 To implement:
 
