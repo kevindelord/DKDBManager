@@ -238,10 +238,9 @@ Instead, you could also provide a specific sorting attribute name (e.g.: "order"
 
 ## How to DELETE entities
 
-Unlike the CREATE logic, many ways exist to **delete** an entity.
-The best one is to call is [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:) as it deletes the current entity, logged the reason and forward the delete process to the child entities using the function [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities).
+To **delete** an entity use [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:) as it deletes the current entity, logged the reason and forward the delete process to the child entities using the function [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities) (see _How to deal with child entities_).
 
-	TODO: example deleteChildEntities
+	self.deleteEntityWithReason("removed by user")
 
 If you want to me more radical and remove all entities for the current class you can use [+ deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteAllEntities) or [+ deleteAllEntitiesForClass:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntitiesForClass:).
 
@@ -251,12 +250,15 @@ If you want to me more radical and remove all entities for the current class you
 
 	DKDBManager.AllEntitiesForClass(Entity)
 
+**Attention**, if you call [+ deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntities) on the DKDBManager all entities for all classes will be deleted.
 
+	DKDBManager.deleteAllEntities()
+
+## How to deal with child entities
 
 - (void)deleteChildEntities;
-
-+ (void)deleteAllEntities;
-+ (void)deleteAllEntitiesForClass:(Class)class;
+- (void)saveEntityAsNotDeprecated;
+- (void)updateWithDictionary:(NSDictionary *)dictionary;
 
 ## Database matching API
 
@@ -282,8 +284,9 @@ Can be called:
 
 ## Tips
 
-- add more custom functions inside the helper files. Everything logic related to one class model should/could be inside this file. It will help you a lot to structure your code. 
-- Subclass the DKDBManager in order to structure your code as you wish it.
+- Add more custom functions inside the helper files. Every logic related to one class model should/could be inside this file. It helps a lot to structure the code. 
+
+- Subclass the DKDBManager and add more DB related functions keeps the app delegate cleaner.
 
 ## Projects
 
