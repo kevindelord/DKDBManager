@@ -122,12 +122,14 @@ static BOOL _needForcedUpdate = NO;
         Class class = NSClassFromString(className);
         [class deleteAllEntities];
     }
+    [self dump];
 }
 
 + (void)deleteAllEntitiesForClass:(Class)class {
     if ([self.entities containsObject:NSStringFromClass(class)]){
         [class deleteAllEntities];
     }
+    [self dump];
 }
 
 #pragma mark - Save methods
@@ -154,10 +156,8 @@ static BOOL _needForcedUpdate = NO;
 + (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (self.verbose) {
-            [self dump];
-        }
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {        
+        [self dump];
         if (completionBlock) {
             completionBlock(success, error);
         }
@@ -168,9 +168,7 @@ static BOOL _needForcedUpdate = NO;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreAndWait];
-    if (self.verbose) {
-        [self dump];
-    }
+    [self dump];
 #pragma clang diagnostic pop
 }
 
@@ -226,7 +224,9 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)dumpCount {
 
-    if (!self.verbose) return ;
+    if (self.verbose == false) {
+        return ;
+    }
 
     NSString *count = @"";
 
@@ -242,7 +242,9 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)dump {
 
-    if (!self.verbose) return ;
+    if (self.verbose == false) {
+        return ;
+    }
 
     [self dumpCount];
 

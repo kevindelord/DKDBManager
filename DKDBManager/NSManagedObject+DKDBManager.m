@@ -158,6 +158,7 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 }
 
 + (void)deleteAllEntities {
+    CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete all %@ entities", [self class]);
     [self MR_deleteAllMatchingPredicate:nil];
 }
 
