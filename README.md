@@ -169,7 +169,7 @@ The following **optional** ones are also recommended:
 
 - WhiteWall
 - Pons-SprachKalender
-- Pons-Bildwörterbuch
+- Pons-Bildwoerterbuch
 - ERGO ZahnPlan
 - Handhelp
 - RezeptBOX
