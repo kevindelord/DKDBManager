@@ -31,7 +31,7 @@
 /**
  * @brief Set a Boolean value indicating whether the manager is set as verbose or not.
  *
- * @param Boolean value.
+ * @param verbose Boolean value.
  */
 + (void)setVerbose:(BOOL)verbose;
 
@@ -51,7 +51,7 @@
 /**
  * @brief Set a Boolean value indicating whether the manager allows updates or not.
  *
- * @param Boolean value.
+ * @param allowUpdate Boolean value.
  */
 + (void)setAllowUpdate:(BOOL)allowUpdate;
 
@@ -67,7 +67,7 @@
 /**
  * @brief Set a Boolean value indicating whether the manager will reset all stored entities or not.
  *
- * @param Boolean value.
+ * @param resetStoredEntities Boolean value.
  */
 + (void)setResetStoredEntities:(BOOL)resetStoredEntities;
 
@@ -86,7 +86,7 @@
 /**
  * @brief Set a Boolean value indicating whether the manager will force the update of the entities or not.
  *
- * @param Boolean value.
+ * @param needForcedUpdate Boolean value.
  */
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate;
 
@@ -136,8 +136,7 @@
 /**
  * @brief Setup, and reset if needed, the CoreData stack using an auto migrating system.
  *
- * @discussion
- * Of course you can play with the name to change your database on startup whenever you would like to.
+ * @discussion Of course you can play with the name to change your database on startup whenever you would like to.
  * A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions`
  * method of your `AppDelegate`.
  *
@@ -181,8 +180,7 @@
 /**
  * @brief Call `removeDeprecatedEntitiesFromArray:` method for every class returned by the `entities` one.
  *
- * @discussion
- * Only the saved objects through the `saveEntity:` method will NOT be removed as they are saved as *not deprecated*.
+ * @discussion Only the saved objects through the `saveEntity:` method will NOT be removed as they are saved as *not deprecated*.
  * All other entities will be removed.
  */
 + (void)removeDeprecatedEntities;
@@ -191,6 +189,8 @@
  * @brief Do a `cleanUp` and completely remove the sqlite file from the disk.
  *
  * @discussion If the file referenced by the given database name couldn't be find an UIAlertView will be shown.
+ *
+ * @param databaseName The NSString object containing the name of the database.
  *
  * @return TRUE if the database has been erased.
  */

@@ -1,5 +1,10 @@
 # DKDBManager CHANGELOG
 
+## 0.5.2
+
+- Add documentation.
+- Minor parameter renaming `updateWithDictionary:(NSDictionary *)dictionary`.
+
 ## 0.5.1
 
 - Add version requirement on dependencies.

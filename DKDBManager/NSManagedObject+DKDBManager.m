@@ -95,7 +95,7 @@
 + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary {
     // If returns nil will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.
     // If returns a `false predicate` then a new entity will always be created.
-    // otherwise use the one find by the predicate.
+    // Otherwise the CRUD process use the entity found by the predicate.
     return nil;
 }
 

@@ -227,7 +227,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  + (NSString *)sortingAttributeName;
 
 /**
- * @brief Override this function to create a predicate that will find the right entity corresponding to the given dictionary.
+ * @brief Override this function to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
  *
  * @param dictionary A NSDictionary object containing information about the database entity to be fetched with.
  *
