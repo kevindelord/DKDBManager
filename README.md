@@ -27,7 +27,7 @@ and run `pod install` from the main directory.
 
 ## Getting Started
 
-To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and `CoredData`.
+To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and CoredData`.
 
     #import "DKDBManager.h"
 
@@ -106,7 +106,7 @@ __warning__ If your code is in Swift you can either generate the NSManagedObject
 
 		#import "Entity.h"
 
-### Simple local database
+## Simple local database
 
 This part explains how to create and configure a single local database that do not need to be updated from an API.
 In this case there is no need of deprecated entities or automatic updates.
@@ -157,9 +157,9 @@ The following **optional** ones are also recommended:
     }
 
 
-### Database matching API
+## Database matching API
 
-### MagicalRecord request
+## MagicalRecord request
 
 ## Projects
 
