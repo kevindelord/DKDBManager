@@ -206,9 +206,9 @@ To do so use one of the following methods:
 ## How to READ entities
 #### With MagicalRecord !
 
-To read the entities currently in the current context you need to fetch them using a `NSPredicate` and `Magical Record`.
+To **read** the entities currently in the current context you need to fetch them using a `NSPredicate` and `Magical Record`.
 
-Using the various methods of Magical Record can seriously help you on your everyday development.
+Using the various methods of `Magical Record` can seriously help you on your everyday development.
 Here is the [official documentation](https://github.com/magicalpanda/MagicalRecord/blob/master/Docs/Fetching-Entities.md).
 
 Nonetheless the following example show how to fetch an array of entities depending on their name:
