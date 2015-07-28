@@ -217,7 +217,7 @@ To do so use one of the following methods:
 [DKDBManager.saveToPersistentStoreWithCompletion(void ( ^ ) ( BOOL success , NSError *error ))](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/saveToPersistentStoreWithCompletion:)
 
 Those calls need to be done after creating, deleting or updating entities.
-Saving to the persistent store is not an easy task, please try to save the CPU usage and call those functions only when necessary.
+Saving to the persistent store is not an easy task, please try to conserve the CPU usage and call those functions only when necessary.
 
 ## How to READ entities
 #### With MagicalRecord !
