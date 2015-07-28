@@ -207,11 +207,12 @@ To do so use one of the following methods:
 
 create predicate and use default function
 example:
-    func sortedNotes() -> [Note]? {
-        var predicate = NSPredicate(format: "\(DB.Key.Recipe).\(DB.Key.Id) ==[c] \(self.id)")
-        var notes = Note.MR_findAllSortedBy(Note.sortingAttributeName(), ascending: true, withPredicate: predicate)
-        return notes as? [Note]
-    }
+
+	func sortedNotes() -> [Note]? {
+		var predicate = NSPredicate(format: "\(DB.Key.Recipe).\(DB.Key.Id) ==[c] \(self.id)")
+		var notes = Note.MR_findAllSortedBy(Note.sortingAttributeName(), ascending: true, withPredicate: predicate)
+		return notes as? [Note]
+	}
 
 Add link to official documentation.
 
