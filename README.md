@@ -159,7 +159,69 @@ The following **optional** ones are also recommended:
 
 ## Database matching API
 
+To implement:
+
+invalidReason
+saveEntityAsNotDeprecated
+deleteChildEntities
+shouldUpdateEntityWithDictionary
+
+To call:
+
+DKDBManager.removeDeprecatedEntities()
+//
+// As the recipes are not directly integrated within the books,
+// they could become invalid after removing the deprecated entities.
+// See Book+Helper for me information.
+Book.checkAllDeprecatedEntities()
+
+## How to create entities
+
+-> Always same bookInfo?
+Book.createEntityFromDictionary(bookInfo) { (newBook, state) -> Void in
+    //
+    // Depending on what change on the DB fetch the recipes or not.
+    // If the state is `.Create` or `.Update` the recipes SHOULD be refreshed. (Fetch recipes for book.)
+    // If the state is `.Save` nothing changed. The entity is automatically marked as not-deprecated.
+    //      BUT as the recipes are not directly integrated within the books but separately
+    //      it is necessary to manually save the child entities.
+    // If the state is `.Delete` the entity as been removed; newBook = nil.
+    //
+    // Reduce the ready counter only for `.Delete` and `.Save` as the function `fetchRecipesForBook:`
+    // calls it for the other two states when all recipes have been saved or updated.
+    //
+    switch state {
+    case .Save:
+        (newBook as? Book)?.saveChildEntitiesAsNotDeprecated()
+        self.reduceReadyCount(completionBlock)
+    case .Delete:
+        self.reduceReadyCount(completionBlock)
+    case .Create, .Update:
+        (newBook as? Book)?.preloadImages()
+        self.fetchRecipesForBook(newBook as? Book, receipt: IAPManager.currentReceipt(), completionBlock: completionBlock)
+    }
+}
+
+then 
+
+DKDBManager.save()
+DKDBManager.saveToPersistentStoreAndWait()
+DKDBManager.saveToPersistentStoreWithCompletion { (succeed, error) -> Void in
+	completionBlock()
+}
+
+
 ## MagicalRecord request
+
+create predicate and use default function
+example:
+    func sortedNotes() -> [Note]? {
+        var predicate = NSPredicate(format: "\(DB.Key.Recipe).\(DB.Key.Id) ==[c] \(self.id)")
+        var notes = Note.MR_findAllSortedBy(Note.sortingAttributeName(), ascending: true, withPredicate: predicate)
+        return notes as? [Note]
+    }
+
+Add link to official documentation.
 
 ## Projects
 
