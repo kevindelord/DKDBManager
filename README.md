@@ -98,8 +98,8 @@ __warning__ If your code is in Swift you can either generate the NSManagedObject
 
 		@objc(Entity)
 		class Entity: NSManagedObject {
-			@NSManaged var createdAt: NSDate?
-			@NSManaged var updatedAt: NSDate?
+			@NSManaged var name: NSString?
+			@NSManaged var order: NSNumber?
 		}
 
 - _Obj-C_: import the class header in the bridge-header file.
@@ -129,9 +129,8 @@ In each extented class the following methods are **required**:
 
 	override public func updateWithDictionary(dictionary: [NSObject : AnyObject]!) {
         // Update attributes
-        self.id         = GET_NUMBER(dictionary, "id")
-        self.firstName  = GET_STRING(dictionary, "firstName")
-        self.lastName   = GET_STRING(dictionary, "lastName")
+        self.name 		= GET_STRING(dictionary, "name")
+        self.order 		= GET_NUMBER(dictionary, "order")
     }
 
 The following **optional** ones are also recommended:
@@ -140,7 +139,7 @@ The following **optional** ones are also recommended:
 
 	override var description: String {
         get {
-            return "\(self.id) : \(self.name)"
+            return "\(self.order) : \(self.name)"
         }
     }
 
