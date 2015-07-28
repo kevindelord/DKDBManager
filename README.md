@@ -264,7 +264,7 @@ If you want to be more radical and remove all entities for the current class you
 
 ## Database matching an API
 
-### Extended protocol
+#### Extended protocol
 
 Implement the following functions inside the NSManagedObject subclasses:
 
@@ -273,7 +273,7 @@ Implement the following functions inside the NSManagedObject subclasses:
 - [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities)
 - [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:)
 
-### Deprecated entities
+#### Deprecated entities
 
 A deprecated entity is an object not saved as `not deprecated` in the DKDBManager.
 TODO: explain more about deprecated entities
@@ -297,7 +297,7 @@ To remove the deprecated entities call the function [+ removeDeprecatedEntities]
 
 TODO: explain more about .checkAllDeprecatedEntities()
 
-### Delete if invalid
+#### Delete if invalid
 
 If the function [invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) has been implemented you can also manually delete invalid entities: [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
 
