@@ -76,14 +76,35 @@ When parsing new entities force the manager to update the entities no matter wha
 
     DKDBManager.needForcedUpdate = NO;
 
-### Model : Plane
+### Models Configuration
 
-To be explained soon...
+The models configuration is done as in any other projects.
 
-- NSManagedObject subclass
-- Categories/extensions
-- Completion block
-- MagicalRecord request
+First create and configure your model entities inside the `.xcdatamodel` file.
+Then generate with Xcode the NSManagedObject subclasses as you are used to.
+
+After that, create category files (or extensions in Swift) for each model.
+The functions and logic will be implemented in those files. If it was done in the generated files, your changes would be removed everytime you generate them again.
+
+__warning__ If your code is in Swift you can either generate the NSManagedObject subclasses in _Swift_ or _Obj-C_.
+
+- _Swift_: add `@objc(ClassName)` before the implementation:
+
+		@objc(Entity)
+		class Entity: NSManagedObject {
+			@NSManaged var createdAt: NSDate?
+			@NSManaged var updatedAt: NSDate?
+		}
+
+- _Obj-C_: import the class header in the bridge-header file.
+
+		#import "Entity.h"
+
+### Simple local database
+
+### Database matching API
+
+### MagicalRecord request
 
 ## Projects
 
@@ -101,7 +122,7 @@ To be explained soon...
 
 ## TODO
 
-- Improve documentaion
+- Improve documentation
 - Add tests
 - Add project links
 
