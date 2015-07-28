@@ -45,7 +45,7 @@ You could also sublclass the DKDBManager and wrap the following in a dedicated c
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-		var didResetDB = self.setupDatabaseWithName("DKDatabaseName.sqlite")
+		var didResetDB = DKDBManager.setupDatabaseWithName("DKDatabaseName.sqlite")
 		if (didResetDB) {
 			// The database is fresh new.
 			// Depending on your needs you might want to do something special right now as:.
