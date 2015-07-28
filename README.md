@@ -122,12 +122,12 @@ In each extented class the following methods are **required**:
 
 [+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
 
-	+ (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary {
+	override public class func primaryPredicateWithDictionary(dictionary: [NSObject:AnyObject]!) -> NSPredicate! {
 		// If returns nil then only ONE entity will ever be created and updated.
 		// If returns a `false predicate` then a new entity will always be created.
 		// Otherwise the CRUD process use the entity found by the predicate.
-		return NSPredicate(format: "FALSEPREDICATE");
-	}
+		return NSPredicate(format: "FALSEPREDICATE")
+    }
 
 [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) to update the current entity with a given dictionary.
 
@@ -159,61 +159,51 @@ The following **optional** ones are also recommended:
 		return true
     }
 
-## Database matching API
+## How to CREATE and UPDATE entities
 
-To implement:
+To **create** new entities in the current context you need to have your data inside a NSDictionary object.
+And then use one of the following functions:
 
-invalidReason
-saveEntityAsNotDeprecated
-deleteChildEntities
-shouldUpdateEntityWithDictionary
+[+ createEntityFromDictionary:completion:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/createEntityFromDictionary:completion:)
 
-To call:
+[+ createEntityFromDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/createEntityFromDictionary:)
 
-DKDBManager.removeDeprecatedEntities()
-//
-// As the recipes are not directly integrated within the books,
-// they could become invalid after removing the deprecated entities.
-// See Book+Helper for me information.
-Book.checkAllDeprecatedEntities()
+If you have multiple entities to create inside an array feel free to use:
 
-## How to create entities
+[+ createEntitiesFromArray:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/createEntitiesFromArray:)
 
--> Always same bookInfo?
-Book.createEntityFromDictionary(bookInfo) { (newBook, state) -> Void in
-    //
-    // Depending on what change on the DB fetch the recipes or not.
-    // If the state is `.Create` or `.Update` the recipes SHOULD be refreshed. (Fetch recipes for book.)
-    // If the state is `.Save` nothing changed. The entity is automatically marked as not-deprecated.
-    //      BUT as the recipes are not directly integrated within the books but separately
-    //      it is necessary to manually save the child entities.
-    // If the state is `.Delete` the entity as been removed; newBook = nil.
-    //
-    // Reduce the ready counter only for `.Delete` and `.Save` as the function `fetchRecipesForBook:`
-    // calls it for the other two states when all recipes have been saved or updated.
-    //
-    switch state {
-    case .Save:
-        (newBook as? Book)?.saveChildEntitiesAsNotDeprecated()
-        self.reduceReadyCount(completionBlock)
-    case .Delete:
-        self.reduceReadyCount(completionBlock)
-    case .Create, .Update:
-        (newBook as? Book)?.preloadImages()
-        self.fetchRecipesForBook(newBook as? Book, receipt: IAPManager.currentReceipt(), completionBlock: completionBlock)
-    }
-}
+To **update** or **save as not deprecated** just call the same function with the same dictionary.
+The most important values are the ones required by the function [primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to actually let the manager finds the entities again.
 
-then 
+	let entityInfo = ["name":"LOTR", "order":1]
+	Entity.createEntityFromDictionary(entityInfo) { (newEntity, state) -> Void in
+		//
+		// The CRUDed entity is referenced in the `newEntity`.
+		// Its actual state is described as follow:
+	    switch state {
+	    case .Create:	// The entity has been created, it's all fresh new.
+	    case .Update:	// The entity has been updated, its attributes changed.
+	    case .Save:		// The entity has been saved, nothing happened.
+	    case .Delete:	// The entity has been removed.
+	    }
+	}
 
-DKDBManager.save()
-DKDBManager.saveToPersistentStoreAndWait()
-DKDBManager.saveToPersistentStoreWithCompletion { (succeed, error) -> Void in
-	completionBlock()
-}
+## How to SAVE the current context
+
+When you are doing modifications on the DB entites, you still need to **save the current context into the persistent store** (aka the sqlite file).
+
+To do so use one of the following methods:
+
+[DKDBManager.save()](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/save)
+
+[DKDBManager.saveToPersistentStoreAndWait()](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/saveToPersistentStoreAndWait)
+
+[DKDBManager.saveToPersistentStoreWithCompletion(void ( ^ ) ( BOOL success , NSError *error ))](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/saveToPersistentStoreWithCompletion:)
 
 
-## MagicalRecord request
+## How to READ entities
+
+#### MagicalRecord request
 
 create predicate and use default function
 example:
@@ -224,6 +214,30 @@ example:
     }
 
 Add link to official documentation.
+
+
+## How to DELETE entities
+
++ (void)deleteAllEntities;
++ (void)deleteAllEntitiesForClass:(Class)class;
+
+## Database matching API
+
+To implement:
+
+- invalidReason
+- saveEntityAsNotDeprecated
+- deleteChildEntities
+- shouldUpdateEntityWithDictionary
+
+To call:
+
+	DKDBManager.removeDeprecatedEntities()
+	//
+	// As the recipes are not directly integrated within the books,
+	// they could become invalid after removing the deprecated entities.
+	// See Book+Helper for me information.
+	Book.checkAllDeprecatedEntities()
 
 ## Projects
 
