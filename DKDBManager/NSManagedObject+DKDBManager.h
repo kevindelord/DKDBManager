@@ -7,6 +7,8 @@
 
 #import "DKDBManager.h"
 
+#pragma mark - ENUM
+
 /**
  * @typedef DKDBManagedObjectState
  *
@@ -33,6 +35,15 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
     /** The entity has been removed. */
     DKDBManagedObjectStateDelete,
 } ;
+
+#pragma mark - Log
+
+/**
+ * Log a string if the verbose boolean is enabled.
+ */
+void        CRUDLog(BOOL logEnabled, NSString *format, ...);
+
+#pragma mark - NSManagedObject
 
 @interface NSManagedObject (DKDBManager)
 

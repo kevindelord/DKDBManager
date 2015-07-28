@@ -27,7 +27,7 @@ and run `pod install` from the main directory.
 
 ## Getting Started
 
-To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `DKHelpers`, `Magical Record` and CoredData`.
+To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `Magical Record` and CoredData`.
 
     #import "DKDBManager.h"
 
@@ -154,7 +154,6 @@ The following **optional** ones are also recommended:
     override public class func verbose() -> Bool {
 		return true
     }
-
 
 ## Database matching API
 

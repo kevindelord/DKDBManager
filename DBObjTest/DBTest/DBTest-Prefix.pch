@@ -14,4 +14,5 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "DKDBManager.h"
+    #import "DKHelper.h"
 #endif
