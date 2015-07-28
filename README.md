@@ -78,7 +78,7 @@ You can configure how the manager will react on execution. Add the following **o
 [+ resetStoredEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/resetStoredEntities) to completely reset the database on startup.
 Instead of removing your app from the simulator just activate this flag and the local DB will be brand new when your app starts.
 
-	DKDBManager.setResetStoredEntities(true)
+	DKDBManager.setResetStoredEntities(false)
 
 [+ needForcedUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/needForcedUpdate) to force the manager to update the entities during the CRUD process.
 
