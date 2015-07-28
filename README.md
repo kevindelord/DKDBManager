@@ -118,7 +118,9 @@ In this case there is no need of deprecated entities or automatic updates.
 As explained earlier, you first need the data inside a NSDictionary object.
 This data will get parsed and the library will apply a CRUD logic on it.
 
-In each extented class the following methods are **required**:
+In each extented class, implement the following methods:
+
+### Required
 
 [+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
 
@@ -137,7 +139,7 @@ In each extented class the following methods are **required**:
         self.order 		= GET_NUMBER(dictionary, "order")
     }
 
-The following **optional** ones are also recommended:
+### Optional
 
 [- description](https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/clm/NSObject/description) to improve how the receiving entity is described/logged.
 
@@ -202,22 +204,30 @@ To do so use one of the following methods:
 
 
 ## How to READ entities
+#### With MagicalRecord !
 
-#### MagicalRecord request
+To read the entities currently in the current context you need to fetch them using a `NSPredicate` and `Magical Record`.
 
-create predicate and use default function
-example:
+Using the various methods of Magical Record can seriously help you on your everyday development.
+Here is the [official documentation](https://github.com/magicalpanda/MagicalRecord/blob/master/Docs/Fetching-Entities.md).
 
-	func sortedNotes() -> [Note]? {
-		var predicate = NSPredicate(format: "\(DB.Key.Recipe).\(DB.Key.Id) ==[c] \(self.id)")
-		var notes = Note.MR_findAllSortedBy(Note.sortingAttributeName(), ascending: true, withPredicate: predicate)
-		return notes as? [Note]
+Nonetheless the following example show how to fetch an array of entities depending on their name:
+
+	class func entityForName(name: String) -> [Entity] {
+		var predicate = NSPredicate(format: "name ==[c] \(name)")
+		var entities = Entity.MR_findAllSortedBy(Entity.sortingAttributeName(), ascending: true, withPredicate: predicate)
+		return (entities as? [Entity] ?? [])
 	}
 
-Add link to official documentation.
-
+Note that the call to `Entity.sortingAttributeName()` can be replaced by any other attribute name (ex: `"order"`).
+This function returns the default sorting attribute previously set.
 
 ## How to DELETE entities
+
+- (BOOL)deleteIfInvalid;
+- (void)deleteChildEntities;
+- (void)deleteEntityWithReason:(NSString *)reason;
++ (void)deleteAllEntities;
 
 + (void)deleteAllEntities;
 + (void)deleteAllEntitiesForClass:(Class)class;
@@ -239,6 +249,11 @@ To call:
 	// they could become invalid after removing the deprecated entities.
 	// See Book+Helper for me information.
 	Book.checkAllDeprecatedEntities()
+
+## Tips
+
+- add more custom functions inside the helper files. Everything logic related to one class model should/could be inside this file. It will help you a lot to structure your code. 
+- Subclass the DKDBManager in order to structure your code as you wish it.
 
 ## Projects
 
