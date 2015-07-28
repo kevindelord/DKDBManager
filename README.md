@@ -123,14 +123,19 @@ In each extented class, implement the following methods:
 ### Required
 
 [+ primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary. This function should create and return a `NSPredicate` object that match only one database entity.
+If you need more information on how to create a NSPredicate object, please read the [official documentation](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html). 
 
 	override public class func primaryPredicateWithDictionary(dictionary: [NSObject:AnyObject]!) -> NSPredicate! {
 
 		// If returns nil then only ONE entity will ever be created and updated.
 		return nil
 
+		// - OR -
+
 		// If returns a `false predicate` then a new entity will always be created.
 		return NSPredicate(format: "FALSEPREDICATE")
+
+		// - OR -
 
 		// Otherwise the CRUD process use the entity found by the predicate.
 		let dictionaryName = GET_STRING(dictionary, "name")
@@ -151,7 +156,7 @@ In each extented class, implement the following methods:
 
 	override var description: String {
         get {
-            return "\(self.order) : \(self.name)"
+            return "{  name: \(self.name), order: \(self.order) }"
         }
     }
 
@@ -162,6 +167,8 @@ In each extented class, implement the following methods:
     }
 
 [+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/verbose) to toggle the log for the receiving class.
+
+If this value returns `true` and if the `DKDBManager.verbose == true` then the manager will automatically print the entities for this class during the CRUD process. The number of objects and their _(overriden)_ description will also be logged. Another very handy feature, even the activity around this class model will be printed: *Updating Entity { name: LOTR, order: 1 }*
 
     override public class func verbose() -> Bool {
 		return true
@@ -213,30 +220,40 @@ To do so use one of the following methods:
 ## How to READ entities
 #### With MagicalRecord !
 
-To **read** the entities currently in the current context you need to fetch them using a `NSPredicate` and `Magical Record`.
+To **read** the entities in the current context you need to fetch them using a `NSPredicate` and `Magical Record`.
 
 Using the various methods of [Magical Record](https://github.com/magicalpanda/MagicalRecord) can seriously help you on your everyday development.
 Here is the [official documentation](https://github.com/magicalpanda/MagicalRecord/blob/master/Docs/Fetching-Entities.md).
 
-Nonetheless the following example show how to fetch an array of entities depending on their name:
+Here is an example showing how to fetch an array of entities depending on their name:
 
 	class func entityForName(name: String) -> [Entity] {
-		var predicate = NSPredicate(format: "name ==[c] \(name)")
+		var predicate = NSPredicate(format: "name == \(name)")
 		var entities = Entity.MR_findAllSortedBy(Entity.sortingAttributeName(), ascending: true, withPredicate: predicate)
 		return (entities as? [Entity] ?? [])
 	}
 
-Note that the call to `Entity.sortingAttributeName()` can be replaced by any other attribute name (ex: `"order"`).
-This function returns the default sorting attribute previously set.
+Note that the call to Entity.sortingAttributeName() returns the default sorting attribute previously set.
+Instead, you could also provide a specific sorting attribute name (e.g.: "order").
 
 ## How to DELETE entities
 
 Unlike the CREATE logic, many ways exist to **delete** an entity.
+The best one is to call is [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:) as it deletes the current entity, logged the reason and forward the delete process to the child entities using the function [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities).
 
-- (BOOL)deleteIfInvalid;
+	TODO: example deleteChildEntities
+
+If you want to me more radical and remove all entities for the current class you can use [+ deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteAllEntities) or [+ deleteAllEntitiesForClass:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntitiesForClass:).
+
+	Entity.deleteAllEntities()
+
+	// - OR -
+
+	DKDBManager.AllEntitiesForClass(Entity)
+
+
+
 - (void)deleteChildEntities;
-- (void)deleteEntityWithReason:(NSString *)reason;
-+ (void)deleteAllEntities;
 
 + (void)deleteAllEntities;
 + (void)deleteAllEntitiesForClass:(Class)class;
@@ -258,6 +275,10 @@ To call:
 	// they could become invalid after removing the deprecated entities.
 	// See Book+Helper for me information.
 	Book.checkAllDeprecatedEntities()
+
+Can be called:
+
+- (BOOL)deleteIfInvalid;
 
 ## Tips
 
