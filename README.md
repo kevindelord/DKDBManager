@@ -314,7 +314,7 @@ The custom function `createPagesFromArray` inserts in the dictionary the parent 
 		}
 	}
 
-**Warning:** The methods `` and `` exist only if you generated your model classes in _Obj-C_.
+**Warning:** The methods `removePagesObject` and `addPagesObject` exist only if you generated your model classes in _Obj-C_.
 If you did it in _Swift_ you need to manually add small functions do `add` and `remove` child entities. 
 
     func addPage(page: Page) {
