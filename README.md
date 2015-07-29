@@ -94,21 +94,21 @@ Then generate with Xcode the NSManagedObject subclasses as you are used to.
 After that, create category files (or extensions in Swift) for each model.
 The functions and logic will be implemented in those files. If it was done in the generated files, your changes would be removed everytime you generate them again.
 
-_Example_: `DBEntity.swift` and `DBEntity+DKDBManager.swift`
+_Example_: `Book.swift` and `Book+DKDBManager.swift`
 
 __warning__ If your code is in Swift you can either generate the NSManagedObject subclasses in _Swift_ or _Obj-C_.
 
 - _Swift_: add `@objc(ClassName)` before the implementation:
 
-		@objc(Entity)
-		class Entity: NSManagedObject {
+		@objc(Book)
+		class Book: NSManagedObject {
 			@NSManaged var name: NSString?
 			@NSManaged var order: NSNumber?
 		}
 
 - _Obj-C_: import the class header in the bridge-header file.
 
-		#import "Entity.h"
+		#import "Book.h"
 
 ## Simple local database
 
@@ -138,8 +138,8 @@ If you need more information on how to create a NSPredicate object, please read 
 		// - OR -
 
 		// Otherwise the CRUD process use the entity found by the predicate.
-		let dictionaryName = GET_STRING(dictionary, "name")
-		return NSPredicate(format: "name ==[c] \(dictionaryName)")
+		let bookName = GET_STRING(dictionary, "name")
+		return NSPredicate(format: "name ==[c] \(bookName)")
     }
 
 [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) to update the current entity with a given dictionary.
@@ -168,7 +168,7 @@ If you need more information on how to create a NSPredicate object, please read 
 
 [+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/verbose) to toggle the log for the receiving class.
 
-If this value returns `true` and if the `DKDBManager.verbose == true` then the manager will automatically print the entities for this class during the CRUD process. The number of objects and their _(overriden)_ description will also be logged. Another very handy feature, even the activity around this class model will be printed: *Updating Entity { name: LOTR, order: 1 }*
+If this value returns `true` and if the `DKDBManager.verbose == true` then the manager will automatically print the entities for this class during the CRUD process. The number of objects and their _(overriden)_ description will also be logged. Another very handy feature, even the activity around this class model will be printed: *Updating Book { name: LOTR, order: 1 }*
 
     override public class func verbose() -> Bool {
 		return true
@@ -191,17 +191,32 @@ To **update** or **save as not deprecated** just call the same function with the
 The most important values are the ones required by the function [primaryPredicateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/primaryPredicateWithDictionary:) to actually let the manager finds the entities again. This function should create and return a `NSPredicate` object that match only one database entity.
 The values not used to create the primary predicate could be missing or changed, the valid entity will still be found correctly.
 
-	let entityInfo = ["name":"LOTR", "order":1]
-	Entity.createEntityFromDictionary(entityInfo) { (newEntity, state) -> Void in
+	let bookInfo = ["name":"LOTR", "order":1]
+	Book.createEntityFromDictionary(entityInfo) { (newBook, state) -> Void in
 		//
-		// The CRUDed entity is referenced in the `newEntity`.
+		// The CRUDed entity is referenced in the `newBook`.
 		// Its actual state is described as follow:
 	    switch state {
-	    case .Create:	// The entity has been created, it's all fresh new.
-	    case .Update:	// The entity has been updated, its attributes changed.
-	    case .Save:		// The entity has been saved, nothing happened.
-	    case .Delete:	// The entity has been removed.
+	    case .Create:	// The book has been created, it's all fresh new.
+	    case .Update:	// The book has been updated, its attributes changed.
+	    case .Save:		// The book has been saved, nothing happened.
+	    case .Delete:	// The book has been removed.
 	    }
+	}
+
+It is also possible to simply **update** an entity once it is instantiated in your code.
+The changes will only be made in the current context. If you want the changes to persist, you need to `save`.
+
+	class ViewController 	: UIViewController {
+		var aBook 			: Book?
+
+		func awesomeFunction() {
+			// Update the entity.
+			self.book?.name = "The Hobbit"
+
+			// Save the current context to the persistent store.
+			DKDBManager.save()
+		}
 	}
 
 ## How to SAVE the current context
@@ -229,28 +244,28 @@ Here is the [official documentation](https://github.com/magicalpanda/MagicalReco
 
 Here is an example showing how to fetch an array of entities depending on their name:
 
-	class func entityForName(name: String) -> [Entity] {
+	class func entityForName(name: String) -> [Book] {
 		var predicate = NSPredicate(format: "name == \(name)")
-		var entities = Entity.MR_findAllSortedBy(Entity.sortingAttributeName(), ascending: true, withPredicate: predicate)
-		return (entities as? [Entity] ?? [])
+		var entities = Book.MR_findAllSortedBy(Book.sortingAttributeName(), ascending: true, withPredicate: predicate)
+		return (entities as? [Book] ?? [])
 	}
 
-Note that the call to Entity.sortingAttributeName() returns the default sorting attribute previously set.
+Note that the call to Book.sortingAttributeName() returns the default sorting attribute previously set.
 Instead, you could also provide a specific sorting attribute name (e.g.: "order").
 
 ## How to DELETE entities
 
 To **delete** an entity use [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:). It will delete the current entity, log the reason (if logging is enabled) and forward the delete process to the child entities using the function [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities) (see _How to deal with child entities_).
 
-	anEntity.deleteEntityWithReason("removed by user")
+	aBook.deleteEntityWithReason("removed by user")
 
 If you want to be more radical and remove all entities for the current class you can use [+ deleteAllEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteAllEntities) or [+ deleteAllEntitiesForClass:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntitiesForClass:).
 
-	Entity.deleteAllEntities()
+	Book.deleteAllEntities()
 
 	// - OR -
 
-	DKDBManager.deleteAllEntitiesForClass(Entity)
+	DKDBManager.deleteAllEntitiesForClass(Book)
 
 **Attention**, if you call [+ deleteAllEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/deleteAllEntities) on the DKDBManager all entities for all classes will be deleted.
 
@@ -258,9 +273,85 @@ If you want to be more radical and remove all entities for the current class you
 
 ## How to deal with child entities
 
-- (void)deleteChildEntities;
+#### Create and Update
+
+The recommended logic about child entities is to directly add their information in their parent's data.
+Meaning, the NSDictionary object used to create a parent entity should also contains the information to create the child entities.
+The function [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) should be used to forward the CRUD process to the child classes.
+
+	override public func updateWithDictionary(dictionary: [NSObject : AnyObject]!) {
+		// Update attributes
+		self.name 		= GET_STRING(dictionary, "name")
+		self.order 		= GET_NUMBER(dictionary, "order")
+
+		// CRUD child entities
+        let array = OBJECT(dictionary, "pages")
+        Page.createPagesFromArray(array, book: self)
+    }
+
+The relation between a `Book` and a `Page` is a `one-to-many` as a book has many pages and a page has just one book.
+The custom function `createPagesFromArray` inserts in the dictionary the parent book entity.
+
+	extension Page {
+		class func createPagesFromArray(array: AnyObject?, book: Book?) {
+			// CRUD pages
+			for dict in (array as? [[NSObject : AnyObject]] ?? [[:]])  {
+				var copy = dict
+				// Insert the parent book object
+				copy["book"] = book
+				Page.createEntityFromDictionary(copy) { (entity: AnyObject? , state: DKDBManagedObjectState) -> Void in
+					if (entity != nil && book != nil) {
+					    switch state {
+					    // Remove the page from the parent's 'pages' NSSet.
+					    case .Delete:           book?.removePagesObject(entity as? Page)
+					    // Add the page into the parent's 'pages' NSSet.
+					    case .Create:           book?.addPagesObject(entity as? Page)
+					    case .Save, .Update:    break // Do nothing.
+					    }
+					}
+				}
+			}
+		}
+	}
+
+The CRUD process will then call the following function to update the `Page` entity. Use this one to set the parent book object.
+
+	override public func updateWithDictionary(dictionary: [NSObject : AnyObject]!) {
+		// Super update
+		super.updateWithDictionary(dictionary)
+
+		// Setup parent Book
+		self.book 		= OBJECT(dictionary, "book") as? Book
+
+		// Update attributes
+		self.text 		= GET_STRING(dictionary, "text")
+	}
+
+#### Save
+
 - (void)saveEntityAsNotDeprecated;
-- (void)updateWithDictionary:(NSDictionary *)dictionary;
+
+#### Delete
+
+The CRUD process or a specific user action might needs to **delete an entity**.
+In most of the case the child entities need to be removed as well.
+
+This _cascade removal_ allows the developer to remove a complete structure of entities in just one single line:
+
+	// Delete a book and all its pages and other child entities
+	aBook.deleteWithReason("user does not want it anymore") 
+
+To make sure the `pages` of this deleted `book` are also deleted implement the [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities) function.
+
+	// remove all the child of the current object
+    public override func deleteChildEntities() {
+        // super call
+        super.deleteChildEntities()
+
+        for page in (self.pages as? Set<Page> ?? []) {
+			page.deleteEntityWithReason("parent book removed")
+        }
+    }
 
 ## Database matching an API
 
@@ -269,9 +360,14 @@ If you want to be more radical and remove all entities for the current class you
 Implement the following functions inside the NSManagedObject subclasses:
 
 - [- invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
+- [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:)
+
+If a class has some child entitites:
+
 - [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated)
 - [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities)
-- [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:)
+
+For more information, see the **How to deal with child entities** section.
 
 #### Deprecated entities
 
@@ -290,7 +386,7 @@ To remove the deprecated entities call the function [+ removeDeprecatedEntities]
 	// If some entities are not well integrated/linked to the other ones,
 	// they could become invalid after removing the deprecated entities.
 	// It is then required do it manually:
-	Entity.checkAllDeprecatedEntities()
+	Book.checkAllDeprecatedEntities()
 
 	// Save the current context to the persistent store
 	DKDBManager.saveToPersistentStoreWithCompletion() { /* Do something */}
@@ -301,7 +397,7 @@ TODO: explain more about .checkAllDeprecatedEntities()
 
 If the function [invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) has been implemented you can also manually delete invalid entities: [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
 
-	anEntity.deleteIfInvalid()
+	aBook.deleteIfInvalid()
 
 ## Tips
 
