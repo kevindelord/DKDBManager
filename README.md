@@ -273,10 +273,15 @@ If you want to be more radical and remove all entities for the current class you
 
 ## How to deal with child entities
 
-#### Create and Update
-
 The recommended logic about child entities is to directly add their information in their parent's data.
 Meaning, the NSDictionary object used to create a parent entity should also contains the information to create the child entities.
+
+With such structure, the DKDBManager implements a _cascade process_ to create, update, save and delete child entities.
+
+Some other functions must be implemented.
+
+#### Create and Update
+
 The function [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) should be used to forward the CRUD process to the child classes.
 
 	override public func updateWithDictionary(dictionary: [NSObject : AnyObject]!) {
@@ -338,7 +343,19 @@ The CRUD process will then call the following function to update the `Page` enti
 
 #### Save
 
-- (void)saveEntityAsNotDeprecated;
+When a parent entity got **saved as not deprecated** (manually or through the CRUD process) the [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) function is not called and no CRUD logic reaches the child entities.
+
+To complete the _cascase process_ to save the child entities, each model class should implement the [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) method and forward it to its child.
+
+	public override func saveEntityAsNotDeprecated() {
+		// Method to save/store the current object AND all its child relations as not deprecated.
+		super.saveEntityAsNotDeprecated()
+
+		// Forward the process
+		for page in (self.pages as? Set<Page> ?? []) {
+			page.saveEntityAsNotDeprecated()
+		}
+	}
 
 #### Delete
 
@@ -359,8 +376,8 @@ To make sure the `pages` of this deleted `book` are also deleted implement the [
 
         for page in (self.pages as? Set<Page> ?? []) {
 			page.deleteEntityWithReason("parent book removed")
-        }
-    }
+		}
+	}
 
 ## Database matching an API
 
