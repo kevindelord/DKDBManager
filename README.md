@@ -323,7 +323,7 @@ The custom function `createPagesFromArray` inserts in the dictionary the parent 
 If you did it in _Swift_ you need to manually add small functions do `add` and `remove` child entities. 
 
     func addPage(page: Page) {
-        var bookSet = self.mutableSetValueForKey("page")
+        var bookSet = self.mutableSetValueForKey("pages")
         bookSet.addObject(page)
         self.pages = bookSet
     }
