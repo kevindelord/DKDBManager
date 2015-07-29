@@ -381,6 +381,8 @@ To make sure the `pages` of this deleted `book` are also deleted implement the [
 
 ## Database matching an API
 
+**TODO**: explain matching API
+
 #### Extended protocol
 
 Implement the following functions inside the NSManagedObject subclasses:
@@ -398,7 +400,8 @@ For more information, see the **How to deal with child entities** section.
 #### Deprecated entities
 
 A deprecated entity is an object not saved as `not deprecated` in the DKDBManager.
-TODO: explain more about deprecated entities
+
+**TODO**: explain more about deprecated entities
 
 To remove the deprecated entities call the function [+ removeDeprecatedEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/removeDeprecatedEntities) after the CRUD process (when refreshing the local database from an API) and before `saving` the current context to the persistent store.
 
@@ -417,7 +420,7 @@ To remove the deprecated entities call the function [+ removeDeprecatedEntities]
 	// Save the current context to the persistent store
 	DKDBManager.saveToPersistentStoreWithCompletion() { /* Do something */}
 
-TODO: explain more about .checkAllDeprecatedEntities()
+**TODO**: explain more about .checkAllDeprecatedEntities()
 
 #### Delete if invalid
 
@@ -430,6 +433,8 @@ If the function [invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/C
 - Add more custom functions inside the helper files. Every logic related to one class model should/could be inside this file. It helps a lot to structure the code. 
 
 - Subclass the DKDBManager and add more DB related functions keeps the app delegate cleaner.
+
+- Generate the model classes in Obj-C. You will have no trouble with `optional` variables. Plus, each `NSSet` object for the DB relationships will have additional functions.
 
 ## Projects
 
@@ -444,12 +449,6 @@ If the function [invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/C
 - Huethig
 - Digster Music Deals
 - *Your project here*
-
-## TODO
-
-- Improve documentation
-- Add tests
-- Add project links
 
 ## Author
 
