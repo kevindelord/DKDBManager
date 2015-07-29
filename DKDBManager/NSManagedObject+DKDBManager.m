@@ -136,8 +136,9 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 #pragma mark - DELETE
 
 - (BOOL)deleteIfInvalid {
-    if ([self invalidReason]) {
-        [self deleteEntityWithReason:[self invalidReason]];
+    NSString *reason = [self invalidReason];
+    if (reason != nil) {
+        [self deleteEntityWithReason:reason];
         return true;
     }
     return false;

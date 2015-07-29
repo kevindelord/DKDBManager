@@ -345,7 +345,7 @@ The CRUD process will then call the following function to update the `Page` enti
 
 When a parent entity got **saved as not deprecated** (manually or through the CRUD process) the [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) function is not called and no CRUD logic reaches the child entities.
 
-To complete the _cascase process_ to save the child entities, each model class should implement the [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) method and forward it to its child.
+To complete the _cascase process_ to save the child entities, each model class should implement the [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) method and forward it to its children.
 
 	public override func saveEntityAsNotDeprecated() {
 		// Method to save/store the current object AND all its child relations as not deprecated.
@@ -357,10 +357,12 @@ To complete the _cascase process_ to save the child entities, each model class s
 		}
 	}
 
+For more information about **deprecated entities** please read the **Database matching an API** section.
+
 #### Delete
 
 The CRUD process or a specific user action might needs to **delete an entity**.
-In most of the case the child entities need to be removed as well.
+In most cases the child entities need to be removed as well.
 
 This _cascade removal_ allows the developer to remove a complete structure of entities in just one single line:
 
@@ -374,6 +376,7 @@ To make sure the `pages` of this deleted `book` are also deleted implement the [
         // super call
         super.deleteChildEntities()
 
+		// Forward the delete process to every child.
         for page in (self.pages as? Set<Page> ?? []) {
 			page.deleteEntityWithReason("parent book removed")
 		}
@@ -381,58 +384,110 @@ To make sure the `pages` of this deleted `book` are also deleted implement the [
 
 ## Database matching an API
 
-**TODO**: explain matching API
+For many projects it is required to match a database hosted in a server and accessible through an API.
+In most cases it delivers a big JSON data containing all informations about the entities.
+Use the CRUD process to create and update your local models.
 
-#### Extended protocol
+But what about entities that does not exist anymore in the API ? What about badly updated entities that become invalid ? What about unchanged values and useless update process ?
 
-Implement the following functions inside the NSManagedObject subclasses:
+The DKDBManager helps you to deal with those cases just by implementing few other functions.
 
-- [- invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
+#### Avoid useless update processes
+
+**TODO**: Explain _cascase update process_ will stop on the first entity and not forward the process to its children.
+
 - [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:)
-
-If a class has some child entitites:
-
-- [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated)
-- [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities)
-
-For more information, see the **How to deal with child entities** section.
 
 #### Deprecated entities
 
-A deprecated entity is an object not saved as `not deprecated` in the DKDBManager.
+A **deprecated entity** is a NSManaged object not saved as `not deprecated` in the DKDBManager.
 
-**TODO**: explain more about deprecated entities
+An object not saved as not deprecated is:
+
+- An object where the CRUD process *didn't go through* (isn't sent by the API anymore?).
+
+- An object marked as invalid (see **Invalid model entities** section).
+
+- An object where a manual [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) did not occur.
+
+- An object where the CRUD process has state equals to `.Delete`
+
+#### Remove deprecated methods
 
 To remove the deprecated entities call the function [+ removeDeprecatedEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/removeDeprecatedEntities) after the CRUD process (when refreshing the local database from an API) and before `saving` the current context to the persistent store.
 
 	// CRUD process
 	DKDBManager.createEntityFromDictionary(data)
 
-	// Remove all deprecated (not set as 'not deprecated')
+	// Remove all deprecated entities (not set as 'not deprecated')
 	DKDBManager.removeDeprecatedEntities()
-
-	//
-	// If some entities are not well integrated/linked to the other ones,
-	// they could become invalid after removing the deprecated entities.
-	// It is then required do it manually:
-	Book.checkAllDeprecatedEntities()
 
 	// Save the current context to the persistent store
 	DKDBManager.saveToPersistentStoreWithCompletion() { /* Do something */}
 
-**TODO**: explain more about .checkAllDeprecatedEntities()
+#### Save as not deprecated when nothing changed
 
-#### Delete if invalid
+If an entity did not change in the backend but is still sent through the API, your local database needs to save it as not deprecated.
+But, as explained previously, if nothing changed the _cascase update process_ will stop on the first entity and not forward the process to its children.
+By doing so they won't get updated nor saved as not deprecated.
 
-If the function [invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) has been implemented you can also manually delete invalid entities: [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
+When the [+ removeDeprecatedEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/removeDeprecatedEntities) occurs those unsaved entities will be removed.
+
+To avoid such problem, implement the function [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) inside your NSManagedObject subclasses. It will be called on the first valid parent model object and will be forwarded to every child.
+
+For more information, see the **How to deal with child entities** section.
+
+#### Invalid model entities
+
+The DKDBManager allows you to define whether an entity is invalid or not.
+
+During the CRUD process an entity is tested to verify its validity. If [- invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) returns nil, no `invalidReason` has been found. Otherwise the reason will automatically be used and logged by the function [- deleteEntityWithReason:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteEntityWithReason:).
+
+The function [- invalidReason](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) must be implemented inside a NSManagedObject subclass.
+
+Here is an example of implementation:
+
+	public override func invalidReason() -> String! {
+		// Check the super class first.
+		if let invalidReason = super.invalidReason() {
+			return invalidReason
+		}
+
+		// Then verify the current required attributes.
+		if (self.image == nil) {
+			return "missing full screen image URL"	
+		}
+		if (self.pages.count == 0) {
+			return "invalid relation with: Page - no entities found"
+		}
+		return nil
+	}
+
+If this function has been implemented, you can also manually delete invalid entities: [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid)
 
 	aBook.deleteIfInvalid()
+
+Depending on the app and its architecture some entities could get invalid when something important has been removed or updated.
+Or, some could also becomes invalid after `removing the deprecated entities`.
+If it is the case you have to check the deprecated entities manually.
+
+To do so use the function [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) on your model objects.
+
+	class func checkAllDeprecatedEntities() {
+        //
+        // Check validity of ALL books and remove the invalid ones.
+        if let books = self.all() as? [Book] {
+            for book in books {
+                book.deleteIfInvalid()
+            }
+        }
+    }
 
 ## Tips
 
 - Add more custom functions inside the helper files. Every logic related to one class model should/could be inside this file. It helps a lot to structure the code. 
 
-- Subclass the DKDBManager and add more DB related functions keeps the app delegate cleaner.
+- Subclass the DKDBManager and use this new class to add more DB related functions. It keeps the `AppDelegate` cleaner.
 
 - Generate the model classes in Obj-C. You will have no trouble with `optional` variables. Plus, each `NSSet` object for the DB relationships will have additional functions.
 
