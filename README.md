@@ -546,14 +546,14 @@ To do so use the function [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBM
 
 `DKDBManager` is used in the following projects:
 
-- WhiteWall
-- Pons-SprachKalender
-- Pons-Bildwoerterbuch
-- ERGO ZahnPlan
+- [WhiteWall](https://itunes.apple.com/de/app/whitewall-fotolabor-bilder/id745169971)
+- [Pons-SprachKalender](https://itunes.apple.com/de/app/sprachkalender-englisch-taglich/id901382448)
+- [Pons-Bildwoerterbuch](https://itunes.apple.com/de/app/pons-bildworterbuch-englisch/id916712880)
+- [ERGO ZahnPlan](https://itunes.apple.com/de/app/zahnplan/id882485101)
+- [Digster Music Deals](https://itunes.apple.com/de/app/digster-music-deals/id916738237)
 - Handhelp
 - RezeptBOX
 - Huethig
-- Digster Music Deals
 - *Your project here*
 
 ## Author
