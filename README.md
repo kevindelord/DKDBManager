@@ -212,7 +212,7 @@ The changes will only be made in the current context. If you want the changes to
 
 		func awesomeFunction() {
 			// Update the entity.
-			self.book?.name = "The Hobbit"
+			self.aBook?.name = "The Hobbit"
 
 			// Save the current context to the persistent store.
 			DKDBManager.save()
