@@ -314,6 +314,15 @@ The custom function `createPagesFromArray` inserts in the dictionary the parent 
 		}
 	}
 
+**Warning:** The methods `` and `` exist only if you generated your model classes in _Obj-C_.
+If you did it in _Swift_ you need to manually add small functions do `add` and `remove` child entities. 
+
+    func addPage(page: Page) {
+        var bookSet = self.mutableSetValueForKey("page")
+        bookSet.addObject(page)
+        self.pages = bookSet
+    }
+
 The CRUD process will then call the following function to update the `Page` entity. Use this one to set the parent book object.
 
 	override public func updateWithDictionary(dictionary: [NSObject : AnyObject]!) {
