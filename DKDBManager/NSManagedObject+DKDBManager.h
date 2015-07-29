@@ -179,7 +179,6 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * If the log is activated for the current class, the terminal will display
  * all important modification.
  *
- *
  * The super function should be called.
  *
  * For example, if a `book` does not have a `title` anymore your application

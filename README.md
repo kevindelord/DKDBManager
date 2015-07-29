@@ -235,7 +235,7 @@ Those calls need to be done after creating, deleting or updating entities.
 Saving to the persistent store is not an easy task, please try to conserve the CPU usage and call those functions only when necessary.
 
 ## How to READ entities
-#### With MagicalRecord !
+### With MagicalRecord !
 
 To **read** the entities in the current context you need to fetch them using a `NSPredicate` and `Magical Record`.
 
@@ -280,7 +280,7 @@ With such structure, the DKDBManager implements a _cascade process_ to create, u
 
 Some other functions must be implemented.
 
-#### Create and Update
+### Create and Update
 
 The function [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) should be used to forward the CRUD process to the child classes.
 
@@ -341,7 +341,7 @@ The CRUD process will then call the following function to update the `Page` enti
 		self.text 		= GET_STRING(dictionary, "text")
 	}
 
-#### Save
+### Save
 
 When a parent entity got **saved as not deprecated** (manually or through the CRUD process) the [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) function is not called and no CRUD logic reaches the child entities.
 
@@ -359,7 +359,7 @@ To complete the _cascase process_ to save the child entities, each model class s
 
 For more information about **deprecated entities** please read the **Database matching an API** section.
 
-#### Delete
+### Delete
 
 The CRUD process or a specific user action might needs to **delete an entity**.
 In most cases the child entities need to be removed as well.
@@ -417,13 +417,39 @@ But what about entities that does not exist anymore in the API ? What about badl
 
 The DKDBManager helps you to deal with those cases just by implementing few other functions.
 
-#### Avoid useless update processes
+### Avoid useless update processes
 
-**TODO**: Explain _cascase update process_ will stop on the first entity and not forward the process to its children.
+Sometimes you might need to update just some entities and not all of them. But how can you do so when the CRUD process iterates through the whole JSON structure entity by entity?
 
-- [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:)
+The DKDBManager lets you choose whether an object needs an update or not. The function [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:) receives as parameter the JSON structure as a NSDictionary object.
+You can use the current entity and the parameter to check if an update is needed or not.
 
-#### Deprecated entities
+For example; is the `updated_at` field the same in the JSON and in the local database?
+
+- If so, return `false` and no update process will occur
+
+- Otherwise return `true` and the [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) function will be called.
+
+Due to the _cascade process_ if a parent entity _should **NOT** be updated_ then its child entities shouldn't either.
+
+In order to **avoid useless actions** the update verification will _stop at the first valid and already updated parent_ object.
+Its children will not get updated and the DKDBManager will not even ask them if they should be.
+
+Here is an implementation of the function [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:) that checks the lastest `update_at`:
+
+	override public func shouldUpdateEntityWithDictionary(dictionary: [NSObject:AnyObject]!) -> Bool {
+		// if the updated_at value from the dictionary is a different one.
+		let lastUpdatedAt = (GET_DATE(dictionary, "updated_at") ?? NSDate())
+		return (self.updated_at.isEqualToDate(lastUpdatedAt) == false)
+	}
+
+**TIP**
+
+The parent `updated_at` timestamp should be refresh everytime one of its child gets updated. If so you will never miss a small update of the children or grand children of an entity.
+
+
+
+### Deprecated entities
 
 A **deprecated entity** is a NSManaged object not saved as `not deprecated` in the DKDBManager.
 
@@ -437,7 +463,7 @@ An object not saved as not deprecated is:
 
 - An object where the CRUD process has state equals to `.Delete`
 
-#### Remove deprecated methods
+### Remove deprecated methods
 
 To remove the deprecated entities call the function [+ removeDeprecatedEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/removeDeprecatedEntities) after the CRUD process (when refreshing the local database from an API) and before `saving` the current context to the persistent store.
 
@@ -450,7 +476,7 @@ To remove the deprecated entities call the function [+ removeDeprecatedEntities]
 	// Save the current context to the persistent store
 	DKDBManager.saveToPersistentStoreWithCompletion() { /* Do something */}
 
-#### Save as not deprecated when nothing changed
+### Save as not deprecated when nothing changed
 
 If an entity did not change in the backend but is still sent through the API, your local database needs to save it as not deprecated.
 But, as explained previously, if nothing changed the _cascase update process_ will stop on the first entity and not forward the process to its children.
@@ -462,7 +488,7 @@ To avoid such problem, implement the function [- saveEntityAsNotDeprecated](http
 
 For more information, see the **How to deal with child entities** section.
 
-#### Invalid model entities
+### Invalid model entities
 
 The DKDBManager allows you to define whether an entity is invalid or not.
 
