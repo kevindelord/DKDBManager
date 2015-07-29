@@ -136,8 +136,9 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 #pragma mark - DELETE
 
 - (BOOL)deleteIfInvalid {
-    if ([self invalidReason]) {
-        [self deleteEntityWithReason:[self invalidReason]];
+    NSString *reason = [self invalidReason];
+    if (reason != nil) {
+        [self deleteEntityWithReason:reason];
         return true;
     }
     return false;
@@ -158,6 +159,7 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 }
 
 + (void)deleteAllEntities {
+    CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete all %@ entities", [self class]);
     [self MR_deleteAllMatchingPredicate:nil];
 }
 
