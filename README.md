@@ -6,13 +6,13 @@
 
 ## Concept
 
-DKDBManager is simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord) (a wonderful CoreData wrapper). The current library will implement a logic around it and helps the developer to manage his entities.
+DKDBManager is a simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord) (a wonderful CoreData wrapper). The current library will implement a logic around it and helps the developer to manage his entities.
 
-Through the implemented *CRUD* logic you will be able to focus on other things than the classic-repetitivly boring data management.
+Through the implemented *CRUD* logic you will be able to focus on other things than the “classic” repetitive and boring data management.
 
-The main concept is to use JSON dictionaries representing your entities. The logic to create, read or update your entities are done with just one single function. The delete logic has also been improved with a `deprecated` state.
+The main concept is to use JSON dictionaries representing your entities. The logic to create, read or update your entities is done with just one single function. The delete logic has also been improved with a `deprecated` state.
 
-Extend the NSManagedObject subclasses is required.
+Extending the NSManagedObject subclasses is required.
 
 ## Documentation
 
@@ -31,30 +31,30 @@ and run `pod install` from the main directory.
 
 ## Getting Started
 
-To get started, first, import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import in your project all required headers for `Magical Record` and CoredData`.
+To get started, first import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import all required headers for `Magical Record` and `CoredData`.
 
     #import "DKDBManager.h"
 
-As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you first need to implement minor methods within your AppDelegate. Afterwhat you still have to generate your model classes and create categories (or extensions in Swift).
+As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you’ll first need to implement some minor methods within your AppDelegate. After that you still have to generate your model classes and create categories (or extensions in Swift).
 
 ### AppDelegate using DKDBManager
 
-First you need to setup the CoreData stack with a specifc file name. Of course you can play with the name to change your database on startup whenever you would like to.
+First you need to setup the CoreData stack with a specific file name. Of course you can play with the name to change your database on startup whenever you would like to.
 A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
-You could also sublclass the DKDBManager and wrap the following in a dedicated class. 
+You could also subclass the DKDBManager and wrap the following in a dedicated class. 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
 		var didResetDB = DKDBManager.setupDatabaseWithName("DKDatabaseName.sqlite")
 		if (didResetDB) {
 			// The database is fresh new.
-			// Depending on your needs you might want to do something special right now as:.
+			// Depending on your needs you might want to do something special right now, such as:
 			// - Setting up some user defaults.
 			// - Deal with your api/store manager.
 			// etc.
         }
-        // Starting this point your database is ready to use.
-		// You can now create any object you could need.
+        // Starting at this point your database is ready to use.
+		// You can now create any object you want.
 
         return true
 	}
@@ -86,13 +86,13 @@ Instead of removing your app from the simulator just activate this flag and the 
 
 ### Models Configuration
 
-The models configuration is done as in any other projects.
+The model configuration is done as in any other CoreData project.
 
 First create and configure your model entities inside the `.xcdatamodel` file.
 Then generate with Xcode the NSManagedObject subclasses as you are used to.
 
-After that, create category files (or extensions in Swift) for each model.
-The functions and logic will be implemented in those files. If it was done in the generated files, your changes would be removed everytime you generate them again.
+After that, create category files (or extensions in Swift) for each model class.
+The functions and logic will be implemented in those files. (If it were to be done in the generated files, your changes would be removed every time you generate them again.)
 
 _Example_: `Book.swift` and `Book+DKDBManager.swift`
 
@@ -112,13 +112,13 @@ __warning__ If your code is in Swift you can either generate the NSManagedObject
 
 ## Simple local database
 
-This part explains how to create and configure a single local database that do not need to be updated from an API.
-In this case there is no need of deprecated entities or automatic updates.
+This part explains how to create and configure a single local database that doesn’t need to be updated from an API.
+In this case there is no need for deprecated entities or automatic updates.
 
 As explained earlier, you first need the data inside a NSDictionary object.
 This data will get parsed and the library will apply a CRUD logic on it.
 
-In each extented class, implement the following methods:
+In each extended class, implement the following methods:
 
 ### Required
 
@@ -139,7 +139,7 @@ If you need more information on how to create a NSPredicate object, please read 
 
 		// Otherwise the CRUD process use the entity found by the predicate.
 		let bookName = GET_STRING(dictionary, "name")
-		return NSPredicate(format: "name ==[c] \(bookName)")
+		return NSPredicate(format: "name ==[c] %@", bookName)
     }
 
 [- updateWithDictionary:](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/updateWithDictionary:) to update the current entity with a given dictionary.
@@ -371,7 +371,7 @@ This _cascade removal_ allows the developer to remove a complete structure of en
 
 To make sure the `pages` of this deleted `book` are also deleted implement the [- deleteChildEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteChildEntities) function.
 
-	// remove all the child of the current object
+	// remove all children of the current object
     public override func deleteChildEntities() {
         // super call
         super.deleteChildEntities()
@@ -386,9 +386,9 @@ To make sure the `pages` of this deleted `book` are also deleted implement the [
 
 For many projects it is required to match a database hosted in a server and accessible through an API.
 In most cases it delivers a big JSON data containing all informations about the entities.
-Use the CRUD process to create and update your local models.
+Use the CRUD process to create and update your local models based on that data.
 
-A good practice is to receive all this within a "cascase" structure.
+A good practice is to receive all this within a "cascade" structure.
 Here is an example of data structure with `books` containing `pages` containing `images`:
 
 	{
@@ -413,15 +413,15 @@ Here is an example of data structure with `books` containing `pages` containing 
 		]
 	}
 
-But what about entities that does not exist anymore in the API ? What about badly updated entities that become invalid ? What about unchanged values and useless update process ?
+But what about entities that do not exist anymore in the API? What about badly updated entities that become invalid? What about unchanged values and useless update processes?
 
-The DKDBManager helps you to deal with those cases just by implementing few other functions.
+The DKDBManager helps you deal with those cases just by implementing a few additional functions.
 
 ### Avoid useless update processes
 
 Sometimes you might need to update just some entities and not all of them. But how can you do so when the CRUD process iterates through the whole JSON structure entity by entity?
 
-The DKDBManager lets you choose whether an object needs an update or not. The function [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:) receives as parameter the JSON structure as a NSDictionary object.
+The DKDBManager lets you choose whether an object needs an update or not. The function [- shouldUpdateEntityWithDictionary](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/shouldUpdateEntityWithDictionary:) receives as a parameter the JSON structure as a NSDictionary object.
 You can use the current entity and the parameter to check if an update is needed or not.
 
 For example; is the `updated_at` field the same in the JSON and in the local database?
@@ -461,7 +461,7 @@ An object not saved as not deprecated is:
 
 - An object where a manual [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) did not occur.
 
-- An object where the CRUD process has state equals to `.Delete`
+- An object where the CRUD process has a state that equals to `.Delete`
 
 ### Remove deprecated methods
 
@@ -484,7 +484,7 @@ By doing so they won't get updated nor saved as not deprecated.
 
 When the [+ removeDeprecatedEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/removeDeprecatedEntities) occurs those unsaved entities will be removed.
 
-To avoid such problem, implement the function [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) inside your NSManagedObject subclasses. It will be called on the first valid parent model object and will be forwarded to every child.
+To avoid such problems, implement the function [- saveEntityAsNotDeprecated](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/saveEntityAsNotDeprecated) inside your NSManagedObject subclasses. It will be called on the first valid parent model object and will be forwarded to every child.
 
 For more information, see the **How to deal with child entities** section.
 
@@ -519,8 +519,8 @@ If this function has been implemented, you can also manually delete invalid enti
 	aBook.deleteIfInvalid()
 
 Depending on the app and its architecture some entities could get invalid when something important has been removed or updated.
-Or, some could also becomes invalid after `removing the deprecated entities`.
-If it is the case you have to check the deprecated entities manually.
+Or some could also become invalid after `removing the deprecated entities`.
+If this is the case you have to check the deprecated entities manually.
 
 To do so use the function [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Categories/NSManagedObject+DKDBManager.html#//api/name/deleteIfInvalid) on your model objects.
 
@@ -536,11 +536,11 @@ To do so use the function [- deleteIfInvalid](http://cocoadocs.org/docsets/DKDBM
 
 ## Tips
 
-- Add more custom functions inside the helper files. Every logic related to one class model should/could be inside this file. It helps a lot to structure the code. 
+- Add more custom functions inside the helper files. All logic related to a class model should/could be inside this file. It helps a lot to structure the code. 
 
 - Subclass the DKDBManager and use this new class to add more DB related functions. It keeps the `AppDelegate` cleaner.
 
-- Generate the model classes in Obj-C. You will have no trouble with `optional` variables. Plus, each `NSSet` object for the DB relationships will have additional functions.
+- Generate the model classes in Obj-C. You will have no trouble with `optional` variables. Plus, the `NSSet` objects for `to-many`-relationships in the DB will have additional functions.
 
 ## Projects
 
