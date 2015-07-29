@@ -388,6 +388,31 @@ For many projects it is required to match a database hosted in a server and acce
 In most cases it delivers a big JSON data containing all informations about the entities.
 Use the CRUD process to create and update your local models.
 
+A good practice is to receive all this within a "cascase" structure.
+Here is an example of data structure with `books` containing `pages` containing `images`:
+
+	{
+		"books" : [
+			{
+				"name":"LOTR",
+				"order":1,
+				"pages": [
+					{
+						"text": "abcde",
+						"images": [
+							...
+						]
+					}
+				]
+			},
+			{
+				"name":"The Hobbit",
+				"order":2
+				"pages" : [ ... ]
+			}
+		]
+	}
+
 But what about entities that does not exist anymore in the API ? What about badly updated entities that become invalid ? What about unchanged values and useless update process ?
 
 The DKDBManager helps you to deal with those cases just by implementing few other functions.
