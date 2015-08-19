@@ -61,7 +61,7 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
     }
 
     // Just keeping the valid and managed entities and ignored the unvalid, disabled, non-managed ones.
-    if ([entity deleteIfInvalid] == true) {
+    if ([entity deleteIfInvalidInContext:context] == true) {
         entity = nil;
         status = DKDBManagedObjectStateDelete;
     }
