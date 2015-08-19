@@ -43,7 +43,6 @@
     NSArray * array = @[@{@"name":@"Philip", @"position":@1}, @{@"name":@"Adrien", @"position":@2}];
     NSArray * second_array = @[@{@"name":@"Marc", @"position":@3}, @{@"name":@"Julien", @"position":@4}];
 
-
     [DKDBManager saveWithBlock:^(NSManagedObjectContext *localContext) {
         [Runner createEntitiesFromArray:array context:localContext];
     } completion:^(BOOL contextDidSave, NSError *error) {
