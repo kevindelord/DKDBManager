@@ -18,9 +18,7 @@ DerivedData
 *.hmap
 *.DS_Store
 
-deploy.sh
-
-#CocoaPods
+## CocoaPods
 Pods
 DBObjTest/Pods
 DBSwiftTest/Pods
