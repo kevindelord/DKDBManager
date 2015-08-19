@@ -289,13 +289,15 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @return A NSArray object containing all entities from the current class model.
  */
 + (NSArray *)all;
++ (NSArray *)allInContext:(NSManagedObjectContext *)context;
 
 /**
  * @brief Count all entities of the current class model.
  *
  * @return A NSInteger value corresponding to the total number of entities of the current class model.
  */
- + (NSInteger)count;
++ (NSInteger)count;
++ (NSInteger)countInContext:(NSManagedObjectContext *)context;
 
 #pragma mark - UPDATE
 
@@ -334,6 +336,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @return TRUE is the entity has been deleted; otherwise FALSE.
  */
 - (BOOL)deleteIfInvalid;
+- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext *)context;
 
 /**
  * @brief Override this function to delete the child entities of a current entity.
@@ -358,6 +361,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @endcode
  */
 - (void)deleteChildEntities;
+- (void)deleteChildEntitiesInContext:(NSManagedObjectContext *)context;
 
 /**
  * @brief Delete the current entity and log the reason.
@@ -372,6 +376,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @see + (BOOL)verbose;
  */
 - (void)deleteEntityWithReason:(NSString *)reason;
+- (void)deleteEntityWithReason:(NSString *)reason inContext:(NSManagedObjectContext *)context;
 
 /**
  * @brief Delete all entities from the current class model.
@@ -380,6 +385,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * Functions `deleteChildEntities` and `deleteEntityWithReason:` will not be called.
  */
 + (void)deleteAllEntities;
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext *)context;
 
 /**
  * @brief Check and remove all deprecated entities from the local database.
@@ -392,6 +398,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @see - (void)saveEntityAsNotDeprecated;
  */
 + (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
++ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array inContext:(NSManagedObjectContext *)context;
 
 @end
 

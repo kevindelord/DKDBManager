@@ -139,10 +139,20 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
     return [self MR_countOfEntities];
 }
 
++ (NSInteger)countInContext:(NSManagedObjectContext *)context {
+    return [self MR_countOfEntitiesWithContext:context];
+}
+
 + (NSArray *)all {
     if (self.sortingAttributeName)
         return [self MR_findAllSortedBy:self.sortingAttributeName ascending:YES];
     return [self MR_findAll];
+}
+
++ (NSArray *)allInContext:(NSManagedObjectContext *)context {
+    if (self.sortingAttributeName)
+        return [self MR_findAllSortedBy:self.sortingAttributeName ascending:YES inContext:context];
+    return [self MR_findAllInContext:context];
 }
 
 #pragma mark - UPDATE
@@ -153,27 +163,48 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 
 #pragma mark - DELETE
 
-- (BOOL)deleteIfInvalid {
+- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext *)context {
     NSString *reason = [self invalidReason];
     if (reason != nil) {
-        [self deleteEntityWithReason:reason];
+        [self deleteEntityWithReason:reason inContext:context];
         return true;
     }
     return false;
 }
 
-- (void)deleteChildEntities {
-    // remove all the child of the current object
+- (BOOL)deleteIfInvalid {
+    return [self deleteIfInvalidInContext:nil];
 }
 
-- (void)deleteEntityWithReason:(NSString *)reason {
+- (void)deleteChildEntities {
+    [self deleteChildEntitiesInContext:nil];
+}
+
+- (void)deleteChildEntitiesInContext:(NSManagedObjectContext *)context {
+    //
+    // remove all the child of the current object
+    // Example in Swift:
+    // for page in book.pages {
+    //      page.deleteEntityWithReason("parent book removed", context: context)
+    // }
+}
+
+- (void)deleteEntityWithReason:(NSString *)reason inContext:(NSManagedObjectContext *)context {
     CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete %@: %@ Reason: %@", [self class], self, reason);
     
     // remove all the child of the current object
-    [self deleteChildEntities];
+    [self deleteChildEntitiesInContext:context];
     
     // remove the current object
-    [self MR_deleteEntity];
+    if (context != nil) {
+        [self MR_deleteEntityInContext:context];
+    } else {
+        [self MR_deleteEntity];
+    }
+}
+
+- (void)deleteEntityWithReason:(NSString *)reason {
+    [self deleteEntityWithReason:reason inContext:nil];
 }
 
 + (void)deleteAllEntities {
@@ -181,16 +212,26 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
     [self MR_deleteAllMatchingPredicate:nil];
 }
 
-+ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array {
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext *)context {
+    CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete all %@ entities in context %@", [self class], context);
+    [self MR_deleteAllMatchingPredicate:nil inContext:context];
+}
+
++ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array inContext:(NSManagedObjectContext *)context {
     // check if all entities are still in the dictionary
-    for (id entity in [self MR_findAll]) {
+    NSArray *allEntities = (context != nil ? [self MR_findAllInContext:context] : [self MR_findAll]);
+    for (id entity in allEntities) {
         // if the entity is deprecated (no longer in the dictionary) then remove it !
         if ([entity respondsToSelector:@selector(uniqueIdentifier)]) {
-            if (![array containsObject:[entity performSelector:@selector(uniqueIdentifier)]]) {
-                [entity deleteEntityWithReason:@"deprecated"];
+            if ([array containsObject:[entity performSelector:@selector(uniqueIdentifier)]] == false) {
+                [entity deleteEntityWithReason:@"deprecated" inContext:context];
             }
         }
     }
+}
+
++ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array {
+    [self removeDeprecatedEntitiesFromArray:array inContext:nil];
 }
 
 @end
