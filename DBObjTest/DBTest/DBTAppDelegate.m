@@ -14,6 +14,7 @@
     // Override point for customization after application launch.
     
     DKDBManager.verbose = YES;
+    DKDBManager.resetStoredEntities = YES;
     BOOL didResetDB = [DKDBManager setupDatabaseWithName:@"DB.sqlite"];
     if (didResetDB) {
         // The database is fresh new.

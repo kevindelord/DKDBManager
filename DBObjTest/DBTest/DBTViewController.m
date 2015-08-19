@@ -15,14 +15,12 @@
 
 @implementation DBTViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -31,22 +29,59 @@
     [super viewDidAppear:animated];
     [self createRunners];
     [self createSecondRunners];
+    [Runner countEntity];
     [Runner deleteAllEntities];
     [self createRunners];
+    [Runner countEntity];
+
+    [self async_createRunners:^{
+        [Runner countEntity];
+    }];
+}
+
+- (void)async_createRunners:(void(^)())completion {
+    NSArray * array = @[@{@"name":@"Philip", @"position":@1}, @{@"name":@"Adrien", @"position":@2}];
+    NSArray * second_array = @[@{@"name":@"Marc", @"position":@3}, @{@"name":@"Julien", @"position":@4}];
+
+
+    [DKDBManager saveWithBlock:^(NSManagedObjectContext *localContext) {
+        [Runner createEntitiesFromArray:array context:localContext];
+    } completion:^(BOOL contextDidSave, NSError *error) {
+
+        [DKDBManager saveWithBlock:^(NSManagedObjectContext *localContext) {
+            [Runner createEntitiesFromArray:second_array context:localContext];
+        } completion:^(BOOL contextDidSave, NSError *error) {
+
+            [Runner deleteAllEntities];
+
+            [DKDBManager saveWithBlock:^(NSManagedObjectContext *localContext) {
+                [Runner createEntitiesFromArray:array context:localContext];
+
+            } completion:^(BOOL contextDidSave, NSError *error) {
+                completion();
+            }];
+        }];
+    }];
 }
 
 - (void)createRunners {
     NSArray * array = @[@{@"name":@"John", @"position":@13}, @{@"name":@"Toto", @"position":@14}];
-    [Runner createEntitiesFromArray:array];
-    [Runner countEntity];
-    [DKDBManager saveToPersistentStoreAndWait];
+
+    [DKDBManager saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        [Runner createEntitiesFromArray:array context:localContext];
+    }];
+    // Deprecated methods
+//    [DKDBManager saveToPersistentStoreAndWait];
 }
 
 - (void)createSecondRunners {
     NSArray * array = @[@{@"name":@"Alea", @"position":@16}, @{@"name":@"Proost", @"position":@17}];
-    [Runner createEntitiesFromArray:array];
-    [Runner countEntity];
-    [DKDBManager saveToPersistentStoreAndWait];
+
+    [DKDBManager saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        [Runner createEntitiesFromArray:array context:localContext];
+    }];
+    // Deprecated methods
+//    [DKDBManager saveToPersistentStoreAndWait];
 }
 
 
