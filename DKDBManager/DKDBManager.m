@@ -65,10 +65,6 @@ static BOOL _needForcedUpdate = NO;
     return nil;
 }
 
-+ (void)cleanUp {
-    [MagicalRecord cleanUp];
-}
-
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName {
 
     // Refresh current/default log level
@@ -149,6 +145,39 @@ static BOOL _needForcedUpdate = NO;
     }
 }
 
+#pragma mark - Asynchronous context saving
+
++ (void)saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block {
+    [super saveWithBlock:^(NSManagedObjectContext *localContext) {
+        if (block != nil) {
+            block(localContext);
+        }
+        [self dump];
+    }];
+}
+
++ (void)saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion {
+    [super saveWithBlock:block completion:^(BOOL contextDidSave, NSError *error) {
+        [self dump];
+        if (completion != nil) {
+            completion(contextDidSave, error);
+        }
+    }];
+}
+
+#pragma mark - Synchronous context saving
+
++ (void)saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block {
+    [super saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        if (block != nil) {
+            block(localContext);
+        }
+        [self dump];
+    }];
+}
+
+#pragma mark - Deprecated Methods — DO NOT USE
+
 + (void)save {
     [self saveToPersistentStoreWithCompletion:nil];
 }
@@ -162,6 +191,7 @@ static BOOL _needForcedUpdate = NO;
             completionBlock(success, error);
         }
     }];
+#pragma clang diagnostic pop
 }
 
 + (void)saveToPersistentStoreAndWait {

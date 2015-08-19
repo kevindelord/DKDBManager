@@ -10,9 +10,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "DKHelper.h"
 #import "MagicalRecord.h"
 #import "NSManagedObject+DKDBManager.h"
 #import "NSManagedObject+ExistingObject.h"
+
+#define DK_DEPRECATED_PLEASE_USE(METHOD) __attribute__((deprecated("Deprecated method. Please use `" METHOD "` instead.")))
 
 /**
  * DKDBManager is simple, yet very useful, CRUD manager around Magical Record (a CoreData wrapper).
@@ -25,7 +28,7 @@
  * Extend the NSManagedObject subclasses is required.
  * Please read the README.md for more information.
  */
-@interface DKDBManager : NSObject
+@interface DKDBManager : MagicalRecord
 
 #pragma mark - DEBUG
 
@@ -137,13 +140,6 @@
 + (instancetype)sharedInstance;
 
 /**
- * @brief Cleanup the CoreData stack before the app exits.
- *
- * @discussion Should be called on the `applicationWillTerminate:` AppDelegate's method.
- */
-+ (void)cleanUp;
-
-/**
  * @brief Setup, and reset if needed, the CoreData stack using an auto migrating system.
  *
  * @discussion Of course you can play with the name to change your database on startup whenever you would like to.
@@ -155,22 +151,62 @@
  */
 + (BOOL)setupDatabaseWithName:(NSString *)databaseName;
 
-#pragma mark - Save methods
+#pragma mark - Asynchronous context saving
+
+/**
+ * @brief Asynchronously saves the modifications into the persistent store.
+ *
+ * @discussion Save operations in background; done on a different thread/queue.
+ *
+ * @see Official documentation: https://github.com/magicalpanda/MagicalRecord/blob/develop/Docs/Saving-Entities.md
+ *
+ * @param block Block of code to be saved, against the `localContext` instance.
+ * Every operation is done on a background thread.
+ */
++ (void)saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 
 /**
  * @brief Asynchronously saves the current context into its persistent store.
  */
-+ (void)save;
++ (void)save DK_DEPRECATED_PLEASE_USE("saveWithBlock:");
 
 /**
- * @brief Synchronously saves the current context into its persistent store.
+ * @brief Asynchronously saves the modifications into the persistent store and execute the completion block when it is done.
+ *
+ * @discussion Save operations in background; done on a different thread/queue.
+ *
+ * @see Official documentation: https://github.com/magicalpanda/MagicalRecord/blob/develop/Docs/Saving-Entities.md
+ *
+ * @param block Block of code to be saved, against the `localContext` instance.
+ * Every operation is done on a background thread.
  */
-+ (void)saveToPersistentStoreAndWait;
++ (void)saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 
 /**
  * @brief Asynchronously saves the current context into its persistent store and execute the completion block when it is done.
  */
-+ (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock;
++ (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock DK_DEPRECATED_PLEASE_USE("saveWithBlock:completion:");
+
+#pragma mark - Synchronous context saving
+
+/**
+ * @brief Synchronously saves the current context into its persistent store.
+ *
+ * @discussion For saving on the current thread as the caller, only with a seperate context. Useful when you're managing your own threads/queues and need a serial call to create or change data.
+ *
+ * @see Official documentation: https://github.com/magicalpanda/MagicalRecord/blob/develop/Docs/Saving-Entities.md
+ *
+ * @param block Block of code to be saved, against the `localContext` instance.
+ * Every operation is done on a background thread.
+ */
++ (void)saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+
+/**
+ * @brief Synchronously saves the current context into its persistent store.
+ */
++ (void)saveToPersistentStoreAndWait DK_DEPRECATED_PLEASE_USE("saveWithBlockAndWait:");
+
+#pragma mark - Save Entities methods
 
 /**
  * @brief Save the given entity as not deprecated.
