@@ -8,14 +8,14 @@
 #ifndef DKDBManager_h__
 #define DKDBManager_h__
 
+#define DK_DEPRECATED_PLEASE_USE(METHOD) __attribute__((deprecated("Deprecated method. Please use `" METHOD "` instead.")))
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "DKHelper.h"
 #import "MagicalRecord.h"
 #import "NSManagedObject+DKDBManager.h"
 #import "NSManagedObject+ExistingObject.h"
-
-#define DK_DEPRECATED_PLEASE_USE(METHOD) __attribute__((deprecated("Deprecated method. Please use `" METHOD "` instead.")))
 
 /**
  * DKDBManager is simple, yet very useful, CRUD manager around Magical Record (a CoreData wrapper).

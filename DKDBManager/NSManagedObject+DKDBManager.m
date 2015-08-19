@@ -26,19 +26,32 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 #pragma mark - CREATE
 
 + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary {
-    return [self createEntityFromDictionary:dictionary completion:nil];
+    return [self createEntityFromDictionary:dictionary context:nil completion:nil];
+}
+
++ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary context:(NSManagedObjectContext *)context {
+    return [self createEntityFromDictionary:dictionary context:context completion:nil];
 }
 
 + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion {
+    return [self createEntityFromDictionary:dictionary context:nil completion:completion];
+}
+
++ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary context:(NSManagedObjectContext *)context completion:(void (^)(id entity, DKDBManagedObjectState status))completion {
 
     // now create, save or update an entity
     DKDBManagedObjectState status = DKDBManagedObjectStateSave;
 
-    // if the entity already exist then update it
+    // If the entity already exist then update it
     id entity = [self MR_findFirstWithPredicate:[self primaryPredicateWithDictionary:dictionary]];
-    // else create a new entity in the current thread MOC
+    // Else create a new entity in the given context.
     if (entity == nil) {
-        entity = [self MR_createEntity];
+        if (context != nil) {
+            entity = [self MR_createEntityInContext:context];
+        } else {
+            // You should always specify a context. This line will be removed in the next versions.
+            entity = [self MR_createEntity];
+        }
         [entity updateWithDictionary:dictionary];
         status = DKDBManagedObjectStateCreate;
     } else if (DKDBManager.needForcedUpdate || (DKDBManager.allowUpdate && [entity shouldUpdateEntityWithDictionary:dictionary])) {
@@ -64,14 +77,19 @@ void        CRUDLog(BOOL logEnabled, NSString *format, ...) {
 }
 
 + (NSArray *)createEntitiesFromArray:(NSArray *)array {
+    return [self createEntitiesFromArray:array context:nil];
+}
+
++ (NSArray *)createEntitiesFromArray:(NSArray *)array context:(NSManagedObjectContext *)context {
 
     if (!array || !array.count) return nil;
 
     NSMutableArray *entities = [NSMutableArray new];
     for (NSDictionary *dictionary in array) {
-        id entity = [self createEntityFromDictionary:dictionary];
-        if (entity)
+        id entity = [self createEntityFromDictionary:dictionary context:context];
+        if (entity != nil) {
             [entities addObject:entity];
+        }
     }
     return entities;
 }
