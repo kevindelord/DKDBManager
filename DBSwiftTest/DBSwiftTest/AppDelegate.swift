@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         DKDBManager.setVerbose(true)
-        var didResetDB = DKDBManager.setupDatabaseWithName("DBSwiftTest.sqlite")
+        let didResetDB = DKDBManager.setupDatabaseWithName("DBSwiftTest.sqlite")
         if (didResetDB) {
             // The database is fresh new.
             // Depending on your needs you might want to do something special right now as:.

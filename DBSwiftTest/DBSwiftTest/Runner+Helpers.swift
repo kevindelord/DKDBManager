@@ -10,9 +10,11 @@ import Foundation
 
 extension Runner {
 
-    func description() -> String {
-        return "\(self.objectID.URIRepresentation().lastPathComponent) : \(self.name) - \(self.position)"
-    }
+	override public var description: String {
+		get {
+			return "\(self.objectID.URIRepresentation().lastPathComponent) : \(self.name) - \(self.position)"
+		}
+	}
 
     override public func uniqueIdentifier() -> AnyObject! {
         return self.objectID;
@@ -50,6 +52,6 @@ extension Runner {
     }
 
     class func countEntity() {
-        println(Runner.MR_findAll())
+        print(Runner.MR_findAll())
     }
 }

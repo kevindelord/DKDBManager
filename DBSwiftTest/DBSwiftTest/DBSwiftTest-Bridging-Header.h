@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "DKDBManager.h"
+#import "DKHelper.h"
 
 #import "Runner.h"
 

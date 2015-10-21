@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     }
 
     func createSecondRunners() {
-        var array = [["name":"Alea", "position":16], ["name":"Proost", "position":17]]
+        let array = [["name":"Alea", "position":16], ["name":"Proost", "position":17]]
         Runner.createEntitiesFromArray(array)
         Runner.countEntity()
         DKDBManager.saveToPersistentStoreAndWait()

@@ -3,3 +3,4 @@
 
 pod 'DKDBManager', :path => '../DKDBManager.podspec'
 
+pod 'DKHelper', '~> 0.9.5'
