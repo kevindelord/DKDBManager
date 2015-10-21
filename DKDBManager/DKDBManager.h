@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 #import "NSManagedObject+DKDBManager.h"
 #import "NSManagedObject+ExistingObject.h"
 
