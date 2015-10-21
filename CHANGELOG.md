@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 0.5.3
+
+- Import Magical Record as framework to support cocoapods 0.39.0
+
 ## 0.5.2
 
 - Add documentation.
