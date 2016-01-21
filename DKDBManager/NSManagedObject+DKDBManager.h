@@ -39,7 +39,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - NSManagedObject
 
 /**
- * Category of the NSManagedObject class. Add functions required by the CRUD process.
+ * Category of the NSManagedObject class.
+ * This adds functions required by the CRUD process.
+ *
  * Please read the README.md for more information.
  */
 @interface NSManagedObject (DKDBManager)
@@ -81,16 +83,12 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * .Save if the entity was already created and nothing changed.
  *
  * .Delete if the entity has been deleted.
+ *
  * @see typedef DKDBManagedObjectState
  *
  * @return A created/read/updated database entity; nil if deleted.
  */
-+ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary context:(NSManagedObjectContext *)context completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
-
-/**
- * @brief CRUD a database entity for the current class model from a NSDictionary object within the context for the current thread.
- */
-+ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion DK_DEPRECATED_PLEASE_USE("createEntityFromDictionary:context:completion:");
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary context:(NSManagedObjectContext * _Nonnull)context completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion;
 
 /**
  * @brief CRUD a database entity for the current class model from a NSDictionary object. 
@@ -105,12 +103,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return A created/read/updated database entitiy.
  */
-+ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary context:(NSManagedObjectContext *)context;
-
-/**
- * @brief CRUD a database entity for the current class model from a NSDictionary object within the context for the current thread.
- */
-+ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary DK_DEPRECATED_PLEASE_USE("createEntityFromDictionary:context:");
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary context:(NSManagedObjectContext * _Nonnull)context;
 
 /**
  * @brief CRUD database entities for the current class model from an array of NSDictionary objects.
@@ -125,12 +118,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return An array of created/read/updated database entities.
  */
-+ (NSArray *)createEntitiesFromArray:(NSArray *)array context:(NSManagedObjectContext *)context;
-
-/**
- * @brief CRUD database entities for the current class model from an array of NSDictionary objects within the context for the current thread.
- */
-+ (NSArray *)createEntitiesFromArray:(NSArray *)array DK_DEPRECATED_PLEASE_USE("createEntitiesFromArray:context:");
++ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array context:(NSManagedObjectContext * _Nonnull)context;
 
 #pragma mark - READ
 
@@ -150,7 +138,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return the unique identifer of the current model entity.
  */
-- (id)uniqueIdentifier;
+- (id _Nonnull)uniqueIdentifier;
 
 /**
  * @brief Override this function to store the current object and all its child relations as not deprecated.
@@ -220,7 +208,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return An invalid reason; nil if valid.
  */
-- (NSString *)invalidReason;
+- (NSString * _Nullable)invalidReason;
 
 /**
  * @brief Override this function to inform the manager whether it should update the current entity or not.
@@ -238,7 +226,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return TRUE if the entity should be updated by the manager; default is TRUE.
  */
- - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
+ - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary * _Nullable)dictionary;
 
 /**
  * @brief Override this function to enable all activitiy logs about the current class entity or not.
@@ -252,7 +240,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return Sorting key as a NSString object; default is nil.
  */
- + (NSString *)sortingAttributeName;
+ + (NSString * _Nullable)sortingAttributeName;
 
 /**
  * @brief Override this function to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
@@ -277,27 +265,49 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @return A NSPredicate object to find/fetch an entity in the local database.
  */
- + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
+ + (NSPredicate * _Nullable)primaryPredicateWithDictionary:(NSDictionary * _Nullable)dictionary;
 
 /**
- * @brief Returns all entities of the current class model.
+ *  @brief Returns all entities of the current class model within a specific context.
  *
- * @discussion The values are sorted by the default sorting attribute.
+ *  @discussion The values are sorted by the default sorting attribute.
  *
- * @see + (NSString *)sortingAttributeName;
+ *  @param context The context from where all entities will be fetched.
  *
- * @return A NSArray object containing all entities from the current class model.
+ *  @see + (NSString *)sortingAttributeName;
+ *
+ *  @return A NSArray object containing all entities from the current class model.
  */
-+ (NSArray *)all;
-+ (NSArray *)allInContext:(NSManagedObjectContext *)context;
++ (NSArray * _Nullable)allInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
- * @brief Count all entities of the current class model.
+ *  @brief Returns all entities of the current class model using the default NSManagedObjectContext object.
  *
- * @return A NSInteger value corresponding to the total number of entities of the current class model.
+ *  @discussion This method uses a NSManagedObjectContext object operating on the main thread (simple and single-threaded operations only).
+ *
+ *  @see + (NSString *)sortingAttributeName;
+ *
+ *  @return A NSArray object containing all entities from the current class model.
+ */
++ (NSArray * _Nullable)all;
+
+/**
+ *  @brief Count all entities of the current class model within a specific context.
+ *
+ *  @param context The context from where all entities will be counted.
+ *
+ *  @return A NSInteger value corresponding to the total number of entities of the current class model.
+ */
++ (NSInteger)countInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Count all entities of the current class model using the default NSManagedObjectContext object.
+ *
+ *  @discussion This method uses a NSManagedObjectContext object operating on the main thread (simple and single-threaded operations only).
+ *
+ *  @return A NSInteger value corresponding to the total number of entities of the current class model.
  */
 + (NSInteger)count;
-+ (NSInteger)countInContext:(NSManagedObjectContext *)context;
 
 #pragma mark - UPDATE
 
@@ -322,36 +332,25 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * self.images = Images.createEntitiesFromArray(GET_ARRAY(dict, "images"))
  * @endcode
  */
-- (void)updateWithDictionary:(NSDictionary *)dictionary;
+- (void)updateWithDictionary:(NSDictionary * _Nullable)dictionary;
 
 #pragma mark - DELETE
 
 /**
- * @brief Check and delete the current entity if invalid.
+ * @brief Check and delete the current entity if invalid within a given context.
  *
  * @discussion This function verifies the validity of the current entity with the function `invalidReason`.
  *
- * The default managed object context is used.
+ * @param context The current local context.
  *
  * @see - (NSString *)invalidReason
  *
  * @return TRUE is the entity has been deleted; otherwise FALSE.
  */
-- (BOOL)deleteIfInvalid;
+- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
- * @brief Check and delete the current entity if invalid within a given context.
- *
- * @param context The current local context.
- *
- * @see - (BOOL)deleteIfInvalid for more information.
- *
- * @return TRUE is the entity has been deleted; otherwise FALSE.
- */
-- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext *)context;
-
-/**
- * @brief Override this function to delete the child entities of a current entity.
+ * @brief Override this function to delete the child entities of a current entity within a given context.
  *
  * @discussion To remove an entity one should call `deleteEntityWithReason:`.
  * When doing so the current function is called.
@@ -373,94 +372,61 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * @endcode
  *
  * The default managed object context is used.
- */
-- (void)deleteChildEntities;
-
-/**
- * @brief Override this function to delete the child entities of a current entity within a given context.
  *
  * @param context The current local context.
- *
- * @see - (void)deleteChildEntities for more information.
  */
-- (void)deleteChildEntitiesInContext:(NSManagedObjectContext *)context;
-
-/**
- * @brief Delete the current entity and log the reason.
- *
- * @param reason A NSString object explaining why the entity is getting removed from the local database.
- *
- * @discussion The reason will be logged only if the function `verbose` returns TRUE for the current class model
- *
- * This function also calls the function `deleteChildEntities` for the current entity.
- *
- * The default managed object context is used.
- *
- * @see - (void)deleteChildEntities;
- * @see + (BOOL)verbose;
- */
-- (void)deleteEntityWithReason:(NSString *)reason;
+- (void)deleteChildEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
  * @brief Delete the current entity and log the reason within a given context.
  *
+ * @discussion The reason will be logged only if the function `verbose` returns TRUE for the current class model
+ *
+ * This function also calls the function `deleteChildEntitiesInContext` for the current entity.
+ *
  * @param reason A NSString object explaining why the entity is getting removed from the local database.
  *
  * @param context The current local context.
  *
- * @see - (void)deleteEntityWithReason: for more information.
+ * @see - (void)deleteChildEntitiesInContext;
+ * @see + (BOOL)verbose;
  */
-- (void)deleteEntityWithReason:(NSString *)reason inContext:(NSManagedObjectContext *)context;
-
-/**
- * @brief Delete all entities from the current class model.
- *
- * @discussion All entites for the current class model will be removed.
- * Functions `deleteChildEntities` and `deleteEntityWithReason:` will not be called.
- *
- * The default managed object context is used.
- */
-+ (void)deleteAllEntities;
+- (void)deleteEntityWithReason:(NSString * _Nullable)reason inContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
  * @brief Delete all entities from the current class model within a given context.
  *
+ * @discussion All entites for the current class model will be removed.
+ * Functions `deleteChildEntitiesInContext` and `deleteEntityWithReason:inContext:` will NOT be called.
+ *
  * @param context The current local context.
  *
- * @see + (void)deleteAllEntities for more information.
  */
-+ (void)deleteAllEntitiesInContext:(NSManagedObjectContext *)context;
-
-/**
- * @brief Check and remove all deprecated entities from the local database.
- *
- * @param array A NSArray object containing all not deprecated entities for the current class model.
- *
- * @discussion The entities are automatically set as not deprecated in the CRUD process.
- * The ones that are not refreshed/saved before removing all deprecated entities will then disappear from the local store.
- *
- * The default managed object context is used.
- *
- * @see - (void)saveEntityAsNotDeprecated;
- */
-+ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
  * @brief Check and remove all deprecated entities from the local database within a given context.
  *
+ * @discussion The entities are automatically set as not deprecated in the CRUD process.
+ * The ones that are not refreshed/saved before removing all deprecated entities will then disappear from the local store.
+ *
  * @param array A NSArray object containing all not deprecated entities for the current class model.
  *
  * @param context The current local context.
  *
- * @see + (void)removeDeprecatedEntitiesFromArray: for more information.
+ * @see - (void)saveEntityAsNotDeprecated;
  */
-+ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array inContext:(NSManagedObjectContext *)context;
++ (void)removeDeprecatedEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)context;
 
 @end
 
 #pragma mark - Log
 
 /**
- * Log a string if the verbose boolean is enabled.
+ *  @brief Log a string if the verbose boolean is enabled.
+ *
+ *  @param logEnabled Boolean to enable or not the log.
+ *  @param format     Format of the NSString
+ *  @param ...        Var args
  */
-void        CRUDLog(BOOL logEnabled, NSString *format, ...);
+void CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...);

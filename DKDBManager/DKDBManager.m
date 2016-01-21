@@ -34,7 +34,7 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - DB methods
 
-+ (instancetype)sharedInstance {
++ (instancetype _Nonnull)sharedInstance {
     static DKDBManager *manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -43,7 +43,7 @@ static BOOL _needForcedUpdate = NO;
     return manager;
 }
 
-+ (NSArray *)entities {
++ (NSArray * _Nonnull)entityClassNames {
     NSMutableArray *classNames = [NSMutableArray new];
     for (NSEntityDescription *desc in [NSManagedObjectModel MR_defaultManagedObjectModel].entities) {
         if (desc.isAbstract == false) {
@@ -53,41 +53,44 @@ static BOOL _needForcedUpdate = NO;
     return classNames;
 }
 
-+ (NSUInteger)count {
-    // This method is needed to make the compiler understands this method exists for the NSManagedObject classes.
-    // See: DKDBManager::dump and DKDBManager::dumpCount
-    return 0;
++ (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName didResetDatabase:(void (^ _Nullable)())didResetDatabaseBlock {
+
+	// Refresh current/default log level
+	self.verbose = self.verbose;
+
+	// Boolean to know if the database has been completely reset
+	BOOL didResetDB = NO;
+	if (DKDBManager.resetStoredEntities == true) {
+		didResetDB = [self eraseDatabaseForStoreName:databaseName];
+	}
+
+	// Setup the coredata stack
+	[self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
+
+	if (didResetDB == true && didResetDatabaseBlock != nil) {
+		didResetDatabaseBlock();
+	}
 }
 
-+ (NSArray *)all {
-    // This method is needed to make the compiler understands this method exists for the NSManagedObject classes.
-    // See: DKDBManager::dump and DKDBManager::dumpCount
-    return nil;
++ (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName {
+	[self setupDatabaseWithName:databaseName didResetDatabase:nil];
 }
 
-+ (BOOL)setupDatabaseWithName:(NSString *)databaseName {
++ (void)setup {
+	NSString * databaseName = [NSString stringWithFormat:@"%@.sqlite", NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"]];
+	[self setupDatabaseWithName:databaseName didResetDatabase:nil];
+}
 
-    // Refresh current/default log level
-    self.verbose = self.verbose;
-
-    // Boolean to know if the database has been completely reset
-    BOOL didResetDB = NO;
-    if (DKDBManager.resetStoredEntities) {
-        didResetDB = [self eraseDatabaseForStoreName:databaseName];
-    }
-
-    // Setup the coredata stack
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
-
-    return didResetDB;
++ (void)cleanUp {
+	[super cleanUp];
 }
 
 #pragma mark - Delete methods
 
-+ (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName {
++ (BOOL)eraseDatabaseForStoreName:(NSString * _Nonnull)databaseName {
 
-    CRUDLog(DKDBManager.verbose, @"erase database: %@", databaseName);
-    // do some cleanUp of MagicalRecord
+    CRUDLog(DKDBManager.verbose, @"------ Erasing database: %@ ------", databaseName);
+    // do some MagicalRecord clean up
     [self cleanUp];
 
     // remove the sqlite file
@@ -96,41 +99,41 @@ static BOOL _needForcedUpdate = NO;
     NSURL *fileURL = [NSPersistentStore MR_urlForStoreName:databaseName];
     [[NSFileManager defaultManager] removeItemAtURL:fileURL error:&error];
     if (error && error.code != NSFileNoSuchFileError) {
-        [[[UIAlertView alloc] initWithTitle:@"Error - cannot erase DB" message:error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil] show];
+		NSAssert(false, @"Error - cannot erase DB");
         didResetDB = NO;
     }
     return didResetDB;
 }
 
-+ (void)removeDeprecatedEntities {
++ (void)removeDeprecatedEntitiesInContext:(NSManagedObjectContext * _Nonnull)context {
     DKDBManager *manager = [DKDBManager sharedInstance];
 
     CRUDLog(self.verbose, @"-------------- Removing deprecated entities -----------------");
 
-    for (NSString *className in self.entities) {
+    for (NSString *className in self.entityClassNames) {
         Class class = NSClassFromString(className);
-        [class removeDeprecatedEntitiesFromArray:manager->_entities[className]];
+        [class removeDeprecatedEntitiesFromArray:manager->_entities[className] inContext:(NSManagedObjectContext * _Nonnull)context];
     }
 }
 
-+ (void)deleteAllEntities {
-    for (NSString *className in self.entities) {
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)context {
+    for (NSString *className in self.entityClassNames) {
         Class class = NSClassFromString(className);
-        [class deleteAllEntities];
+        [class deleteAllEntitiesInContext:context];
     }
-    [self dump];
+    [self dumpInContext:context];
 }
 
-+ (void)deleteAllEntitiesForClass:(Class)class {
-    if ([self.entities containsObject:NSStringFromClass(class)]){
-        [class deleteAllEntities];
++ (void)deleteAllEntitiesForClass:(Class)class inContext:(NSManagedObjectContext * _Nonnull)context {
+    if ([self.entityClassNames containsObject:NSStringFromClass(class)]) {
+		[class deleteAllEntitiesInContext:context];
     }
-    [self dump];
+    [self dumpInContext:context];
 }
 
 #pragma mark - Save methods
 
-+ (void)saveEntityAsNotDeprecated:(id)entity {
++ (void)saveEntityAsNotDeprecated:(id _Nonnull)entity {
 
     DKDBManager *manager = [DKDBManager sharedInstance];
 
@@ -147,18 +150,23 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - Asynchronous context saving
 
-+ (void)saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block {
++ (void)saveWithBlock:(void(^ _Nullable )(NSManagedObjectContext * _Nonnull context))block {
     [super saveWithBlock:^(NSManagedObjectContext *localContext) {
         if (block != nil) {
             block(localContext);
         }
-        [self dump];
+        [self dumpInContext:localContext];
     }];
 }
 
-+ (void)saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion {
-    [super saveWithBlock:block completion:^(BOOL contextDidSave, NSError *error) {
-        [self dump];
++ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull context))block completion:(MRSaveCompletionHandler _Nullable)completion {
+	[super saveWithBlock:^(NSManagedObjectContext *localContext) {
+		if (block != nil) {
+			block(localContext);
+		}
+		[self dumpInContext:localContext];
+
+	} completion:^(BOOL contextDidSave, NSError *error) {
         if (completion != nil) {
             completion(contextDidSave, error);
         }
@@ -167,39 +175,13 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - Synchronous context saving
 
-+ (void)saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block {
++ (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull context))block {
     [super saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         if (block != nil) {
             block(localContext);
         }
-        [self dump];
+        [self dumpInContext:localContext];
     }];
-}
-
-#pragma mark - Deprecated Methods — DO NOT USE
-
-+ (void)save {
-    [self saveToPersistentStoreWithCompletion:nil];
-}
-
-+ (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {        
-        [self dump];
-        if (completionBlock) {
-            completionBlock(success, error);
-        }
-    }];
-#pragma clang diagnostic pop
-}
-
-+ (void)saveToPersistentStoreAndWait {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreAndWait];
-    [self dump];
-#pragma clang diagnostic pop
 }
 
 #pragma mark - DEBUG methods
@@ -252,7 +234,7 @@ static BOOL _needForcedUpdate = NO;
 
 #pragma mark - Log
 
-+ (void)dumpCount {
++ (void)dumpCountInContext:(NSManagedObjectContext * _Nonnull)context {
 
     if (self.verbose == false) {
         return ;
@@ -260,9 +242,10 @@ static BOOL _needForcedUpdate = NO;
 
     NSString *count = @"";
 
-    for (NSString *className in self.entities) {
+    for (NSString *className in self.entityClassNames) {
         Class class = NSClassFromString(className);
-        count = [NSString stringWithFormat:@"%@%ld %@, ", count, (unsigned long)(class.count), className];
+		unsigned long value = (unsigned long)[class performSelector:@selector(countInContext:) withObject:context];
+		count = [NSString stringWithFormat:@"%@%ld %@, ", count, value, className];
     }
 
     CRUDLog(self.verbose, @"-------------------------------------");
@@ -270,22 +253,34 @@ static BOOL _needForcedUpdate = NO;
     CRUDLog(self.verbose, @"-------------------------------------");
 }
 
-+ (void)dump {
++ (void)dumpCount {
+	[self dumpInContext:NSManagedObjectContext.MR_defaultContext];
+}
+
++ (void)dumpInContext:(NSManagedObjectContext * _Nonnull)context {
 
     if (self.verbose == false) {
         return ;
     }
 
-    [self dumpCount];
+    [self dumpCountInContext:context];
 
-    for (NSString *className in self.entities) {
+    for (NSString *className in self.entityClassNames) {
         Class class = NSClassFromString(className);
-        if (class.verbose) {
-            for (id entity in class.all)
-                NSLog(@"%@ %@", className, entity);
+        if (class.verbose == true) {
+			NSArray * allValues = (NSArray *)[class performSelector:@selector(allInContext:) withObject:context];
+			if (allValues != nil) {
+				for (id entity in allValues) {
+					NSLog(@"%@ %@", className, entity);
+				}
+			}
             CRUDLog(self.verbose, @"-------------------------------------");
         }
     }
+}
+
++ (void)dump {
+	[self dumpInContext:NSManagedObjectContext.MR_defaultContext];
 }
 
 @end

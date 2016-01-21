@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '6.1'
   s.framework        = 'CoreData'
   s.source_files     = 'DKDBManager/*'
-  s.dependency         'MagicalRecord', '~> 2.3.0'
+  s.dependency         'MagicalRecord', '~> 2.3.2'
   s.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
-#import "MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 EOS
 end
