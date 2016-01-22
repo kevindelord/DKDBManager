@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *
- *  @return A created/read/updated database entitiy.
+ *  @return A created/read/updated database entity.
  */
 + (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
@@ -117,23 +117,22 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  */
 + (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
-#pragma mark - READ
+#pragma mark - SAVE
 
 /**
- *  @brief Override this function to return a custom unique identifier of the current entity.
+ *  @brief Function automatically called by the CRUD process logs the status and calls the `saveEntityAsNotDeprecated` function.
  *
- *  @discussion When using the DKDBManager to match a distant database (behind an API) the logic to remove deprecated objects uses an `uniqueIdentifier` for every class.
+ *  @remark Does not save as not deprecated in case of `.Delete` status.
  *
- *  The identifer of each entity is saved when '<i>CRUD</i>ing' the entities.
- *  It is used when the function `removeDeprecatedEntitiesInContext:` is called.
+ *  @param entity A created/read/updated database entity; nil if deleted.
  *
- *  The default value use the native `objectID` property of a NSManagedObject.
+ *  @param status The CRUD status of the entity.
  *
- *  Override this method to use a custom unique identifer built from a class attribute or anything else.
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *
- *  @return The unique identifer of the current model entity.
+ *  @see - (void)saveEntityAsNotDeprecated;
  */
-- (id _Nonnull)uniqueIdentifier;
++ (void)saveEntityAfterCreation:(id _Nullable)entity status:(DKDBManagedObjectState)status;
 
 /**
  *  @brief Override this function to store the current object and all its child relations as not deprecated.
@@ -167,6 +166,24 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *  The `pages` will not be marked until the second custom function is called.
  */
 - (void)saveEntityAsNotDeprecated;
+
+#pragma mark - READ
+
+/**
+ *  @brief Override this function to return a custom unique identifier of the current entity.
+ *
+ *  @discussion When using the DKDBManager to match a distant database (behind an API) the logic to remove deprecated objects uses an `uniqueIdentifier` for every class.
+ *
+ *  The identifer of each entity is saved when '<i>CRUD</i>ing' the entities.
+ *  It is used when the function `removeDeprecatedEntitiesInContext:` is called.
+ *
+ *  The default value use the native `objectID` property of a NSManagedObject.
+ *
+ *  Override this method to use a custom unique identifer built from a class attribute or anything else.
+ *
+ *  @return The unique identifer of the current model entity.
+ */
+- (id _Nonnull)uniqueIdentifier;
 
 /**
  * @brief Override this function to verify the validity of an entity; default returns nil.
@@ -345,7 +362,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param context The current saving context.
  *
- *  @see - (NSString *)invalidReason
+ *  @see - (NSString *)invalidReason;
  *
  *  @return TRUE is the entity has been deleted; otherwise FALSE.
  */
