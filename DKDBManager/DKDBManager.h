@@ -223,9 +223,9 @@
  *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
  *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
  *
- *  @param block Block executed to perform saving changes using the `localContext` instance. Every operation is done on a background thread.
+ *  @param block Block executed to perform saving changes using the `savingContext` instance. Every operation is done on a background thread.
  */
-+ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull localContext))block;
++ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block;
 
 /**
  *  @brief Asynchronously executes and saves modifications into the persistent store and executes the completion block when it is done.
@@ -235,11 +235,11 @@
  *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
  *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
  *
- *  @param block Block executed to perform saving changes using the `localContext` instance. Every operation is done on a background thread.
+ *  @param block Block executed to perform saving changes using the `savingContext` instance. Every operation is done on a background thread.
  *
  *  @param completion Block executed on the main thread once the saving has been completed.
  */
-+ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull localContext))block completion:(MRSaveCompletionHandler _Nullable)completion;
++ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block completion:(MRSaveCompletionHandler _Nullable)completion;
 
 /**
  *  @brief Synchronously executes and saves modificiations into its persistent store.
@@ -251,9 +251,9 @@
  *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
  *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
  *
- *  @param block Block executed to perform saving changes using the `localContext` instance. Every operation is done on a background thread.
+ *  @param block Block executed to perform saving changes using the `savingContext` instance. Every operation is done on a background thread.
  */
-+ (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull localContext))block;
++ (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block;
 
 /**
  *  @brief Save the given entity as not deprecated.

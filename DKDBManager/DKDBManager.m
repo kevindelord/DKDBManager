@@ -149,20 +149,20 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (void)saveWithBlock:(void(^ _Nullable )(NSManagedObjectContext * _Nonnull context))block {
-    [super saveWithBlock:^(NSManagedObjectContext *localContext) {
+    [super saveWithBlock:^(NSManagedObjectContext *savingContext) {
         if (block != nil) {
-            block(localContext);
+            block(savingContext);
         }
-        [self dumpInContext:localContext];
+        [self dumpInContext:savingContext];
     }];
 }
 
-+ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull context))block completion:(MRSaveCompletionHandler _Nullable)completion {
-	[super saveWithBlock:^(NSManagedObjectContext *localContext) {
++ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block completion:(MRSaveCompletionHandler _Nullable)completion {
+	[super saveWithBlock:^(NSManagedObjectContext *savingContext) {
 		if (block != nil) {
-			block(localContext);
+			block(savingContext);
 		}
-		[self dumpInContext:localContext];
+		[self dumpInContext:savingContext];
 
 	} completion:^(BOOL contextDidSave, NSError *error) {
         if (completion != nil) {
@@ -171,12 +171,12 @@ static BOOL _needForcedUpdate = NO;
     }];
 }
 
-+ (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull context))block {
-    [super saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
++ (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block {
+    [super saveWithBlockAndWait:^(NSManagedObjectContext *savingContext) {
         if (block != nil) {
-            block(localContext);
+            block(savingContext);
         }
-        [self dumpInContext:localContext];
+        [self dumpInContext:savingContext];
     }];
 }
 
