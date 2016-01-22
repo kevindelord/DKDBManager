@@ -9,7 +9,7 @@
 import Foundation
 import DKDBManager
 
-class BaggageViewController		: UITableViewController {
+class BaggageViewController		: TableViewController {
 
 	var passenger 				: Passenger? = nil
 
@@ -48,8 +48,7 @@ class BaggageViewController		: UITableViewController {
 
 				}, completion: { (didSave: Bool, error: NSError?) -> Void in
 					// Main Thread
-					tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-					self.tableView.setEditing(false, animated: true)
+					self.didDeleteItemAtIndexPath(indexPath)
 			})
 		}
 	}

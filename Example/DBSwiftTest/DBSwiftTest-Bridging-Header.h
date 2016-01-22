@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "DKDBManager.h"
-#import "DKHelper.h"
+#import <DKDBManager/DKDBManager.h>
+#import <DKHelper/DKHelper.h>
 
 #endif

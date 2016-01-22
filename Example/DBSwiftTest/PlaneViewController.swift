@@ -9,7 +9,7 @@
 import UIKit
 import DKDBManager
 
-class PlaneViewController	: UITableViewController {
+class PlaneViewController	: TableViewController {
 
 	// MARK: - UITableView
 
@@ -42,8 +42,7 @@ class PlaneViewController	: UITableViewController {
 
 					}, completion: { (didSave: Bool, error: NSError?) -> Void in
 						// Main Thread
-						tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-						self.tableView.setEditing(false, animated: true)
+						self.didDeleteItemAtIndexPath(indexPath)
 				})
 		}
 	}
