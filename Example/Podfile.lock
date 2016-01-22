@@ -8,7 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - DKDBManager (from `../DKDBManager.podspec`)
-  - DKHelper
+  - DKHelper (~> 2.1.1)
 
 EXTERNAL SOURCES:
   DKDBManager:

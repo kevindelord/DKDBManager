@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		47D5687A955329D31410E373 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A283E5C124E1E818CB6194E1 /* libPods.a */; };
+		759C62201C525F6700858442 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C621F1C525F6700858442 /* Constants.swift */; };
+		759C62211C525F6700858442 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C621F1C525F6700858442 /* Constants.swift */; };
 		75C5CB3F19DBE8DA002BA192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB3E19DBE8DA002BA192 /* AppDelegate.swift */; };
 		75C5CB4219DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB4019DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld */; };
 		75C5CB4419DBE8DA002BA192 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB4319DBE8DA002BA192 /* ViewController.swift */; };
@@ -15,8 +17,19 @@
 		75C5CB4919DBE8DA002BA192 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C5CB4819DBE8DA002BA192 /* Images.xcassets */; };
 		75C5CB4C19DBE8DA002BA192 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75C5CB4A19DBE8DA002BA192 /* LaunchScreen.xib */; };
 		75C5CB5819DBE8DA002BA192 /* DBSwiftTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB5719DBE8DA002BA192 /* DBSwiftTestTests.swift */; };
-		75C5CB6619DBEC23002BA192 /* Runner+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB6519DBEC23002BA192 /* Runner+Helpers.swift */; };
-		75C5CB6919DBF53A002BA192 /* Runner.m in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB6819DBF53A002BA192 /* Runner.m */; };
+		75C5CB6619DBEC23002BA192 /* Plane+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB6519DBEC23002BA192 /* Plane+Helpers.swift */; };
+		75D800DA1C52497700CF1776 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */; };
+		75D800DB1C52497700CF1776 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */; };
+		75D800DC1C52497700CF1776 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D51C52497700CF1776 /* Plane.swift */; };
+		75D800DD1C52497700CF1776 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D51C52497700CF1776 /* Plane.swift */; };
+		75D800DE1C52497700CF1776 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */; };
+		75D800DF1C52497700CF1776 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */; };
+		75D800E01C52497700CF1776 /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D71C52497700CF1776 /* Baggage.swift */; };
+		75D800E11C52497700CF1776 /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D71C52497700CF1776 /* Baggage.swift */; };
+		75D800E21C52497700CF1776 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */; };
+		75D800E31C52497700CF1776 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */; };
+		75D800E41C52497700CF1776 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D91C52497700CF1776 /* Passenger.swift */; };
+		75D800E51C52497700CF1776 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D91C52497700CF1776 /* Passenger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +45,7 @@
 /* Begin PBXFileReference section */
 		02EA966AD99F945BEDDD302F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		27BD9A2BA30E7FCCD5E38A44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		759C621F1C525F6700858442 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		75C5CB3919DBE8DA002BA192 /* DBSwiftTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBSwiftTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB3D19DBE8DA002BA192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75C5CB3E19DBE8DA002BA192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,9 +58,13 @@
 		75C5CB5619DBE8DA002BA192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75C5CB5719DBE8DA002BA192 /* DBSwiftTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSwiftTestTests.swift; sourceTree = "<group>"; };
 		75C5CB6219DBEA62002BA192 /* DBSwiftTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DBSwiftTest-Bridging-Header.h"; sourceTree = "<group>"; };
-		75C5CB6519DBEC23002BA192 /* Runner+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Runner+Helpers.swift"; sourceTree = "<group>"; };
-		75C5CB6719DBF53A002BA192 /* Runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Runner.h; sourceTree = "<group>"; };
-		75C5CB6819DBF53A002BA192 /* Runner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Runner.m; sourceTree = "<group>"; };
+		75C5CB6519DBEC23002BA192 /* Plane+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plane+Helpers.swift"; sourceTree = "<group>"; };
+		75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plane+CoreDataProperties.swift"; path = "Models/Plane+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75D800D51C52497700CF1776 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plane.swift; path = Models/Plane.swift; sourceTree = "<group>"; };
+		75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Baggage+CoreDataProperties.swift"; path = "Models/Baggage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75D800D71C52497700CF1776 /* Baggage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Baggage.swift; path = Models/Baggage.swift; sourceTree = "<group>"; };
+		75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Passenger+CoreDataProperties.swift"; path = "Models/Passenger+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75D800D91C52497700CF1776 /* Passenger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Passenger.swift; path = Models/Passenger.swift; sourceTree = "<group>"; };
 		A283E5C124E1E818CB6194E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +121,7 @@
 				75C5CB6C19DC00B5002BA192 /* Models */,
 				75C5CB3E19DBE8DA002BA192 /* AppDelegate.swift */,
 				75C5CB4319DBE8DA002BA192 /* ViewController.swift */,
+				759C621F1C525F6700858442 /* Constants.swift */,
 				75C5CB4019DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld */,
 				75C5CB3C19DBE8DA002BA192 /* Supporting Files */,
 			);
@@ -141,9 +160,13 @@
 		75C5CB6C19DC00B5002BA192 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				75C5CB6519DBEC23002BA192 /* Runner+Helpers.swift */,
-				75C5CB6719DBF53A002BA192 /* Runner.h */,
-				75C5CB6819DBF53A002BA192 /* Runner.m */,
+				75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */,
+				75C5CB6519DBEC23002BA192 /* Plane+Helpers.swift */,
+				75D800D51C52497700CF1776 /* Plane.swift */,
+				75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */,
+				75D800D71C52497700CF1776 /* Baggage.swift */,
+				75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */,
+				75D800D91C52497700CF1776 /* Passenger.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -308,10 +331,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75C5CB6619DBEC23002BA192 /* Runner+Helpers.swift in Sources */,
-				75C5CB6919DBF53A002BA192 /* Runner.m in Sources */,
+				75D800E21C52497700CF1776 /* Passenger+CoreDataProperties.swift in Sources */,
+				759C62201C525F6700858442 /* Constants.swift in Sources */,
+				75D800DA1C52497700CF1776 /* Plane+CoreDataProperties.swift in Sources */,
+				75D800E01C52497700CF1776 /* Baggage.swift in Sources */,
+				75D800DC1C52497700CF1776 /* Plane.swift in Sources */,
+				75D800DE1C52497700CF1776 /* Baggage+CoreDataProperties.swift in Sources */,
+				75C5CB6619DBEC23002BA192 /* Plane+Helpers.swift in Sources */,
 				75C5CB4419DBE8DA002BA192 /* ViewController.swift in Sources */,
 				75C5CB3F19DBE8DA002BA192 /* AppDelegate.swift in Sources */,
+				75D800E41C52497700CF1776 /* Passenger.swift in Sources */,
 				75C5CB4219DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +349,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75D800DD1C52497700CF1776 /* Plane.swift in Sources */,
+				75D800E11C52497700CF1776 /* Baggage.swift in Sources */,
+				75D800E31C52497700CF1776 /* Passenger+CoreDataProperties.swift in Sources */,
 				75C5CB5819DBE8DA002BA192 /* DBSwiftTestTests.swift in Sources */,
+				75D800DB1C52497700CF1776 /* Plane+CoreDataProperties.swift in Sources */,
+				75D800DF1C52497700CF1776 /* Baggage+CoreDataProperties.swift in Sources */,
+				75D800E51C52497700CF1776 /* Passenger.swift in Sources */,
+				759C62211C525F6700858442 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

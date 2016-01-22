@@ -8,97 +8,53 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PlaneViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+		self.title = "Planes"
+		self.view.backgroundColor = UIColor.whiteColor()
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-
-		print("---")
-		Runner.countEntityInContext(NSManagedObjectContext.MR_defaultContext())
-		print("---")
-
-//        self.createRunners()
-////        self.createSecondRunners()
-////        DKDBManager.deleteAllEntities()
-//
-//		self.performBlockAfterDelay(2, block: { () -> Void in
-//			        self.createRunners()
-//			}, completion: nil)
-//
-		self.createRunners()
-
-//		self.performBlockAfterDelay(5, block: { () -> Void in
-//			print("---")
-//			DKDBManager.dumpInContext(NSManagedObjectContext.MR_defaultContext())
-////			Runner.countEntityInContext(NSManagedObjectContext.MR_defaultContext())
-//
-////			DKDBManager.saveWithBlock({ (context: NSManagedObjectContext) -> Void in
-////				DKDBManager.deleteAllEntitiesInContext(context)
-////			})
-//			print("---")
-//
-//		})
-
-    }
-
-	func lol() {
-
-		let dict = ["name":"Bob", "position":14]
-
-		DKDBManager.saveWithBlock({ (context: NSManagedObjectContext) -> Void in
-
-			Runner.createEntityFromDictionary(dict, inContext: context) { (runner, state: DKDBManagedObjectState) -> Void in
-				print("status: \(state.rawValue) - entity: \(runner)")
-			}
-		})
-		print(dict)
 	}
 
-    func createRunners() {
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return Plane.count()
+	}
 
-        let dict = ["name":"John", "position":13]
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+		if let plane = (Plane.all() as? [Plane])?[indexPath.row] {
+			cell.textLabel?.text = "\(plane.origin ?? "n/a") -> \(plane.destination ?? "n/a")"
+			cell.detailTextLabel?.text = "ferf"//"\(plane.passengers))"
+		}
+		return cell
+	}
 
+	@IBAction func addEntitiesButtonPressed() {
 
-		DKDBManager.saveWithBlockAndWait({ (context: NSManagedObjectContext) -> Void in
+		let json = self.planeJSON()
 
-			print("1.isMainThread: ")
-			print(NSThread.currentThread().isMainThread)
-			Runner.createEntityFromDictionary(dict, inContext: context) { (runner, state: DKDBManagedObjectState) -> Void in
-				print("status: \(state.rawValue) - entity: \(runner)")
-				print("2.isMainThread: ")
-				print(NSThread.currentThread().isMainThread)
-			}
-			})//, completion: nil)
+		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+			// background thread
 
-//        Runner.createEntityFromDictionary(dict) { (runner, state: DKDBManagedObjectState) -> Void in
-//            if (runner != nil && state == .Create) {
-//                // did create runner
-//            }
-//        }
+			Plane.createEntitiesFromArray(json, inContext: savingContext)
 
-//        let array = [dict, ["name":"Toto", "position":14]]
-//        Runner.createEntitiesFromArray(array)
-//        Runner.countEntity()
-//        DKDBManager.saveToPersistentStoreAndWait()
-    }
+			}) { (contextDidSave: Bool, error: NSError?) -> Void in
+				// main thread
+				self.tableView.reloadData()
+		}
+	}
 
-    func createSecondRunners() {
-//        let array = [["name":"Alea", "position":16], ["name":"Proost", "position":17]]
-//        Runner.createEntitiesFromArray(array)
-//        Runner.countEntity()
-//        DKDBManager.saveToPersistentStoreAndWait()
-    }
-
+	private func planeJSON() -> [[String:AnyObject]] {
+		return [
+			[JSON.Origin: "Paris", JSON.Destination: "Berlin"],
+			[JSON.Origin: "Paris", JSON.Destination: "Tokyo"],
+			[JSON.Origin: "London", JSON.Destination: "Berlin"],
+			[JSON.Origin: "Tokyo", JSON.Destination: "Berlin"]
+		]
+	}
 }
 

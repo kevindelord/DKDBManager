@@ -16,6 +16,4 @@
 #import "DKDBManager.h"
 #import "DKHelper.h"
 
-#import "Runner.h"
-
 #endif
