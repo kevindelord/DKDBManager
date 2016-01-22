@@ -18,9 +18,14 @@ extension Runner {
         return self.objectID;
     }
 
-    override public func updateWithDictionary(dict: [NSObject : AnyObject]?) {
-        self.name = GET_STRING(dict, "name")
-        self.position = GET_NUMBER(dict, "position")
+	public override func saveEntityAsNotDeprecated() {
+		super.saveEntityAsNotDeprecated()
+	}
+
+
+	public override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+        self.name = GET_STRING(dictionary, "name")
+        self.position = GET_NUMBER(dictionary, "position")
     }
 
     override public func invalidReason() -> String? {
@@ -49,7 +54,8 @@ extension Runner {
 		return nil
     }
 
-    override public func shouldUpdateEntityWithDictionary(dictionary: [NSObject:AnyObject]?) -> Bool {
+
+	public override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
         return true
     }
 

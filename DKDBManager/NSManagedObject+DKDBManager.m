@@ -25,30 +25,30 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 #pragma mark - CREATE
 
-+ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary context:(NSManagedObjectContext * _Nonnull)context {
-    return [self createEntityFromDictionary:dictionary context:context completion:nil];
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
+    return [self createEntityFromDictionary:dictionary inContext:savingContext completion:nil];
 }
 
-+ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary context:(NSManagedObjectContext * _Nonnull)context completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion {
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion {
 
     // now create, save or update an entity
     DKDBManagedObjectState status = DKDBManagedObjectStateSave;
 
     // If the entity already exist then update it
-	id entity = [self MR_findFirstWithPredicate:[self primaryPredicateWithDictionary:dictionary] inContext:context];
+	id entity = [self MR_findFirstWithPredicate:[self primaryPredicateWithDictionary:dictionary] inContext:savingContext];
     // Else create a new entity in the given context.
     if (entity == nil) {
-		entity = [self MR_createEntityInContext:context];
-        [entity updateWithDictionary:dictionary];
+		entity = [self MR_createEntityInContext:savingContext];
+        [entity updateWithDictionary:dictionary inContext:savingContext];
         status = DKDBManagedObjectStateCreate;
-    } else if (DKDBManager.needForcedUpdate || (DKDBManager.allowUpdate && [entity shouldUpdateEntityWithDictionary:dictionary])) {
+    } else if (DKDBManager.needForcedUpdate || (DKDBManager.allowUpdate && [entity shouldUpdateEntityWithDictionary:dictionary inContext:savingContext])) {
         // update attributes
-        [entity updateWithDictionary:dictionary];
+        [entity updateWithDictionary:dictionary inContext:savingContext];
         status = DKDBManagedObjectStateUpdate;
     }
 
     // Just keeping the valid and managed entities and ignored the unvalid, disabled, non-managed ones.
-    if ([entity deleteIfInvalidInContext:context] == true) {
+    if ([entity deleteIfInvalidInContext:savingContext] == true) {
         entity = nil;
         status = DKDBManagedObjectStateDelete;
     }
@@ -65,7 +65,7 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
     return entity;
 }
 
-+ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array context:(NSManagedObjectContext * _Nonnull)context {
++ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext {
 
 	if (array == nil || array.count == 0) {
 		return nil;
@@ -73,7 +73,7 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
     NSMutableArray *entities = [NSMutableArray new];
     for (NSDictionary *dictionary in array) {
-        id entity = [self createEntityFromDictionary:dictionary context:context];
+        id entity = [self createEntityFromDictionary:dictionary inContext:savingContext];
         if (entity != nil) {
             [entities addObject:entity];
         }
@@ -101,7 +101,7 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
     return nil;
 }
 
-- (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary * _Nullable)dictionary {
+- (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
     // will be ignored if needForcedUpdate == true OR if allowUpdate == true
     return true;
 }
@@ -142,22 +142,22 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 #pragma mark - UPDATE
 
-- (void)updateWithDictionary:(NSDictionary * _Nullable)dictionary {
+- (void)updateWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
     // this method should be overridden on the subclass
 }
 
 #pragma mark - DELETE
 
-- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext * _Nonnull)context {
+- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext * _Nonnull)savingContext {
     NSString *reason = [self invalidReason];
     if (reason != nil) {
-        [self deleteEntityWithReason:reason inContext:context];
+        [self deleteEntityWithReason:reason inContext:savingContext];
         return true;
     }
     return false;
 }
 
-- (void)deleteChildEntitiesInContext:(NSManagedObjectContext *)context {
+- (void)deleteChildEntitiesInContext:(NSManagedObjectContext *)savingContext {
     //
     // remove all the child of the current object
     // Example in Swift:
@@ -176,20 +176,20 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 	[self MR_deleteEntityInContext:context];
 }
 
-+ (void)deleteAllEntitiesInContext:(NSManagedObjectContext *)context {
-    CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete all %@ entities in context %@", [self class], context);
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext *)savingContext {
+    CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete all %@ entities in context %@", [self class], savingContext);
 	NSPredicate *truePredicate = [NSPredicate predicateWithFormat:@"TRUEPREDICATE"];
-    [self MR_deleteAllMatchingPredicate:truePredicate inContext:context];
+    [self MR_deleteAllMatchingPredicate:truePredicate inContext:savingContext];
 }
 
-+ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array inContext:(NSManagedObjectContext * _Nonnull)context {
++ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array inContext:(NSManagedObjectContext * _Nonnull)savingContext {
     // check if all entities are still in the dictionary
-    NSArray *allEntities = [self MR_findAllInContext:context];
+    NSArray *allEntities = [self MR_findAllInContext:savingContext];
     for (id entity in allEntities) {
         // if the entity is deprecated (no longer in the dictionary) then remove it !
         if ([entity respondsToSelector:@selector(uniqueIdentifier)]) {
             if ([array containsObject:[entity performSelector:@selector(uniqueIdentifier)]] == false) {
-                [entity deleteEntityWithReason:@"deprecated" inContext:context];
+                [entity deleteEntityWithReason:@"deprecated" inContext:savingContext];
             }
         }
     }

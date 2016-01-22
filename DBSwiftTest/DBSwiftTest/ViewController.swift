@@ -58,7 +58,7 @@ class ViewController: UIViewController {
 
 		DKDBManager.saveWithBlock({ (context: NSManagedObjectContext) -> Void in
 
-			Runner.createEntityFromDictionary(dict, context: context) { (runner, state: DKDBManagedObjectState) -> Void in
+			Runner.createEntityFromDictionary(dict, inContext: context) { (runner, state: DKDBManagedObjectState) -> Void in
 				print("status: \(state.rawValue) - entity: \(runner)")
 			}
 		})
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
 
 			print("1.isMainThread: ")
 			print(NSThread.currentThread().isMainThread)
-			Runner.createEntityFromDictionary(dict, context: context) { (runner, state: DKDBManagedObjectState) -> Void in
+			Runner.createEntityFromDictionary(dict, inContext: context) { (runner, state: DKDBManagedObjectState) -> Void in
 				print("status: \(state.rawValue) - entity: \(runner)")
 				print("2.isMainThread: ")
 				print(NSThread.currentThread().isMainThread)
