@@ -47,8 +47,8 @@
 		02EA966AD99F945BEDDD302F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		0F9741DC9D7628280BBB888B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BD9A2BA30E7FCCD5E38A44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		75C5CB3919DBE8DA002BA192 /* DBSwiftTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBSwiftTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		75C5CB5119DBE8DA002BA192 /* DBSwiftTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DBSwiftTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75C5CB3919DBE8DA002BA192 /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKDBManager.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB5619DBE8DA002BA192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75C5CB5719DBE8DA002BA192 /* DBSwiftTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSwiftTestTests.swift; sourceTree = "<group>"; };
 		75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		75C5CB3019DBE8DA002BA192 = {
 			isa = PBXGroup;
 			children = (
-				75C5CB3B19DBE8DA002BA192 /* DBSwiftTest */,
+				75C5CB3B19DBE8DA002BA192 /* SampleProject */,
 				75C5CB5419DBE8DA002BA192 /* DBSwiftTestTests */,
 				75C5CB3A19DBE8DA002BA192 /* Products */,
 				D74B142824CC574663898D60 /* Pods */,
@@ -116,13 +116,13 @@
 		75C5CB3A19DBE8DA002BA192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				75C5CB3919DBE8DA002BA192 /* DBSwiftTest.app */,
-				75C5CB5119DBE8DA002BA192 /* DBSwiftTestTests.xctest */,
+				75C5CB3919DBE8DA002BA192 /* DKDBManager.app */,
+				75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		75C5CB3B19DBE8DA002BA192 /* DBSwiftTest */ = {
+		75C5CB3B19DBE8DA002BA192 /* SampleProject */ = {
 			isa = PBXGroup;
 			children = (
 				75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */,
@@ -132,6 +132,7 @@
 				75FF77C01C5299EE00E146D0 /* Resources */,
 				75FF77C81C5299EE00E146D0 /* ViewControllers */,
 			);
+			name = SampleProject;
 			path = DBSwiftTest;
 			sourceTree = "<group>";
 		};
@@ -225,9 +226,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		75C5CB3819DBE8DA002BA192 /* DBSwiftTest */ = {
+		75C5CB3819DBE8DA002BA192 /* DKDBManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75C5CB5B19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DBSwiftTest" */;
+			buildConfigurationList = 75C5CB5B19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DKDBManager" */;
 			buildPhases = (
 				F97E5236BD3F3CD61DC8E625 /* Check Pods Manifest.lock */,
 				75C5CB3519DBE8DA002BA192 /* Sources */,
@@ -240,14 +241,14 @@
 			);
 			dependencies = (
 			);
-			name = DBSwiftTest;
+			name = DKDBManager;
 			productName = DBSwiftTest;
-			productReference = 75C5CB3919DBE8DA002BA192 /* DBSwiftTest.app */;
+			productReference = 75C5CB3919DBE8DA002BA192 /* DKDBManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		75C5CB5019DBE8DA002BA192 /* DBSwiftTestTests */ = {
+		75C5CB5019DBE8DA002BA192 /* DKDBManagerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75C5CB5E19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DBSwiftTestTests" */;
+			buildConfigurationList = 75C5CB5E19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */;
 			buildPhases = (
 				75C5CB4D19DBE8DA002BA192 /* Sources */,
 				75C5CB4E19DBE8DA002BA192 /* Frameworks */,
@@ -258,9 +259,9 @@
 			dependencies = (
 				75C5CB5319DBE8DA002BA192 /* PBXTargetDependency */,
 			);
-			name = DBSwiftTestTests;
+			name = DKDBManagerTests;
 			productName = DBSwiftTestTests;
-			productReference = 75C5CB5119DBE8DA002BA192 /* DBSwiftTestTests.xctest */;
+			productReference = 75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -283,7 +284,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 75C5CB3419DBE8DA002BA192 /* Build configuration list for PBXProject "DBSwiftTest" */;
+			buildConfigurationList = 75C5CB3419DBE8DA002BA192 /* Build configuration list for PBXProject "DKDBManager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -296,8 +297,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75C5CB3819DBE8DA002BA192 /* DBSwiftTest */,
-				75C5CB5019DBE8DA002BA192 /* DBSwiftTestTests */,
+				75C5CB3819DBE8DA002BA192 /* DKDBManager */,
+				75C5CB5019DBE8DA002BA192 /* DKDBManagerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -409,7 +410,7 @@
 /* Begin PBXTargetDependency section */
 		75C5CB5319DBE8DA002BA192 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 75C5CB3819DBE8DA002BA192 /* DBSwiftTest */;
+			target = 75C5CB3819DBE8DA002BA192 /* DKDBManager */;
 			targetProxy = 75C5CB5219DBE8DA002BA192 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -521,7 +522,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Debug;
@@ -535,7 +536,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Release;
@@ -555,8 +556,8 @@
 				INFOPLIST_FILE = DBSwiftTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DBSwiftTest.app/DBSwiftTest";
+				PRODUCT_NAME = DKDBManager;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKDBManager.app/DKDBManager";
 			};
 			name = Debug;
 		};
@@ -571,15 +572,15 @@
 				INFOPLIST_FILE = DBSwiftTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DBSwiftTest.app/DBSwiftTest";
+				PRODUCT_NAME = DKDBManager;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKDBManager.app/DKDBManager";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		75C5CB3419DBE8DA002BA192 /* Build configuration list for PBXProject "DBSwiftTest" */ = {
+		75C5CB3419DBE8DA002BA192 /* Build configuration list for PBXProject "DKDBManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75C5CB5919DBE8DA002BA192 /* Debug */,
@@ -588,7 +589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75C5CB5B19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DBSwiftTest" */ = {
+		75C5CB5B19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DKDBManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75C5CB5C19DBE8DA002BA192 /* Debug */,
@@ -597,7 +598,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75C5CB5E19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DBSwiftTestTests" */ = {
+		75C5CB5E19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75C5CB5F19DBE8DA002BA192 /* Debug */,
