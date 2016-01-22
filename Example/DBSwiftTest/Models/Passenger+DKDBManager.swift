@@ -63,8 +63,17 @@ extension Passenger {
 		return nil
 	}
 
+	override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
+
+		for baggage in self.allBaggagesArray {
+			baggage.deleteEntityWithReason("Parent passenger entity removed", inContext: savingContext)
+		}
+
+		super.deleteEntityWithReason(reason, inContext: savingContext)
+	}
+
 	override class func verbose() -> Bool {
-		return false
+		return Verbose.Model.Passenger
 	}
 
 	override class func sortingAttributeName() -> String? {

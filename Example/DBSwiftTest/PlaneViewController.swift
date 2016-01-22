@@ -42,6 +42,26 @@ class PlaneViewController	: UITableViewController {
 
 	// MARK: - IBAction
 
+	@IBAction func editButtonPressed() {
+
+	}
+
+	@IBAction func removeAllEntitiesButtonPressed() {
+
+		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+			// background thread
+			for plane in (Plane.all() as? [Plane] ?? []) {
+				if let plane = plane.entityInContext(savingContext) {
+					plane.deleteEntityWithReason("Remove all planes button pressed", inContext: savingContext)
+				}
+			}
+
+			}) { (contextDidSave: Bool, error: NSError?) -> Void in
+				// main thread
+				self.tableView.reloadData()
+		}
+	}
+
 	@IBAction func addEntitiesButtonPressed() {
 
 		let json = MockManager.randomPlaneJSON()

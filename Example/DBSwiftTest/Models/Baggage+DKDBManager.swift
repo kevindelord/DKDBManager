@@ -44,7 +44,11 @@ extension Baggage {
 	}
 
 	override class func verbose() -> Bool {
-		return true
+		return Verbose.Model.Baggage
+	}
+
+	override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
+		super.deleteEntityWithReason(reason, inContext: savingContext)
 	}
 
 	override class func sortingAttributeName() -> String? {

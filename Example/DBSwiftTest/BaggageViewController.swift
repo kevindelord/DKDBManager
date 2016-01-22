@@ -37,6 +37,26 @@ class BaggageViewController		: UITableViewController {
 
 	// MARK: - IBAction
 
+	@IBAction func editButtonPressed() {
+
+	}
+
+	@IBAction func removeAllEntitiesButtonPressed() {
+
+		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+			// background thread
+			if let passenger = self.passenger?.entityInContext(savingContext) {
+				for baggage in passenger.allBaggagesArray {
+					baggage.deleteEntityWithReason("Remove all baggages button pressed", inContext: savingContext)
+				}
+			}
+
+			}) { (contextDidSave: Bool, error: NSError?) -> Void in
+				// main thread
+				self.tableView.reloadData()
+		}
+	}
+
 	@IBAction func addEntitiesButtonPressed() {
 
 		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in

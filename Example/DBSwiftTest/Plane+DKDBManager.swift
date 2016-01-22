@@ -56,11 +56,16 @@ extension Plane {
 	}
 
 	override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
-		//
+
+		for passenger in self.allPassengersArray {
+			passenger.deleteEntityWithReason("Parent plane entity removed", inContext: savingContext)
+		}
+
+		super.deleteEntityWithReason(reason, inContext: savingContext)
 	}
 
 	override class func verbose() -> Bool {
-		return false
+		return Verbose.Model.Plane
 	}
 
 	override class func sortingAttributeName() -> String? {

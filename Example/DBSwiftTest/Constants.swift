@@ -23,3 +23,13 @@ struct JSON {
 	static let Age 				= "age"
 	static let Weight			= "weight"
 }
+
+struct Verbose {
+	static let DatabaseManage	= true
+
+	struct Model {
+		static let Plane		= false
+		static let Passenger	= true
+		static let Baggage		= true
+	}
+}

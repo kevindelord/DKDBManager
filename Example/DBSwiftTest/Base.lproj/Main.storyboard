@@ -27,9 +27,22 @@
                                         <action selector="addEntitiesButtonPressed" destination="2I7-To-SaD" eventType="touchUpInside" id="mdL-ZL-s7y"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aS-29-fpk">
+                                    <rect key="frame" x="462" y="8" width="130" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="130" id="wR7-No-3p8"/>
+                                    </constraints>
+                                    <state key="normal" title="Remove All Planes"/>
+                                    <connections>
+                                        <action selector="removeAllEntitiesButtonPressed" destination="2I7-To-SaD" eventType="touchUpInside" id="G2L-qC-pBh"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="6aS-29-fpk" secondAttribute="bottom" constant="6" id="EP5-p3-Occ"/>
+                                <constraint firstItem="6aS-29-fpk" firstAttribute="top" secondItem="1Sb-B6-lQ2" secondAttribute="top" constant="8" id="FFC-gG-KhN"/>
+                                <constraint firstAttribute="trailing" secondItem="6aS-29-fpk" secondAttribute="trailing" constant="8" id="Fz1-vb-naI"/>
                                 <constraint firstAttribute="bottom" secondItem="vLy-5X-2BX" secondAttribute="bottom" constant="6" id="MS7-vK-nZS"/>
                                 <constraint firstItem="vLy-5X-2BX" firstAttribute="leading" secondItem="1Sb-B6-lQ2" secondAttribute="leading" constant="8" id="NCZ-tB-oFw"/>
                                 <constraint firstItem="vLy-5X-2BX" firstAttribute="top" secondItem="1Sb-B6-lQ2" secondAttribute="top" constant="8" id="c54-bR-13e"/>
@@ -66,7 +79,9 @@
                             <outlet property="delegate" destination="2I7-To-SaD" id="yy6-K9-xLK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Planes" id="EqZ-Xm-w56"/>
+                    <navigationItem key="navigationItem" title="Planes" id="EqZ-Xm-w56">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="wsU-WZ-6Te"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="1oL-Ip-6Bh" kind="show" identifier="OpenPassengerForPlane" id="RZh-XA-jQl"/>
                     </connections>
@@ -97,11 +112,24 @@
                                         <action selector="addEntitiesButtonPressed" destination="1oL-Ip-6Bh" eventType="touchUpInside" id="DGd-aE-xel"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T58-er-vpU">
+                                    <rect key="frame" x="423" y="8" width="169" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="169" id="faa-Ku-yqp"/>
+                                    </constraints>
+                                    <state key="normal" title="Remove All Passengers"/>
+                                    <connections>
+                                        <action selector="removeAllEntitiesButtonPressed" destination="1oL-Ip-6Bh" eventType="touchUpInside" id="lU3-cl-5xk"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="T58-er-vpU" secondAttribute="trailing" constant="8" id="69e-I7-lUq"/>
+                                <constraint firstAttribute="bottom" secondItem="T58-er-vpU" secondAttribute="bottom" constant="6" id="9r4-G7-Act"/>
                                 <constraint firstItem="8ca-XO-clQ" firstAttribute="top" secondItem="NT7-DJ-8t2" secondAttribute="top" constant="8" id="b25-xY-Otu"/>
                                 <constraint firstItem="8ca-XO-clQ" firstAttribute="leading" secondItem="NT7-DJ-8t2" secondAttribute="leading" constant="8" id="g90-sV-5cN"/>
+                                <constraint firstItem="T58-er-vpU" firstAttribute="top" secondItem="NT7-DJ-8t2" secondAttribute="top" constant="8" id="j0Q-LQ-HAn"/>
                                 <constraint firstAttribute="bottom" secondItem="8ca-XO-clQ" secondAttribute="bottom" constant="6" id="pR6-ge-J9l"/>
                             </constraints>
                         </view>
@@ -136,6 +164,13 @@
                             <outlet property="delegate" destination="1oL-Ip-6Bh" id="Ddr-c0-zVD"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Passengers" id="OhB-AZ-JEf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="tIQ-Ny-oaf">
+                            <connections>
+                                <action selector="removeAllEntitiesButtonPressed" destination="1oL-Ip-6Bh" id="p2J-Hg-d6E"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="3ra-4V-LfG" kind="show" identifier="OpenBaggageForPassenger" id="MKb-4t-Cev"/>
                     </connections>
@@ -163,8 +198,23 @@
                                         <action selector="addEntitiesButtonPressed" destination="3ra-4V-LfG" eventType="touchUpInside" id="gcQ-xc-Ue6"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GnG-6e-DZm">
+                                    <rect key="frame" x="442" y="8" width="150" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="150" id="JYo-id-VM5"/>
+                                    </constraints>
+                                    <state key="normal" title="Remove All Baggages"/>
+                                    <connections>
+                                        <action selector="removeAllEntitiesButtonPressed" destination="3ra-4V-LfG" eventType="touchUpInside" id="1o8-qU-TQN"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="GnG-6e-DZm" secondAttribute="bottom" constant="6" id="B6S-Y2-FDG"/>
+                                <constraint firstItem="GnG-6e-DZm" firstAttribute="top" secondItem="AAF-GZ-Ub5" secondAttribute="top" constant="8" id="W6b-hE-abO"/>
+                                <constraint firstAttribute="trailing" secondItem="GnG-6e-DZm" secondAttribute="trailing" constant="8" id="XaG-vf-um4"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="dSB-dA-eyC" detailTextLabel="aCM-cc-Q7w" style="IBUITableViewCellStyleSubtitle" id="xBN-i6-6tr">
@@ -197,6 +247,9 @@
                             <outlet property="delegate" destination="3ra-4V-LfG" id="gYM-kU-sxx"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Baggages" id="txh-Mu-sHM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="gAa-yp-t9f"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qw-T3-xPb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
