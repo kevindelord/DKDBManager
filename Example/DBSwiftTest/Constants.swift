@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct Segue {
+	static let OpenPassengers	= "OpenPassengerForPlane"
+	static let OpenBaggages		= "OpenBaggageForPassenger"
+}
+
 struct JSON {
 	static let Destination		= "destination"
 	static let Origin 			= "origin"
@@ -15,4 +20,6 @@ struct JSON {
 	static let Baggages 		= "baggages"
 	static let Plane 			= "plane"
 	static let Name 			= "name"
+	static let Age 				= "age"
+	static let Weight			= "weight"
 }

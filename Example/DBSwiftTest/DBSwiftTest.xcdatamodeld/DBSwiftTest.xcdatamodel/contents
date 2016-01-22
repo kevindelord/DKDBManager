@@ -7,17 +7,17 @@
     <entity name="Passenger" representedClassName=".Passenger" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="baggages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Baggage" inverseName="passenger" inverseEntity="Baggage" syncable="YES"/>
+        <relationship name="baggages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Baggage" inverseName="passenger" inverseEntity="Baggage" syncable="YES"/>
         <relationship name="plane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plane" inverseName="passengers" inverseEntity="Plane" syncable="YES"/>
     </entity>
     <entity name="Plane" representedClassName=".Plane" syncable="YES">
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="origin" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="passengers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Passenger" inverseName="plane" inverseEntity="Passenger" syncable="YES"/>
+        <relationship name="passengers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Passenger" inverseName="plane" inverseEntity="Passenger" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Plane" positionX="-63" positionY="0" width="128" height="90"/>
-        <element name="Passenger" positionX="-54" positionY="27" width="128" height="105"/>
         <element name="Baggage" positionX="-36" positionY="45" width="128" height="75"/>
+        <element name="Passenger" positionX="-54" positionY="27" width="128" height="105"/>
+        <element name="Plane" positionX="-63" positionY="0" width="128" height="90"/>
     </elements>
 </model>

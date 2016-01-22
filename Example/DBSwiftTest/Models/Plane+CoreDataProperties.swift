@@ -19,4 +19,3 @@ extension Plane {
     @NSManaged var passengers: Passenger?
 
 }
-

@@ -7,18 +7,11 @@
 //
 
 import UIKit
+import DKDBManager
 
-class PlaneViewController: UITableViewController {
+class PlaneViewController	: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		self.title = "Planes"
-		self.view.backgroundColor = UIColor.whiteColor()
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-	}
+	// MARK: - UITableView
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return Plane.count()
@@ -28,33 +21,39 @@ class PlaneViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 		if let plane = (Plane.all() as? [Plane])?[indexPath.row] {
 			cell.textLabel?.text = "\(plane.origin ?? "n/a") -> \(plane.destination ?? "n/a")"
-			cell.detailTextLabel?.text = "ferf"//"\(plane.passengers))"
+			cell.detailTextLabel?.text = "\(plane.allPassengersCount) passenger(s)"
 		}
 		return cell
 	}
 
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		self.performSegueWithIdentifier(Segue.OpenPassengers, sender: (Plane.all() as? [Plane])?[indexPath.row])
+	}
+
+	// MARK: - Segue
+
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if (segue.identifier == Segue.OpenPassengers) {
+			let vc = segue.destinationViewController as? PassengerViewController
+			vc?.plane = sender as? Plane
+		}
+	}
+
+	// MARK: - IBAction
+
 	@IBAction func addEntitiesButtonPressed() {
 
-		let json = self.planeJSON()
+		let json = MockManager.randomPlaneJSON()
 
 		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-
 			Plane.createEntitiesFromArray(json, inContext: savingContext)
 
 			}) { (contextDidSave: Bool, error: NSError?) -> Void in
 				// main thread
 				self.tableView.reloadData()
 		}
-	}
-
-	private func planeJSON() -> [[String:AnyObject]] {
-		return [
-			[JSON.Origin: "Paris", JSON.Destination: "Berlin"],
-			[JSON.Origin: "Paris", JSON.Destination: "Tokyo"],
-			[JSON.Origin: "London", JSON.Destination: "Berlin"],
-			[JSON.Origin: "Tokyo", JSON.Destination: "Berlin"]
-		]
 	}
 }
 

@@ -11,7 +11,7 @@ import Foundation
 extension Plane {
 
 	override var description : String {
-		return "\(self.objectID.URIRepresentation().lastPathComponent ?? "") : \(self.origin ?? "") -> \(self.destination ?? "") | \(self.passengers ?? "")"
+		return "\(self.objectID.URIRepresentation().lastPathComponent ?? "") : \(self.origin ?? "") -> \(self.destination ?? ""), \(self.allPassengersCount) Passenger(s)"
 	}
 
 	override func uniqueIdentifier() -> AnyObject {
@@ -20,11 +20,21 @@ extension Plane {
 
 	override func saveEntityAsNotDeprecated() {
 		super.saveEntityAsNotDeprecated()
+
+ 		for passenger in self.allPassengers {
+			(passenger as? Passenger)?.saveEntityAsNotDeprecated()
+		}
 	}
 
 	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
 		self.origin = GET_STRING(dictionary, JSON.Origin)
 		self.destination = GET_STRING(dictionary, JSON.Destination)
+
+		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
+			if let passengers = Passenger.createEntitiesFromArray(jsonArray, inContext: savingContext) {
+				self.mutableSetValueForKey(JSON.Passengers).addObjectsFromArray(passengers)
+			}
+		}
 	}
 
 	override func invalidReason() -> String? {
@@ -33,25 +43,24 @@ extension Plane {
 			return "Invalid Origin"
 		}
 
-		guard let destination = self.origin where (destination.characters.count > 0) else {
+		guard let destination = self.destination where (destination.characters.count > 0) else {
 			return "Invalid Destination"
 		}
 
 		if (origin == destination) {
-			return "Cannot have same origin and destination"
+			return "Cannot have same origin and destination: \(origin) == \(destination)"
 		}
 
 		// valid plane.
 		return nil
 	}
 
-
-	override func deleteChildEntitiesInContext(context: NSManagedObjectContext) {
+	override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
 		//
 	}
 
 	override class func verbose() -> Bool {
-		return true
+		return false
 	}
 
 	override class func sortingAttributeName() -> String? {
