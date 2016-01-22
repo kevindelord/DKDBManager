@@ -213,7 +213,7 @@
 				75C5CB3619DBE8DA002BA192 /* Frameworks */,
 				75C5CB3719DBE8DA002BA192 /* Resources */,
 				935174490ABF4C150A42F4E0 /* Copy Pods Resources */,
-				DF1E4A3D1AF17A48993E4365 /* Embed Pods Frameworks */,
+				249401D276C875C1AC3A7CC5 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -248,6 +248,8 @@
 		75C5CB3119DBE8DA002BA192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Smart Mobile Factory";
 				TargetAttributes = {
@@ -300,6 +302,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		249401D276C875C1AC3A7CC5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		935174490ABF4C150A42F4E0 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,21 +330,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF1E4A3D1AF17A48993E4365 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F97E5236BD3F3CD61DC8E625 /* Check Pods Manifest.lock */ = {
