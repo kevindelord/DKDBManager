@@ -46,18 +46,12 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
         [entity updateWithDictionary:dictionary inContext:savingContext];
         status = DKDBManagedObjectStateUpdate;
     }
-
     // Just keeping the valid and managed entities and ignored the unvalid, disabled, non-managed ones.
     if ([entity deleteIfInvalidInContext:savingContext] == true) {
         status = DKDBManagedObjectStateDelete;
-		// Log the delete
-		[self saveEntityAfterCreation:entity status:status];
-		// Reset the entity
-		entity = nil;
-	} else {
-		// Log and save 'As Not Deprecated' the entity.
-		[self saveEntityAfterCreation:entity status:status];
 	}
+	// Log and save as not deprecated. Entity reset if .Delete
+	entity = [self saveEntityAfterCreation:entity status:status];
 
 	if (completion != nil) {
 		completion(entity, status);
@@ -84,28 +78,26 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 #pragma mark - SAVE
 
-+ (void)saveEntityAfterCreation:(id _Nullable)entity status:(DKDBManagedObjectState)status {
++ (instancetype _Nullable)saveEntityAfterCreation:(id _Nullable)entity status:(DKDBManagedObjectState)status {
 	// Log the current status and save the entity as not deprecated.
 	// Does not save in case of `.Delete`
 	switch (status) {
 		case DKDBManagedObjectStateSave:
 			CRUDLog(DKDBManager.verbose && [self verbose], @"Saving %@ %@", NSStringFromClass([self class]), entity);
-			[entity saveEntityAsNotDeprecated];
-			break;
 		case DKDBManagedObjectStateCreate:
 			CRUDLog(DKDBManager.verbose && [self verbose], @"Creating %@ %@", NSStringFromClass([self class]), entity);
-			[entity saveEntityAsNotDeprecated];
-			break;
 		case DKDBManagedObjectStateUpdate:
 			CRUDLog(DKDBManager.verbose && [self verbose], @"Updating %@ %@", NSStringFromClass([self class]), entity);
-			[entity saveEntityAsNotDeprecated];
-			break;
 		case DKDBManagedObjectStateDelete:
-			CRUDLog(DKDBManager.verbose && [self verbose], @"Deleting %@ %@", NSStringFromClass([self class]), entity);
-			break;
-		default:
+			// Commented out as this event is already logged by the function `deleteEntityWithReason:inContext`
+//			CRUDLog(DKDBManager.verbose && [self verbose], @"Deleting %@ %@", NSStringFromClass([self class]), entity);
 			break;
 	}
+	if (status == DKDBManagedObjectStateDelete) {
+		return nil;
+	}
+	[entity saveEntityAsNotDeprecated];
+	return entity;
 }
 
 - (void)saveEntityAsNotDeprecated {
@@ -181,19 +173,8 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
     return false;
 }
 
-- (void)deleteChildEntitiesInContext:(NSManagedObjectContext *)savingContext {
-    // Remove all the child of the current object
-    // Example in Swift:
-    // for page in book.pages {
-    //      page.deleteEntityWithReason("parent book removed", context: context)
-    // }
-}
-
 - (void)deleteEntityWithReason:(NSString * _Nullable)reason inContext:(NSManagedObjectContext * _Nonnull)context {
-	CRUDLog(DKDBManager.verbose && self.class.verbose, @"delete %@: %@ Reason: %@", [self class], self, (reason != nil ? reason : @"n/a"));
-
-    // remove all the child of the current object
-    [self deleteChildEntitiesInContext:context];
+	CRUDLog(DKDBManager.verbose && self.class.verbose, @"Deleting %@ %@ Reason: %@", [self class], self, (reason != nil ? reason : @"n/a"));
     
     // remove the current object
 	[self MR_deleteEntityInContext:context];

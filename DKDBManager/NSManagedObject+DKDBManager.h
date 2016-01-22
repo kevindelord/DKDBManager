@@ -131,8 +131,10 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *
  *  @see - (void)saveEntityAsNotDeprecated;
+ *
+ *  @return A saved or deleted database entity.
  */
-+ (void)saveEntityAfterCreation:(id _Nullable)entity status:(DKDBManagedObjectState)status;
++ (instancetype _Nullable)saveEntityAfterCreation:(id _Nullable)entity status:(DKDBManagedObjectState)status;
 
 /**
  *  @brief Override this function to store the current object and all its child relations as not deprecated.
@@ -371,43 +373,34 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 /**
  *  @brief Override this function to delete the child entities of a current entity within a given context.
  *
- *  @param context The current saving context.
- *
- *  @discussion This function is called from `deleteEntityWithReason:inContext:`.
- *
- *  The expected behavior is to remove any data stored on the disk (like image assets) <b>and</b> to forward the destruction process to its child entities.
- *
- *  This function is called from the CRUD process when deleting deprecated entities.
- *
- *  @remark The super function should be called.
- *
- *  For example, an entity `book` has a cover picture and many `pages` entities:
- *  @code
- *  override func deleteChildEntitiesInContext(context: NSManagedObjectContext) {
- *      super.deleteChildEntities()
- *      // Remove cover picture
- *      AssetManager.removeCachedImage(self.coverPicture)
- *      // Forward the destruction process and its reason to every child entities.
- *      for page in self.pages {
- *          page.deleteEntityWithReason("parent book removed")
- *      }
- *  }
- *  @endcode
- */
-- (void)deleteChildEntitiesInContext:(NSManagedObjectContext * _Nonnull)savingContext;
-
-/**
- *  @brief Delete the current entity within a given context.
- *
- *  @discussion This function calls the function `deleteChildEntitiesInContext:` before deleting the current entity from the context.
- *
  *  @param reason A NSString object explaining why the entity is getting removed from the local database.
  *
  *  @param context The current saving context.
  *
  *  @remark The reason will be logged only if the `verbose` function returns TRUE for the current class model.
  *
- *  @see - (void)deleteChildEntitiesInContext;
+ *  @discussion This function is called from the CRUD process when deleting deprecated entities.
+ *
+ *  The expected behavior is to remove any data stored on the disk (like image assets) <b>and</b> to forward the destruction process to its child entities.
+ *
+ *  @remark The super function should be called after removing child and local entitities.
+ *
+ *  For example, an entity `book` has a cover picture and many `pages` entities:
+ *
+ *  @code
+ *  override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
+ *
+ *      // Remove cover picture
+ *      AssetManager.removeCachedImage(self.coverPicture)
+ *      // Forward the destruction process and its reason to every child entities.
+ *      for page in self.pages {
+ *          page.deleteEntityWithReason("parent book removed", inContext: savingContext)
+ *      }
+ *      // Call the super function
+ *      super.deleteEntityWithReason(reason, inContext: savingContext)
+ *  }
+ *  @endcode
+ *
  *  @see + (BOOL)verbose;
  */
 - (void)deleteEntityWithReason:(NSString * _Nullable)reason inContext:(NSManagedObjectContext * _Nonnull)savingContext;
@@ -417,7 +410,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @discussion All entites for the current class model will be removed.
  *
- * @remark The functions `deleteChildEntitiesInContext:` and `deleteEntityWithReason:inContext:` will NOT be called.
+ * @remark The function `deleteEntityWithReason:inContext:` will NOT be called.
  *
  * @param context The current saving context.
  */
