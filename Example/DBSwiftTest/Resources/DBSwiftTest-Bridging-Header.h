@@ -15,5 +15,10 @@
 
 #import "DKDBManager.h"
 #import "DKHelper.h"
+<<<<<<< HEAD:Example/DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h
+=======
+
+#import "Runner.h"
+>>>>>>> master:DBSwiftTest/DBSwiftTest/DBSwiftTest-Bridging-Header.h
 
 #endif
