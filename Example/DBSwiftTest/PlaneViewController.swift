@@ -31,6 +31,23 @@ class PlaneViewController	: UITableViewController {
 		self.performSegueWithIdentifier(Segue.OpenPassengers, sender: (Plane.all() as? [Plane])?[indexPath.row])
 	}
 
+	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+
+		if (editingStyle == .Delete),
+			let plane = (Plane.all() as? [Plane])?[indexPath.row] {
+
+				DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+					// Background Thread
+					plane.deleteEntityWithReason("Selective delete button pressed", inContext: savingContext)
+
+					}, completion: { (didSave: Bool, error: NSError?) -> Void in
+						// Main Thread
+						tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+						self.tableView.setEditing(false, animated: true)
+				})
+		}
+	}
+
 	// MARK: - Segue
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -43,7 +60,7 @@ class PlaneViewController	: UITableViewController {
 	// MARK: - IBAction
 
 	@IBAction func editButtonPressed() {
-
+		self.tableView.setEditing(!self.tableView.editing, animated: true)
 	}
 
 	@IBAction func removeAllEntitiesButtonPressed() {

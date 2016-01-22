@@ -28,7 +28,7 @@ struct Verbose {
 	static let DatabaseManage	= true
 
 	struct Model {
-		static let Plane		= false
+		static let Plane		= true
 		static let Passenger	= true
 		static let Baggage		= true
 	}

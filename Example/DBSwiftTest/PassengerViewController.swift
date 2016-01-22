@@ -37,6 +37,25 @@ class PassengerViewController	: UITableViewController {
 		self.performSegueWithIdentifier(Segue.OpenBaggages, sender: self.plane?.allPassengersArray[indexPath.row])
 	}
 
+	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+
+		if (editingStyle == .Delete) {
+
+				DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+					// Background Thread
+					if let plane = self.plane?.entityInContext(savingContext) where (plane.allPassengersCount > indexPath.row) {
+						let passenger = plane.allPassengersArray[indexPath.row]
+						passenger.deleteEntityWithReason("Selective delete button pressed", inContext: savingContext)
+					}
+
+					}, completion: { (didSave: Bool, error: NSError?) -> Void in
+						// Main Thread
+						tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+						self.tableView.setEditing(false, animated: true)
+				})
+		}
+	}
+
 	// MARK: - Segue
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -49,7 +68,7 @@ class PassengerViewController	: UITableViewController {
 	// MARK: - IBAction
 
 	@IBAction func editButtonPressed() {
-
+		self.tableView.setEditing(!self.tableView.editing, animated: true)
 	}
 
 	@IBAction func removeAllEntitiesButtonPressed() {

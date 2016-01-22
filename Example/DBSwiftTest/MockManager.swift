@@ -26,7 +26,7 @@ class MockManager {
 		var data = [[String:AnyObject]]()
 
 		for _ in 0...Int(arc4random_uniform(10) + 1) {
-			data.append([JSON.Name: self.randomName(), JSON.Age: Int(arc4random_uniform(20)), JSON.Baggages: self.randomBaggageJSON()])
+			data.append([JSON.Name: self.randomName(), JSON.Age: Int(arc4random_uniform(20)) + 20, JSON.Baggages: self.randomBaggageJSON()])
 		}
 
 		return data

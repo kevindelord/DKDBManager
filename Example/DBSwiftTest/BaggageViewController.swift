@@ -35,10 +35,29 @@ class BaggageViewController		: UITableViewController {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 
+	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+
+		if (editingStyle == .Delete) {
+
+			DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+				// Background Thread
+				if let passenger = self.passenger?.entityInContext(savingContext) where (passenger.allBaggagesCount > indexPath.row) {
+					let baggage = passenger.allBaggagesArray[indexPath.row]
+					baggage.deleteEntityWithReason("Selective delete button pressed", inContext: savingContext)
+				}
+
+				}, completion: { (didSave: Bool, error: NSError?) -> Void in
+					// Main Thread
+					tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+					self.tableView.setEditing(false, animated: true)
+			})
+		}
+	}
+
 	// MARK: - IBAction
 
 	@IBAction func editButtonPressed() {
-
+		self.tableView.setEditing(!self.tableView.editing, animated: true)
 	}
 
 	@IBAction func removeAllEntitiesButtonPressed() {

@@ -80,7 +80,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Planes" id="EqZ-Xm-w56">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="wsU-WZ-6Te"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="wsU-WZ-6Te">
+                            <connections>
+                                <action selector="editButtonPressed" destination="2I7-To-SaD" id="CDH-qn-IH1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="1oL-Ip-6Bh" kind="show" identifier="OpenPassengerForPlane" id="RZh-XA-jQl"/>
@@ -167,7 +171,7 @@
                     <navigationItem key="navigationItem" title="Passengers" id="OhB-AZ-JEf">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="tIQ-Ny-oaf">
                             <connections>
-                                <action selector="removeAllEntitiesButtonPressed" destination="1oL-Ip-6Bh" id="p2J-Hg-d6E"/>
+                                <action selector="editButtonPressed" destination="1oL-Ip-6Bh" id="Q2F-Gs-gC6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -248,7 +252,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Baggages" id="txh-Mu-sHM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="gAa-yp-t9f"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="gAa-yp-t9f">
+                            <connections>
+                                <action selector="editButtonPressed" destination="3ra-4V-LfG" id="d7F-4E-yDc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qw-T3-xPb" userLabel="First Responder" sceneMemberID="firstResponder"/>
