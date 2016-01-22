@@ -1,5 +1,5 @@
 //
-//  Baggage+DKDBManager.swift
+//  Baggage.swift
 //  DBSwiftTest
 //
 //  Created by kevin delord on 22/01/16.
@@ -7,6 +7,16 @@
 //
 
 import Foundation
+import CoreData
+
+
+class Baggage: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
+
+}
+
+// MARK: - DKDBManager
 
 extension Baggage {
 

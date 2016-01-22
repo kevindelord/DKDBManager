@@ -16,8 +16,8 @@
         <relationship name="passengers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Passenger" inverseName="plane" inverseEntity="Passenger" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Baggage" positionX="-36" positionY="45" width="128" height="75"/>
-        <element name="Passenger" positionX="-54" positionY="27" width="128" height="105"/>
-        <element name="Plane" positionX="-63" positionY="0" width="128" height="90"/>
+        <element name="Baggage" positionX="-36" positionY="-0" width="128" height="75"/>
+        <element name="Passenger" positionX="-207" positionY="-99" width="128" height="105"/>
+        <element name="Plane" positionX="-416" positionY="-171" width="128" height="90"/>
     </elements>
 </model>
