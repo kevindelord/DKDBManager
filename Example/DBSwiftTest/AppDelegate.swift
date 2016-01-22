@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DKDBManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-		// Enable the log
-        DKDBManager.setVerbose(true)
-		// Reset the database on start to make this test app more understandable.
-		DKDBManager.setResetStoredEntities(true)
+		// Optional: Enable the log
+		DKDBManager.setVerbose(Verbose.DatabaseManager)
+		// Optional: Reset the database on start to make this test app more understandable.
+		DKDBManager.setResetStoredEntities(false)
 		// Setup the database.
 		DKDBManager.setup()
 

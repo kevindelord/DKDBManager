@@ -25,7 +25,8 @@ struct JSON {
 }
 
 struct Verbose {
-	static let DatabaseManage	= true
+
+	static let DatabaseManager	= true
 
 	struct Model {
 		static let Plane		= true

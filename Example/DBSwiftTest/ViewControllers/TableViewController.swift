@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import DKHelper
 
 class TableViewController : UITableViewController {
 

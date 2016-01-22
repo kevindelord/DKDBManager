@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DKDBManager
 
 class PlaneViewController	: TableViewController {
 

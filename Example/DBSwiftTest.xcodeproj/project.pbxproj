@@ -7,19 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44634F6FABC01005B2FC4751 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73F96C22486A08BFC96B90A /* Pods.framework */; };
 		75FF77CD1C5299EE00E146D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */; };
 		75FF77CF1C5299EE00E146D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AF1C5299EE00E146D0 /* Constants.swift */; };
 		75FF77D11C5299EE00E146D0 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */; };
-		75FF77D31C5299EE00E146D0 /* Baggage+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B31C5299EE00E146D0 /* Baggage+DKDBManager.swift */; };
 		75FF77D51C5299EE00E146D0 /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B41C5299EE00E146D0 /* Baggage.swift */; };
 		75FF77D71C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
 		75FF77D81C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
 		75FF77D91C5299EE00E146D0 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */; };
-		75FF77DB1C5299EE00E146D0 /* Passenger+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B91C5299EE00E146D0 /* Passenger+DKDBManager.swift */; };
 		75FF77DD1C5299EE00E146D0 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BA1C5299EE00E146D0 /* Passenger.swift */; };
 		75FF77DF1C5299EE00E146D0 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */; };
-		75FF77E11C5299EE00E146D0 /* Plane+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BD1C5299EE00E146D0 /* Plane+DKDBManager.swift */; };
 		75FF77E31C5299EE00E146D0 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BE1C5299EE00E146D0 /* Plane.swift */; };
 		75FF77E51C5299EE00E146D0 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BF1C5299EE00E146D0 /* MockManager.swift */; };
 		75FF77E71C5299EE00E146D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */; };
@@ -34,6 +30,7 @@
 		75FF77F31C5299EE00E146D0 /* PlaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */; };
 		75FF77F51C5299EE00E146D0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CC1C5299EE00E146D0 /* TableViewController.swift */; };
 		75FF77F81C529A6300E146D0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75FF77F71C529A6300E146D0 /* Pods.framework */; };
+		C91E59A6260E337B2094A680 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9741DC9D7628280BBB888B /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		02EA966AD99F945BEDDD302F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		0F9741DC9D7628280BBB888B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BD9A2BA30E7FCCD5E38A44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		75C5CB3919DBE8DA002BA192 /* DBSwiftTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBSwiftTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB5119DBE8DA002BA192 /* DBSwiftTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DBSwiftTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,14 +54,11 @@
 		75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75FF77AF1C5299EE00E146D0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Baggage+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75FF77B31C5299EE00E146D0 /* Baggage+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Baggage+DKDBManager.swift"; sourceTree = "<group>"; };
 		75FF77B41C5299EE00E146D0 /* Baggage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baggage.swift; sourceTree = "<group>"; };
 		75FF77B61C5299EE00E146D0 /* DBSwiftTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBSwiftTest.xcdatamodel; sourceTree = "<group>"; };
 		75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Passenger+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75FF77B91C5299EE00E146D0 /* Passenger+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Passenger+DKDBManager.swift"; sourceTree = "<group>"; };
 		75FF77BA1C5299EE00E146D0 /* Passenger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passenger.swift; sourceTree = "<group>"; };
 		75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plane+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75FF77BD1C5299EE00E146D0 /* Plane+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plane+DKDBManager.swift"; sourceTree = "<group>"; };
 		75FF77BE1C5299EE00E146D0 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		75FF77BF1C5299EE00E146D0 /* MockManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		75FF77C21C5299EE00E146D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -76,7 +71,6 @@
 		75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneViewController.swift; sourceTree = "<group>"; };
 		75FF77CC1C5299EE00E146D0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		75FF77F71C529A6300E146D0 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
-		E73F96C22486A08BFC96B90A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44634F6FABC01005B2FC4751 /* Pods.framework in Frameworks */,
+				C91E59A6260E337B2094A680 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				75FF77F71C529A6300E146D0 /* Pods.framework */,
-				E73F96C22486A08BFC96B90A /* Pods.framework */,
+				0F9741DC9D7628280BBB888B /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */,
-				75FF77B31C5299EE00E146D0 /* Baggage+DKDBManager.swift */,
 				75FF77B41C5299EE00E146D0 /* Baggage.swift */,
 			);
 			path = Baggage;
@@ -183,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */,
-				75FF77B91C5299EE00E146D0 /* Passenger+DKDBManager.swift */,
 				75FF77BA1C5299EE00E146D0 /* Passenger.swift */,
 			);
 			path = Passenger;
@@ -193,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */,
-				75FF77BD1C5299EE00E146D0 /* Plane+DKDBManager.swift */,
 				75FF77BE1C5299EE00E146D0 /* Plane.swift */,
 			);
 			path = Plane;
@@ -391,15 +382,12 @@
 				75FF77DF1C5299EE00E146D0 /* Plane+CoreDataProperties.swift in Sources */,
 				75FF77CD1C5299EE00E146D0 /* AppDelegate.swift in Sources */,
 				75FF77F51C5299EE00E146D0 /* TableViewController.swift in Sources */,
-				75FF77DB1C5299EE00E146D0 /* Passenger+DKDBManager.swift in Sources */,
 				75FF77F31C5299EE00E146D0 /* PlaneViewController.swift in Sources */,
-				75FF77D31C5299EE00E146D0 /* Baggage+DKDBManager.swift in Sources */,
 				75FF77E51C5299EE00E146D0 /* MockManager.swift in Sources */,
 				75FF77CF1C5299EE00E146D0 /* Constants.swift in Sources */,
 				75FF77F11C5299EE00E146D0 /* PassengerViewController.swift in Sources */,
 				75FF77D91C5299EE00E146D0 /* Passenger+CoreDataProperties.swift in Sources */,
 				75FF77DD1C5299EE00E146D0 /* Passenger.swift in Sources */,
-				75FF77E11C5299EE00E146D0 /* Plane+DKDBManager.swift in Sources */,
 				75FF77D71C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */,
 				75FF77D51C5299EE00E146D0 /* Baggage.swift in Sources */,
 				75FF77E31C5299EE00E146D0 /* Plane.swift in Sources */,

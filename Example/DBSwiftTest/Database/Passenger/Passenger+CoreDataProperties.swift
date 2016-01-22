@@ -14,9 +14,10 @@ import CoreData
 
 extension Passenger {
 
-    @NSManaged var name: String?
     @NSManaged var age: NSNumber?
+    @NSManaged var name: String?
+    @NSManaged var gender: String?
+    @NSManaged var baggages: NSSet?
     @NSManaged var plane: Plane?
-    @NSManaged var baggages: Baggage?
 
 }
