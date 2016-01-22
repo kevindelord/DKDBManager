@@ -106,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				75C5CB3B19DBE8DA002BA192 /* SampleProject */,
-				75C5CB5419DBE8DA002BA192 /* DBSwiftTestTests */,
+				75C5CB5419DBE8DA002BA192 /* Tests */,
 				75C5CB3A19DBE8DA002BA192 /* Products */,
 				D74B142824CC574663898D60 /* Pods */,
 				57ACE6FE14D0414F1F765DB8 /* Frameworks */,
@@ -136,12 +136,13 @@
 			path = DBSwiftTest;
 			sourceTree = "<group>";
 		};
-		75C5CB5419DBE8DA002BA192 /* DBSwiftTestTests */ = {
+		75C5CB5419DBE8DA002BA192 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				75C5CB5719DBE8DA002BA192 /* DBSwiftTestTests.swift */,
 				75C5CB5519DBE8DA002BA192 /* Supporting Files */,
 			);
+			name = Tests;
 			path = DBSwiftTestTests;
 			sourceTree = "<group>";
 		};
