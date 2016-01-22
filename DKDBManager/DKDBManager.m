@@ -131,7 +131,7 @@ static BOOL _needForcedUpdate = NO;
     [self dumpInContext:context];
 }
 
-#pragma mark - Save methods
+#pragma mark - SAVE
 
 + (void)saveEntityAsNotDeprecated:(id _Nonnull)entity {
 
@@ -147,8 +147,6 @@ static BOOL _needForcedUpdate = NO;
         [manager->_entities[className] addObject:[entity performSelector:@selector(uniqueIdentifier)]];
     }
 }
-
-#pragma mark - Asynchronous context saving
 
 + (void)saveWithBlock:(void(^ _Nullable )(NSManagedObjectContext * _Nonnull context))block {
     [super saveWithBlock:^(NSManagedObjectContext *localContext) {
@@ -172,8 +170,6 @@ static BOOL _needForcedUpdate = NO;
         }
     }];
 }
-
-#pragma mark - Synchronous context saving
 
 + (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull context))block {
     [super saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {

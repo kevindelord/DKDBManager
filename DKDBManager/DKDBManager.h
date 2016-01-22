@@ -213,7 +213,7 @@
  */
 + (void)cleanUp;
 
-#pragma mark - Asynchronous context saving
+#pragma mark - SAVE
 
 /**
  *  @brief Asynchronously executes and saves modifications into the persistent store.
@@ -241,8 +241,6 @@
  */
 + (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull localContext))block completion:(MRSaveCompletionHandler _Nullable)completion;
 
-#pragma mark - Synchronous context saving
-
 /**
  *  @brief Synchronously executes and saves modificiations into its persistent store.
  *
@@ -256,8 +254,6 @@
  *  @param block Block executed to perform saving changes using the `localContext` instance. Every operation is done on a background thread.
  */
 + (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull localContext))block;
-
-#pragma mark - Save Entities methods
 
 /**
  *  @brief Save the given entity as not deprecated.
