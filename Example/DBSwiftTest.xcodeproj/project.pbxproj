@@ -8,27 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		44634F6FABC01005B2FC4751 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73F96C22486A08BFC96B90A /* Pods.framework */; };
-		759C62201C525F6700858442 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C621F1C525F6700858442 /* Constants.swift */; };
-		759C62231C52643200858442 /* Passenger+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759C62221C52643200858442 /* Passenger+DKDBManager.swift */; };
-		75C5CB3F19DBE8DA002BA192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB3E19DBE8DA002BA192 /* AppDelegate.swift */; };
-		75C5CB4219DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB4019DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld */; };
-		75C5CB4419DBE8DA002BA192 /* PlaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB4319DBE8DA002BA192 /* PlaneViewController.swift */; };
-		75C5CB4719DBE8DA002BA192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C5CB4519DBE8DA002BA192 /* Main.storyboard */; };
-		75C5CB4919DBE8DA002BA192 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C5CB4819DBE8DA002BA192 /* Images.xcassets */; };
-		75C5CB4C19DBE8DA002BA192 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75C5CB4A19DBE8DA002BA192 /* LaunchScreen.xib */; };
-		75C5CB5819DBE8DA002BA192 /* DBSwiftTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB5719DBE8DA002BA192 /* DBSwiftTestTests.swift */; };
-		75C5CB6619DBEC23002BA192 /* Plane+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5CB6519DBEC23002BA192 /* Plane+DKDBManager.swift */; };
-		75D800DA1C52497700CF1776 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */; };
-		75D800DC1C52497700CF1776 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D51C52497700CF1776 /* Plane.swift */; };
-		75D800DE1C52497700CF1776 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */; };
-		75D800E01C52497700CF1776 /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D71C52497700CF1776 /* Baggage.swift */; };
-		75D800E21C52497700CF1776 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */; };
-		75D800E41C52497700CF1776 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D800D91C52497700CF1776 /* Passenger.swift */; };
-		75FF77991C52740400E146D0 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77981C52740400E146D0 /* MockManager.swift */; };
-		75FF779C1C5278EA00E146D0 /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF779B1C5278EA00E146D0 /* PassengerViewController.swift */; };
-		75FF779F1C52803B00E146D0 /* BaggageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF779E1C52803B00E146D0 /* BaggageViewController.swift */; };
-		75FF77A21C52804A00E146D0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77A11C52804A00E146D0 /* TableViewController.swift */; };
-		75FF77A51C5282F300E146D0 /* Baggage+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77A41C5282F300E146D0 /* Baggage+DKDBManager.swift */; };
+		75FF77CD1C5299EE00E146D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */; };
+		75FF77CF1C5299EE00E146D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AF1C5299EE00E146D0 /* Constants.swift */; };
+		75FF77D11C5299EE00E146D0 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */; };
+		75FF77D31C5299EE00E146D0 /* Baggage+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B31C5299EE00E146D0 /* Baggage+DKDBManager.swift */; };
+		75FF77D51C5299EE00E146D0 /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B41C5299EE00E146D0 /* Baggage.swift */; };
+		75FF77D71C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
+		75FF77D81C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
+		75FF77D91C5299EE00E146D0 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */; };
+		75FF77DB1C5299EE00E146D0 /* Passenger+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B91C5299EE00E146D0 /* Passenger+DKDBManager.swift */; };
+		75FF77DD1C5299EE00E146D0 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BA1C5299EE00E146D0 /* Passenger.swift */; };
+		75FF77DF1C5299EE00E146D0 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */; };
+		75FF77E11C5299EE00E146D0 /* Plane+DKDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BD1C5299EE00E146D0 /* Plane+DKDBManager.swift */; };
+		75FF77E31C5299EE00E146D0 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BE1C5299EE00E146D0 /* Plane.swift */; };
+		75FF77E51C5299EE00E146D0 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BF1C5299EE00E146D0 /* MockManager.swift */; };
+		75FF77E71C5299EE00E146D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */; };
+		75FF77E81C5299EE00E146D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */; };
+		75FF77E91C5299EE00E146D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C31C5299EE00E146D0 /* Main.storyboard */; };
+		75FF77EA1C5299EE00E146D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C31C5299EE00E146D0 /* Main.storyboard */; };
+		75FF77EB1C5299EE00E146D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C61C5299EE00E146D0 /* Images.xcassets */; };
+		75FF77EC1C5299EE00E146D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C61C5299EE00E146D0 /* Images.xcassets */; };
+		75FF77EE1C5299EE00E146D0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C71C5299EE00E146D0 /* Info.plist */; };
+		75FF77EF1C5299EE00E146D0 /* BaggageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77C91C5299EE00E146D0 /* BaggageViewController.swift */; };
+		75FF77F11C5299EE00E146D0 /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CA1C5299EE00E146D0 /* PassengerViewController.swift */; };
+		75FF77F31C5299EE00E146D0 /* PlaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */; };
+		75FF77F51C5299EE00E146D0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CC1C5299EE00E146D0 /* TableViewController.swift */; };
+		75FF77F81C529A6300E146D0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75FF77F71C529A6300E146D0 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,32 +49,33 @@
 /* Begin PBXFileReference section */
 		02EA966AD99F945BEDDD302F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		27BD9A2BA30E7FCCD5E38A44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		759C621F1C525F6700858442 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		759C62221C52643200858442 /* Passenger+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Passenger+DKDBManager.swift"; path = "Models/Passenger+DKDBManager.swift"; sourceTree = "<group>"; };
 		75C5CB3919DBE8DA002BA192 /* DBSwiftTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBSwiftTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		75C5CB3D19DBE8DA002BA192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75C5CB3E19DBE8DA002BA192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		75C5CB4119DBE8DA002BA192 /* DBSwiftTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBSwiftTest.xcdatamodel; sourceTree = "<group>"; };
-		75C5CB4319DBE8DA002BA192 /* PlaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneViewController.swift; sourceTree = "<group>"; };
-		75C5CB4619DBE8DA002BA192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		75C5CB4819DBE8DA002BA192 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		75C5CB4B19DBE8DA002BA192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		75C5CB5119DBE8DA002BA192 /* DBSwiftTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DBSwiftTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB5619DBE8DA002BA192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75C5CB5719DBE8DA002BA192 /* DBSwiftTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSwiftTestTests.swift; sourceTree = "<group>"; };
-		75C5CB6219DBEA62002BA192 /* DBSwiftTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DBSwiftTest-Bridging-Header.h"; sourceTree = "<group>"; };
-		75C5CB6519DBEC23002BA192 /* Plane+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plane+DKDBManager.swift"; sourceTree = "<group>"; };
-		75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Plane+CoreDataProperties.swift"; path = "Models/Plane+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75D800D51C52497700CF1776 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plane.swift; path = Models/Plane.swift; sourceTree = "<group>"; };
-		75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Baggage+CoreDataProperties.swift"; path = "Models/Baggage+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75D800D71C52497700CF1776 /* Baggage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Baggage.swift; path = Models/Baggage.swift; sourceTree = "<group>"; };
-		75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Passenger+CoreDataProperties.swift"; path = "Models/Passenger+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75D800D91C52497700CF1776 /* Passenger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Passenger.swift; path = Models/Passenger.swift; sourceTree = "<group>"; };
-		75FF77981C52740400E146D0 /* MockManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
-		75FF779B1C5278EA00E146D0 /* PassengerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassengerViewController.swift; sourceTree = "<group>"; };
-		75FF779E1C52803B00E146D0 /* BaggageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageViewController.swift; sourceTree = "<group>"; };
-		75FF77A11C52804A00E146D0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		75FF77A41C5282F300E146D0 /* Baggage+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Baggage+DKDBManager.swift"; path = "Models/Baggage+DKDBManager.swift"; sourceTree = "<group>"; };
+		75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		75FF77AF1C5299EE00E146D0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Baggage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75FF77B31C5299EE00E146D0 /* Baggage+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Baggage+DKDBManager.swift"; sourceTree = "<group>"; };
+		75FF77B41C5299EE00E146D0 /* Baggage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baggage.swift; sourceTree = "<group>"; };
+		75FF77B61C5299EE00E146D0 /* DBSwiftTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBSwiftTest.xcdatamodel; sourceTree = "<group>"; };
+		75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Passenger+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75FF77B91C5299EE00E146D0 /* Passenger+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Passenger+DKDBManager.swift"; sourceTree = "<group>"; };
+		75FF77BA1C5299EE00E146D0 /* Passenger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passenger.swift; sourceTree = "<group>"; };
+		75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plane+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75FF77BD1C5299EE00E146D0 /* Plane+DKDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plane+DKDBManager.swift"; sourceTree = "<group>"; };
+		75FF77BE1C5299EE00E146D0 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
+		75FF77BF1C5299EE00E146D0 /* MockManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
+		75FF77C21C5299EE00E146D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		75FF77C41C5299EE00E146D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		75FF77C51C5299EE00E146D0 /* DBSwiftTest-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBSwiftTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		75FF77C61C5299EE00E146D0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		75FF77C71C5299EE00E146D0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75FF77C91C5299EE00E146D0 /* BaggageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageViewController.swift; sourceTree = "<group>"; };
+		75FF77CA1C5299EE00E146D0 /* PassengerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassengerViewController.swift; sourceTree = "<group>"; };
+		75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneViewController.swift; sourceTree = "<group>"; };
+		75FF77CC1C5299EE00E146D0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		75FF77F71C529A6300E146D0 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		E73F96C22486A08BFC96B90A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FF77F81C529A6300E146D0 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +102,7 @@
 		57ACE6FE14D0414F1F765DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75FF77F71C529A6300E146D0 /* Pods.framework */,
 				E73F96C22486A08BFC96B90A /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -123,30 +131,14 @@
 		75C5CB3B19DBE8DA002BA192 /* DBSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
-				75C5CB6C19DC00B5002BA192 /* Models */,
-				75C5CB3E19DBE8DA002BA192 /* AppDelegate.swift */,
-				75C5CB4319DBE8DA002BA192 /* PlaneViewController.swift */,
-				75FF779B1C5278EA00E146D0 /* PassengerViewController.swift */,
-				75FF779E1C52803B00E146D0 /* BaggageViewController.swift */,
-				75FF77A11C52804A00E146D0 /* TableViewController.swift */,
-				75FF77981C52740400E146D0 /* MockManager.swift */,
-				759C621F1C525F6700858442 /* Constants.swift */,
-				75C5CB4019DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld */,
-				75C5CB3C19DBE8DA002BA192 /* Supporting Files */,
+				75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */,
+				75FF77AF1C5299EE00E146D0 /* Constants.swift */,
+				75FF77BF1C5299EE00E146D0 /* MockManager.swift */,
+				75FF77B01C5299EE00E146D0 /* Database */,
+				75FF77C01C5299EE00E146D0 /* Resources */,
+				75FF77C81C5299EE00E146D0 /* ViewControllers */,
 			);
 			path = DBSwiftTest;
-			sourceTree = "<group>";
-		};
-		75C5CB3C19DBE8DA002BA192 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				75C5CB4519DBE8DA002BA192 /* Main.storyboard */,
-				75C5CB4819DBE8DA002BA192 /* Images.xcassets */,
-				75C5CB4A19DBE8DA002BA192 /* LaunchScreen.xib */,
-				75C5CB6219DBEA62002BA192 /* DBSwiftTest-Bridging-Header.h */,
-				75C5CB3D19DBE8DA002BA192 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		75C5CB5419DBE8DA002BA192 /* DBSwiftTestTests */ = {
@@ -166,20 +158,68 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		75C5CB6C19DC00B5002BA192 /* Models */ = {
+		75FF77B01C5299EE00E146D0 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				75D800D41C52497700CF1776 /* Plane+CoreDataProperties.swift */,
-				75C5CB6519DBEC23002BA192 /* Plane+DKDBManager.swift */,
-				75D800D51C52497700CF1776 /* Plane.swift */,
-				75D800D61C52497700CF1776 /* Baggage+CoreDataProperties.swift */,
-				75D800D71C52497700CF1776 /* Baggage.swift */,
-				75FF77A41C5282F300E146D0 /* Baggage+DKDBManager.swift */,
-				75D800D81C52497700CF1776 /* Passenger+CoreDataProperties.swift */,
-				75D800D91C52497700CF1776 /* Passenger.swift */,
-				759C62221C52643200858442 /* Passenger+DKDBManager.swift */,
+				75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */,
+				75FF77B11C5299EE00E146D0 /* Baggage */,
+				75FF77B71C5299EE00E146D0 /* Passenger */,
+				75FF77BB1C5299EE00E146D0 /* Plane */,
 			);
-			name = Models;
+			path = Database;
+			sourceTree = "<group>";
+		};
+		75FF77B11C5299EE00E146D0 /* Baggage */ = {
+			isa = PBXGroup;
+			children = (
+				75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */,
+				75FF77B31C5299EE00E146D0 /* Baggage+DKDBManager.swift */,
+				75FF77B41C5299EE00E146D0 /* Baggage.swift */,
+			);
+			path = Baggage;
+			sourceTree = "<group>";
+		};
+		75FF77B71C5299EE00E146D0 /* Passenger */ = {
+			isa = PBXGroup;
+			children = (
+				75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */,
+				75FF77B91C5299EE00E146D0 /* Passenger+DKDBManager.swift */,
+				75FF77BA1C5299EE00E146D0 /* Passenger.swift */,
+			);
+			path = Passenger;
+			sourceTree = "<group>";
+		};
+		75FF77BB1C5299EE00E146D0 /* Plane */ = {
+			isa = PBXGroup;
+			children = (
+				75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */,
+				75FF77BD1C5299EE00E146D0 /* Plane+DKDBManager.swift */,
+				75FF77BE1C5299EE00E146D0 /* Plane.swift */,
+			);
+			path = Plane;
+			sourceTree = "<group>";
+		};
+		75FF77C01C5299EE00E146D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */,
+				75FF77C31C5299EE00E146D0 /* Main.storyboard */,
+				75FF77C51C5299EE00E146D0 /* DBSwiftTest-Bridging-Header.h */,
+				75FF77C61C5299EE00E146D0 /* Images.xcassets */,
+				75FF77C71C5299EE00E146D0 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		75FF77C81C5299EE00E146D0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				75FF77C91C5299EE00E146D0 /* BaggageViewController.swift */,
+				75FF77CA1C5299EE00E146D0 /* PassengerViewController.swift */,
+				75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */,
+				75FF77CC1C5299EE00E146D0 /* TableViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		D74B142824CC574663898D60 /* Pods */ = {
@@ -276,9 +316,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75C5CB4719DBE8DA002BA192 /* Main.storyboard in Resources */,
-				75C5CB4C19DBE8DA002BA192 /* LaunchScreen.xib in Resources */,
-				75C5CB4919DBE8DA002BA192 /* Images.xcassets in Resources */,
+				75FF77EB1C5299EE00E146D0 /* Images.xcassets in Resources */,
+				75FF77E71C5299EE00E146D0 /* LaunchScreen.xib in Resources */,
+				75FF77E91C5299EE00E146D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +326,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FF77EE1C5299EE00E146D0 /* Info.plist in Resources */,
+				75FF77EC1C5299EE00E146D0 /* Images.xcassets in Resources */,
+				75FF77E81C5299EE00E146D0 /* LaunchScreen.xib in Resources */,
+				75FF77EA1C5299EE00E146D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,23 +388,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75FF77A51C5282F300E146D0 /* Baggage+DKDBManager.swift in Sources */,
-				75D800E21C52497700CF1776 /* Passenger+CoreDataProperties.swift in Sources */,
-				759C62201C525F6700858442 /* Constants.swift in Sources */,
-				75D800DA1C52497700CF1776 /* Plane+CoreDataProperties.swift in Sources */,
-				75FF779F1C52803B00E146D0 /* BaggageViewController.swift in Sources */,
-				75D800E01C52497700CF1776 /* Baggage.swift in Sources */,
-				75FF77991C52740400E146D0 /* MockManager.swift in Sources */,
-				759C62231C52643200858442 /* Passenger+DKDBManager.swift in Sources */,
-				75D800DC1C52497700CF1776 /* Plane.swift in Sources */,
-				75D800DE1C52497700CF1776 /* Baggage+CoreDataProperties.swift in Sources */,
-				75C5CB6619DBEC23002BA192 /* Plane+DKDBManager.swift in Sources */,
-				75C5CB4419DBE8DA002BA192 /* PlaneViewController.swift in Sources */,
-				75FF77A21C52804A00E146D0 /* TableViewController.swift in Sources */,
-				75C5CB3F19DBE8DA002BA192 /* AppDelegate.swift in Sources */,
-				75D800E41C52497700CF1776 /* Passenger.swift in Sources */,
-				75C5CB4219DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld in Sources */,
-				75FF779C1C5278EA00E146D0 /* PassengerViewController.swift in Sources */,
+				75FF77DF1C5299EE00E146D0 /* Plane+CoreDataProperties.swift in Sources */,
+				75FF77CD1C5299EE00E146D0 /* AppDelegate.swift in Sources */,
+				75FF77F51C5299EE00E146D0 /* TableViewController.swift in Sources */,
+				75FF77DB1C5299EE00E146D0 /* Passenger+DKDBManager.swift in Sources */,
+				75FF77F31C5299EE00E146D0 /* PlaneViewController.swift in Sources */,
+				75FF77D31C5299EE00E146D0 /* Baggage+DKDBManager.swift in Sources */,
+				75FF77E51C5299EE00E146D0 /* MockManager.swift in Sources */,
+				75FF77CF1C5299EE00E146D0 /* Constants.swift in Sources */,
+				75FF77F11C5299EE00E146D0 /* PassengerViewController.swift in Sources */,
+				75FF77D91C5299EE00E146D0 /* Passenger+CoreDataProperties.swift in Sources */,
+				75FF77DD1C5299EE00E146D0 /* Passenger.swift in Sources */,
+				75FF77E11C5299EE00E146D0 /* Plane+DKDBManager.swift in Sources */,
+				75FF77D71C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */,
+				75FF77D51C5299EE00E146D0 /* Baggage.swift in Sources */,
+				75FF77E31C5299EE00E146D0 /* Plane.swift in Sources */,
+				75FF77D11C5299EE00E146D0 /* Baggage+CoreDataProperties.swift in Sources */,
+				75FF77EF1C5299EE00E146D0 /* BaggageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75C5CB5819DBE8DA002BA192 /* DBSwiftTestTests.swift in Sources */,
+				75FF77D81C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,20 +427,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		75C5CB4519DBE8DA002BA192 /* Main.storyboard */ = {
+		75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				75C5CB4619DBE8DA002BA192 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		75C5CB4A19DBE8DA002BA192 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				75C5CB4B19DBE8DA002BA192 /* Base */,
+				75FF77C21C5299EE00E146D0 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		75FF77C31C5299EE00E146D0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75FF77C41C5299EE00E146D0 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -485,12 +529,12 @@
 			baseConfigurationReference = 02EA966AD99F945BEDDD302F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DBSwiftTest/Info.plist;
+				INFOPLIST_FILE = DBSwiftTest/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/DBSwiftTest-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -499,12 +543,12 @@
 			baseConfigurationReference = 27BD9A2BA30E7FCCD5E38A44 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DBSwiftTest/Info.plist;
+				INFOPLIST_FILE = DBSwiftTest/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/DBSwiftTest-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -512,6 +556,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -528,6 +576,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = DBSwiftTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
@@ -569,12 +621,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		75C5CB4019DBE8DA002BA192 /* DBSwiftTest.xcdatamodeld */ = {
+		75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				75C5CB4119DBE8DA002BA192 /* DBSwiftTest.xcdatamodel */,
+				75FF77B61C5299EE00E146D0 /* DBSwiftTest.xcdatamodel */,
 			);
-			currentVersion = 75C5CB4119DBE8DA002BA192 /* DBSwiftTest.xcdatamodel */;
+			currentVersion = 75FF77B61C5299EE00E146D0 /* DBSwiftTest.xcdatamodel */;
 			path = DBSwiftTest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
