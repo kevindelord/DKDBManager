@@ -14,8 +14,6 @@ static BOOL _needForcedUpdate = NO;
 
 @implementation DKDBManager
 
-@dynamic storedIdentifiers;
-
 #pragma mark - init method
 
 - (instancetype)init {
