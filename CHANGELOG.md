@@ -1,5 +1,63 @@
 # DKDBManager CHANGELOG
 
+## 0.6.0
+
+- Rewrite test project in Swift.
+- Update Magical Record to 2.3.2 and integration as framework.
+- Update global documentation.
+- Improve Swift compatibility.
+
+### DKDBManager
+
+- Add `dumpInContext:` function.
+- Add `dumpCountInContext:` function.
+- Add `cleanUp` function.
+- Rename `entities` function into `entityClassNames`.
+
+#### Simplify setup methods
+
+- Add `setup` and `setupDatabaseWithName:` functions.
+- Change `setupDatabaseWithName:didResetDatabase:` function.
+
+#### Save methods with context and block
+
+- Remove `save`, `saveToPersistentStoreAndWait` and `saveToPersistentStoreWithCompletion:` methods.
+- Add `saveWithBlock:` function.
+- Add `saveWithBlock:completion:` function.
+- Add `saveWithBlockAndWait:` function.
+
+- Rename `removeDeprecatedEntities` function into `removeDeprecatedEntitiesInContext:`.
+- Rename `deleteAllEntities` function into `deleteAllEntitiesInContext:`.
+- Rename `deleteAllEntitiesForClass:` function into `deleteAllEntitiesForClass:inContext:`.
+
+### NSManagedObject Category
+
+#### Create methods with context and block
+
+##### CREATE
+
+- Add `createEntityInContext:`function.
+- Update `createEntityFromDictionary:completion:` to `createEntityFromDictionary:inContext:completion:`.
+- Update `createEntityFromDictionary:` to `createEntityFromDictionary:inContext:`.
+- Update `createEntitiesFromArray:` to `createEntitiesFromArray:inContext:`.
+
+##### READ
+
+- Add `allInContext:` and `countInContext:` functions.
+
+##### UPDATE
+
+- Update `shouldUpdateEntityWithDictionary:` to `shouldUpdateEntityWithDictionary:inContext:`.
+- Update `updateWithDictionary:` to `updateWithDictionary:inContext:`.
+
+##### DELETE
+
+- Update `deleteIfInvalid` to `deleteIfInvalidInContext:`.
+- Update `deleteAllEntities` to `deleteAllEntitiesInContext:
+- Update `removeDeprecatedEntitiesFromArray:` to `removeDeprecatedEntitiesFromArray:inContext:`
+- Remove `deleteChildEntities` function. Use `deleteEntityWithReason:inContext:` instead.
+
+
 ## 0.5.3
 
 - Import Magical Record as framework to support cocoapods 0.39.0
