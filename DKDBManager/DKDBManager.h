@@ -31,7 +31,10 @@
 
 /**
  *  Dictionnary containing identifiers of all entities marked as not deprecated.
+ *
  *  If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
+ *
+ *  @remark The value can not be `nil`; to reinitialise the stored identifiers, create a new NSMutableDictionary.
  */
 @property (nonnull, nonatomic, retain) NSMutableDictionary * storedIdentifiers;
 
@@ -287,6 +290,8 @@
  *
  *  This function calls `removeDeprecatedEntitiesFromArray:inContext:` method for each model class returned by the `entityClassNames` function.
  *
+ *  @remark The `cleanUp` function is called.
+ *
  *  @param context Database context to remove the entities from.
  */
 + (void)removeDeprecatedEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
@@ -295,6 +300,8 @@
  *  @brief Performs a `cleanUp` and completely remove the sqlite file from the disk.
  *
  *  @discussion If the file referenced by the given database name couldn't be found; an assert will be thrown.
+ *
+ *  @remark It is your responsability to reset the `storedIdentifiers` depending on your threading and managed object context.
  *
  *  @param databaseName The NSString object containing the name of the database; must not be nil.
  *
@@ -307,6 +314,8 @@
  *
  *  @discussion Does not 'hard' reset the entire sqlite file.
  *
+ *  @remark It is your responsability to reset the `storedIdentifiers` depending on your threading and managed object context.
+ *
  *  @param context Database context to delete the entities from.
  */
 + (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
@@ -315,6 +324,8 @@
  *  @brief Delete all saved entities from a specific context for one specific model in the current database.
  *
  *  @discussion Does not 'hard' reset the entire sqlite file.
+ *
+ *  @remark It is your responsability to reset the `storedIdentifiers` depending on your threading and managed object context.
  *
  *  @param class The Class object referencing the model to delete the entities.
  *

@@ -80,7 +80,7 @@ static BOOL _needForcedUpdate = NO;
 	manager.storedIdentifiers = [NSMutableDictionary new];
 }
 
-#pragma mark - Delete methods
+#pragma mark - DELETE
 
 + (BOOL)eraseDatabaseForStoreName:(NSString * _Nonnull)databaseName {
 
