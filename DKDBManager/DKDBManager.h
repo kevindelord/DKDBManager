@@ -29,6 +29,12 @@
  */
 @interface DKDBManager : MagicalRecord
 
+/**
+ *  Dictionnary containing identifiers of all entities marked as not deprecated.
+ *  If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
+ */
+@property (nonnull, nonatomic, retain) NSMutableDictionary * storedIdentifiers;
+
 #pragma mark - DEBUG
 
 /**
