@@ -11,8 +11,9 @@
 
 - Add `dumpInContext:` function.
 - Add `dumpCountInContext:` function.
-- Add `cleanUp` function.
+- Add `cleanUp` function which also remove the stored identifiers.
 - Rename `entities` function into `entityClassNames`.
+- The `storedIdentifiers` can now be accessed as a property.
 
 #### Simplify setup methods
 
