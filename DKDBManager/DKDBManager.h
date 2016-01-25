@@ -8,6 +8,8 @@
 #ifndef DKDBManager_h__
 #define DKDBManager_h__
 
+#define DK_DEPRECATED_PLEASE_USE(METHOD) __attribute__((deprecated("Deprecated method. Please use `" METHOD "` instead.")))
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <MagicalRecord/MagicalRecord.h>
@@ -15,208 +17,304 @@
 #import "NSManagedObject+ExistingObject.h"
 
 /**
- * DKDBManager is simple, yet very useful, CRUD manager around Magical Record (a CoreData wrapper).
- * The current library implement a CRUD logic around it and helps the developer to manage his entities.
+ *  DKDBManager is simple, yet very useful, CRUD manager around Magical Record (a CoreData wrapper).
+ *  The current library implement a CRUD logic around it and helps the developer to manage his entities.
  *
- * The main concept is to use JSON dictionaries representing the entities.
- * The logic to create, read or update entities is done with just one single function.
- * The delete logic has also been improved with a `deprecated` state.
+ *  The main concept is to use JSON dictionaries representing the entities.
+ *  The logic to create, read or update entities is done with just one single function.
+ *  The delete logic has also been improved with a `deprecated` state.
  *
- * Extend the NSManagedObject subclasses is required.
- * Please read the README.md for more information.
+ *  Extend the NSManagedObject subclasses is required.
+ *  Please read the README.md for more information.
  */
-@interface DKDBManager : NSObject
+@interface DKDBManager : MagicalRecord
 
 #pragma mark - DEBUG
 
 /**
- * @brief Boolean indicating whether the manager is set as verbose or not.
+ *  @brief Boolean indicating whether the manager is set as verbose or not.
  *
- * @discussion Default is FALSE.
+ *  @discussion Default is FALSE.
  *
- * @return TRUE if the manager is verbose.
+ *  @return TRUE if the manager is verbose; otherwise FALSE.
  */
 + (BOOL)verbose;
 
 /**
- * @brief Set a Boolean value indicating whether the manager is set as verbose or not.
+ *  @brief Set a Boolean value indicating whether the manager is set as verbose or not.
  *
- * @param verbose Boolean value.
+ *  @param verbose Boolean value.
  */
 + (void)setVerbose:(BOOL)verbose;
 
 /**
- * @brief Boolean indicating whether the manager will allow updates on the database entities or not.
+ *  @brief Boolean indicating whether the manager will allow updates on the database entities or not.
  *
- * @discussion Returns a Boolean value indicating whether the manager allows updates to the different model entities.
- * If this boolean is set to FALSE then entities won't be updated anymore. Just new ones will be created with new values.
- * The result of the method: 'shouldUpdateEntity:withDictionary:' will be ignored.
+ *  @discussion Returns a Boolean value indicating whether the manager allows updates to the different model entities.
  *
- * Default value is TRUE.
+ *  If this boolean is set to FALSE then entities won't be updated anymore. Just new ones will be created with new values.
+ *  Moreover, the result of the method: `shouldUpdateEntity:withDictionary:` will be ignored.
  *
- * @return TRUE if the manager allows updates to the model entities.
+ *  Default value is TRUE.
+ *
+ *  @return TRUE if the manager allows updates to the model entities; otherwise FALSE.
  */
 + (BOOL)allowUpdate;
 
 /**
- * @brief Set a Boolean value indicating whether the manager allows updates or not.
+ *  @brief Set a Boolean value indicating whether the manager allows updates or not.
  *
- * @param allowUpdate Boolean value.
+ *  @param allowUpdate Boolean value.
  */
 + (void)setAllowUpdate:(BOOL)allowUpdate;
 
 /**
- * @brief Boolean indicating whether the manager will reset all stored entities on setup or not.
+ *  @brief Boolean indicating whether the manager will reset all stored entities on setup or not.
  *
- * @discussion Default value FALSE.
+ *  @discussion Default value FALSE.
  *
- * @return TRUE if the manager need to reset all stored entities.
+ *  @return TRUE if the manager need to reset all stored entities; otherwise FALSE.
  */
 + (BOOL)resetStoredEntities;
 
 /**
- * @brief Set a Boolean value indicating whether the manager will reset all stored entities or not.
+ *  @brief Set a Boolean value indicating whether the manager will reset all stored entities or not.
  *
- * @param resetStoredEntities Boolean value.
+ *  @param resetStoredEntities Boolean value.
  */
 + (void)setResetStoredEntities:(BOOL)resetStoredEntities;
 
 /**
- * @brief Boolean indicating whether the manager will force the update over the database entities or not.
+ *  @brief Boolean indicating whether the manager will force the update over the database entities or not.
  *
- * @discussion Returns a Boolean value indicating whether the manager will force the update to the different model entities.
- * If this boolean is set to TRUE then an entity will always be updated with a given dictionnary inside the method: 'createEntityWithDictionary:'.
- * The result of the method: 'shouldUpdateEntity:withDictionary:' will be ignored.
- * Default value FALSE.
+ *  @discussion Returns a Boolean value indicating whether the manager will force the update to the different model entities.
  *
- * @return TRUE if the manager need to reset all stored entities.
+ *  If this boolean is set to TRUE then an entity will always be updated with a given dictionnary inside the method   `createEntityWithDictionary:`. Moreover, the result of the `shouldUpdateEntity:withDictionary:` method will be ignored.
+ *
+ *  Default value FALSE.
+ *
+ *  @return TRUE if the manager need to reset all stored entities; otherwise FALSE.
  */
 + (BOOL)needForcedUpdate;
 
 /**
- * @brief Set a Boolean value indicating whether the manager will force the update of the entities or not.
+ *  @brief Set a Boolean value indicating whether the manager will force the update of the entities or not.
  *
- * @param needForcedUpdate Boolean value.
+ *  @param needForcedUpdate Boolean value.
  */
 + (void)setNeedForcedUpdate:(BOOL)needForcedUpdate;
 
 /**
- * @brief Returns an array of NSString objects corresponding to the class name of all model entities in the current database.
+ *  @brief Returns an array of NSString objects corresponding to the class name of all model entities in the current database.
  *
- * @discussion The Abstract entities are not including.
+ *  @discussion The Abstract entities are not including.
  *
- * @return A NSArray object containing all class names in the database.
+ *  @return A NSArray object containing all class names in the database.
  */
-+ (NSArray *)entities;
++ (NSArray * _Nonnull)entityClassNames;
 
 #pragma mark - Log
 
 /**
- * @brief Dump the database if and only if the log is enabled.
+ *  @brief Dump the database within a specific context; if and only if the log is enabled.
  *
- * @discussion Will log the number of entities per model and then the description of every single object.
- * The entities are sorted by class and by their default sorting attribute.
+ *  @discussion Will log the number of entities per model and then the description of every single object.
  *
- * @see + (BOOL)verbose;
- * @see + (NSString *)sortingAttributeName;
+ *  The entities are sorted by class and by their default sorting attribute.
+ *
+ *  @param context The context from where all entities will be fetched.
+ *
+ *  @see + (BOOL)verbose;
+ *  @see + (NSString *)sortingAttributeName;
+ */
++ (void)dumpInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Dump the database using the default NSManagedObjectContext object; if and only if the log is enabled.
+ *
+ *  @discussion Will log the number of entities per model and then the description of every single object.
+ *
+ *  The entities are sorted by class and by their default sorting attribute.
+ *
+ *  This method uses a NSManagedObjectContext object operating on the main thread (simple and single-threaded operations only).
+ *
+ *  @see + (BOOL)verbose;
+ *  @see + (NSString *)sortingAttributeName;
  */
 + (void)dump;
 
 /**
- * @brief Dump the number of entities per model in the database if and only if the log is enabled.
+ *  @brief Dump the number of entities per model in the database within a specific context; if and only if the log is enabled.
+ *
+ *  @see + (BOOL)verbose;
+ */
++ (void)dumpCountInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Dump the number of entities per model in the database using the default NSManagedObjectContext object; if and only if the log is enabled.
+ *
+ *  This method uses a NSManagedObjectContext object operating on the main thread (simple and single-threaded operations only).
+ *
+ *  @see + (BOOL)verbose;
  */
 + (void)dumpCount;
 
 #pragma mark - DB methods
 
 /**
- * @brief Create and a return a singleton shared instance of the current manager class.
+ *  @brief Create and a return a singleton shared instance of the current manager class.
  *
- * @return A singleton instance of the manager.
+ *  @return A singleton instance of the manager.
  */
-+ (instancetype)sharedInstance;
++ (instancetype _Nonnull)sharedInstance;
 
 /**
- * @brief Cleanup the CoreData stack before the app exits.
+ *  @brief Setup, and reset if needed, the datamodel using an auto migrating system.
  *
- * @discussion Should be called on the `applicationWillTerminate:` AppDelegate's method.
+ *  @discussion A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
+ *
+ *  The `didResetDatabaseBlock` block is only called if the database has been erased and recreated.
+ *  Depending on your needs you might want to do something special right now as:
+ *
+ *    - Setting up some user defaults.
+ *
+ *    - Deal with your api/store manager.
+ *
+ *    - etc.
+ *
+ *  @param databaseName The NSString object containing the name of the database. Must not be nil and can be modified on startup.
+ *
+ *  @param didResetDatabaseBlock Block called if the datamodel file has been completely erased and recreated.
+ */
++ (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName didResetDatabase:(void (^ _Nullable)())didResetDatabaseBlock;
+
+/**
+ *  @brief Setup, and reset if needed, the datamodel using an auto migrating system.
+ *
+ *  @discussion A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
+ *
+ *  @param databaseName The NSString object containing the name of the database. Must not be nil and can be modified on startup.
+ */
++ (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName;
+
+/**
+ *  @brief Setup, and reset if needed, the datamodel using an auto migrating system.
+ *
+ *  @discussion A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
+ *
+ *  The database filename will be generating using the app's bundle identifier.
+ */
++ (void)setup;
+
+/**
+ *  @brief Function to clean up the CoreData stack, the defaults contexts and error handlers.
+ *
+ *  @discussion This function should be called from the `applicationWillTerminate` function of the AppDelegate.
  */
 + (void)cleanUp;
 
+#pragma mark - SAVE
+
 /**
- * @brief Setup, and reset if needed, the CoreData stack using an auto migrating system.
+ *  @brief Asynchronously executes and saves modifications into the persistent store.
  *
- * @discussion Of course you can play with the name to change your database on startup whenever you would like to.
- * A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions`
- * method of your `AppDelegate`.
+ *  @discussion Saving operations are done on a background thread.
  *
- * @param databaseName The NSString object containing the name of the database. Shouldn't be nil and can be modified on startup. 
- * @return TRUE if the database has been reset. 
- */
-+ (BOOL)setupDatabaseWithName:(NSString *)databaseName;
-
-#pragma mark - Save methods
-
-/**
- * @brief Asynchronously saves the current context into its persistent store.
- */
-+ (void)save;
-
-/**
- * @brief Synchronously saves the current context into its persistent store.
- */
-+ (void)saveToPersistentStoreAndWait;
-
-/**
- * @brief Asynchronously saves the current context into its persistent store and execute the completion block when it is done.
- */
-+ (void)saveToPersistentStoreWithCompletion:(void (^)(BOOL success, NSError *error))completionBlock;
-
-/**
- * @brief Save the given entity as not deprecated.
+ *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
+ *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
  *
- * @discussion Depending on your database logic, app architecture, APIs, etc., each entity's uniqueIdentifier` could be saved into
- * a local array as not deprecated. By doing so they won't be removed when the method "removeDeprecatedEntities" is called.
- * The 'saveEntity:' method is called from the 'createEntityFromDictionary:' one.
- * To improve the removal of deprecated entities it is extremely adviced to save the ID of each child entities and relationships.
- * If implemented properly an entity will be removed also if its parent is.
- *
- * @param entity The entity object to store as not deprecated
+ *  @param block Block executed to perform saving changes using the `savingContext` instance. Every operation is done on a background thread.
  */
-+ (void)saveEntityAsNotDeprecated:(id)entity;
++ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block;
+
+/**
+ *  @brief Asynchronously executes and saves modifications into the persistent store and executes the completion block when it is done.
+ *
+ *  @discussion Saving operations are done on a background thread. The completion block is called on the main one.
+ *
+ *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
+ *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
+ *
+ *  @param block Block executed to perform saving changes using the `savingContext` instance. Every operation is done on a background thread.
+ *
+ *  @param completion Block executed on the main thread once the saving has been completed.
+ */
++ (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block completion:(MRSaveCompletionHandler _Nullable)completion;
+
+/**
+ *  @brief Synchronously executes and saves modificiations into its persistent store.
+ *
+ *  @discussion Saving operations done on the main thread. Be careful and using such function, it could slow down your application.
+ *
+ *  Nonetheless this is very useful when you're managing your own threads/queues and need a serial call to create or change data.
+ *
+ *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
+ *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
+ *
+ *  @param block Block executed to perform saving changes using the `savingContext` instance. Every operation is done on a background thread.
+ */
++ (void)saveWithBlockAndWait:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block;
+
+/**
+ *  @brief Save the given entity as not deprecated.
+ *
+ *  @discussion Depending on your database logic, app architecture, APIs, etc., each entity's `uniqueIdentifier` could be saved into
+ *  a local array as not deprecated.
+ *
+ *  By doing so they won't be removed when the method `removeDeprecatedEntitiesInContext:` is called.
+ *
+ *  The `saveEntityAsNotDeprecated:` method is automatically called from the `createEntityFromDictionary:inContext:` one.
+ *
+ *  To improve the removal of deprecated entities it is extremely adviced to save the ID of each child entities and relationships.
+ *  If implemented properly an entity will be removed also if its parent is.
+ *
+ *  @param entity The entity object to store as not deprecated; must not be nil.
+ */
++ (void)saveEntityAsNotDeprecated:(id _Nonnull)entity;
 
 #pragma mark - Delete methods
 
 /**
- * @brief Call `removeDeprecatedEntitiesFromArray:` method for every class returned by the `entities` one.
+ *  @brief Remove all deprecated entities for every model class within a specific context.
  *
- * @discussion Only the saved objects through the `saveEntity:` method will NOT be removed as they are saved as *not deprecated*.
- * All other entities will be removed.
+ *  @discussion All entities not marked as not deprecated (using the `saveEntityAsNotDeprecated:` method ) will be removed.
+ *
+ *  This function calls `removeDeprecatedEntitiesFromArray:inContext:` method for each model class returned by the `entityClassNames` function.
+ *
+ *  @param context Database context to remove the entities from.
  */
-+ (void)removeDeprecatedEntities;
++ (void)removeDeprecatedEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
- * @brief Do a `cleanUp` and completely remove the sqlite file from the disk.
+ *  @brief Performs a `cleanUp` and completely remove the sqlite file from the disk.
  *
- * @discussion If the file referenced by the given database name couldn't be find an UIAlertView will be shown.
+ *  @discussion If the file referenced by the given database name couldn't be found; an assert will be thrown.
  *
- * @param databaseName The NSString object containing the name of the database.
+ *  @param databaseName The NSString object containing the name of the database; must not be nil.
  *
- * @return TRUE if the database has been erased.
+ *  @return TRUE if the database has been erased; otherwise FALSE.
  */
-+ (BOOL)eraseDatabaseForStoreName:(NSString *)databaseName;
++ (BOOL)eraseDatabaseForStoreName:(NSString * _Nonnull)databaseName;
 
 /**
- * @brief Delete all saved entities from the current context for all models in the current database. Does not 'hard' reset the entire sqlite file.
+ *  @brief Delete all saved entities from a specific context for all models in the current database.
+ *
+ *  @discussion Does not 'hard' reset the entire sqlite file.
+ *
+ *  @param context Database context to delete the entities from.
  */
-+ (void)deleteAllEntities;
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
- * @brief Delete all saved entities from the current context for one specific model in the current database.
+ *  @brief Delete all saved entities from a specific context for one specific model in the current database.
  *
- * @param class The Class object referencing the model to delete the entities.
+ *  @discussion Does not 'hard' reset the entire sqlite file.
+ *
+ *  @param class The Class object referencing the model to delete the entities.
+ *
+ *  @param context Database context to delete the entities from.
  */
-+ (void)deleteAllEntitiesForClass:(Class)class;
++ (void)deleteAllEntitiesForClass:(Class _Nullable)class inContext:(NSManagedObjectContext * _Nonnull)context;
 
 @end
 

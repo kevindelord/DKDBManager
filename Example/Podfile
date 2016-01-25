@@ -1,0 +1,5 @@
+platform :ios, "7.1"
+
+pod 'DKHelper', '~> 2.1.1'
+pod 'DKDBManager', :path => '../DKDBManager.podspec'
+

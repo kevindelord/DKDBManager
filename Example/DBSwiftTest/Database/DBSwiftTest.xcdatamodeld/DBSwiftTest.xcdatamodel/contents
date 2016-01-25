@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="Baggage" representedClassName=".Baggage" syncable="YES">
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="passenger" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Passenger" inverseName="baggages" inverseEntity="Passenger" syncable="YES"/>
+    </entity>
+    <entity name="Passenger" representedClassName=".Passenger" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="baggages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Baggage" inverseName="passenger" inverseEntity="Baggage" syncable="YES"/>
+        <relationship name="plane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plane" inverseName="passengers" inverseEntity="Plane" syncable="YES"/>
+    </entity>
+    <entity name="Plane" representedClassName=".Plane" syncable="YES">
+        <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="origin" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="passengers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Passenger" inverseName="plane" inverseEntity="Passenger" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Baggage" positionX="-36" positionY="-0" width="128" height="75"/>
+        <element name="Passenger" positionX="-207" positionY="-99" width="128" height="105"/>
+        <element name="Plane" positionX="-416" positionY="-171" width="128" height="90"/>
+    </elements>
+</model>

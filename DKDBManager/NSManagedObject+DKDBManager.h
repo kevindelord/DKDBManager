@@ -17,13 +17,13 @@
  * @discussion
  * The values of this enum represent whether an entity has been created, updated, saved or deleted.
  *
- * @field .Create The entity has been created, it's all fresh new.
+ * @field .<b>Create</b> The entity has been created, it's all fresh new.
  *
- * @field .Update The entity has been updated, its attributes changed.
+ * @field .<b>Update</b> The entity has been updated, its attributes changed.
  *
- * @field .Save   The entity has been saved, nothing happened.
+ * @field .<b>Save</b>   The entity has been saved, nothing happened.
  *
- * @field .Delete The entity has been removed.
+ * @field .<b>Delete</b> The entity has been removed.
  */
 typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
     /** The entity has been created, it's all fresh new. */
@@ -39,142 +39,177 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 #pragma mark - NSManagedObject
 
 /**
- * Category of the NSManagedObject class. Add functions required by the CRUD process.
- * Please read the README.md for more information.
+ *  Category of the NSManagedObject class.
+ *  This adds functions required by the CRUD process.
+ *
+ *  Please read the README.md for more information.
  */
 @interface NSManagedObject (DKDBManager)
 
 #pragma mark - CREATE
 
 /**
- * @brief CRUD a database entity for the current class model from a NSDictionary object.
+ *  @brief CRUD a database entity for the current class model from a NSDictionary object.
  *
- * @param dictionary The NSDictionary object used to CRUD an entity.
+ *  @param dictionary The NSDictionary object used to CRUD an entity.
  *
- * @param completion A completion block containing the entity and its CRUD state.
+ *  @param context The current saving context.
  *
- * @discussion
- * This function is the most important one in this library.
+ *  @param completion A completion block containing the entity and its CRUD state.
  *
- * At first it will try to fetch
- * an entity in the persistent store by using the `primaryPredicateWithDictionary:`.
- * If the entity does not exist/isn't found, a new one will be created.
- * @see + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
+ *  @discussion
+ *  This function is the most important one in this library.
  *
- * Then this new object (or the already existing one) will be updated with `updateWithDictionary:`.
- * @see - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
+ *  At first it will try to fetch an entity in the persistent store by using the `primaryPredicateWithDictionary:`.
+ *  If the entity does not exist or is not found, a new one will be created.
  *
- * If the entity is now invalid it will get deleted; function returns nil.
- * @see - (NSString *)invalidReason;
+ *  Then this new object (or the already existing one) will be updated with `updateWithDictionary:`.
  *
- * In the end the current object will get saved as not deprecated by the manager and returned.
- * @see - (void)saveEntityAsNotDeprecated
+ *  If the entity is now invalid it will get deleted; current function returns nil.
  *
- * About the status in the completion block:
+ *  In the end, if valid, the current object will get saved as not deprecated by the manager and be returned.
  *
- * .Create if the entity has been created and updated.
+ *  @remark Deleted entities are not returned.
  *
- * .Update if the entity was already created and has just been updated.
+ *  About the status in the completion block:
  *
- * .Save if the entity was already created and nothing changed.
+ *  - .<i>Create</i> if the entity has been created and updated.
  *
- * .Delete if the entity has been deleted.
- * @see typedef DKDBManagedObjectState
+ *  - .<i>Update</i> if the entity was already created and has just been updated.
  *
- * @return A created/read/updated database entity; nil if deleted.
+ *  - .<i>Save</i> if the entity was already created and nothing changed.
+ *
+ *  - .<i>Delete</i> if the entity has been deleted.
+ *
+ *  @see typedef DKDBManagedObjectState
+ *  @see + (NSPredicate *)primaryPredicateWithDictionary:;
+ *  @see - (BOOL)shouldUpdateEntityWithDictionary:;
+ *  @see - (NSString *)invalidReason;
+ *  @see - (void)saveEntityAsNotDeprecated;
+ *
+ *  @return A created/read/updated database entity; nil if deleted.
  */
-+ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion;
 
 /**
- * @brief CRUD a database entity for the current class model from a NSDictionary object. 
+ *  @brief CRUD a database entity for the current class model from a NSDictionary object.
  *
- * @param dictionary The NSDictionary object used to CRUD an entity.
+ *  @param dictionary The NSDictionary object used to CRUD an entity.
  *
- * @discussion The deleted entities are not returned.
+ *  @param context The current saving context.
  *
- * @see + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *
- * @return A created/read/updated database entitiy.
+ *  @return A created/read/updated database entity.
  */
-+ (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary;
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 /**
- * @brief CRUD database entities for the current class model from an array of NSDictionary objects.
+ *  @brief CRUD an empty database entity for the current class model.
  *
- * @param array The NSArray object containing all the NSDictionary objects to CRUD the entities from.
+ *  @discussion The function will use an empty dictionary to create the entity. The usual CRUD process will be used.
  *
- * @discussion The deleted entities are not returned.
+ *  @param context The current saving context.
  *
- * @see + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *
- * @return An array of created/read/updated database entities.
+ *  @return A created/read/updated database entity.
  */
-+ (NSArray *)createEntitiesFromArray:(NSArray *)array;
++ (instancetype _Nullable)createEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext;
+
+/**
+ *  @brief CRUD database entities for the current class model from an array of NSDictionary objects.
+ *
+ *  @param array The NSArray object containing all the NSDictionary objects to CRUD the entities from.
+ *
+ *  @param context The current saving context.
+ *
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *
+ *  @return An array of created/read/updated database entities.
+ */
++ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext;
+
+#pragma mark - SAVE
+
+/**
+ *  @brief Function automatically called by the CRUD process logs the status and calls the `saveEntityAsNotDeprecated` function.
+ *
+ *  @remark Does not save as not deprecated in case of `.Delete` status.
+ *
+ *  @param entity A created/read/updated database entity; nil if deleted.
+ *
+ *  @param status The CRUD status of the entity.
+ *
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *
+ *  @see - (void)saveEntityAsNotDeprecated;
+ *
+ *  @return A saved or deleted database entity.
+ */
++ (instancetype _Nullable)saveEntityAfterCreation:(id _Nullable)entity status:(DKDBManagedObjectState)status;
+
+/**
+ *  @brief Override this function to store the current object and all its child relations as not deprecated.
+ *
+ *  @discussion This function is important when matching an online database behind an API.
+ *
+ *  Override required if the current class model has some child entities (relationships).
+ *
+ *  This function is automatically called after '<i>CRUD</i>ing' an entity with: `createEntityFromDictionary:inContext`.
+ *
+ *  Unless the method returns `.Delete` the current/new entity will be stored as not deprecated.
+ *
+ *  @remark The `super` function must be called and the process forwarded to all child entities.
+ *
+ *  For example, an entity `book` with many child entities `pages`.
+ *
+ *  @code
+ *  public override func saveEntityAsNotDeprecated() {
+ *      super.saveEntityAsNotDeprecated()
+ *      for page in book.pages {
+ *          page.saveEntityAsNotDeprecated()
+ *      }
+ *  }
+ *  @endcode
+ *
+ *  @remark When the entity is created but its child can not be at the same time, then the developper has to create another function and manually save the objects when they have been checked/created.
+ *
+ *  In few words, when an <i>empty</i> `book` is created/updated and its `pages` some time later; the <i>save as not deprecated</i> must be done manually for the `pages`.
+ *
+ *  On the second app start, the CRUD process will mark the existing `book` as not deprecated.
+ *  The `pages` will not be marked until the second custom function is called.
+ */
+- (void)saveEntityAsNotDeprecated;
 
 #pragma mark - READ
 
 /**
- * @brief Override this function to return a custom unique identifier of the current entity.
+ *  @brief Override this function to return a custom unique identifier of the current entity.
  *
- * @discussion When using the DKDBManager to match a distant database (behind an API)
- * the logic to remove deprecated objects actually use a `uniqueIdentifier`
- * for every class.
- * The identifer of each entity is saved when refreshing/creating the entities.
- * It is used when the function `removeDeprecatedEntities` is called.
+ *  @discussion When using the DKDBManager to match a distant database (behind an API) the logic to remove deprecated objects uses an `uniqueIdentifier` for every class.
  *
- * The default value use the native `objectID` property of a NSManagedObject.
+ *  The identifer of each entity is saved when '<i>CRUD</i>ing' the entities.
+ *  It is used when the function `removeDeprecatedEntitiesInContext:` is called.
  *
- * Override this method to use a custom unique identifer build from a
- * class attribute or anything else.
+ *  The default value use the native `objectID` property of a NSManagedObject.
  *
- * @return the unique identifer of the current model entity.
+ *  Override this method to use a custom unique identifer built from a class attribute or anything else.
+ *
+ *  @return The unique identifer of the current model entity.
  */
-- (id)uniqueIdentifier;
-
-/**
- * @brief Override this function to store the current object and all its child relations as not deprecated.
- *
- * @discussion This function is important when matching an online database behind an API.
- * If the current class model does NOT have any child entities / relations, then 
- * it is not required to implement it.
- *
- * This function is automatically called after creating an entity with: `createEntityFromDictionary:`.
- * Unless the CREATE method returns `.Delete` the current/new entity will be stored as not deprecated.
- * When overriden, call `super` and forward the process to all child entities.
- *
- * The default behavior of the current function is to forward the saving process to its child objects.
- * When the entity is created but its child can not be at the same time, then the developper has to create
- * another function to manually save the objects when they have been checked/created.
- *
- * In few words, call this second function when the `pages` of a `book` has been created.
- * On the second start, when the `book` did not get updated it will got saved with `saveEntityAsNotDeprecated`.
- * The `pages` won't be saved until the second custom function is called.
- *
- * The super function should be called.
- *
- * For example, an entity `book` with many child entities `pages`.
- *
- * @code
- * super.saveEntityAsNotDeprecated()
- * for page in book.pages {
- *   page.saveEntityAsNotDeprecated()
- * }
- * @endcode
- */
-- (void)saveEntityAsNotDeprecated;
+- (id _Nonnull)uniqueIdentifier;
 
 /**
  * @brief Override this function to verify the validity of an entity; default returns nil.
  *
  * @discussion During the CRUD process an entity is tested to verify its validity.
- * If nil is returned no `invalidReason` has been found.
+ * If `nil` is returned no `invalidReason` has been found.
  * Otherwise the reason will automatically be used and logged by
- * the function `deleteEntityWithReason:`.
+ * the function `deleteEntityWithReason:inContext:`.
  *
- * Depending on the app and its architecture some entities could get invalid 
- * when something important has been removed or updated.
- * If this required field is verified in this function, the current entity
- * will be, if needed, removed.
+ * Depending on the app and its architecture some entities could become invalid
+ * when something important has been removed or updated. This function is called to verify that.
  *
  * If the log is activated for the current class, the terminal will display
  * all important modification.
@@ -185,198 +220,240 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  * could not want to display/handle the case. Same if its `pages` are missing.
  *
  * @code
- * if let invalidReason = super.invalidReason() {
- *   return invalidReason
+ * override public func invalidReason() -> String? {
+ *     if let invalidReason = super.invalidReason() {
+ *         return invalidReason
+ *     }
+ *     if (self.pages.count == 0) {
+ *         return "invalid number of pages to display"
+ *     }
+ *     if (self.title == nil) {
+ *         return "invalid book title"
+ *     }
+ *     return nil // the entity is valid
  * }
- * if self.pages.count == 0 {
- *   return "invalid number of pages to display"
- * }
- * if self.title == nil {
- *   return "invalid book title"
- * }
- * return nil
  * @endcode
  *
  * @return An invalid reason; nil if valid.
  */
-- (NSString *)invalidReason;
+- (NSString * _Nullable)invalidReason;
 
 /**
- * @brief Override this function to inform the manager whether it should update the current entity or not.
+ *  @brief Override this function to inform the manager whether it should update the current entity or not.
  *
- * @param dictionary A NSDictionary object containing information about the database entity to be updated with.
+ *  @param dictionary A NSDictionary object containing information about the database entity to be updated with.
  *
- * @discussion Depending on your app and architecture some entities should not be updated or do not need to.
- * This function allows you to check that and avoid the update of the current entity during the CRUD process.
+ *  @param context The current saving context.
  *
- * For example you might want to verify the `lastUpdate` attribute or a version number from the given dictionary against the current entity.
- * If they match return `false` to NOT update the entity and avoid some useless actions.
+ *  @discussion Depending on your app and architecture some entities should not be updated or do not need to. This function allows you to check that and avoid useless updates during the CRUD process.
  *
- * The result of this function is ignored when the debug states of the manager are set as
- * `needForcedUpdate == true` or if `allowUpdate == false`.
+ *  For example you might want to verify the `lastUpdate` attribute or a version number from the given dictionary against the current entity.
+ *  If they match then return `false` to NOT update the entity and avoid some useless actions.
  *
- * @return TRUE if the entity should be updated by the manager; default is TRUE.
+ *  @remark The result of this function is ignored when the debug states of the manager are set as `needForcedUpdate == true` or if `allowUpdate == false`.
+ *
+ *  @return TRUE if the entity should be updated by the manager; default is TRUE.
  */
- - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary *)dictionary;
+ - (BOOL)shouldUpdateEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 /**
- * @brief Override this function to enable all activitiy logs about the current class entity or not.
+ *  @brief Override this function to enable all activitiy logs about the current class entity or not.
  *
- * @return TRUE if log is activated; default is FALSE.
+ *  @return TRUE if log is activated; default is FALSE.
  */
  + (BOOL)verbose;
 
 /**
- * @brief Override this function to set a default sorting key for the current class entity.
+ *  @brief Override this function to set a default sorting key for the current class entity.
  *
- * @return Sorting key as a NSString object; default is nil.
+ *  @return Sorting key as a NSString object; default is nil.
  */
- + (NSString *)sortingAttributeName;
+ + (NSString * _Nullable)sortingAttributeName;
 
 /**
- * @brief Override this function to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
+ *  @brief Override this function to create a predicate used in the CRUD process to find the right entity corresponding to the given dictionary.
  *
- * @param dictionary A NSDictionary object containing information about the database entity to be fetched with.
+ *  @param dictionary A NSDictionary object containing information about the database entity to be fetched with.
  *
- * @discussion This function is called during the CRUD process to fetch an entity from the database.
- * Depending on the returned predicate the manager will update an existing entity or will create a new one.
+ *  @discussion The predicate returned is used in the CRUD process to fetch an entity from the database. Depending on the returned value the manager will create a new entity, update or delete an existing one.
  *
- * If the current function returns:
+ *  The predicate should be created depending on the parameter given `dictionary`.
  *
- * - nil then the CRUD process will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.`
+ *  If the current function returns:
  *
- * - a `false predicate` then the CRUD process will always create a new entity.
+ *  - <i>valid predicate</i>: If existing, the entity found will be used in the CRUD process.
  *
- * Otherwise the CRUD process use the entity found by the predicate.
- * The predicate should be created depending on the parameter: `dictionary`.
+ *  - <i>nil</i>: The CRUD process will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.
  *
- * For example, your entity `Book` could be fetch through its `releaseDate` and `title` attributes.
+ *  - <i>false predicate</i>: The CRUD process will always create a new entity.
  *
- * @see + (instancetype)createEntityFromDictionary:(NSDictionary *)dictionary completion:(void (^)(id entity, DKDBManagedObjectState status))completion;
+ *  - <i>true predicate</i>: The CRUD process will use a random entity in the database. Should not be used.
  *
- * @return A NSPredicate object to find/fetch an entity in the local database.
+ *  For example, your entity `Book` could be fetch through its `releaseDate` and `title` attributes.
+ *
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *
+ *  @return A NSPredicate object to find/fetch an entity in the local database.
  */
- + (NSPredicate *)primaryPredicateWithDictionary:(NSDictionary *)dictionary;
+ + (NSPredicate * _Nullable)primaryPredicateWithDictionary:(NSDictionary * _Nullable)dictionary;
 
 /**
- * @brief Returns all entities of the current class model.
+ *  @brief Returns all entities of the current class model within a specific context.
  *
- * @discussion The values are sorted by the default sorting attribute.
+ *  @discussion The values are sorted by the default sorting attribute.
  *
- * @see + (NSString *)sortingAttributeName;
+ *  @param context The context from where all entities will be fetched.
  *
- * @return A NSArray object containing all entities from the current class model.
+ *  @see + (NSString *)sortingAttributeName;
+ *
+ *  @return A NSArray object containing all entities from the current class model.
  */
-+ (NSArray *)all;
++ (NSArray * _Nullable)allInContext:(NSManagedObjectContext * _Nonnull)context;
 
 /**
- * @brief Count all entities of the current class model.
+ *  @brief Returns all entities of the current class model using the default NSManagedObjectContext object.
  *
- * @return A NSInteger value corresponding to the total number of entities of the current class model.
+ *  @discussion This method uses a NSManagedObjectContext object operating on the main thread (simple and single-threaded operations only).
+ *
+ *  @see + (NSString *)sortingAttributeName;
+ *
+ *  @return A NSArray object containing all entities from the current class model.
  */
- + (NSInteger)count;
++ (NSArray * _Nullable)all;
+
+/**
+ *  @brief Count all entities of the current class model within a specific context.
+ *
+ *  @param context The context from where all entities will be counted.
+ *
+ *  @return A NSInteger value corresponding to the total number of entities of the current class model.
+ */
++ (NSInteger)countInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Count all entities of the current class model using the default NSManagedObjectContext object.
+ *
+ *  @discussion This method uses a NSManagedObjectContext object operating on the main thread (simple and single-threaded operations only).
+ *
+ *  @return A NSInteger value corresponding to the total number of entities of the current class model.
+ */
++ (NSInteger)count;
 
 #pragma mark - UPDATE
 
 /**
- * @brief Override to update the current entity with a given dictionary.
+ *  @brief Override to update the current entity with a given dictionary.
  *
- * @param dictionary A NSDictionary object containing new information about the database entity.
+ *  @param dictionary A NSDictionary object containing new information about the database entity.
  *
- * @discussion Use this function and the given parameter to update the attributes of the current entity.
+ *  @param context The current saving context.
  *
- * Depending on your project and architecture the information/data of the child entities could be inside the dictionary.
- * In this case initiate the CRUD process from this function.
+ *  @discussion Use this function and the given parameter to update the attributes of the current entity.
  *
- * The super function should be called.
+ *  Depending on your project and architecture the information/data of the child entities could be inside the dictionary.
+ *  In this case initiate the CRUD process from this function.
  *
- * For example, a `Book` entity could have some `Images` as child entities.
- * @code
- * super.updateWithDictionary(dictionary)
- * self.id = GET_NUMBER(dict, "id")
- * self.title = GET_STRING(dict, "title")
- * // child entities
- * self.images = Images.createEntitiesFromArray(GET_ARRAY(dict, "images"))
- * @endcode
+ * 	@remark The super function should be called.
+ *
+ *  For example, a `Book` entity could have some `Images` as child entities.
+ *  @code
+ *  override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+ *      super.updateWithDictionary(dictionary)
+ *      self.id = GET_NUMBER(dictionary, "id")
+ *      self.title = GET_STRING(dictionary, "title")
+ *      // child entities
+ *      self.images = Images.createEntitiesFromArray(GET_ARRAY(dictionary, "images"))
+ *  }
+ *  @endcode
  */
-- (void)updateWithDictionary:(NSDictionary *)dictionary;
+- (void)updateWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 #pragma mark - DELETE
 
 /**
- * @brief Check and delete the current entity if invalid.
+ *  @brief Check and delete the current entity if invalid within a given context.
  *
- * @discussion This function verifies the validity of the current entity with the function `invalidReason`.
+ *  @discussion This function verifies the validity of the current entity with the function `invalidReason`.
  *
- * @see - (NSString *)invalidReason
+ *  @param context The current saving context.
  *
- * @return TRUE is the entity has been deleted; otherwise FALSE.
+ *  @see - (NSString *)invalidReason;
+ *
+ *  @return TRUE is the entity has been deleted; otherwise FALSE.
  */
-- (BOOL)deleteIfInvalid;
+- (BOOL)deleteIfInvalidInContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 /**
- * @brief Override this function to delete the child entities of a current entity.
+ *  @brief Override this function to delete the child entities of a current entity within a given context.
  *
- * @discussion To remove an entity one should call `deleteEntityWithReason:`.
- * When doing so the current function is called.
- * The expected behavior is to remove any data store on the disk (like image assets)
- * but also to forward the destruction process to its child entities.
+ *  @param reason A NSString object explaining why the entity is getting removed from the local database.
  *
- * When implementing a DB that matches a distant database (behind an API) this function
- * might also be called when an entity gets deprecated/disabled.
+ *  @param context The current saving context.
  *
- * The super function should be called.
+ *  @remark The reason will be logged only if the `verbose` function returns TRUE for the current class model.
  *
- * For example, an entity `book` has many entities `pages` as children then a good practice is to do:
- * @code
- * super.deleteChildEntities()
- * for page in book.pages {
- *   page.deleteEntityWithReason("parent book removed")
- * }
- * AssetManager.removeCachedImage(book.image)
- * @endcode
+ *  @discussion This function is called from the CRUD process when deleting deprecated entities.
+ *
+ *  The expected behavior is to remove any data stored on the disk (like image assets) <b>and</b> to forward the destruction process to its child entities.
+ *
+ *  @remark The super function should be called after removing child and local entitities.
+ *
+ *  For example, an entity `book` has a cover picture and many `pages` entities:
+ *
+ *  @code
+ *  override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
+ *
+ *      // Remove cover picture
+ *      AssetManager.removeCachedImage(self.coverPicture)
+ *      // Forward the destruction process and its reason to every child entities.
+ *      for page in self.pages {
+ *          page.deleteEntityWithReason("parent book removed", inContext: savingContext)
+ *      }
+ *      // Call the super function
+ *      super.deleteEntityWithReason(reason, inContext: savingContext)
+ *  }
+ *  @endcode
+ *
+ *  @see + (BOOL)verbose;
  */
-- (void)deleteChildEntities;
+- (void)deleteEntityWithReason:(NSString * _Nullable)reason inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 /**
- * @brief Delete the current entity and log the reason.
- *
- * @param reason A NSString object explaining why the entity is getting removed from the local database.
- *
- * @discussion The reason will be logged only if the function `verbose` returns TRUE for the current class model
- *
- * This function also calls the function `deleteChildEntities` for the current entity.
- *
- * @see - (void)deleteChildEntities;
- * @see + (BOOL)verbose;
- */
-- (void)deleteEntityWithReason:(NSString *)reason;
-
-/**
- * @brief Delete all entities from the current class model.
+ * @brief Delete all entities from the current class model within a given context.
  *
  * @discussion All entites for the current class model will be removed.
- * Functions `deleteChildEntities` and `deleteEntityWithReason:` will not be called.
+ *
+ * @remark The function `deleteEntityWithReason:inContext:` will NOT be called.
+ *
+ * @param context The current saving context.
  */
-+ (void)deleteAllEntities;
++ (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 /**
- * @brief Check and remove all deprecated entities from the local database.
+ * @brief Check and remove all deprecated entities from the local database within a given context.
+ *
+ * @discussion The entities are automatically set as not deprecated in the CRUD process.
+ * The ones that are not set will then disappear from the local store.
+ *
+ * Theoretically the entities present in the given array are marked as not depecrated and will not be removed.
  *
  * @param array A NSArray object containing all not deprecated entities for the current class model.
  *
- * @discussion The entities are automatically set as not deprecated in the CRUD process.
- * The ones that are not refreshed/saved before removing all deprecated entities will then disappear from the local store.
+ * @param context The current saving context.
  *
  * @see - (void)saveEntityAsNotDeprecated;
  */
-+ (void)removeDeprecatedEntitiesFromArray:(NSArray *)array;
++ (void)removeDeprecatedEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 @end
 
 #pragma mark - Log
 
 /**
- * Log a string if the verbose boolean is enabled.
+ *  @brief Log a string if the verbose boolean is enabled.
+ *
+ *  @param logEnabled Boolean to enable or not the log.
+ *  @param format     Format of the NSString
+ *  @param ...        Var args
  */
-void        CRUDLog(BOOL logEnabled, NSString *format, ...);
+void CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...);
