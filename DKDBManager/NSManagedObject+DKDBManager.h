@@ -105,6 +105,19 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
 + (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
 /**
+ *  @brief CRUD an empty database entity for the current class model.
+ *
+ *  @discussion The function will use an empty dictionary to create the entity. The usual CRUD process will be used.
+ *
+ *  @param context The current saving context.
+ *
+ *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *
+ *  @return A created/read/updated database entity.
+ */
++ (instancetype _Nullable)createEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext;
+
+/**
  *  @brief CRUD database entities for the current class model from an array of NSDictionary objects.
  *
  *  @param array The NSArray object containing all the NSDictionary objects to CRUD the entities from.

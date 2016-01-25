@@ -25,6 +25,10 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 #pragma mark - CREATE
 
++ (instancetype _Nullable)createEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext {
+	return [self createEntityFromDictionary:NSDictionary.new inContext:savingContext completion:nil];
+}
+
 + (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
     return [self createEntityFromDictionary:dictionary inContext:savingContext completion:nil];
 }
