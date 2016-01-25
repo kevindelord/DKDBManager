@@ -71,6 +71,8 @@ extension Passenger {
 	}
 
 	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+		super.updateWithDictionary(dictionary, inContext: savingContext)
+
 		self.name = GET_STRING(dictionary, JSON.Name)
 		self.age = GET_NUMBER(dictionary, JSON.Age)
 
@@ -82,6 +84,10 @@ extension Passenger {
 	}
 
 	override func invalidReason() -> String? {
+
+		if let invalidReason = super.invalidReason() {
+			return invalidReason
+		}
 
 		guard let name = self.name where (name.characters.count > 0) else {
 			return "Invalid Name"

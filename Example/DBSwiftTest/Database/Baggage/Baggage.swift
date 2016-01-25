@@ -40,10 +40,16 @@ extension Baggage {
 	}
 
 	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+		super.updateWithDictionary(dictionary, inContext: savingContext)
+
 		self.weight = GET_NUMBER(dictionary, JSON.Weight)
 	}
 
 	override func invalidReason() -> String? {
+
+		if let invalidReason = super.invalidReason() {
+			return invalidReason
+		}
 
 		guard let weight = self.weight as? Int where (weight > 0) else {
 			return "Invalid weight"

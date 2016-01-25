@@ -59,6 +59,8 @@ extension Plane {
 	}
 
 	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+		super.updateWithDictionary(dictionary, inContext: savingContext)
+
 		self.origin = GET_STRING(dictionary, JSON.Origin)
 		self.destination = GET_STRING(dictionary, JSON.Destination)
 
@@ -70,6 +72,10 @@ extension Plane {
 	}
 
 	override func invalidReason() -> String? {
+
+		if let invalidReason = super.invalidReason() {
+			return invalidReason
+		}
 
 		guard let origin = self.origin where (origin.characters.count > 0) else {
 			return "Invalid Origin"
