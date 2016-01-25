@@ -12,22 +12,16 @@ static BOOL _verbose = NO;
 static BOOL _resetStoredEntities = NO;
 static BOOL _needForcedUpdate = NO;
 
-@interface DKDBManager () {
-    NSMutableDictionary *   _entities;
-    NSManagedObjectContext *_context;
-}
-
-@end
-
 @implementation DKDBManager
+
+@dynamic storedIdentifiers;
 
 #pragma mark - init method
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _entities = [NSMutableDictionary new];
-        _context = nil;
+        self.storedIdentifiers = [NSMutableDictionary new];
     }
     return self;
 }
@@ -83,9 +77,12 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)cleanUp {
 	[super cleanUp];
+
+	DKDBManager *manager = [DKDBManager sharedInstance];
+	manager.storedIdentifiers = [NSMutableDictionary new];
 }
 
-#pragma mark - Delete methods
+#pragma mark - DELETE
 
 + (BOOL)eraseDatabaseForStoreName:(NSString * _Nonnull)databaseName {
 
@@ -112,7 +109,7 @@ static BOOL _needForcedUpdate = NO;
 
     for (NSString *className in self.entityClassNames) {
         Class class = NSClassFromString(className);
-        [class removeDeprecatedEntitiesFromArray:manager->_entities[className] inContext:(NSManagedObjectContext * _Nonnull)context];
+        [class removeDeprecatedEntitiesFromArray:manager.storedIdentifiers[className] inContext:(NSManagedObjectContext * _Nonnull)context];
     }
 }
 
@@ -139,12 +136,12 @@ static BOOL _needForcedUpdate = NO;
 
     NSString *className = NSStringFromClass([entity class]);
 
-    if (!manager->_entities[className]) {
-        [manager->_entities setValue:[NSMutableArray new] forKey:className];
+    if (!manager.storedIdentifiers[className]) {
+        [manager.storedIdentifiers setValue:[NSMutableArray new] forKey:className];
     }
 
     if ([entity respondsToSelector:@selector(uniqueIdentifier)]) {
-        [manager->_entities[className] addObject:[entity performSelector:@selector(uniqueIdentifier)]];
+        [manager.storedIdentifiers[className] addObject:[entity performSelector:@selector(uniqueIdentifier)]];
     }
 }
 
