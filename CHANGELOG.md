@@ -53,10 +53,14 @@
 ##### DELETE
 
 - Update `deleteIfInvalid` to `deleteIfInvalidInContext:`.
-- Update `deleteAllEntities` to `deleteAllEntitiesInContext:
-- Update `removeDeprecatedEntitiesFromArray:` to `removeDeprecatedEntitiesFromArray:inContext:`
+- Update `deleteAllEntities` to `deleteAllEntitiesInContext:`.
+- Update `removeDeprecatedEntitiesFromArray:` to `removeDeprecatedEntitiesFromArray:inContext:`.
 - Remove `deleteChildEntities` function. Use `deleteEntityWithReason:inContext:` instead.
 
+### External links
+
+- [Apple official documentation](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/HowManagedObjectsarerelated.html)
+- [Magical Record: Working with Managed Object Contexts](https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts)
 
 ## 0.5.3
 
