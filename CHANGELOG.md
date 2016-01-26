@@ -1,5 +1,11 @@
 # DKDBManager CHANGELOG
 
+## 0.6.1
+
+### DKDBManager
+
+- Add `removeAllStoredIdentifiersForClass:` function.
+
 ## 0.6.0
 
 - Rewrite test project in Swift.

@@ -119,6 +119,14 @@ static BOOL _needForcedUpdate = NO;
     [self dumpInContext:context];
 }
 
++ (void)removeAllStoredIdentifiersForClass:(Class _Nullable)class {
+
+	DKDBManager *manager = [DKDBManager sharedInstance];
+
+	NSString *className = NSStringFromClass(class);
+	[manager.storedIdentifiers removeObjectForKey:className];
+}
+
 + (void)deleteAllEntitiesForClass:(Class)class inContext:(NSManagedObjectContext * _Nonnull)context {
     if ([self.entityClassNames containsObject:NSStringFromClass(class)]) {
 		[class deleteAllEntitiesInContext:context];

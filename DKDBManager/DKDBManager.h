@@ -284,6 +284,17 @@
 #pragma mark - Delete methods
 
 /**
+ *  @brief Remove all stored identifiers of non-deprecated entities for a specific class.
+ *
+ *  @remark The related entities will be considered as deprecated by the manager.
+ *
+ *  @see Variable `NSMutableDictionary * storedIdentifiers`
+ *
+ *  @param class The Class object referencing the model to delete the identifiers.
+ */
++ (void)removeAllStoredIdentifiersForClass:(Class _Nullable)class;
+
+/**
  *  @brief Remove all deprecated entities for every model class within a specific context.
  *
  *  @discussion All entities not marked as not deprecated (using the `saveEntityAsNotDeprecated:` method ) will be removed.
