@@ -17,8 +17,9 @@ class DKDBManagerTest: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+		MockManager.reset()
+
+		super.tearDown()
     }
 }
 
@@ -113,6 +114,14 @@ extension DKDBManagerTest  {
 		XCTAssertTrue(MockManager.didResetDatabaseBlockExecuted == false)
 	}
 
+	func testIfSetupDatabaseDidResetWasCalled() {
+		// Set + Call
+		MockManager.setupDatabaseWithName("TestDB")
+
+		// Assert
+		XCTAssertTrue(MockManager.setupDatabseDidResetCalled == true)
+	}
+
 }
 
 // MARK: - Testing dumpCount
@@ -187,6 +196,8 @@ class MockManager : DKDBManager {
 	static var allowsEraseDatabaseForName   	= false
 	static var didResetDatabaseBlockExecuted 	= false
 
+	static var setupDatabseDidResetCalled		= false
+
 	static var demoEntities 					: [NSEntityDescription]?
 
 
@@ -208,6 +219,8 @@ class MockManager : DKDBManager {
 	}
 
 	override class func setupDatabaseWithName(databaseName: String, didResetDatabase: (() -> Void)?) {
+
+		self.setupDatabseDidResetCalled = true
 
 		var didResetDB = false
 		if (DKDBManager.resetStoredEntities() == true) {
@@ -253,6 +266,8 @@ class MockManager : DKDBManager {
 		self.dumpInContextIsCalled 			= true
 	}
 
+	// MARK: - Helpers
+
 	class func addDemoEntityWithName(className: String) {
 
 		if self.demoEntities == nil {
@@ -262,5 +277,15 @@ class MockManager : DKDBManager {
 		let entity 							= NSEntityDescription()
 		entity.managedObjectClassName 		= className
 		self.demoEntities?.append(entity)
+	}
+
+	class func reset() {
+		self.context						= NSManagedObjectContext()
+		self.dumpCountInContextIsCalled 	= false
+		self.dumpInContextIsCalled	 		= false
+		self.allowsEraseDatabaseForName   	= false
+		self.didResetDatabaseBlockExecuted 	= false
+		self.setupDatabseDidResetCalled		= false
+		self.demoEntities?.removeAll()
 	}
 }
