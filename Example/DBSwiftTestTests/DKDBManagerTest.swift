@@ -41,7 +41,23 @@ extension DKDBManagerTest {
 	}
 }
 
+// MARK: - Testing CleanUp
+
+extension DKDBManagerTest {
+
+	func testCleanUpShouldDeleteStoredIdentifiers() {
+
+		// Set + Call
+		MockManager.cleanUp()
+
+		// Assert
+		XCTAssertTrue(MockManager.sharedInstance().storedIdentifiers.count == 0)
+	}
+
+}
+
 // MARK: - Testing Log Methods
+
 // MARK: - Testing setVerbose
 
 extension DKDBManagerTest {
