@@ -37,7 +37,7 @@ extension DKDBManagerTest {
 		MockManager.addDemoEntityWithName("TestClassB")
 
 		// Call + Assert
-		XCTAssertEqual(["TestClass","TestClassA","TestClassB"], MockManager.entityClassNames() as! [String])
+		XCTAssertEqual(["TestClass","TestClassA","TestClassB"], (MockManager.entityClassNames() as? [String]) ?? [])
 	}
 }
 
