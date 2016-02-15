@@ -1,5 +1,12 @@
 # DKDBManager CHANGELOG
 
+## 0.6.2
+
+### DKDBManager
+
+- Add `removeAllStoredIdentifiers` function.
+- Add `removeDeprecatedEntitiesInContext:forClass:` function.
+
 ## 0.6.1
 
 ### DKDBManager
