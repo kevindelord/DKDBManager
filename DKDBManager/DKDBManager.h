@@ -284,6 +284,15 @@
 #pragma mark - Delete methods
 
 /**
+ *  @brief Remove all stored identifiers of non-deprecated entities.
+ *
+ *  @remark The related entities will be considered as deprecated by the manager.
+ *
+ *  @see Variable `NSMutableDictionary * storedIdentifiers`
+ */
++ (void)removeAllStoredIdentifiers;
+
+/**
  *  @brief Remove all stored identifiers of non-deprecated entities for a specific class.
  *
  *  @remark The related entities will be considered as deprecated by the manager.
@@ -292,7 +301,7 @@
  *
  *  @param class The Class object referencing the model to delete the identifiers.
  */
-+ (void)removeAllStoredIdentifiersForClass:(Class _Nullable)class;
++ (void)removeAllStoredIdentifiersForClass:(Class _Nonnull)class;
 
 /**
  *  @brief Remove all deprecated entities for every model class within a specific context.
@@ -306,6 +315,21 @@
  *  @param context Database context to remove the entities from.
  */
 + (void)removeDeprecatedEntitiesInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Remove all deprecated entities for one specific model class within a specific context.
+ *
+ *  @discussion All entities not marked as not deprecated (using the `saveEntityAsNotDeprecated:` method ) will be removed.
+ *
+ *  This function calls `removeDeprecatedEntitiesFromArray:inContext:` method for each model class returned by the `entityClassNames` function.
+ *
+ *  @remark The `cleanUp` function is called.
+ *
+ *  @param context Database context to remove the entities from.
+ *
+ *  @param class The Class object referencing the model to remove the deprecated entities.
+ */
++ (void)removeDeprecatedEntitiesInContext:(NSManagedObjectContext * _Nonnull)context forClass:(Class _Nonnull)class;
 
 /**
  *  @brief Performs a `cleanUp` and completely remove the sqlite file from the disk.

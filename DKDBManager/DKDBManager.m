@@ -111,6 +111,15 @@ static BOOL _needForcedUpdate = NO;
     }
 }
 
++ (void)removeDeprecatedEntitiesInContext:(NSManagedObjectContext * _Nonnull)context forClass:(Class _Nonnull)class {
+	DKDBManager *manager = [DKDBManager sharedInstance];
+
+	CRUDLog(self.verbose, @"-------------- Removing deprecated entities for class -----------------");
+
+	NSString *className = NSStringFromClass(class);
+	[class removeDeprecatedEntitiesFromArray:manager.storedIdentifiers[className] inContext:(NSManagedObjectContext * _Nonnull)context];
+}
+
 + (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)context {
     for (NSString *className in self.entityClassNames) {
         Class class = NSClassFromString(className);
@@ -119,7 +128,14 @@ static BOOL _needForcedUpdate = NO;
     [self dumpInContext:context];
 }
 
-+ (void)removeAllStoredIdentifiersForClass:(Class _Nullable)class {
++ (void)removeAllStoredIdentifiers {
+
+    DKDBManager *manager = [DKDBManager sharedInstance];
+
+	[manager.storedIdentifiers removeAllObjects];
+}
+
++ (void)removeAllStoredIdentifiersForClass:(Class _Nonnull)class {
 
 	DKDBManager *manager = [DKDBManager sharedInstance];
 
