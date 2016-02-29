@@ -20,95 +20,15 @@ The complete documentation is available on [CocoaDocs](http://cocoadocs.org/docs
 
 The library is explained using Swift code. For an Obj-C example see the sample projects.
 
-## Installation
+## Try it!
 
-DKDBManager is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+`pod try DKDBManager`
 
-    pod "DKDBManager"
 
-and run `pod install` from the main directory.
 
-## Getting Started
 
-To get started, first import the header file DKDBManager.h in your project's .pch or bridge-header file. This will import all required headers for `Magical Record` and `CoredData`.
 
-    #import "DKDBManager.h"
 
-As the `DKDBManager` is a light wrapper around [Magical Record](https://github.com/magicalpanda/MagicalRecord) you’ll first need to implement some minor methods within your AppDelegate. After that you still have to generate your model classes and create categories (or extensions in Swift).
-
-### AppDelegate using DKDBManager
-
-First you need to setup the CoreData stack with a specific file name. Of course you can play with the name to change your database on startup whenever you would like to.
-A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.
-You could also subclass the DKDBManager and wrap the following in a dedicated class. 
-
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-		var didResetDB = DKDBManager.setupDatabaseWithName("DKDatabaseName.sqlite")
-		if (didResetDB) {
-			// The database is fresh new.
-			// Depending on your needs you might want to do something special right now, such as:
-			// - Setting up some user defaults.
-			// - Deal with your api/store manager.
-			// etc.
-        }
-        // Starting at this point your database is ready to use.
-		// You can now create any object you want.
-
-        return true
-	}
-
-	func applicationWillTerminate(application: UIApplication) {
-		DKDBManager.cleanUp()
-	}
-
-### Configuration
-
-You can configure how the manager will react on execution. Add the following **optional** lines before calling `setupDatabaseWithName:`:
-
-[+ verbose](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/verbose) to toggle the log.
-
-	DKDBManager.setVerbose(true)
-
-[+ allowUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/allowUpdate) to allow the manager to update the entities when parsing new data.
-
-	DKDBManager.setAllowUpdate(true)
-
-[+ resetStoredEntities](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/resetStoredEntities) to completely reset the database on startup.
-Instead of removing your app from the simulator just activate this flag and the local DB will be brand new when your app starts.
-
-	DKDBManager.setResetStoredEntities(false)
-
-[+ needForcedUpdate](http://cocoadocs.org/docsets/DKDBManager/0.5.2/Classes/DKDBManager.html#//api/name/needForcedUpdate) to force the manager to update the entities during the CRUD process.
-
-    DKDBManager.setNeedForcedUpdate(false)
-
-### Models Configuration
-
-The model configuration is done as in any other CoreData project.
-
-First create and configure your model entities inside the `.xcdatamodel` file.
-Then generate with Xcode the NSManagedObject subclasses as you are used to.
-
-After that, create category files (or extensions in Swift) for each model class.
-The functions and logic will be implemented in those files. (If it were to be done in the generated files, your changes would be removed every time you generate them again.)
-
-_Example_: `Book.swift` and `Book+DKDBManager.swift`
-
-__warning__ If your code is in Swift you can either generate the NSManagedObject subclasses in _Swift_ or _Obj-C_.
-
-- _Swift_: add `@objc(ClassName)` before the implementation:
-
-		@objc(Book)
-		class Book: NSManagedObject {
-			@NSManaged var name: NSString?
-			@NSManaged var order: NSNumber?
-		}
-
-- _Obj-C_: import the class header in the bridge-header file.
-
-		#import "Book.h"
 
 ## Simple local database
 
