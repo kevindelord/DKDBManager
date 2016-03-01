@@ -10,11 +10,9 @@ DKDBManager is a simple, yet very useful, CRUD manager around [Magical Record](h
 
 It implements a logic around the database that helps the developer to manage his entities and let him focus on other things than only data management.
 
-The implemented *CRUD* logic  you will be able to focus on other things than the “classic” repetitive and boring data management.
-
 The main concept is to import JSON dictionaries representing entities into the database. 
 
-Only one single function is needed to create, read, update or delete your entities!
+After some configuration on your model classes, only one single function is needed to _create_, _read_, _update_ or _delete_ your entities!
 
 ## Documentation
 
