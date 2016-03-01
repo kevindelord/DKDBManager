@@ -28,13 +28,7 @@ class Passenger: NSManagedObject {
 	}
 
 	func entityInContext(context: NSManagedObjectContext) -> Passenger? {
-		if let
-			name = self.name,
-			age = self.age {
-				let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Name, name, JSON.Age, age)
-				return Passenger.MR_findFirstWithPredicate(predicate, inContext: context)
-		}
-		return nil
+		return self.MR_inContext(context)
 	}
 }
 
