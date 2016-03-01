@@ -227,7 +227,7 @@
 /**
  *  @brief Asynchronously executes and saves modifications into the persistent store.
  *
- *  @discussion Saving operations are done on a background thread.
+ *  @discussion Perform saving operations on a background thread.
  *
  *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
  *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
@@ -239,7 +239,7 @@
 /**
  *  @brief Asynchronously executes and saves modifications into the persistent store and executes the completion block when it is done.
  *
- *  @discussion Saving operations are done on a background thread. The completion block is called on the main one.
+ *  @discussion Perform saving operations on a background thread. The completion block is called on the main one.
  *
  *  @see Official documentation: https://github.com/magicalpanda/MagicalRecord/wiki/Saving-Entities
  *  @see Mobe about NSManagedObjectContext: https://github.com/magicalpanda/MagicalRecord/wiki/Working-with-Managed-Object-Contexts
@@ -251,9 +251,9 @@
 + (void)saveWithBlock:(void(^ _Nullable)(NSManagedObjectContext * _Nonnull savingContext))block completion:(MRSaveCompletionHandler _Nullable)completion;
 
 /**
- *  @brief Synchronously executes and saves modificiations into its persistent store.
+ *  @brief Synchronously executes and saves modifications into the persistent store.
  *
- *  @discussion Saving operations done on the main thread. Be careful and using such function, it could slow down your application.
+ *  @discussion Perform saving operations on the main thread. Be careful by using such function, it could slow down your application.
  *
  *  Nonetheless this is very useful when you're managing your own threads/queues and need a serial call to create or change data.
  *
