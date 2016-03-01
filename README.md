@@ -6,17 +6,21 @@
 
 ## Concept
 
-DKDBManager is a simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord) (a wonderful CoreData wrapper). The current library will implement a logic around it and helps the developer to manage his entities.
+DKDBManager is a simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). 
 
-Through the implemented *CRUD* logic you will be able to focus on other things than the “classic” repetitive and boring data management.
+It implements a logic around the database that helps the developer to manage his entities and let him focus on other things than only data management.
 
-The main concept is to use JSON dictionaries representing your entities. The logic to create, read or update your entities is done with just one single function. The delete logic has also been improved with a `deprecated` state.
+The implemented *CRUD* logic  you will be able to focus on other things than the “classic” repetitive and boring data management.
+
+The main concept is to import JSON dictionaries representing entities into the database. 
+
+Only one single function is needed to create, read, update or delete your entities!
 
 ## Documentation
 
 The complete documentation is available on [CocoaDocs](http://cocoadocs.org/docsets/DKDBManager).
 
-More over, the [Wiki](https://github.com/kevindelord/DKDBManager/wiki) contains all kind of information and details the different logics of the library.
+More over, the [Wiki](https://github.com/kevindelord/DKDBManager/wiki) contains all kind of information and details about the different logics of the library.
 
 - [Setup](https://github.com/kevindelord/dkdbmanager/wiki#setup)
 - [Configuration](https://github.com/kevindelord/dkdbmanager/wiki#configuration)
@@ -29,7 +33,7 @@ More over, the [Wiki](https://github.com/kevindelord/DKDBManager/wiki) contains 
 
 Checkout the example project:
 
-	`pod try DKDBManager`
+	$> pod try DKDBManager
 
 ## Author
 
