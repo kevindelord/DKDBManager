@@ -26,10 +26,6 @@ class Passenger: NSManagedObject {
 		let sortDescriptor = NSSortDescriptor(key: JSON.Weight, ascending: true)
 		return (self.allBaggages.sortedArrayUsingDescriptors([sortDescriptor]) as? [Baggage] ?? [])
 	}
-
-	func entityInContext(context: NSManagedObjectContext) -> Passenger? {
-		return self.MR_inContext(context)
-	}
 }
 
 // MARK: - DKDBManager

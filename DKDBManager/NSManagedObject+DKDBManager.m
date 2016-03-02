@@ -160,6 +160,14 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 	return [self allInContext:NSManagedObjectContext.MR_defaultContext];
 }
 
+- (instancetype _Nullable)entityInContext:(NSManagedObjectContext * _Nonnull)context {
+	return [self MR_inContext:context];
+}
+
+- (instancetype _Nullable)entityInDefaultContext {
+	return [self MR_inContext:NSManagedObjectContext.MR_defaultContext];
+}
+
 #pragma mark - UPDATE
 
 - (void)updateWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {

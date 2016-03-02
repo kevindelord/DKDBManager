@@ -339,6 +339,24 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  */
 + (NSInteger)count;
 
+/**
+ *  @brief Fetch the current entity from the given database context.
+ *
+ *  @param context The context from where the entity will be retrieve.
+ *
+ *  @return The fetched database entity if found; nil otherwise.
+ */
+- (instancetype _Nullable)entityInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Fetch the current entity from the current database context.
+ *
+ *  @dicussion This funciton will use the default NSManagedObjectContext object.
+ *
+ *  @return The fetched database entity if found; nil otherwise.
+ */
+- (instancetype _Nullable)entityInDefaultContext;
+
 #pragma mark - UPDATE
 
 /**

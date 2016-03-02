@@ -26,10 +26,6 @@ class Plane: NSManagedObject {
 		let sortDescriptor = NSSortDescriptor(key: JSON.Name, ascending: true)
 		return (self.allPassengers.sortedArrayUsingDescriptors([sortDescriptor]) as? [Passenger] ?? [])
 	}
-
-	func entityInContext(context: NSManagedObjectContext) -> Plane? {
-		return self.MR_inContext(context)
-	}
 }
 
 // MARK: - DKDBManager
