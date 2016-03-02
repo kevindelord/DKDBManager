@@ -114,7 +114,7 @@ extension Passenger {
 			age = GET_NUMBER(dictionary, JSON.Age) {
 				return NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Name, name, JSON.Age, age)
 		}
-		return nil
+		return super.primaryPredicateWithDictionary(dictionary)
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {

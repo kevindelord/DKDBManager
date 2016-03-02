@@ -277,7 +277,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @discussion The predicate returned is used in the CRUD process to fetch an entity from the database. Depending on the returned value the manager will create a new entity, update or delete an existing one.
  *
- *  The predicate should be created depending on the parameter given `dictionary`.
+ *  The predicate should be created depending on the given parameter `dictionary`.
  *
  *  If the current function returns:
  *
@@ -290,6 +290,8 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *  - <i>true predicate</i>: The CRUD process will use a random entity in the database. Should not be used.
  *
  *  For example, your entity `Book` could be fetch through its `releaseDate` and `title` attributes.
+ *
+ *  Default: Returns a `false predicate`.
  *
  *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *

@@ -106,7 +106,7 @@ extension Plane {
 			destination = GET_STRING(dictionary, JSON.Destination) {
 				return NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, origin, JSON.Destination, destination)
 		}
-		return nil
+		return super.primaryPredicateWithDictionary(dictionary)
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
