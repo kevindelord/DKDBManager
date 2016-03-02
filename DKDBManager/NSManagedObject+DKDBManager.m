@@ -132,9 +132,10 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 + (NSPredicate * _Nullable)primaryPredicateWithDictionary:(NSDictionary * _Nullable)dictionary {
     // If returns nil will only take the first entity created (if any) and update it. By doing so only ONE entity will ever be created.
-    // If returns a `false predicate` then a new entity will always be created.
+    // If returns a `false predicate` a new entity will always be created.
+	// If returns a `true predicate` a random entity will be retrieved.
     // Otherwise the CRUD process use the entity found by the predicate.
-    return nil;
+    return [NSPredicate predicateWithFormat:@"FALSEPREDICATE"];
 }
 
 + (NSString * _Nullable)sortingAttributeName {
@@ -158,6 +159,14 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 + (NSArray * _Nullable)all {
 	return [self allInContext:NSManagedObjectContext.MR_defaultContext];
+}
+
+- (instancetype _Nullable)entityInContext:(NSManagedObjectContext * _Nonnull)context {
+	return [self MR_inContext:context];
+}
+
+- (instancetype _Nullable)entityInDefaultContext {
+	return [self MR_inContext:NSManagedObjectContext.MR_defaultContext];
 }
 
 #pragma mark - UPDATE

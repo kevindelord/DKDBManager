@@ -26,16 +26,6 @@ class Plane: NSManagedObject {
 		let sortDescriptor = NSSortDescriptor(key: JSON.Name, ascending: true)
 		return (self.allPassengers.sortedArrayUsingDescriptors([sortDescriptor]) as? [Passenger] ?? [])
 	}
-
-	func entityInContext(context: NSManagedObjectContext) -> Plane? {
-		if let
-			origin = self.origin,
-			destination = self.destination {
-				let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, origin, JSON.Destination, destination)
-				return Plane.MR_findFirstWithPredicate(predicate, inContext: context)
-		}
-		return nil
-	}
 }
 
 // MARK: - DKDBManager
@@ -116,7 +106,7 @@ extension Plane {
 			destination = GET_STRING(dictionary, JSON.Destination) {
 				return NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, origin, JSON.Destination, destination)
 		}
-		return nil
+		return super.primaryPredicateWithDictionary(dictionary)
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {

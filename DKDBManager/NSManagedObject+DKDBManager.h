@@ -277,7 +277,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @discussion The predicate returned is used in the CRUD process to fetch an entity from the database. Depending on the returned value the manager will create a new entity, update or delete an existing one.
  *
- *  The predicate should be created depending on the parameter given `dictionary`.
+ *  The predicate should be created depending on the given parameter `dictionary`.
  *
  *  If the current function returns:
  *
@@ -290,6 +290,8 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *  - <i>true predicate</i>: The CRUD process will use a random entity in the database. Should not be used.
  *
  *  For example, your entity `Book` could be fetch through its `releaseDate` and `title` attributes.
+ *
+ *  Default: Returns a `false predicate`.
  *
  *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
  *
@@ -338,6 +340,24 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *  @return A NSInteger value corresponding to the total number of entities of the current class model.
  */
 + (NSInteger)count;
+
+/**
+ *  @brief Fetch the current entity from the given database context.
+ *
+ *  @param context The context from where the entity will be retrieve.
+ *
+ *  @return The fetched database entity if found; nil otherwise.
+ */
+- (instancetype _Nullable)entityInContext:(NSManagedObjectContext * _Nonnull)context;
+
+/**
+ *  @brief Fetch the current entity from the current database context.
+ *
+ *  @dicussion This funciton will use the default NSManagedObjectContext object.
+ *
+ *  @return The fetched database entity if found; nil otherwise.
+ */
+- (instancetype _Nullable)entityInDefaultContext;
 
 #pragma mark - UPDATE
 

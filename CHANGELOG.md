@@ -1,5 +1,16 @@
 # DKDBManager CHANGELOG
 
+## 0.6.3
+
+### DKDBManager
+
+- Add `entityInContext:`function.
+- Add `entityInDefaultContext` function.
+
+### NSManagedObjectContext
+
+- By default, `primaryPredicateWithDictionary:` now returns a FALSEPREDICATE. Unless it is overridden, the library will always create a new entity instead of reusing old ones.
+
 ## 0.6.2
 
 ### DKDBManager
