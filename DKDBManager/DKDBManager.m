@@ -251,21 +251,22 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)dumpCountInContext:(NSManagedObjectContext * _Nonnull)context {
 
-    if (self.verbose == false) {
-        return ;
-    }
+	if (self.verbose == false) {
+		return ;
+	}
 
-    NSString *count = @"";
+	NSString *count = @"";
 
-    for (NSString *className in self.entityClassNames) {
-        Class class = NSClassFromString(className);
+	for (NSString *className in self.entityClassNames) {
+		[DKDBManager checkClassValidity:className];
+		Class class = NSClassFromString(className);
 		unsigned long value = (unsigned long)[class performSelector:@selector(countInContext:) withObject:context];
 		count = [NSString stringWithFormat:@"%@%ld %@, ", count, value, className];
-    }
+	}
 
-    CRUDLog(self.verbose, @"-------------------------------------");
-    CRUDLog(self.verbose, @"%@", count);
-    CRUDLog(self.verbose, @"-------------------------------------");
+	CRUDLog(self.verbose, @"-------------------------------------");
+	CRUDLog(self.verbose, @"%@", count);
+	CRUDLog(self.verbose, @"-------------------------------------");
 }
 
 + (void)dumpCount {
@@ -274,28 +275,38 @@ static BOOL _needForcedUpdate = NO;
 
 + (void)dumpInContext:(NSManagedObjectContext * _Nonnull)context {
 
-    if (self.verbose == false) {
-        return ;
-    }
+	if (self.verbose == false) {
+		return ;
+	}
 
-    [self dumpCountInContext:context];
+	[self dumpCountInContext:context];
 
-    for (NSString *className in self.entityClassNames) {
-        Class class = NSClassFromString(className);
-        if (class.verbose == true) {
+	for (NSString *className in self.entityClassNames) {
+		[DKDBManager checkClassValidity:className];
+		Class class = NSClassFromString(className);
+		if (class.verbose == true) {
 			NSArray * allValues = (NSArray *)[class performSelector:@selector(allInContext:) withObject:context];
 			if (allValues != nil) {
 				for (id entity in allValues) {
 					NSLog(@"%@ %@", className, entity);
 				}
 			}
-            CRUDLog(self.verbose, @"-------------------------------------");
-        }
-    }
+		}
+
+		CRUDLog(self.verbose, @"-------------------------------------");
+	}
 }
 
 + (void)dump {
 	[self dumpInContext:NSManagedObjectContext.MR_defaultContext];
+}
+
+#pragma mark - Log
+
++ (void)checkClassValidity:(NSString *)className {
+	if ([className isEqualToString:NSStringFromClass([NSManagedObject class])] == true) {
+		NSAssert(false, @"ERROR: Invalid Datamodel: One of the model class in the datamodel is not configure as a custom class but as a default NSManagedObject one.");
+	}
 }
 
 @end
