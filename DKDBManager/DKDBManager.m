@@ -66,7 +66,10 @@ static BOOL _needForcedUpdate = NO;
 	}
 
 	// Check the validity of all model classes.
-	self.entityClassNames;
+	NSArray *classes = self.entityClassNames;
+	if (classes.count > 0) {
+		CRUDLog(self.verbose, @"The datamodel contains the following classes: %@", classes);
+	}
 }
 
 + (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName {
