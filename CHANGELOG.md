@@ -1,5 +1,11 @@
 # DKDBManager CHANGELOG
 
+## 0.6.5
+
+### DKDBManager
+
+- Improve log by removing useless extra log lines.
+
 ## 0.6.4
 
 ### DKDBManager
