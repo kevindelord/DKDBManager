@@ -39,7 +39,9 @@ static BOOL _needForcedUpdate = NO;
     NSMutableArray *classNames = [NSMutableArray new];
     for (NSEntityDescription *desc in [NSManagedObjectModel MR_defaultManagedObjectModel].entities) {
         if (desc.isAbstract == false) {
-            [classNames addObject:desc.managedObjectClassName];
+			NSString *className = desc.managedObjectClassName;
+			[DKDBManager checkClassValidity:className];
+			[classNames addObject:className];
         }
     }
     return classNames;
@@ -62,6 +64,9 @@ static BOOL _needForcedUpdate = NO;
 	if (didResetDB == true && didResetDatabaseBlock != nil) {
 		didResetDatabaseBlock();
 	}
+
+	// Check the validity of all model classes.
+	self.entityClassNames;
 }
 
 + (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName {
@@ -258,7 +263,6 @@ static BOOL _needForcedUpdate = NO;
 	NSString *count = @"";
 
 	for (NSString *className in self.entityClassNames) {
-		[DKDBManager checkClassValidity:className];
 		Class class = NSClassFromString(className);
 		unsigned long value = (unsigned long)[class performSelector:@selector(countInContext:) withObject:context];
 		count = [NSString stringWithFormat:@"%@%ld %@, ", count, value, className];
@@ -282,7 +286,6 @@ static BOOL _needForcedUpdate = NO;
 	[self dumpCountInContext:context];
 
 	for (NSString *className in self.entityClassNames) {
-		[DKDBManager checkClassValidity:className];
 		Class class = NSClassFromString(className);
 		if (class.verbose == true) {
 			NSArray * allValues = (NSArray *)[class performSelector:@selector(allInContext:) withObject:context];
