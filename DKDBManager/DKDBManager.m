@@ -271,9 +271,11 @@ static BOOL _needForcedUpdate = NO;
 		count = [NSString stringWithFormat:@"%@%ld %@, ", count, value, className];
 	}
 
-	CRUDLog(self.verbose, @"-------------------------------------");
-	CRUDLog(self.verbose, @"%@", count);
-	CRUDLog(self.verbose, @"-------------------------------------");
+	if ([count isEqualToString:@""] == false) {
+		CRUDLog(self.verbose, @"-------------------------------------");
+		CRUDLog(self.verbose, @"%@", count);
+		CRUDLog(self.verbose, @"-------------------------------------");
+	}
 }
 
 + (void)dumpCount {
@@ -290,16 +292,17 @@ static BOOL _needForcedUpdate = NO;
 
 	for (NSString *className in self.entityClassNames) {
 		Class class = NSClassFromString(className);
+		BOOL didLogSomething = false;
 		if (class.verbose == true) {
 			NSArray * allValues = (NSArray *)[class performSelector:@selector(allInContext:) withObject:context];
 			if (allValues != nil) {
 				for (id entity in allValues) {
 					NSLog(@"%@ %@", className, entity);
+					didLogSomething = true;
 				}
 			}
 		}
-
-		CRUDLog(self.verbose, @"-------------------------------------");
+		CRUDLog((self.verbose && didLogSomething == true), @"-------------------------------------");
 	}
 }
 
