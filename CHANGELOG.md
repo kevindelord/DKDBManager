@@ -1,5 +1,11 @@
 # DKDBManager CHANGELOG
 
+## 0.6.4
+
+### DKDBManager
+
+- Now check on setup if all non-abstract model class are correctly configured as a custom class.
+
 ## 0.6.3
 
 ### DKDBManager
