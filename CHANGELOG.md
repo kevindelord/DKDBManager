@@ -5,6 +5,7 @@
 ### DKDBManager
 
 - Now check on setup if all non-abstract model class are correctly configured as a custom class.
+- Improve log on start: now display the model classes.
 
 ## 0.6.3
 
