@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		754831B41D1059EA008E6368 /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
+		754831B51D1059F1008E6368 /* DKDBManager.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		754831BB1D105B1C008E6368 /* DKHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; };
+		754831BC1D105B1C008E6368 /* DKHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; };
+		754831BD1D105B25008E6368 /* DKHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		754831BE1D105B2B008E6368 /* DKHelper.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75BF83571D1049D9005028BF /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
 		75BF83581D1049D9005028BF /* DKDBManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75BF83661D1049F8005028BF /* DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BF83601D1049F7005028BF /* DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,9 +39,7 @@
 		75BF83821D104AEC005028BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */; };
 		75BF83831D104AEC005028BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C31C5299EE00E146D0 /* Main.storyboard */; };
 		75D880481D104FB20058024B /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; };
-		75DEDF721D105190007B9011 /* DKHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DEDF711D105190007B9011 /* DKHelper.framework */; };
 		75DEDF731D105217007B9011 /* MagicalRecord.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		75DEDF741D10533A007B9011 /* DKHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75DEDF711D105190007B9011 /* DKHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75FF77CD1C5299EE00E146D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */; };
 		75FF77CF1C5299EE00E146D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AF1C5299EE00E146D0 /* Constants.swift */; };
 		75FF77D11C5299EE00E146D0 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */; };
@@ -69,6 +73,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		759148671D105711005FCD2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75BF83411D1049D9005028BF;
+			remoteInfo = DKDBManager;
+		};
 		75BF83551D1049D9005028BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
@@ -76,23 +87,28 @@
 			remoteGlobalIDString = 75BF83411D1049D9005028BF;
 			remoteInfo = DKDBManager;
 		};
-		75C5CB5219DBE8DA002BA192 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 75C5CB3819DBE8DA002BA192;
-			remoteInfo = DBSwiftTest;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		759148631D1055AD005FCD2D /* Embedded Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				754831BE1D105B2B008E6368 /* DKHelper.framework in Embedded Frameworks */,
+				754831B51D1059F1008E6368 /* DKDBManager.framework in Embedded Frameworks */,
+			);
+			name = "Embedded Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75BF835C1D1049D9005028BF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				75DEDF741D10533A007B9011 /* DKHelper.framework in Embed Frameworks */,
+				754831BD1D105B25008E6368 /* DKHelper.framework in Embed Frameworks */,
 				75BF83581D1049D9005028BF /* DKDBManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -122,6 +138,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		754831BA1D105B1C008E6368 /* DKHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DKHelper.framework; path = ../Carthage/Build/iOS/DKHelper.framework; sourceTree = "<group>"; };
 		75BF83421D1049D9005028BF /* DKDBManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DKDBManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BF83601D1049F7005028BF /* DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DKDBManager.h; path = ../../DKDBManager/DKDBManager.h; sourceTree = "<group>"; };
 		75BF83611D1049F8005028BF /* DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DKDBManager.m; path = ../../DKDBManager/DKDBManager.m; sourceTree = "<group>"; };
@@ -129,11 +146,10 @@
 		75BF83631D1049F8005028BF /* NSManagedObject+DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+DKDBManager.m"; path = "../../DKDBManager/NSManagedObject+DKDBManager.m"; sourceTree = "<group>"; };
 		75BF83641D1049F8005028BF /* NSManagedObject+ExistingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+ExistingObject.h"; path = "../../DKDBManager/NSManagedObject+ExistingObject.h"; sourceTree = "<group>"; };
 		75BF83651D1049F8005028BF /* NSManagedObject+ExistingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+ExistingObject.m"; path = "../../DKDBManager/NSManagedObject+ExistingObject.m"; sourceTree = "<group>"; };
-		75BF83891D104AEC005028BF /* Example-Cocoapods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Cocoapods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BF83891D104AEC005028BF /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB3919DBE8DA002BA192 /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKDBManager.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D880451D104FB20058024B /* MagicalRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MagicalRecord.framework; path = ../Carthage/Build/iOS/MagicalRecord.framework; sourceTree = "<group>"; };
-		75DEDF711D105190007B9011 /* DKHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DKHelper.framework; path = ../Carthage/Build/iOS/DKHelper.framework; sourceTree = "<group>"; };
 		75E0E9DF1D104C9800F9EE4E /* DKDBManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DKDBManager-Info.plist"; sourceTree = "<group>"; };
 		75E0E9E01D104C9800F9EE4E /* DKDBManagerTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DKDBManagerTest-Info.plist"; sourceTree = "<group>"; };
 		75E0E9E11D104C9800F9EE4E /* Example-Carthage-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Example-Carthage-Info.plist"; sourceTree = "<group>"; };
@@ -184,7 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75BF83571D1049D9005028BF /* DKDBManager.framework in Frameworks */,
-				75DEDF721D105190007B9011 /* DKHelper.framework in Frameworks */,
+				754831BB1D105B1C008E6368 /* DKHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +208,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				754831B41D1059EA008E6368 /* DKDBManager.framework in Frameworks */,
+				754831BC1D105B1C008E6368 /* DKHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +228,7 @@
 		57ACE6FE14D0414F1F765DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				75DEDF711D105190007B9011 /* DKHelper.framework */,
+				754831BA1D105B1C008E6368 /* DKHelper.framework */,
 				75D880451D104FB20058024B /* MagicalRecord.framework */,
 				AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */,
 			);
@@ -249,7 +267,7 @@
 				75C5CB3919DBE8DA002BA192 /* DKDBManager.app */,
 				75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */,
 				75BF83421D1049D9005028BF /* DKDBManager.framework */,
-				75BF83891D104AEC005028BF /* Example-Cocoapods.app */,
+				75BF83891D104AEC005028BF /* DKDBManager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -401,7 +419,7 @@
 			);
 			name = "Example-Cocoapods";
 			productName = DBSwiftTest;
-			productReference = 75BF83891D104AEC005028BF /* Example-Cocoapods.app */;
+			productReference = 75BF83891D104AEC005028BF /* DKDBManager.app */;
 			productType = "com.apple.product-type.application";
 		};
 		75C5CB3819DBE8DA002BA192 /* Example-Carthage */ = {
@@ -430,11 +448,12 @@
 				75C5CB4D19DBE8DA002BA192 /* Sources */,
 				75C5CB4E19DBE8DA002BA192 /* Frameworks */,
 				75C5CB4F19DBE8DA002BA192 /* Resources */,
+				759148631D1055AD005FCD2D /* Embedded Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				75C5CB5319DBE8DA002BA192 /* PBXTargetDependency */,
+				759148681D105711005FCD2D /* PBXTargetDependency */,
 			);
 			name = DKDBManagerTests;
 			productName = DBSwiftTestTests;
@@ -644,15 +663,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		759148681D105711005FCD2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75BF83411D1049D9005028BF /* DKDBManager */;
+			targetProxy = 759148671D105711005FCD2D /* PBXContainerItemProxy */;
+		};
 		75BF83561D1049D9005028BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 75BF83411D1049D9005028BF /* DKDBManager */;
 			targetProxy = 75BF83551D1049D9005028BF /* PBXContainerItemProxy */;
-		};
-		75C5CB5319DBE8DA002BA192 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 75C5CB3819DBE8DA002BA192 /* Example-Carthage */;
-			targetProxy = 75C5CB5219DBE8DA002BA192 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -680,25 +699,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 21;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Carthage/Build/iOS/",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/PLists/DKDBManager-Info.plist";
+				INFOPLIST_FILE = "PLists/DKDBManager-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -709,25 +725,22 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 21;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Carthage/Build/iOS/",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/PLists/DKDBManager-Info.plist";
+				INFOPLIST_FILE = "PLists/DKDBManager-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -738,12 +751,13 @@
 			baseConfigurationReference = 9FD235B965D5CBD0F89A2C38 /* Pods-Example-Cocoapods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 21;
 				INFOPLIST_FILE = "PLists/Example-Cocoapods-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Cocoapods";
 				PRODUCT_MODULE_NAME = Example;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Debug;
@@ -753,12 +767,13 @@
 			baseConfigurationReference = FEE1FBC1EE8BAC753F15485A /* Pods-Example-Cocoapods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 21;
 				INFOPLIST_FILE = "PLists/Example-Cocoapods-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Cocoapods";
 				PRODUCT_MODULE_NAME = Example;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Release;
@@ -847,11 +862,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 21;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/PLists/Example-Carthage-Info.plist";
+				INFOPLIST_FILE = "PLists/Example-Carthage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Carthage";
@@ -865,11 +881,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 21;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/PLists/Example-Carthage-Info.plist";
+				INFOPLIST_FILE = "PLists/Example-Carthage-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Carthage";
@@ -883,14 +900,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				CURRENT_PROJECT_VERSION = 21;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = DBSwiftTestTests/Info.plist;
+				INFOPLIST_FILE = "PLists/DKDBManagerTest-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
+				PRODUCT_MODULE_NAME = DKDBManagerTests;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -901,10 +924,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = DBSwiftTestTests/Info.plist;
+				CURRENT_PROJECT_VERSION = 21;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "PLists/DKDBManagerTest-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "SMF.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
+				PRODUCT_MODULE_NAME = DKDBManagerTests;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
