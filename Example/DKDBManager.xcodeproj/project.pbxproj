@@ -73,6 +73,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		754831BF1D105B98008E6368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75C5CB3819DBE8DA002BA192;
+			remoteInfo = "Example-Carthage";
+		};
 		759148671D105711005FCD2D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
@@ -454,6 +461,7 @@
 			);
 			dependencies = (
 				759148681D105711005FCD2D /* PBXTargetDependency */,
+				754831C01D105B98008E6368 /* PBXTargetDependency */,
 			);
 			name = DKDBManagerTests;
 			productName = DBSwiftTestTests;
@@ -479,6 +487,7 @@
 					};
 					75C5CB5019DBE8DA002BA192 = {
 						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 75C5CB3819DBE8DA002BA192;
 					};
 				};
 			};
@@ -663,6 +672,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		754831C01D105B98008E6368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75C5CB3819DBE8DA002BA192 /* Example-Carthage */;
+			targetProxy = 754831BF1D105B98008E6368 /* PBXContainerItemProxy */;
+		};
 		759148681D105711005FCD2D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 75BF83411D1049D9005028BF /* DKDBManager */;
@@ -917,6 +931,7 @@
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKDBManager.app/DKDBManager";
 			};
 			name = Debug;
 		};
@@ -936,6 +951,7 @@
 				PRODUCT_MODULE_NAME = DKDBManagerTests;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKDBManager.app/DKDBManager";
 			};
 			name = Release;
 		};
