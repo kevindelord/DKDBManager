@@ -8,9 +8,9 @@ sudo: false
 env:
   global:
     - FRAMEWORK_NAME=DKDBManager
-before_install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
+#before_install:
+#  - brew update
+#  - brew outdated carthage || brew upgrade carthage
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
