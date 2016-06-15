@@ -1,16 +1,18 @@
 # DKDBManager
 
-[![Version](https://img.shields.io/cocoapods/v/DKDBManager.svg?style=flat)](http://cocoadocs.org/docsets/DKDBManager)
+[![Build Status](https://travis-ci.org/kevindelord/DKDBManager.svg?branch=master)](https://travis-ci.org/kevindelord/DKDBManager)
+[![Cocoapods](https://img.shields.io/cocoapods/v/DKDBManager.svg?style=flat)](http://cocoadocs.org/docsets/DKDBManager)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/kevindelord/DKDBManager)
 [![License](https://img.shields.io/cocoapods/l/DKDBManager.svg?style=flat)](http://cocoadocs.org/docsets/DKDBManager)
 [![Platform](https://img.shields.io/cocoapods/p/DKDBManager.svg?style=flat)](http://cocoadocs.org/docsets/DKDBManager)
 
 ## Concept
 
-DKDBManager is a simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord). 
+DKDBManager is a simple, yet very useful, CRUD manager around [Magical Record](https://github.com/magicalpanda/MagicalRecord).
 
 It implements a logic around the database that helps the developer to manage his entities and let him focus on other things than only data management.
 
-The main concept is to import JSON dictionaries representing entities into the database. 
+The main concept is to import JSON dictionaries representing entities into the database.
 
 After some configuration on your model classes, only one single function is needed to _create_, _read_, _update_ or _delete_ your entities!
 

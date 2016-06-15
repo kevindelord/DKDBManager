@@ -1,5 +1,13 @@
 # DKDBManager CHANGELOG
 
+## 0.6.6
+
+### DKDBManager
+
+- Add Carthage support.
+- Value DKDBManagerVersionNumber added.
+- Value DKDBManagerVersionString added.
+
 ## 0.6.5
 
 ### DKDBManager
