@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		754831B41D1059EA008E6368 /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
-		754831B51D1059F1008E6368 /* DKDBManager.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		754831BB1D105B1C008E6368 /* DKHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; };
-		754831BC1D105B1C008E6368 /* DKHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; };
 		754831BD1D105B25008E6368 /* DKHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		754831BE1D105B2B008E6368 /* DKHelper.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		75A303D71D1149AF009CEA34 /* DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D11D1149AF009CEA34 /* DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75A303DB1D1149AF009CEA34 /* NSManagedObject+DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75A303DE1D1149AF009CEA34 /* NSManagedObject+DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D41D1149AF009CEA34 /* NSManagedObject+DKDBManager.m */; };
+		75A303DF1D1149AF009CEA34 /* NSManagedObject+ExistingObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D51D1149AF009CEA34 /* NSManagedObject+ExistingObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75A303E21D1149AF009CEA34 /* NSManagedObject+ExistingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D61D1149AF009CEA34 /* NSManagedObject+ExistingObject.m */; };
+		75A303E31D1149B6009CEA34 /* DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D21D1149AF009CEA34 /* DKDBManager.m */; };
+		75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
+		75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16025671C5B877300A1013E /* DKDBManagerTest.swift */; };
+		75A303F51D114A2E009CEA34 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A303F41D114A2D009CEA34 /* MagicalRecord.framework */; };
+		75A303F81D114A4F009CEA34 /* MagicalRecord.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75BF83571D1049D9005028BF /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
 		75BF83581D1049D9005028BF /* DKDBManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		75BF83661D1049F8005028BF /* DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BF83601D1049F7005028BF /* DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75BF83671D1049F8005028BF /* DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF83611D1049F8005028BF /* DKDBManager.m */; };
-		75BF83681D1049F8005028BF /* NSManagedObject+DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BF83621D1049F8005028BF /* NSManagedObject+DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75BF83691D1049F8005028BF /* NSManagedObject+DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF83631D1049F8005028BF /* NSManagedObject+DKDBManager.m */; };
-		75BF836A1D1049F8005028BF /* NSManagedObject+ExistingObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BF83641D1049F8005028BF /* NSManagedObject+ExistingObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75BF836B1D1049F8005028BF /* NSManagedObject+ExistingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF83651D1049F8005028BF /* NSManagedObject+ExistingObject.m */; };
 		75BF83701D104AEC005028BF /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */; };
 		75BF83711D104AEC005028BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */; };
 		75BF83721D104AEC005028BF /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CC1C5299EE00E146D0 /* TableViewController.swift */; };
@@ -45,42 +45,23 @@
 		75FF77D11C5299EE00E146D0 /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */; };
 		75FF77D51C5299EE00E146D0 /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B41C5299EE00E146D0 /* Baggage.swift */; };
 		75FF77D71C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
-		75FF77D81C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
 		75FF77D91C5299EE00E146D0 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */; };
 		75FF77DD1C5299EE00E146D0 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BA1C5299EE00E146D0 /* Passenger.swift */; };
 		75FF77DF1C5299EE00E146D0 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */; };
 		75FF77E31C5299EE00E146D0 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BE1C5299EE00E146D0 /* Plane.swift */; };
 		75FF77E51C5299EE00E146D0 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BF1C5299EE00E146D0 /* MockManager.swift */; };
 		75FF77E71C5299EE00E146D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */; };
-		75FF77E81C5299EE00E146D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */; };
 		75FF77E91C5299EE00E146D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C31C5299EE00E146D0 /* Main.storyboard */; };
-		75FF77EA1C5299EE00E146D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C31C5299EE00E146D0 /* Main.storyboard */; };
 		75FF77EB1C5299EE00E146D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C61C5299EE00E146D0 /* Images.xcassets */; };
-		75FF77EC1C5299EE00E146D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75FF77C61C5299EE00E146D0 /* Images.xcassets */; };
 		75FF77EF1C5299EE00E146D0 /* BaggageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77C91C5299EE00E146D0 /* BaggageViewController.swift */; };
 		75FF77F11C5299EE00E146D0 /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CA1C5299EE00E146D0 /* PassengerViewController.swift */; };
 		75FF77F31C5299EE00E146D0 /* PlaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */; };
 		75FF77F51C5299EE00E146D0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CC1C5299EE00E146D0 /* TableViewController.swift */; };
-		D16025681C5B877300A1013E /* DKDBManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16025671C5B877300A1013E /* DKDBManagerTest.swift */; };
-		D16025691C5B9BC700A1013E /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */; };
-		D160256A1C5B9BC700A1013E /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BE1C5299EE00E146D0 /* Plane.swift */; };
-		D160256B1C5B9CA500A1013E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AF1C5299EE00E146D0 /* Constants.swift */; };
-		D160256C1C5B9CAF00A1013E /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BA1C5299EE00E146D0 /* Passenger.swift */; };
-		D160256D1C5B9CB400A1013E /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */; };
-		D160256E1C5B9CC500A1013E /* Baggage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B21C5299EE00E146D0 /* Baggage+CoreDataProperties.swift */; };
-		D160256F1C5B9CC500A1013E /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B41C5299EE00E146D0 /* Baggage.swift */; };
 		F03DCFE5492EB7A451734233 /* Pods_Example_Cocoapods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		754831BF1D105B98008E6368 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 75C5CB3819DBE8DA002BA192;
-			remoteInfo = "Example-Carthage";
-		};
-		759148671D105711005FCD2D /* PBXContainerItemProxy */ = {
+		75A303EE1D1149FE009CEA34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75C5CB3119DBE8DA002BA192 /* Project object */;
 			proxyType = 1;
@@ -97,14 +78,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		759148631D1055AD005FCD2D /* Embedded Frameworks */ = {
+		75A303F61D114A39009CEA34 /* Embedded Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				754831BE1D105B2B008E6368 /* DKHelper.framework in Embedded Frameworks */,
-				754831B51D1059F1008E6368 /* DKDBManager.framework in Embedded Frameworks */,
+				75A303F81D114A4F009CEA34 /* MagicalRecord.framework in Embedded Frameworks */,
 			);
 			name = "Embedded Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,19 +126,20 @@
 
 /* Begin PBXFileReference section */
 		754831BA1D105B1C008E6368 /* DKHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DKHelper.framework; path = ../Carthage/Build/iOS/DKHelper.framework; sourceTree = "<group>"; };
+		75A303D11D1149AF009CEA34 /* DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKDBManager.h; sourceTree = "<group>"; };
+		75A303D21D1149AF009CEA34 /* DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKDBManager.m; sourceTree = "<group>"; };
+		75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+DKDBManager.h"; sourceTree = "<group>"; };
+		75A303D41D1149AF009CEA34 /* NSManagedObject+DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+DKDBManager.m"; sourceTree = "<group>"; };
+		75A303D51D1149AF009CEA34 /* NSManagedObject+ExistingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ExistingObject.h"; sourceTree = "<group>"; };
+		75A303D61D1149AF009CEA34 /* NSManagedObject+ExistingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ExistingObject.m"; sourceTree = "<group>"; };
+		75A303E81D1149FE009CEA34 /* DKDBManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKDBManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75A303F41D114A2D009CEA34 /* MagicalRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MagicalRecord.framework; path = "../../../Library/Developer/Xcode/DerivedData/DKDBManager-acjzplbalhonsjaxphssuvcyhqoz/Build/Products/Debug-iphonesimulator/MagicalRecord/MagicalRecord.framework"; sourceTree = "<group>"; };
 		75BF83421D1049D9005028BF /* DKDBManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DKDBManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		75BF83601D1049F7005028BF /* DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DKDBManager.h; path = ../../DKDBManager/DKDBManager.h; sourceTree = "<group>"; };
-		75BF83611D1049F8005028BF /* DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DKDBManager.m; path = ../../DKDBManager/DKDBManager.m; sourceTree = "<group>"; };
-		75BF83621D1049F8005028BF /* NSManagedObject+DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+DKDBManager.h"; path = "../../DKDBManager/NSManagedObject+DKDBManager.h"; sourceTree = "<group>"; };
-		75BF83631D1049F8005028BF /* NSManagedObject+DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+DKDBManager.m"; path = "../../DKDBManager/NSManagedObject+DKDBManager.m"; sourceTree = "<group>"; };
-		75BF83641D1049F8005028BF /* NSManagedObject+ExistingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+ExistingObject.h"; path = "../../DKDBManager/NSManagedObject+ExistingObject.h"; sourceTree = "<group>"; };
-		75BF83651D1049F8005028BF /* NSManagedObject+ExistingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+ExistingObject.m"; path = "../../DKDBManager/NSManagedObject+ExistingObject.m"; sourceTree = "<group>"; };
 		75BF83891D104AEC005028BF /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB3919DBE8DA002BA192 /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKDBManager.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D880451D104FB20058024B /* MagicalRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MagicalRecord.framework; path = ../Carthage/Build/iOS/MagicalRecord.framework; sourceTree = "<group>"; };
 		75E0E9DF1D104C9800F9EE4E /* DKDBManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DKDBManager-Info.plist"; sourceTree = "<group>"; };
-		75E0E9E01D104C9800F9EE4E /* DKDBManagerTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DKDBManagerTest-Info.plist"; sourceTree = "<group>"; };
+		75E0E9E01D104C9800F9EE4E /* DKDBManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DKDBManagerTests-Info.plist"; sourceTree = "<group>"; };
 		75E0E9E11D104C9800F9EE4E /* Example-Carthage-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Example-Carthage-Info.plist"; sourceTree = "<group>"; };
 		75E0E9E21D104C9800F9EE4E /* Example-Cocoapods-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Example-Cocoapods-Info.plist"; sourceTree = "<group>"; };
 		75FF77AE1C5299EE00E146D0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -181,11 +162,20 @@
 		75FF77CC1C5299EE00E146D0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		9FD235B965D5CBD0F89A2C38 /* Pods-Example-Cocoapods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Cocoapods.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods.debug.xcconfig"; sourceTree = "<group>"; };
 		AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Cocoapods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D16025671C5B877300A1013E /* DKDBManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKDBManagerTest.swift; sourceTree = "<group>"; };
+		D16025671C5B877300A1013E /* DKDBManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DKDBManagerTest.swift; path = ../DBSwiftTestTests/DKDBManagerTest.swift; sourceTree = "<group>"; };
 		FEE1FBC1EE8BAC753F15485A /* Pods-Example-Cocoapods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Cocoapods.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		75A303E51D1149FE009CEA34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75A303F51D114A2E009CEA34 /* MagicalRecord.framework in Frameworks */,
+				75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75BF833E1D1049D9005028BF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,15 +201,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		75C5CB4E19DBE8DA002BA192 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				754831B41D1059EA008E6368 /* DKDBManager.framework in Frameworks */,
-				754831BC1D105B1C008E6368 /* DKHelper.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -235,6 +216,7 @@
 		57ACE6FE14D0414F1F765DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75A303F41D114A2D009CEA34 /* MagicalRecord.framework */,
 				754831BA1D105B1C008E6368 /* DKHelper.framework */,
 				75D880451D104FB20058024B /* MagicalRecord.framework */,
 				AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */,
@@ -242,25 +224,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		75BF83431D1049D9005028BF /* DKDBManager */ = {
+		75A303D01D1149AF009CEA34 /* DKDBManager */ = {
 			isa = PBXGroup;
 			children = (
-				75BF83601D1049F7005028BF /* DKDBManager.h */,
-				75BF83611D1049F8005028BF /* DKDBManager.m */,
-				75BF83621D1049F8005028BF /* NSManagedObject+DKDBManager.h */,
-				75BF83631D1049F8005028BF /* NSManagedObject+DKDBManager.m */,
-				75BF83641D1049F8005028BF /* NSManagedObject+ExistingObject.h */,
-				75BF83651D1049F8005028BF /* NSManagedObject+ExistingObject.m */,
+				75A303D11D1149AF009CEA34 /* DKDBManager.h */,
+				75A303D21D1149AF009CEA34 /* DKDBManager.m */,
+				75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */,
+				75A303D41D1149AF009CEA34 /* NSManagedObject+DKDBManager.m */,
+				75A303D51D1149AF009CEA34 /* NSManagedObject+ExistingObject.h */,
+				75A303D61D1149AF009CEA34 /* NSManagedObject+ExistingObject.m */,
 			);
-			path = DKDBManager;
+			name = DKDBManager;
+			path = ../DKDBManager;
+			sourceTree = "<group>";
+		};
+		75A303E91D1149FE009CEA34 /* DKDBManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				D16025671C5B877300A1013E /* DKDBManagerTest.swift */,
+			);
+			path = DKDBManagerTests;
 			sourceTree = "<group>";
 		};
 		75C5CB3019DBE8DA002BA192 = {
 			isa = PBXGroup;
 			children = (
 				75C5CB3B19DBE8DA002BA192 /* SampleProject */,
-				75C5CB5419DBE8DA002BA192 /* Tests */,
-				75BF83431D1049D9005028BF /* DKDBManager */,
+				75A303D01D1149AF009CEA34 /* DKDBManager */,
+				75A303E91D1149FE009CEA34 /* DKDBManagerTests */,
 				75C5CB3A19DBE8DA002BA192 /* Products */,
 				75E0E9DE1D104C9800F9EE4E /* PLists */,
 				57ACE6FE14D0414F1F765DB8 /* Frameworks */,
@@ -272,9 +263,9 @@
 			isa = PBXGroup;
 			children = (
 				75C5CB3919DBE8DA002BA192 /* DKDBManager.app */,
-				75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */,
 				75BF83421D1049D9005028BF /* DKDBManager.framework */,
 				75BF83891D104AEC005028BF /* DKDBManager.app */,
+				75A303E81D1149FE009CEA34 /* DKDBManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,20 +284,11 @@
 			path = DBSwiftTest;
 			sourceTree = "<group>";
 		};
-		75C5CB5419DBE8DA002BA192 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				D16025671C5B877300A1013E /* DKDBManagerTest.swift */,
-			);
-			name = Tests;
-			path = DBSwiftTestTests;
-			sourceTree = "<group>";
-		};
 		75E0E9DE1D104C9800F9EE4E /* PLists */ = {
 			isa = PBXGroup;
 			children = (
 				75E0E9DF1D104C9800F9EE4E /* DKDBManager-Info.plist */,
-				75E0E9E01D104C9800F9EE4E /* DKDBManagerTest-Info.plist */,
+				75E0E9E01D104C9800F9EE4E /* DKDBManagerTests-Info.plist */,
 				75E0E9E11D104C9800F9EE4E /* Example-Carthage-Info.plist */,
 				75E0E9E21D104C9800F9EE4E /* Example-Cocoapods-Info.plist */,
 			);
@@ -380,15 +362,34 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75BF836A1D1049F8005028BF /* NSManagedObject+ExistingObject.h in Headers */,
-				75BF83681D1049F8005028BF /* NSManagedObject+DKDBManager.h in Headers */,
-				75BF83661D1049F8005028BF /* DKDBManager.h in Headers */,
+				75A303D71D1149AF009CEA34 /* DKDBManager.h in Headers */,
+				75A303DF1D1149AF009CEA34 /* NSManagedObject+ExistingObject.h in Headers */,
+				75A303DB1D1149AF009CEA34 /* NSManagedObject+DKDBManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		75A303E71D1149FE009CEA34 /* DKDBManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75A303F01D1149FE009CEA34 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */;
+			buildPhases = (
+				75A303E41D1149FE009CEA34 /* Sources */,
+				75A303E51D1149FE009CEA34 /* Frameworks */,
+				75A303E61D1149FE009CEA34 /* Resources */,
+				75A303F61D114A39009CEA34 /* Embedded Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75A303EF1D1149FE009CEA34 /* PBXTargetDependency */,
+			);
+			name = DKDBManagerTests;
+			productName = DKDBManagerTests;
+			productReference = 75A303E81D1149FE009CEA34 /* DKDBManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		75BF83411D1049D9005028BF /* DKDBManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75BF83591D1049D9005028BF /* Build configuration list for PBXNativeTarget "DKDBManager" */;
@@ -448,26 +449,6 @@
 			productReference = 75C5CB3919DBE8DA002BA192 /* DKDBManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		75C5CB5019DBE8DA002BA192 /* DKDBManagerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 75C5CB5E19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */;
-			buildPhases = (
-				75C5CB4D19DBE8DA002BA192 /* Sources */,
-				75C5CB4E19DBE8DA002BA192 /* Frameworks */,
-				75C5CB4F19DBE8DA002BA192 /* Resources */,
-				759148631D1055AD005FCD2D /* Embedded Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				759148681D105711005FCD2D /* PBXTargetDependency */,
-				754831C01D105B98008E6368 /* PBXTargetDependency */,
-			);
-			name = DKDBManagerTests;
-			productName = DBSwiftTestTests;
-			productReference = 75C5CB5119DBE8DA002BA192 /* DKDBManager.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -475,19 +456,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Smart Mobile Factory";
 				TargetAttributes = {
+					75A303E71D1149FE009CEA34 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					75BF83411D1049D9005028BF = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					75C5CB3819DBE8DA002BA192 = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					75C5CB5019DBE8DA002BA192 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 75C5CB3819DBE8DA002BA192;
 					};
 				};
 			};
@@ -507,12 +487,19 @@
 				75C5CB3819DBE8DA002BA192 /* Example-Carthage */,
 				75BF836C1D104AEC005028BF /* Example-Cocoapods */,
 				75BF83411D1049D9005028BF /* DKDBManager */,
-				75C5CB5019DBE8DA002BA192 /* DKDBManagerTests */,
+				75A303E71D1149FE009CEA34 /* DKDBManagerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		75A303E61D1149FE009CEA34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75BF83401D1049D9005028BF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -537,16 +524,6 @@
 				75FF77EB1C5299EE00E146D0 /* Images.xcassets in Resources */,
 				75FF77E71C5299EE00E146D0 /* LaunchScreen.xib in Resources */,
 				75FF77E91C5299EE00E146D0 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		75C5CB4F19DBE8DA002BA192 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75FF77EC1C5299EE00E146D0 /* Images.xcassets in Resources */,
-				75FF77E81C5299EE00E146D0 /* LaunchScreen.xib in Resources */,
-				75FF77EA1C5299EE00E146D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,13 +578,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		75A303E41D1149FE009CEA34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75BF833D1D1049D9005028BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75BF83691D1049F8005028BF /* NSManagedObject+DKDBManager.m in Sources */,
-				75BF83671D1049F8005028BF /* DKDBManager.m in Sources */,
-				75BF836B1D1049F8005028BF /* NSManagedObject+ExistingObject.m in Sources */,
+				75A303DE1D1149AF009CEA34 /* NSManagedObject+DKDBManager.m in Sources */,
+				75A303E31D1149B6009CEA34 /* DKDBManager.m in Sources */,
+				75A303E21D1149AF009CEA34 /* NSManagedObject+ExistingObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,34 +638,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		75C5CB4D19DBE8DA002BA192 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D160256E1C5B9CC500A1013E /* Baggage+CoreDataProperties.swift in Sources */,
-				D160256B1C5B9CA500A1013E /* Constants.swift in Sources */,
-				D16025691C5B9BC700A1013E /* Plane+CoreDataProperties.swift in Sources */,
-				D160256F1C5B9CC500A1013E /* Baggage.swift in Sources */,
-				D160256C1C5B9CAF00A1013E /* Passenger.swift in Sources */,
-				D160256D1C5B9CB400A1013E /* Passenger+CoreDataProperties.swift in Sources */,
-				D16025681C5B877300A1013E /* DKDBManagerTest.swift in Sources */,
-				D160256A1C5B9BC700A1013E /* Plane.swift in Sources */,
-				75FF77D81C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		754831C01D105B98008E6368 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 75C5CB3819DBE8DA002BA192 /* Example-Carthage */;
-			targetProxy = 754831BF1D105B98008E6368 /* PBXContainerItemProxy */;
-		};
-		759148681D105711005FCD2D /* PBXTargetDependency */ = {
+		75A303EF1D1149FE009CEA34 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 75BF83411D1049D9005028BF /* DKDBManager */;
-			targetProxy = 759148671D105711005FCD2D /* PBXContainerItemProxy */;
+			targetProxy = 75A303EE1D1149FE009CEA34 /* PBXContainerItemProxy */;
 		};
 		75BF83561D1049D9005028BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -709,6 +673,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		75A303F11D1149FE009CEA34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../Carthage/Build/iOS/",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "PLists/DKDBManagerTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		75A303F21D1149FE009CEA34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../Carthage/Build/iOS/",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "PLists/DKDBManagerTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		75BF835A1D1049D9005028BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -910,54 +911,17 @@
 			};
 			name = Release;
 		};
-		75C5CB5F19DBE8DA002BA192 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 21;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PLists/DKDBManagerTest-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
-				PRODUCT_MODULE_NAME = DKDBManagerTests;
-				PRODUCT_NAME = DKDBManager;
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKDBManager.app/DKDBManager";
-			};
-			name = Debug;
-		};
-		75C5CB6019DBE8DA002BA192 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 21;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "PLists/DKDBManagerTest-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
-				PRODUCT_MODULE_NAME = DKDBManagerTests;
-				PRODUCT_NAME = DKDBManager;
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DKDBManager.app/DKDBManager";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		75A303F01D1149FE009CEA34 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75A303F11D1149FE009CEA34 /* Debug */,
+				75A303F21D1149FE009CEA34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		75BF83591D1049D9005028BF /* Build configuration list for PBXNativeTarget "DKDBManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -990,15 +954,6 @@
 			buildConfigurations = (
 				75C5CB5C19DBE8DA002BA192 /* Debug */,
 				75C5CB5D19DBE8DA002BA192 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		75C5CB5E19DBE8DA002BA192 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				75C5CB5F19DBE8DA002BA192 /* Debug */,
-				75C5CB6019DBE8DA002BA192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -33,8 +33,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "75C5CB5019DBE8DA002BA192"
-               BuildableName = "DKDBManager.xctest"
+               BlueprintIdentifier = "75A303E71D1149FE009CEA34"
+               BuildableName = "DKDBManagerTests.xctest"
                BlueprintName = "DKDBManagerTests"
                ReferencedContainer = "container:DKDBManager.xcodeproj">
             </BuildableReference>
