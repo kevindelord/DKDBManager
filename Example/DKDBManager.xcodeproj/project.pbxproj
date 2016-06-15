@@ -767,11 +767,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 21;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "PLists/Example-Cocoapods-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Cocoapods";
-				PRODUCT_MODULE_NAME = Example;
+				PRODUCT_MODULE_NAME = ExampleCocoapods;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
@@ -783,11 +784,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 21;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "PLists/Example-Cocoapods-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Cocoapods";
-				PRODUCT_MODULE_NAME = Example;
+				PRODUCT_MODULE_NAME = ExampleCocoapods;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
@@ -878,6 +880,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 21;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../Carthage/Build/iOS",
@@ -886,7 +889,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Carthage";
-				PRODUCT_MODULE_NAME = Example;
+				PRODUCT_MODULE_NAME = ExampleCarthage;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
@@ -897,6 +900,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 21;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../Carthage/Build/iOS",
@@ -905,7 +909,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Carthage";
-				PRODUCT_MODULE_NAME = Example;
+				PRODUCT_MODULE_NAME = ExampleCarthage;
 				PRODUCT_NAME = DKDBManager;
 				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
@@ -921,6 +925,7 @@
 				75A303F21D1149FE009CEA34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75BF83591D1049D9005028BF /* Build configuration list for PBXNativeTarget "DKDBManager" */ = {
 			isa = XCConfigurationList;
