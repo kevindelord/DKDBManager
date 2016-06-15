@@ -8,6 +8,14 @@
 #ifndef DKDBManager_h__
 #define DKDBManager_h__
 
+#import <UIKit/UIKit.h>
+
+//! Project version number for DKDBManager.
+FOUNDATION_EXPORT double DKDBManagerVersionNumber;
+
+//! Project version string for DKDBManager.
+FOUNDATION_EXPORT const unsigned char DKDBManagerVersionString[];
+
 #define DK_DEPRECATED_PLEASE_USE(METHOD) __attribute__((deprecated("Deprecated method. Please use `" METHOD "` instead.")))
 
 #import <Foundation/Foundation.h>
