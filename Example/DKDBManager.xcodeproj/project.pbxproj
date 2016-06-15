@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		754831BB1D105B1C008E6368 /* DKHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; };
 		754831BD1D105B25008E6368 /* DKHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 754831BA1D105B1C008E6368 /* DKHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		755B11A91D11862000509694 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; };
 		75A303D71D1149AF009CEA34 /* DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D11D1149AF009CEA34 /* DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75A303DB1D1149AF009CEA34 /* NSManagedObject+DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75A303DE1D1149AF009CEA34 /* NSManagedObject+DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D41D1149AF009CEA34 /* NSManagedObject+DKDBManager.m */; };
@@ -17,7 +18,6 @@
 		75A303E31D1149B6009CEA34 /* DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D21D1149AF009CEA34 /* DKDBManager.m */; };
 		75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
 		75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16025671C5B877300A1013E /* DKDBManagerTest.swift */; };
-		75A303F51D114A2E009CEA34 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A303F41D114A2D009CEA34 /* MagicalRecord.framework */; };
 		75A303F81D114A4F009CEA34 /* MagicalRecord.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75BF83571D1049D9005028BF /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
 		75BF83581D1049D9005028BF /* DKDBManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -133,7 +133,6 @@
 		75A303D51D1149AF009CEA34 /* NSManagedObject+ExistingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ExistingObject.h"; sourceTree = "<group>"; };
 		75A303D61D1149AF009CEA34 /* NSManagedObject+ExistingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ExistingObject.m"; sourceTree = "<group>"; };
 		75A303E81D1149FE009CEA34 /* DKDBManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKDBManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		75A303F41D114A2D009CEA34 /* MagicalRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MagicalRecord.framework; path = "../../../Library/Developer/Xcode/DerivedData/DKDBManager-acjzplbalhonsjaxphssuvcyhqoz/Build/Products/Debug-iphonesimulator/MagicalRecord/MagicalRecord.framework"; sourceTree = "<group>"; };
 		75BF83421D1049D9005028BF /* DKDBManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DKDBManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BF83891D104AEC005028BF /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5CB3919DBE8DA002BA192 /* DKDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,8 +170,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75A303F51D114A2E009CEA34 /* MagicalRecord.framework in Frameworks */,
 				75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */,
+				755B11A91D11862000509694 /* MagicalRecord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,12 +215,18 @@
 		57ACE6FE14D0414F1F765DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				75A303F41D114A2D009CEA34 /* MagicalRecord.framework */,
-				754831BA1D105B1C008E6368 /* DKHelper.framework */,
-				75D880451D104FB20058024B /* MagicalRecord.framework */,
 				AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		755B11AA1D11869B00509694 /* Carthage Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				754831BA1D105B1C008E6368 /* DKHelper.framework */,
+				75D880451D104FB20058024B /* MagicalRecord.framework */,
+			);
+			name = "Carthage Frameworks";
 			sourceTree = "<group>";
 		};
 		75A303D01D1149AF009CEA34 /* DKDBManager */ = {
@@ -254,6 +259,7 @@
 				75A303E91D1149FE009CEA34 /* DKDBManagerTests */,
 				75C5CB3A19DBE8DA002BA192 /* Products */,
 				75E0E9DE1D104C9800F9EE4E /* PLists */,
+				755B11AA1D11869B00509694 /* Carthage Frameworks */,
 				57ACE6FE14D0414F1F765DB8 /* Frameworks */,
 				1F510BA8E6115908AEB085F4 /* Pods */,
 			);

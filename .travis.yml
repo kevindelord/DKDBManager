@@ -13,6 +13,7 @@ before_install:
   - brew outdated carthage || brew upgrade carthage
   - carthage update
   - gem install cocoapods -v '1.0.0'
+  - carthage update
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
