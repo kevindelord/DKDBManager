@@ -9,16 +9,18 @@ env:
   global:
     - FRAMEWORK_NAME=DKDBManager
 before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
   - gem install cocoapods -v '1.0.0'
-#  - brew update
-#  - brew outdated carthage || brew upgrade carthage
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
 deploy:
   provider: releases
-    file: $FRAMEWORK_NAME.framework.zip
+  file: $FRAMEWORK_NAME.framework.zip
   skip_cleanup: true
+  api_key:
+    secure: BBHsuN6uYaNmfF0hnhP7/r+h4GQOeX8hzlC11ijhDPysiN5drN66KTRMA0yGbBbfcku87qJicZwRK+5JIuopnRzY/1rqnX5qQIm1TXgM4hXJ5MoQzyHJapAGiUBCmundIwmKt+FYU4x7lkXPFqfrYj8WdLs2qKQT6TgQcyB4hb9WjTxmWQEMZrpRyIvVkYXHCrTqpZlg0U2+5ItsJEzyNe0pPjvFkk6B2CnxRcfZYoBPQHHcioanI2sb9r5dajBe6/Tp0VgPdWncXhLVocnkuuRN/NNVIk26LmOW7UJmj9/fsz7BYPwMo0eFI3lXzvagsEQdIdX447q1tHF/ggbkw496S/f4C5L5JCIyB7XOxbgia0kST77zsPOo5430NKUYtuu8ZxWGNnhlJDrGi66w0DMl34ZIvHjmIql00/jMIBVK3ql3Pnxa0D7VhTXoyKTzrZ3i2pzhf0QxSYAYg8BaorA3guqZ1vEl0cmeujYe3GI+KRX+qavmZ8r/XVENgXEjKT7K5Jqqce+PqkbiiMoAHCWjJp8nDXtLEwQEiBaZA/xRC4v0VXd+C+z3XBTBKGkorqpjB90WTs/DF886VC1vr++KkTej4UbB+KRyqlB+8s+qG5B281w7KiAhVIjyOXIQhuIh2pTRT0cXPKLbm/L8qOZHCbP9i4jjjRrkr/XcdqU=
   on:
     repo: kevindelord/DKDBManager
     tags: true
