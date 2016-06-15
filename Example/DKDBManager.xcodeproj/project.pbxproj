@@ -215,11 +215,18 @@
 		57ACE6FE14D0414F1F765DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				754831BA1D105B1C008E6368 /* DKHelper.framework */,
-				75D880451D104FB20058024B /* MagicalRecord.framework */,
 				AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		755B11AA1D11869B00509694 /* Carthage Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				754831BA1D105B1C008E6368 /* DKHelper.framework */,
+				75D880451D104FB20058024B /* MagicalRecord.framework */,
+			);
+			name = "Carthage Frameworks";
 			sourceTree = "<group>";
 		};
 		75A303D01D1149AF009CEA34 /* DKDBManager */ = {
@@ -252,6 +259,7 @@
 				75A303E91D1149FE009CEA34 /* DKDBManagerTests */,
 				75C5CB3A19DBE8DA002BA192 /* Products */,
 				75E0E9DE1D104C9800F9EE4E /* PLists */,
+				755B11AA1D11869B00509694 /* Carthage Frameworks */,
 				57ACE6FE14D0414F1F765DB8 /* Frameworks */,
 				1F510BA8E6115908AEB085F4 /* Pods */,
 			);
