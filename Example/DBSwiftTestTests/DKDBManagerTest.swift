@@ -8,6 +8,7 @@
 
 import XCTest
 import MagicalRecord
+import DKDBManager
 
 class DKDBManagerTest: XCTestCase {
     
