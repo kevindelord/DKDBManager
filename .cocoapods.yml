@@ -1,0 +1,5 @@
+try:
+  install:
+    pre:
+      - echo "Thanks for trying DKDBManager !"
+  project: 'DKDBManager.xcworkspace'
