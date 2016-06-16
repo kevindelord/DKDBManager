@@ -1,10 +1,19 @@
 # DKDBManager CHANGELOG
 
+## 0.6.7
+
+### Cocoapods
+
+- Fix `pod try` command.
+
 ## 0.6.6
+
+### Carthage
+
+- Add Carthage support.
 
 ### DKDBManager
 
-- Add Carthage support.
 - Value DKDBManagerVersionNumber added.
 - Value DKDBManagerVersionString added.
 
