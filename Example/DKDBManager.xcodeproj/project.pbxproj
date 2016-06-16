@@ -151,7 +151,6 @@
 		75FF77BF1C5299EE00E146D0 /* MockManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		75FF77C21C5299EE00E146D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		75FF77C41C5299EE00E146D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		75FF77C51C5299EE00E146D0 /* DBSwiftTest-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBSwiftTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		75FF77C61C5299EE00E146D0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		75FF77C91C5299EE00E146D0 /* BaggageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageViewController.swift; sourceTree = "<group>"; };
 		75FF77CA1C5299EE00E146D0 /* PassengerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassengerViewController.swift; sourceTree = "<group>"; };
@@ -346,7 +345,6 @@
 			children = (
 				75FF77C11C5299EE00E146D0 /* LaunchScreen.xib */,
 				75FF77C31C5299EE00E146D0 /* Main.storyboard */,
-				75FF77C51C5299EE00E146D0 /* DBSwiftTest-Bridging-Header.h */,
 				75FF77C61C5299EE00E146D0 /* Images.xcassets */,
 			);
 			path = Resources;
@@ -830,7 +828,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Cocoapods";
 				PRODUCT_MODULE_NAME = ExampleCocoapods;
 				PRODUCT_NAME = DKDBManager;
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -847,7 +844,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Cocoapods";
 				PRODUCT_MODULE_NAME = ExampleCocoapods;
 				PRODUCT_NAME = DKDBManager;
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -948,7 +944,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Carthage";
 				PRODUCT_MODULE_NAME = ExampleCarthage;
 				PRODUCT_NAME = DKDBManager;
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -969,7 +964,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kevindelord.DKDBManager.Example-Carthage";
 				PRODUCT_MODULE_NAME = ExampleCarthage;
 				PRODUCT_NAME = DKDBManager;
-				SWIFT_OBJC_BRIDGING_HEADER = "DBSwiftTest/Resources/DBSwiftTest-Bridging-Header.h";
 			};
 			name = Release;
 		};

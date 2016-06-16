@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import DKDBManager
 
 class BaggageViewController		: TableViewController {
 

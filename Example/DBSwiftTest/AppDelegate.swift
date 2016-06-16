@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DKDBManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
