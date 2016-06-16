@@ -15,8 +15,8 @@ before_install:
   - gem install cocoapods -v '1.0.0'
 before_deploy:
   #- carthage build --no-skip-current --verbose --configuration "Release" --project-directory ./Example
-  - carthage build --no-skip-current --project-directory ./Example
-  - carthage archive $FRAMEWORK_NAME --project-directory ./Example
+  - carthage build --no-skip-current #--project-directory ./Example
+  - carthage archive $FRAMEWORK_NAME #--project-directory ./Example
 deploy:
   provider: releases
   file: $FRAMEWORK_NAME.framework.zip
