@@ -11,7 +11,7 @@ env:
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - carthage update
+  - carthage update --platform iOS
   - gem install cocoapods -v '1.0.0'
 before_deploy:
   - carthage build --no-skip-current
