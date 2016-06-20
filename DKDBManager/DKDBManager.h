@@ -186,6 +186,13 @@ FOUNDATION_EXPORT const unsigned char DKDBManagerVersionString[];
 + (instancetype _Nonnull)sharedInstance;
 
 /**
+ *  @brief Function to setup the Core Data stack. Override to change the default behavior of the DKDBManager.
+ *
+ *  @param databaseName The NSString object containing the name of the database. Must not be nil and can be modified on startup.
+ */
++ (void)setupCoreDataStackWithName:(NSString * _Nonnull)databaseName;
+
+/**
  *  @brief Setup, and reset if needed, the datamodel using an auto migrating system.
  *
  *  @discussion A good practice will be to call this method at the beginning of the `application:application didFinishLaunchingWithOptions:launchOptions` method of your `AppDelegate`.

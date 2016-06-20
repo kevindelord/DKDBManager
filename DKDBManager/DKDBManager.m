@@ -47,6 +47,10 @@ static BOOL _needForcedUpdate = NO;
     return classNames;
 }
 
++ (void)setupCoreDataStackWithName:(NSString * _Nonnull)databaseName {
+	[self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
+}
+
 + (void)setupDatabaseWithName:(NSString * _Nonnull)databaseName didResetDatabase:(void (^ _Nullable)())didResetDatabaseBlock {
 
 	// Refresh current/default log level
@@ -59,7 +63,7 @@ static BOOL _needForcedUpdate = NO;
 	}
 
 	// Setup the coredata stack
-	[self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:databaseName];
+	[self setupCoreDataStackWithName:databaseName];
 
 	if (didResetDB == true && didResetDatabaseBlock != nil) {
 		didResetDatabaseBlock();
