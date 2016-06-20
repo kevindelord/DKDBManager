@@ -15,10 +15,20 @@ class SetupFunctionTest: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		// Put setup code here. This method is called before the invocation of each test method in the class.
+		self.setupDatabase()
 	}
 
 	override func tearDown() {
 		super.tearDown()
+		TestDataManager.cleanUp()
+	}
+
+	func setupDatabase() {
+		TestDataManager.setVerbose(true)
+		// Optional: Reset the database on start to make this test app more understandable.
+		TestDataManager.setResetStoredEntities(true)
+		// Setup the database.
+		TestDataManager.setup()
 	}
 }
 
@@ -27,12 +37,6 @@ class SetupFunctionTest: XCTestCase {
 extension SetupFunctionTest {
 
 	func testDatabaseManagerSetup() {
-
-		TestDataManager.setVerbose(true)
-		// Optional: Reset the database on start to make this test app more understandable.
-		TestDataManager.setResetStoredEntities(true)
-		// Setup the database.
-		TestDataManager.setup()
 
 		let models = TestDataManager.entityClassNames()
 		XCTAssertEqual(models.count, 3, "the number of models should be equals to 3: Plane, Passenger, Baggages")
@@ -54,23 +58,61 @@ extension SetupFunctionTest {
 		self.waitForExpectationsWithTimeout(5, handler: nil)
 	}
 
-	func testDataPersistencyBetweenTests() {
-		XCTAssertEqual(Plane.count(), 3, "the number of planes should be equals to 5")
-	}
-
 	func testUpdateFirstPlaneWithSameValues() {
 
-		let onePlaneJson = TestDataManager.staticPlaneJSON(5).first
-		print(onePlaneJson)
-
+		let json = TestDataManager.staticPlaneJSON(5)
+		let onePlaneJson = json.first
 
 		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
-			Plane.createEntityFromDictionary(onePlaneJson, inContext: savingContext) { (entity, status) in
+			Plane.createEntitiesFromArray(json, inContext: savingContext)
+		}
 
+		let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, "Paris", JSON.Destination, "London")
+		let plane = Plane.MR_findFirstWithPredicate(predicate)
+
+
+		// set expectation
+		let expectation = self.expectationWithDescription("Wait for the Response")
+		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.createEntityFromDictionary(onePlaneJson, inContext: savingContext) { (entity, status) in
+				XCTAssertEqual((entity as? Plane)?.objectID, plane?.objectID)
+				XCTAssertEqual(status, DKDBManagedObjectState.Save)
+				expectation.fulfill()
 			}
 		}
 
+		self.waitForExpectationsWithTimeout(5, handler: nil)
+
 	}
+
+	func testUpdateFirstPlaneWithNewDestination() {
+
+		let json = TestDataManager.staticPlaneJSON(5)
+		let newDestination = "Berlin"
+
+		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.createEntitiesFromArray(json, inContext: savingContext)
+		}
+
+		let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, "Paris", JSON.Destination, "London")
+		let plane = Plane.MR_findFirstWithPredicate(predicate)
+
+		// set expectation
+		let expectation = self.expectationWithDescription("Wait for the Response")
+
+		TestDataManager.saveWithBlock() { (savingContext: NSManagedObjectContext) -> Void in
+			plane?.entityInContext(savingContext)?.destination = newDestination
+		}
+
+		self.performBlockAfterDelay(1) {
+			XCTAssertEqual(plane?.entityInDefaultContext()?.objectID, plane?.objectID, "Plane entities should have same object ID")
+			XCTAssertEqual(plane?.entityInDefaultContext()?.destination, newDestination, "Plane destination should have been updated")
+			expectation.fulfill()
+		}
+
+		self.waitForExpectationsWithTimeout(5, handler: nil)
+	}
+
 }
 
 // MARK: Boolean state functions
