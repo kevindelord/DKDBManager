@@ -33,6 +33,7 @@ extension ValidateEntityTest {
 		XCTAssertEqual(plane?.hasBeenDeleted, false, "plane entity shoud not have been deleted")
 		XCTAssertEqual(plane?.doesExist, true, "plane entity shoud exist")
 		XCTAssertEqual(plane?.hasValidContext, true, "plane entity shoud have valid context")
+		XCTAssertNotEqual(plane?.doesExist, plane?.hasBeenDeleted)
 
 		XCTAssertEqual(plane?.isValidInCurrentContext, true, "plane entity shoud be valid in context")
 	}
@@ -54,6 +55,7 @@ extension ValidateEntityTest {
 			XCTAssertNil(error)
 
 			XCTAssertEqual(plane?.entityInDefaultContext()?.isValidInCurrentContext, false, "plane entity shoud be NOT valid in context")
+			XCTAssertNotEqual(plane?.doesExist, plane?.hasBeenDeleted)
 			expectation.fulfill()
 		}
 

@@ -23,24 +23,9 @@
 @property (nonatomic, readonly) BOOL hasValidContext;
 
 /**
- * Returns YES if |managedObject| has been deleted from the Persistent Store, or NO if it has not.
- *
- * NO will be returned for NSManagedObject's who have been marked for deletion
- * (e.g. their -isDeleted method returns YES), but have not yet been commited
- * to the Persistent Store. YES will be returned only after a deleted
- * NSManagedObject has been committed to the Persistent Store.
- *
- * Rarely, an exception will be thrown if Mac OS X 10.5 is used AND
- * |managedObject| has zero properties defined. If all your NSManagedObject's
- * in the data model have at least one property, this will not be an issue.
- *
- * Property == Attributes and Relationships
- *
- * Mac OS X 10.4 and earlier are not supported, and will throw an exception.
- *
  * @return YES if the current managedObject has been deleted from the Persistent Store, or NO if it has not.
  */
-@property (nonatomic, readonly) BOOL hasBeenDeleted;
+@property (nonatomic, readonly) BOOL hasBeenDeleted NS_AVAILABLE(10_6, 3_0);
 
 /**
  * @return YES the current managedObject exist in the current context, or NO if it has not.
@@ -50,6 +35,6 @@
 /**
  * @return YES the current managedObject has a managed object context, or NO if it has not.
  */
-@property (nonatomic, readonly) BOOL isValidInCurrentContext;
+@property (nonatomic, readonly) BOOL isValidInCurrentContext NS_AVAILABLE(10_6, 3_0);
 
 @end

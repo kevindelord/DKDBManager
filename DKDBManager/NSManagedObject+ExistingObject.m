@@ -35,26 +35,7 @@
 }
 
 - (BOOL)hasBeenDeleted {
-	/*
-	 Returns YES if |managedObject| has been deleted from the Persistent Store,
-	 or NO if it has not.
-
-	 NO will be returned for NSManagedObject's who have been marked for deletion
-	 (e.g. their -isDeleted method returns YES), but have not yet been commited
-	 to the Persistent Store. YES will be returned only after a deleted
-	 NSManagedObject has been committed to the Persistent Store.
-
-	 Mac OS X 10.5 and earlier are not supported, and will throw an exception.
-	 */
-	NSManagedObjectID *objectID = [self objectID];
-	NSManagedObjectContext *moc = [self managedObjectContext];
-	NSManagedObject *managedObjectClone = [moc existingObjectWithID:objectID error:NULL];
-
-	if (!managedObjectClone) {
-		return YES;                 // Deleted.
-	} else {
-		return NO;                  // Not deleted.
-	}
+	return (self.doesExist == NO);
 }
 
 @end
