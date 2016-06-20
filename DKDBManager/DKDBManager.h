@@ -38,9 +38,9 @@ FOUNDATION_EXPORT const unsigned char DKDBManagerVersionString[];
 @interface DKDBManager : MagicalRecord
 
 /**
- *  Dictionnary containing identifiers of all entities marked as not deprecated.
+ *  @brief Dictionnary containing identifiers of all entities marked as not deprecated.
  *
- *  If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
+ *  @discussion If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
  *
  *  @remark The value can not be `nil`; to reinitialise the stored identifiers, create a new NSMutableDictionary.
  */

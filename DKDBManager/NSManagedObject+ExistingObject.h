@@ -20,7 +20,7 @@
  *
  * @return TRUE is valid
  */
-@property (NS_NONATOMIC_IOSONLY, readonly) BOOL hasValidContext;
+@property (nonatomic, readonly) BOOL hasValidContext;
 
 /**
  * Returns YES if |managedObject| has been deleted from the Persistent Store, or NO if it has not.
@@ -40,16 +40,16 @@
  *
  * @return YES if the current managedObject has been deleted from the Persistent Store, or NO if it has not.
  */
-@property (NS_NONATOMIC_IOSONLY, readonly) BOOL hasBeenDeleted;
+@property (nonatomic, readonly) BOOL hasBeenDeleted;
 
 /**
  * @return YES the current managedObject exist in the current context, or NO if it has not.
  */
-@property (NS_NONATOMIC_IOSONLY, readonly) BOOL doesExist;
+@property (nonatomic, readonly) BOOL doesExist;
 
 /**
  * @return YES the current managedObject has a managed object context, or NO if it has not.
  */
-@property (NS_NONATOMIC_IOSONLY, getter=isValidInCurrentContext, readonly) BOOL validInCurrentContext;
+@property (nonatomic, readonly) BOOL isValidInCurrentContext;
 
 @end
