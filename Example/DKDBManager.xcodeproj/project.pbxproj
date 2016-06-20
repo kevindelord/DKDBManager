@@ -26,7 +26,6 @@
 		75A303E21D1149AF009CEA34 /* NSManagedObject+ExistingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D61D1149AF009CEA34 /* NSManagedObject+ExistingObject.m */; };
 		75A303E31D1149B6009CEA34 /* DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D21D1149AF009CEA34 /* DKDBManager.m */; };
 		75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
-		75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16025671C5B877300A1013E /* DKDBManagerTest.swift */; };
 		75A303F81D114A4F009CEA34 /* MagicalRecord.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75BF83571D1049D9005028BF /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
 		75BF83581D1049D9005028BF /* DKDBManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -175,7 +174,6 @@
 		9FD235B965D5CBD0F89A2C38 /* Pods-Example-Cocoapods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Cocoapods.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods.debug.xcconfig"; sourceTree = "<group>"; };
 		AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Cocoapods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B864B717B3506BF50A77D473 /* Pods-Example-Carthage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Carthage.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Carthage/Pods-Example-Carthage.debug.xcconfig"; sourceTree = "<group>"; };
-		D16025671C5B877300A1013E /* DKDBManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DKDBManagerTest.swift; path = ../DBSwiftTestTests/DKDBManagerTest.swift; sourceTree = "<group>"; };
 		D59710A9B6BCB8E686FFA81B /* Pods-DKDBManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKDBManagerTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DKDBManagerTests/Pods-DKDBManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E5DEA6BD084BF143F93E9CDF /* Pods_Example_Carthage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Carthage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1FBC1EE8BAC753F15485A /* Pods-Example-Cocoapods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Cocoapods.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods.release.xcconfig"; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 		75A303E91D1149FE009CEA34 /* DKDBManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				D16025671C5B877300A1013E /* DKDBManagerTest.swift */,
 				756FAF3E1D17EE0E001D7196 /* SetupFunctionTests.swift */,
 				756FAF341D17E7DF001D7196 /* TestDataManager.swift */,
 			);
@@ -708,7 +705,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				756FAF3A1D17ECFF001D7196 /* Plane+CoreDataProperties.swift in Sources */,
-				75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */,
 				756FAF351D17E7DF001D7196 /* TestDataManager.swift in Sources */,
 				756FAF3F1D17EE0E001D7196 /* SetupFunctionTests.swift in Sources */,
 				756FAF3C1D17ED02001D7196 /* DBSwiftTest.xcdatamodeld in Sources */,

@@ -26,10 +26,11 @@ class TestDataManager : DKDBManager {
 extension TestDataManager {
 
 	class func staticPlaneJSON(entityNumber: Int = 5) -> [[String:AnyObject]] {
-		let names = 	["Kevin", "Michael", "James", "John", "Bob", "Pierre", "Alex", "Tom", "Jack", "Nicolas"]
-		let cities = 	["Paris", "London", "Berlin", "Tokyo", "Madrid", "Los Angles", "Toronto", "Sydney", "Hong Kong"]
-		let ages = 		[21, 22, 34, 21, 45, 44, 32, 19, 79]
+		let names = 	["Kevin", "Michael", "James", "", "Bob", "Pierre", "Alex", "Tom", "Jack", "Nicolas"]
+		let cities = 	["Paris", "London", "Berlin", "", "Madrid", "Los Angles", "Toronto", "Sydney", "Hong Kong"]
+		let ages = 		[21, 22, 34, -2, 45, 44, 32, 19, 79]
 		let numberOfbaggages = [0, 1, 2, 2, 1, 0, 1, 3, 1]
+		let weightOfbaggages = [0, 20, 13, 14, 15, 8, 9, 22, 10]
 
 		var data = [[String:AnyObject]]()
 
@@ -37,7 +38,7 @@ extension TestDataManager {
 			// baggages
 			var baggages = [[String:AnyObject]]()
 			for _ in 0...numberOfbaggages[index] {
-				baggages.append([JSON.Weight: Int(arc4random_uniform(20)) - 2])
+				baggages.append([JSON.Weight: weightOfbaggages[index]])
 			}
 
 			// passenger
