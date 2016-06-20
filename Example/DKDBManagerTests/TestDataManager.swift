@@ -15,104 +15,41 @@ class TestDataManager : DKDBManager {
 
 	// MARK: -  Static Properties of MockManager
 
-	static var context							= NSManagedObjectContext()
+	override class func setupCoreDataStackWithName(name: String) {
+		MagicalRecord.setDefaultModelFromClass(self)
+		self.setupCoreDataStackWithInMemoryStore()
+	}
+}
 
-	static var dumpCountInContextIsCalled 		= false
-	static var dumpInContextIsCalled	 		= false
+// MARK: - Unit Test Methods
 
-	static var allowsEraseDatabaseForName   	= false
-	static var didResetDatabaseBlockExecuted 	= false
+extension TestDataManager {
 
-	static var setupDatabaseDidResetCalled		= false
+	class func staticPlaneJSON(entityNumber: Int = 5) -> [[String:AnyObject]] {
+		let names = 	["Kevin", "Michael", "James", "John", "Bob", "Pierre", "Alex", "Tom", "Jack", "Nicolas"]
+		let cities = 	["Paris", "London", "Berlin", "Tokyo", "Madrid", "Los Angles", "Toronto", "Sydney", "Hong Kong"]
+		let ages = 		[21, 22, 34, 21, 45, 44, 32, 19, 79]
+		let numberOfbaggages = [0, 1, 2, 2, 1, 0, 1, 3, 1]
 
-	static var demoEntities 					: [NSEntityDescription]?
+		var data = [[String:AnyObject]]()
 
+		for index in 0..<entityNumber {
+			// baggages
+			var baggages = [[String:AnyObject]]()
+			for _ in 0...numberOfbaggages[index] {
+				baggages.append([JSON.Weight: Int(arc4random_uniform(20)) - 2])
+			}
 
-	// MARK: - DB Methods
+			// passenger
+			var passenger = [[String:AnyObject]]()
+			for index in 0..<entityNumber {
+				passenger.append([JSON.Name: names[index], JSON.Age: ages[index], JSON.Baggages: baggages])
+			}
 
-	override class func entityClassNames() -> [AnyObject] {
-
-		var array 					= [AnyObject]()
-		var entities 				= NSManagedObjectModel().entities
-
-		if let _demoEntitiesNames = self.demoEntities {
-			entities = _demoEntitiesNames
+			// plane
+			data.append([JSON.Origin: cities[index], JSON.Destination: cities[index + 1], JSON.Passengers: passenger])
 		}
 
-		for desc in entities {
-			array.append(desc.managedObjectClassName);
-		}
-		return array
-	}
-
-	override class func setupDatabaseWithName(databaseName: String, didResetDatabase: (() -> Void)?) {
-
-		self.setupDatabaseDidResetCalled = true
-
-		var didResetDB = false
-		if (DKDBManager.resetStoredEntities() == true) {
-			didResetDB = self.eraseDatabaseForStoreName(databaseName)
-		}
-
-		if (didResetDB == true && didResetDatabase != nil) {
-			self.didResetDatabaseBlockExecuted = true
-		}
-	}
-
-	override class func eraseDatabaseForStoreName(databaseName: String) -> Bool {
-		return self.allowsEraseDatabaseForName
-	}
-
-	// MARK: - Log Methods
-
-	override class func dumpCount() {
-		self.dumpCountInContext(self.context)
-	}
-
-	override class func dumpCountInContext(context: NSManagedObjectContext) {
-
-		if (self.verbose() == false) {
-			self.dumpCountInContextIsCalled = false
-			return
-		}
-
-		self.dumpCountInContextIsCalled = true
-	}
-
-
-	override class func dump() {
-		self.dumpInContext(self.context)
-	}
-
-	override class func dumpInContext(context: NSManagedObjectContext) {
-
-		if (self.verbose() == false) {
-			self.dumpInContextIsCalled 		= false
-		} else {
-			self.dumpInContextIsCalled		= true
-		}
-	}
-
-	// MARK: - Helpers
-
-	class func addDemoEntityWithName(className: String) {
-
-		if self.demoEntities == nil {
-			self.demoEntities 				= [NSEntityDescription]()
-		}
-
-		let entity 							= NSEntityDescription()
-		entity.managedObjectClassName 		= className
-		self.demoEntities?.append(entity)
-	}
-
-	class func reset() {
-		self.context						= NSManagedObjectContext()
-		self.dumpCountInContextIsCalled 	= false
-		self.dumpInContextIsCalled	 		= false
-		self.allowsEraseDatabaseForName   	= false
-		self.didResetDatabaseBlockExecuted 	= false
-		self.setupDatabaseDidResetCalled	= false
-		self.demoEntities?.removeAll()
+		return data
 	}
 }
