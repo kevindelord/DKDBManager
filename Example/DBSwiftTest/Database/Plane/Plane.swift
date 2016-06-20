@@ -36,10 +36,6 @@ extension Plane {
 		return "\(self.objectID.URIRepresentation().lastPathComponent ?? "") : \(self.origin ?? "") -> \(self.destination ?? ""), \(self.allPassengersCount) Passenger(s)"
 	}
 
-	override func uniqueIdentifier() -> AnyObject {
-		return self.objectID;
-	}
-
 	override func saveEntityAsNotDeprecated() {
 		super.saveEntityAsNotDeprecated()
 

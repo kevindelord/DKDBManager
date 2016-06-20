@@ -31,10 +31,6 @@ extension Baggage {
 		return description
 	}
 
-	override func uniqueIdentifier() -> AnyObject {
-		return self.objectID;
-	}
-
 	override func saveEntityAsNotDeprecated() {
 		super.saveEntityAsNotDeprecated()
 	}

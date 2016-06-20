@@ -10,26 +10,8 @@ import Foundation
 import XCTest
 import DKDBManager
 
-class SetupFunctionTest: XCTestCase {
-
-	override func setUp() {
-		super.setUp()
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-		self.setupDatabase()
-	}
-
-	override func tearDown() {
-		super.tearDown()
-		TestDataManager.cleanUp()
-	}
-
-	func setupDatabase() {
-		TestDataManager.setVerbose(true)
-		// Optional: Reset the database on start to make this test app more understandable.
-		TestDataManager.setResetStoredEntities(true)
-		// Setup the database.
-		TestDataManager.setup()
-	}
+class SetupFunctionTest: DKDBTestCase {
+	
 }
 
 // MARK: Setup functions
@@ -51,6 +33,9 @@ extension SetupFunctionTest {
 
 		}) { (contextDidSave: Bool, error: NSError?) -> Void in
 			// main thread
+			XCTAssertTrue(contextDidSave)
+			XCTAssertNil(error)
+
 			XCTAssertEqual(Plane.count(), 3, "the number of planes should be equals to 5")
 			expectation.fulfill()
 		}
@@ -74,6 +59,7 @@ extension SetupFunctionTest {
 		// set expectation
 		let expectation = self.expectationWithDescription("Wait for the Response")
 		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
+
 			Plane.createEntityFromDictionary(onePlaneJson, inContext: savingContext) { (entity, status) in
 				XCTAssertEqual((entity as? Plane)?.objectID, plane?.objectID)
 				XCTAssertEqual(status, DKDBManagedObjectState.Save)
@@ -101,6 +87,7 @@ extension SetupFunctionTest {
 		let expectation = self.expectationWithDescription("Wait for the Response")
 
 		TestDataManager.saveWithBlock() { (savingContext: NSManagedObjectContext) -> Void in
+
 			plane?.entityInContext(savingContext)?.destination = newDestination
 		}
 
