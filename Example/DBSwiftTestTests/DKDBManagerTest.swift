@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import MagicalRecord
 import DKDBManager
 
 class DKDBManagerTest: XCTestCase {
@@ -18,7 +17,7 @@ class DKDBManagerTest: XCTestCase {
     }
     
     override func tearDown() {
-		MockManager.reset()
+		TestDataManager.reset()
 
 		super.tearDown()
     }
@@ -33,12 +32,12 @@ extension DKDBManagerTest {
 	func testEntityClassNames() {
 
 		// Set
-		MockManager.addDemoEntityWithName("TestClass")
-		MockManager.addDemoEntityWithName("TestClassA")
-		MockManager.addDemoEntityWithName("TestClassB")
+		TestDataManager.addDemoEntityWithName("TestClass")
+		TestDataManager.addDemoEntityWithName("TestClassA")
+		TestDataManager.addDemoEntityWithName("TestClassB")
 
 		// Call + Assert
-		XCTAssertEqual(["TestClass","TestClassA","TestClassB"], (MockManager.entityClassNames() as? [String]) ?? [])
+		XCTAssertEqual(["TestClass","TestClassA","TestClassB"], (TestDataManager.entityClassNames() as? [String]) ?? [])
 	}
 }
 
@@ -49,10 +48,10 @@ extension DKDBManagerTest {
 	func testCleanUpShouldDeleteStoredIdentifiers() {
 
 		// Set + Call
-		MockManager.cleanUp()
+		TestDataManager.cleanUp()
 
 		// Assert
-		XCTAssertTrue(MockManager.sharedInstance().storedIdentifiers.count == 0)
+		XCTAssertTrue(TestDataManager.sharedInstance().storedIdentifiers.count == 0)
 	}
 
 }
@@ -66,19 +65,19 @@ extension DKDBManagerTest {
 	func testSetVerboseTrue() {
 
 		// Set + Call
-		MockManager.setVerbose(true)
+		TestDataManager.setVerbose(true)
 
 		// Assert
-		XCTAssertEqual(MockManager.loggingLevel(), MagicalRecord.loggingLevel())
+		XCTAssertEqual(TestDataManager.loggingLevel(), MagicalRecord.loggingLevel())
 	}
 
 	func testSetVerboseFalse() {
 
 		// Set + Call
-		MockManager.setVerbose(false)
+		TestDataManager.setVerbose(false)
 
 		// Assert
-		XCTAssertEqual(MockManager.loggingLevel(), MagicalRecord.loggingLevel())
+		XCTAssertEqual(TestDataManager.loggingLevel(), MagicalRecord.loggingLevel())
 	}
 }
 
@@ -89,54 +88,54 @@ extension DKDBManagerTest  {
 	func testSetupDatabaseWithResetSucceed() {
 
 		// Set
-		MockManager.setResetStoredEntities(true)
-		MockManager.allowsEraseDatabaseForName = true
+		TestDataManager.setResetStoredEntities(true)
+		TestDataManager.allowsEraseDatabaseForName = true
 
 		// Call
-		MockManager.setupDatabaseWithName("TestDB") { () -> Void in
+		TestDataManager.setupDatabaseWithName("TestDB") { () -> Void in
 			// db reseted 
 		}
 
 		// Assert
-		XCTAssertTrue(MockManager.didResetDatabaseBlockExecuted == true)
+		XCTAssertTrue(TestDataManager.didResetDatabaseBlockExecuted == true)
 	}
 
 	func testSetupDatabaseWithResetFailsDueWhenStoredEntitiesToFalse() {
 
 		// Set
-		MockManager.setResetStoredEntities(false)
-		MockManager.allowsEraseDatabaseForName = true
+		TestDataManager.setResetStoredEntities(false)
+		TestDataManager.allowsEraseDatabaseForName = true
 
 		// Call
-		MockManager.setupDatabaseWithName("TestDB") { () -> Void in
+		TestDataManager.setupDatabaseWithName("TestDB") { () -> Void in
 			// db reseted
 		}
 
 		// Assert
-		XCTAssertTrue(MockManager.didResetDatabaseBlockExecuted == false)
+		XCTAssertTrue(TestDataManager.didResetDatabaseBlockExecuted == false)
 	}
 
 	func testSetupDatabaseWithResetFailsWhenTheDatabaseCannotBeDeleted() {
 
 		// Set
-		MockManager.setResetStoredEntities(true)
-		MockManager.allowsEraseDatabaseForName = false
+		TestDataManager.setResetStoredEntities(true)
+		TestDataManager.allowsEraseDatabaseForName = false
 
 		// Call
-		MockManager.setupDatabaseWithName("TestDB") { () -> Void in
+		TestDataManager.setupDatabaseWithName("TestDB") { () -> Void in
 			// db reseted
 		}
 
 		// Assert
-		XCTAssertTrue(MockManager.didResetDatabaseBlockExecuted == false)
+		XCTAssertTrue(TestDataManager.didResetDatabaseBlockExecuted == false)
 	}
 
 	func testIfSetupDatabaseDidResetWasCalled() {
 		// Set + Call
-		MockManager.setupDatabaseWithName("TestDB")
+		TestDataManager.setupDatabaseWithName("TestDB")
 
 		// Assert
-		XCTAssertTrue(MockManager.setupDatabseDidResetCalled == true)
+		XCTAssertTrue(TestDataManager.setupDatabaseDidResetCalled == true)
 	}
 
 }
@@ -145,28 +144,28 @@ extension DKDBManagerTest  {
 
 extension DKDBManagerTest {
 
-	func testCalldumpCountWithVerbose() {
+	func testCallDumpCountWithVerbose() {
 
 		// Set
-		MockManager.setVerbose(true)
+		TestDataManager.setVerbose(true)
 
 		// Call
-		MockManager.dumpCount()
+		TestDataManager.dumpCount()
 
 		// Assert
-		XCTAssertTrue(MockManager.dumpCountInContextIsCalled == true)
+		XCTAssertTrue(TestDataManager.dumpCountInContextIsCalled == true)
 	}
 
-	func testCalldumpCountWithoutVerbose() {
+	func testCallDumpCountWithoutVerbose() {
 
 		// Set
-		MockManager.setVerbose(false)
+		TestDataManager.setVerbose(false)
 
 		// Call
-		MockManager.dumpCount()
+		TestDataManager.dumpCount()
 
 		// Assert
-		XCTAssertTrue(MockManager.dumpCountInContextIsCalled == false)
+		XCTAssertTrue(TestDataManager.dumpCountInContextIsCalled == false)
 	}
 }
 
@@ -174,135 +173,27 @@ extension DKDBManagerTest {
 
 extension DKDBManagerTest {
 
-	func testCalldumpWithVerbose() {
+	func testCallDumpWithVerbose() {
 
 		// Set
-		MockManager.setVerbose(true)
+		TestDataManager.setVerbose(true)
 
 		// Call
-		MockManager.dump()
+		TestDataManager.dump()
 
 		// Assert
-		XCTAssertTrue(MockManager.dumpInContextIsCalled == true)
+		XCTAssertTrue(TestDataManager.dumpInContextIsCalled == true)
 	}
 
-	func testCalldumpWithoutVerbose() {
+	func testCallDumpWithoutVerbose() {
 
 		// Set
-		MockManager.setVerbose(false)
+		TestDataManager.setVerbose(false)
 
 		// Call
-		MockManager.dumpCount()
+		TestDataManager.dumpCount()
 
 		// Assert
-		XCTAssertTrue(MockManager.dumpInContextIsCalled == false)
-	}
-}
-
-// MARK: - MockManager subclass of DKDBManager
-
-class MockManager : DKDBManager {
-
-	// MARK: -  Static Properties of MockManager
-
-	static var context							= NSManagedObjectContext()
-
-	static var dumpCountInContextIsCalled 		= false
-	static var dumpInContextIsCalled	 		= false
-
-	static var allowsEraseDatabaseForName   	= false
-	static var didResetDatabaseBlockExecuted 	= false
-
-	static var setupDatabseDidResetCalled		= false
-
-	static var demoEntities 					: [NSEntityDescription]?
-
-
-	// MARK: - DB Methods
-
-	override class func entityClassNames() -> [AnyObject] {
-
-		var array 					= [AnyObject]()
-		var entities 				= NSManagedObjectModel().entities
-
-		if let _demoEntitiesNames = self.demoEntities {
-			entities 				= _demoEntitiesNames
-		}
-
-		for desc in entities {
-			array.append(desc.managedObjectClassName);
-		}
-		return array
-	}
-
-	override class func setupDatabaseWithName(databaseName: String, didResetDatabase: (() -> Void)?) {
-
-		self.setupDatabseDidResetCalled = true
-
-		var didResetDB = false
-		if (DKDBManager.resetStoredEntities() == true) {
-			didResetDB 				= self.eraseDatabaseForStoreName(databaseName)
-		}
-
-		if (didResetDB == true && didResetDatabase != nil) {
-			self.didResetDatabaseBlockExecuted = true
-		}
-	}
-
-	override class func eraseDatabaseForStoreName(databaseName: String) -> Bool {
-		return self.allowsEraseDatabaseForName
-	}
-
-	// MARK: - Log Methods
-
-	override class func dumpCount() {
-		self.dumpCountInContext(self.context)
-	}
-
-	override class func dumpCountInContext(context: NSManagedObjectContext) {
-
-		if (self.verbose() == false) {
-			self.dumpCountInContextIsCalled = false
-			return
-		}
-
-		self.dumpCountInContextIsCalled 	= true
-	}
-
-
-	override class func dump() {
-		self.dumpInContext(self.context)
-	}
-
-	override class func dumpInContext(context: NSManagedObjectContext) {
-
-		if (self.verbose() == false) {
-			self.dumpInContextIsCalled 		= false
-			return
-		}
-		self.dumpInContextIsCalled 			= true
-	}
-
-	// MARK: - Helpers
-
-	class func addDemoEntityWithName(className: String) {
-
-		if self.demoEntities == nil {
-			self.demoEntities 				= [NSEntityDescription]()
-		}
-
-		let entity 							= NSEntityDescription()
-		entity.managedObjectClassName 		= className
-		self.demoEntities?.append(entity)
-	}
-
-	class func reset() {
-		self.context						= NSManagedObjectContext()
-		self.dumpCountInContextIsCalled 	= false
-		self.dumpInContextIsCalled	 		= false
-		self.allowsEraseDatabaseForName   	= false
-		self.didResetDatabaseBlockExecuted 	= false
-		self.setupDatabseDidResetCalled		= false
-		self.demoEntities?.removeAll()
+		XCTAssertTrue(TestDataManager.dumpInContextIsCalled == false)
 	}
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		755B11A91D11862000509694 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; };
+		756FAF351D17E7DF001D7196 /* TestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FAF341D17E7DF001D7196 /* TestDataManager.swift */; };
 		75A303D71D1149AF009CEA34 /* DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D11D1149AF009CEA34 /* DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75A303DB1D1149AF009CEA34 /* NSManagedObject+DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75A303DE1D1149AF009CEA34 /* NSManagedObject+DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D41D1149AF009CEA34 /* NSManagedObject+DKDBManager.m */; };
@@ -124,6 +125,7 @@
 
 /* Begin PBXFileReference section */
 		6E59B7EAAF48291988443113 /* Pods-Example-Carthage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Carthage.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Carthage/Pods-Example-Carthage.release.xcconfig"; sourceTree = "<group>"; };
+		756FAF341D17E7DF001D7196 /* TestDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDataManager.swift; sourceTree = "<group>"; };
 		75A303D11D1149AF009CEA34 /* DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKDBManager.h; sourceTree = "<group>"; };
 		75A303D21D1149AF009CEA34 /* DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKDBManager.m; sourceTree = "<group>"; };
 		75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+DKDBManager.h"; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				D16025671C5B877300A1013E /* DKDBManagerTest.swift */,
+				756FAF341D17E7DF001D7196 /* TestDataManager.swift */,
 			);
 			path = DKDBManagerTests;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */,
+				756FAF351D17E7DF001D7196 /* TestDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
