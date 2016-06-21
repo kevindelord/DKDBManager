@@ -44,6 +44,7 @@ extension ValidateEntityTest {
 		}
 
 		XCTAssert(bag?.hasValidContext == false)
+		XCTAssert(bag?.doesExist == false)
 	}
 
 	func testDeleteEntityState() {
