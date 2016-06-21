@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75157C421D193607002296DE /* DumpDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C411D193607002296DE /* DumpDBTests.swift */; };
 		75452AE81D1829C1009337A9 /* DeleteFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */; };
 		75452AEA1D182FDC009337A9 /* ValidateEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */; };
 		75452AEF1D183150009337A9 /* DKDBTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AEB1D183150009337A9 /* DKDBTestCase.swift */; };
@@ -139,6 +140,7 @@
 		07735015401DEAFDAD2A7C71 /* Pods-DKDBManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKDBManagerTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-DKDBManagerTests/Pods-DKDBManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		52C67D9A2F4153D2495B6CD1 /* Pods_DKDBManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKDBManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E59B7EAAF48291988443113 /* Pods-Example-Carthage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Carthage.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Carthage/Pods-Example-Carthage.release.xcconfig"; sourceTree = "<group>"; };
+		75157C411D193607002296DE /* DumpDBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DumpDBTests.swift; sourceTree = "<group>"; };
 		75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteFunctionTests.swift; sourceTree = "<group>"; };
 		75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateEntityTests.swift; sourceTree = "<group>"; };
 		75452AEB1D183150009337A9 /* DKDBTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKDBTestCase.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				75452AEB1D183150009337A9 /* DKDBTestCase.swift */,
 				75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */,
 				75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */,
+				75157C411D193607002296DE /* DumpDBTests.swift */,
 				756FAF341D17E7DF001D7196 /* TestDataManager.swift */,
 			);
 			path = DKDBManagerTests;
@@ -717,6 +720,7 @@
 				756FAF3F1D17EE0E001D7196 /* SetupFunctionTests.swift in Sources */,
 				756FAF3C1D17ED02001D7196 /* DBSwiftTest.xcdatamodeld in Sources */,
 				756FAF391D17ECFF001D7196 /* Passenger.swift in Sources */,
+				75157C421D193607002296DE /* DumpDBTests.swift in Sources */,
 				756FAF3D1D17EDC6001D7196 /* Constants.swift in Sources */,
 				756FAF381D17ECFF001D7196 /* Passenger+CoreDataProperties.swift in Sources */,
 				756FAF371D17ECFF001D7196 /* Baggage.swift in Sources */,
