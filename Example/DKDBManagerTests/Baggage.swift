@@ -46,20 +46,6 @@ extension Baggage {
 		self.weight = GET_NUMBER(dictionary, JSON.Weight)
 	}
 
-	override func invalidReason() -> String? {
-
-		if let invalidReason = super.invalidReason() {
-			return invalidReason
-		}
-
-		guard let weight = self.weight as? Int where (weight > 0) else {
-			return "Invalid weight"
-		}
-
-		// valid baggage.
-		return nil
-	}
-
 	override class func verbose() -> Bool {
 		return (super.verbose() || Verbose.Model.Baggage)
 	}
