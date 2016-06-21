@@ -10,6 +10,7 @@
 		75157C421D193607002296DE /* DumpDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C411D193607002296DE /* DumpDBTests.swift */; };
 		75157C491D19477A002296DE /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C481D19477A002296DE /* Baggage.swift */; };
 		75157C4B1D194953002296DE /* CreateEntitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C4A1D194953002296DE /* CreateEntitiesTests.swift */; };
+		75157C4D1D196EEC002296DE /* DeprecatedEntitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C4C1D196EEC002296DE /* DeprecatedEntitiesTests.swift */; };
 		75452AE81D1829C1009337A9 /* DeleteFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */; };
 		75452AEA1D182FDC009337A9 /* ValidateEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */; };
 		75452AEF1D183150009337A9 /* DKDBTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AEB1D183150009337A9 /* DKDBTestCase.swift */; };
@@ -143,6 +144,7 @@
 		75157C411D193607002296DE /* DumpDBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DumpDBTests.swift; sourceTree = "<group>"; };
 		75157C481D19477A002296DE /* Baggage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baggage.swift; sourceTree = "<group>"; };
 		75157C4A1D194953002296DE /* CreateEntitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEntitiesTests.swift; sourceTree = "<group>"; };
+		75157C4C1D196EEC002296DE /* DeprecatedEntitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeprecatedEntitiesTests.swift; sourceTree = "<group>"; };
 		75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteFunctionTests.swift; sourceTree = "<group>"; };
 		75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateEntityTests.swift; sourceTree = "<group>"; };
 		75452AEB1D183150009337A9 /* DKDBTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKDBTestCase.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				756FAF3E1D17EE0E001D7196 /* SetupFunctionTests.swift */,
+				75157C4C1D196EEC002296DE /* DeprecatedEntitiesTests.swift */,
 				75452AEB1D183150009337A9 /* DKDBTestCase.swift */,
 				75157C4A1D194953002296DE /* CreateEntitiesTests.swift */,
 				75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */,
@@ -721,6 +724,7 @@
 			files = (
 				756FAF3A1D17ECFF001D7196 /* Plane+CoreDataProperties.swift in Sources */,
 				756FAF351D17E7DF001D7196 /* TestDataManager.swift in Sources */,
+				75157C4D1D196EEC002296DE /* DeprecatedEntitiesTests.swift in Sources */,
 				756FAF3F1D17EE0E001D7196 /* SetupFunctionTests.swift in Sources */,
 				75157C491D19477A002296DE /* Baggage.swift in Sources */,
 				756FAF3C1D17ED02001D7196 /* DBSwiftTest.xcdatamodeld in Sources */,
