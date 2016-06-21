@@ -16,7 +16,7 @@
 @interface NSManagedObject (ExistingObject)
 
 /**
- * Verification method to know if the current object is still still valid, if it has been deleted or even if it's still in a valid context.
+ * @brief Verification method to know if the current object is still valid, if it has been deleted or even if it's still in a valid context.
  *
  * @return TRUE is valid
  */

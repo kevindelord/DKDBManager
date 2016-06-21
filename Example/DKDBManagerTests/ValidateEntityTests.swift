@@ -35,6 +35,17 @@ extension ValidateEntityTest {
 		XCTAssertEqual(plane?.isValidInCurrentContext, true, "plane entity shoud be valid in context")
 	}
 
+	func testEntityShouldNotBeWithinContext() {
+
+		var bag : Baggage? = nil
+		TestDataManager.saveWithBlockAndWait { (savingContext) in
+			bag = Baggage.createEntityInContext(savingContext)
+			bag?.deleteEntityWithReason(nil, inContext: savingContext)
+		}
+
+		XCTAssert(bag?.hasValidContext == false)
+	}
+
 	func testDeleteEntityState() {
 
 		let plane = Plane.MR_findFirst()
