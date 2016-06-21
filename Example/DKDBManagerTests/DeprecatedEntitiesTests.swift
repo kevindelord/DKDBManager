@@ -10,11 +10,6 @@ import Foundation
 import XCTest
 import DKDBManager
 
-// Functions to test:
-// removeDeprecatedEntitiesInContext:forClass:
-// removeDeprecatedEntitiesInContext:
-// removeDeprecatedEntitiesFromArray:
-
 class DeprecatedEntitiesTest: DKDBTestCase {
 
 	override func setUp() {
@@ -77,5 +72,47 @@ extension DeprecatedEntitiesTest {
 		XCTAssert((identifiers[NSStringFromClass(Passenger)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Passenger")
 	}
 
+	/**
+	Test: removeDeprecatedEntitiesInContext:
+	*/
+	func testShouldRemoveDeprecatedEntitiesForAllClass() {
 
+		let planeCount = Plane.count()
+		let passengerCount = Passenger.count()
+		let baggageCount = Baggage.count()
+
+		let deleteNumber = 2
+		var json = TestDataManager.staticPlaneJSON()
+		json.removeFirst(deleteNumber)
+		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.createEntitiesFromArray(json, inContext: savingContext)
+			TestDataManager.removeDeprecatedEntitiesInContext(savingContext)
+		}
+
+		XCTAssertEqual(Plane.count(), planeCount - deleteNumber)
+		XCTAssertEqual(Passenger.count(), passengerCount - (deleteNumber * 5))
+		XCTAssert(Baggage.count() < baggageCount)
+	}
+
+	/**
+	Test: removeDeprecatedEntitiesInContext:forClass:
+	*/
+	func testShouldRemoveDeprecatedEntitiesForOneClass() {
+
+		let planeCount = Plane.count()
+		let passengerCount = Passenger.count()
+		let baggageCount = Baggage.count()
+
+		let deleteNumber = 2
+		var json = TestDataManager.staticPlaneJSON()
+		json.removeFirst(deleteNumber)
+		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.createEntitiesFromArray(json, inContext: savingContext)
+			TestDataManager.removeDeprecatedEntitiesInContext(savingContext, forClass: Baggage.self)
+		}
+
+		XCTAssertEqual(Plane.count(), planeCount)
+		XCTAssertEqual(Passenger.count(), passengerCount)
+		XCTAssert(Baggage.count() < baggageCount)
+	}
 }

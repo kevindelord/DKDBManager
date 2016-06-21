@@ -20,7 +20,7 @@ extension DKDBTestCase {
 
 		TestDataManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-			let json = TestDataManager.staticPlaneJSON(5)
+			let json = TestDataManager.staticPlaneJSON()
 			Plane.createEntitiesFromArray(json, inContext: savingContext)
 
 		}) { (contextDidSave: Bool, error: NSError?) -> Void in
@@ -28,8 +28,8 @@ extension DKDBTestCase {
 			XCTAssertTrue(contextDidSave)
 			XCTAssertNil(error)
 
-			XCTAssertEqual(Plane.count(), 3, "the number of planes should be equals to 5")
-			XCTAssertEqual(Plane.all()?.count, 3, "the number of planes should be equals to 5")
+			XCTAssertEqual(Plane.count(), 4, "the number of planes should be equals to 5")
+			XCTAssertEqual(Plane.all()?.count, 4, "the number of planes should be equals to 5")
 			expectation.fulfill()
 		}
 
@@ -37,7 +37,7 @@ extension DKDBTestCase {
 	}
 
  	func createDefaultEntities() {
-		let json = TestDataManager.staticPlaneJSON(5)
+		let json = TestDataManager.staticPlaneJSON()
 		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
 			Plane.createEntitiesFromArray(json, inContext: savingContext)
 		}
@@ -80,7 +80,7 @@ extension CreateEntitiesTestCase {
 
 	func testUpdateFirstPlaneWithSameValues() {
 
-		let json = TestDataManager.staticPlaneJSON(5)
+		let json = TestDataManager.staticPlaneJSON()
 		let onePlaneJson = (json.first ?? [:])
 
 		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
