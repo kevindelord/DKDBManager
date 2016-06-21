@@ -106,6 +106,12 @@ extension Plane {
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
-		return true
+		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
+
+			if (jsonArray.count != self.allPassengersCount) {
+				return true
+			}
+		}
+		return false
 	}
 }

@@ -15,10 +15,7 @@ class DumpDBTest: DKDBTestCase {
 	override func setUp() {
 		super.setUp()
 
-		let json = TestDataManager.staticPlaneJSON(5)
-		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
-			Plane.createEntitiesFromArray(json, inContext: savingContext)
-		}
+		self.createDefaultEntities()
 	}
 }
 
