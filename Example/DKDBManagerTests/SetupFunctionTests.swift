@@ -10,19 +10,11 @@ import Foundation
 import XCTest
 import DKDBManager
 
-class SetupFunctionTest: DKDBTestCase {
-	
-}
+// MARK: Common functions
 
-// MARK: Setup functions
+extension DKDBTestCase {
 
-extension SetupFunctionTest {
-
-	func testDatabaseManagerSetup() {
-
-		let models = TestDataManager.entityClassNames()
-		XCTAssertEqual(models.count, 3, "the number of models should be equals to 3: Plane, Passenger, Baggages")
-
+	func createEntitiesFromJSON() {
 		// set expectation
 		let expectation = self.expectationWithDescription("Wait for the Response")
 
@@ -41,6 +33,65 @@ extension SetupFunctionTest {
 		}
 
 		self.waitForExpectationsWithTimeout(5, handler: nil)
+	}
+}
+
+// MARK: Setup functions without default setup
+
+class LightSetupFunctionTest: DKDBTestCase {
+
+	override func setupDatabase() {
+		TestDataManager.setVerbose(true)
+		// Optional: Reset the database on start to make this test app more understandable.
+		TestDataManager.setResetStoredEntities(true)
+		// Setup the database.
+		TestDataManager.setup()
+	}
+}
+
+extension LightSetupFunctionTest {
+
+	func testDidEraseDatabaseBlock() {
+		// Optional: Reset the database on start to make this test app more understandable.
+		TestDataManager.setResetStoredEntities(true)
+		// set expectation
+		let expectation = self.expectationWithDescription("Wait for the Response")
+		// Setup the database.
+		TestDataManager.setupDatabaseWithName("testDB") {
+			expectation.fulfill()
+		}
+		self.waitForExpectationsWithTimeout(5, handler: nil)
+	}
+
+	func testCreateValidDatabaseWithName() {
+		TestDataManager.setResetStoredEntities(true)
+
+		// Setup the database.
+		TestDataManager.setupDatabaseWithName("testDB")
+
+		self.createEntitiesFromJSON()
+	}
+
+	func testDefaultCoreDataStackInitialization() {
+		DKDBManager.setup()
+		XCTAssert(DKDBManager.entityClassNames().isEmpty == true, "Default setup should not find models in Unit Test bundle")
+	}
+}
+
+// MARK: Setup functions with default setup
+
+class SetupFunctionTest: DKDBTestCase {
+
+}
+
+extension SetupFunctionTest {
+
+	func testDatabaseManagerSetup() {
+
+		let models = TestDataManager.entityClassNames()
+		XCTAssertEqual(models.count, 3, "the number of models should be equals to 3: Plane, Passenger, Baggages")
+
+		self.createEntitiesFromJSON()
 	}
 
 	func testUpdateFirstPlaneWithSameValues() {
