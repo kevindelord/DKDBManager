@@ -114,6 +114,6 @@ extension Passenger {
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
-		return true
+		return super.shouldUpdateEntityWithDictionary(dictionary, inContext: savingContext)
 	}
 }

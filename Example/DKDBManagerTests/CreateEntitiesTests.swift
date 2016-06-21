@@ -29,6 +29,7 @@ extension DKDBTestCase {
 			XCTAssertNil(error)
 
 			XCTAssertEqual(Plane.count(), 3, "the number of planes should be equals to 5")
+			XCTAssertEqual(Plane.all()?.count, 3, "the number of planes should be equals to 5")
 			expectation.fulfill()
 		}
 
