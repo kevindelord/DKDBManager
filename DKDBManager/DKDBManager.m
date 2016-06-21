@@ -283,7 +283,7 @@ static BOOL _needForcedUpdate = NO;
 }
 
 + (void)dumpCount {
-	[self dumpInContext:NSManagedObjectContext.MR_defaultContext];
+	[self dumpCountInContext:NSManagedObjectContext.MR_defaultContext];
 }
 
 + (void)dumpInContext:(NSManagedObjectContext * _Nonnull)context {
