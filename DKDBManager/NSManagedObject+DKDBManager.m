@@ -23,22 +23,33 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 
 @implementation NSManagedObject (DKDBManager)
 
-#pragma mark - CREATE
+#pragma mark - Deprecated functions
 
 + (instancetype _Nullable)createEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext {
-	return [self crudEntityWithDictionary:NSDictionary.new inContext:savingContext completion:nil];
+	return [self crudEntityInContext:savingContext];
 }
 
 + (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
 	return [self crudEntityWithDictionary:dictionary inContext:savingContext];
 }
 
-+ (instancetype _Nullable)crudEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
-    return [self crudEntityWithDictionary:dictionary inContext:savingContext completion:nil];
-}
-
 + (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion {
 	return [self crudEntityWithDictionary:dictionary inContext:savingContext completion:completion];
+}
+
++ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext {
+	return [self crudEntitiesWithArray:array inContext:savingContext];
+}
+
+#pragma mark - CREATE
+
+
++ (instancetype _Nullable)crudEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext {
+	return [self crudEntityWithDictionary:NSDictionary.new inContext:savingContext completion:nil];
+}
+
++ (instancetype _Nullable)crudEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext {
+    return [self crudEntityWithDictionary:dictionary inContext:savingContext completion:nil];
 }
 
 + (instancetype _Nullable)crudEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion {
@@ -70,10 +81,6 @@ void        CRUDLog(BOOL logEnabled, NSString * _Nonnull format, ...) {
 	}
 
     return entity;
-}
-
-+ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext {
-	return [self crudEntitiesWithArray:array inContext:savingContext];
 }
 
 + (NSArray * _Nullable)crudEntitiesWithArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext {

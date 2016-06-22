@@ -119,7 +119,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @return A created/read/updated database entity.
  */
-+ (instancetype _Nullable)createEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext;
++ (instancetype _Nullable)crudEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext;
+
++ (instancetype _Nullable)createEntityInContext:(NSManagedObjectContext * _Nonnull)savingContext DK_DEPRECATED_PLEASE_USE("crudEntityInContext:");
 
 /**
  *  @brief CRUD database entities for the current class model from an array of NSDictionary objects.
