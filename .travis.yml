@@ -9,14 +9,12 @@ sudo: false
 env:
   global:
     - FRAMEWORK_NAME=DKDBManager
-    #- XCTOOL_ARGS=-destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES -configuration Release
 before_install:
-  #- brew update
-  #- brew outdated carthage || brew upgrade carthage
-  #- carthage update --platform iOS
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - carthage update --platform iOS
   - gem install cocoapods -v '1.0.0'
 script:
-  #xctool -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManager -sdk iphonesimulator9.3 build test
   - xcodebuild -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManager -sdk iphonesimulator build test GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
   #- xctool -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManagerTests -sdk iphonesimulator test GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
 before_deploy:
