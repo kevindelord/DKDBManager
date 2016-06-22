@@ -63,7 +63,7 @@ extension Passenger {
 		self.age = GET_NUMBER(dictionary, JSON.Age)
 
 		if let jsonArray = OBJECT(dictionary, JSON.Baggages) as? [[NSObject : AnyObject]] {
-			if let passengers = Baggage.createEntitiesFromArray(jsonArray, inContext: savingContext) {
+			if let passengers = Baggage.crudEntitiesWithArray(jsonArray, inContext: savingContext) {
 				self.mutableSetValueForKey(JSON.Baggages).addObjectsFromArray(passengers)
 			}
 		}

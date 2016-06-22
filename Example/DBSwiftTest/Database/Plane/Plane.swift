@@ -51,7 +51,7 @@ extension Plane {
 		self.destination = GET_STRING(dictionary, JSON.Destination)
 
 		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
-			if let passengers = Passenger.createEntitiesFromArray(jsonArray, inContext: savingContext) {
+			if let passengers = Passenger.crudEntitiesWithArray(jsonArray, inContext: savingContext) {
 				self.mutableSetValueForKey(JSON.Passengers).addObjectsFromArray(passengers)
 			}
 		}

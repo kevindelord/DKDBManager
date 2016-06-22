@@ -82,7 +82,7 @@ class BaggageViewController		: TableViewController {
 			// background thread
 			if let
 				passenger = self.passenger?.entityInContext(savingContext),
-				baggages = Baggage.createEntitiesFromArray(MockManager.randomBaggageJSON(), inContext: savingContext) {
+				baggages = Baggage.crudEntitiesWithArray(MockManager.randomBaggageJSON(), inContext: savingContext) {
 					passenger.mutableSetValueForKey(JSON.Baggages).addObjectsFromArray(baggages)
 			}
 

@@ -84,7 +84,7 @@ class PlaneViewController	: TableViewController {
 
 		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-			Plane.createEntitiesFromArray(json, inContext: savingContext)
+			Plane.crudEntitiesWithArray(json, inContext: savingContext)
 
 			}) { (contextDidSave: Bool, error: NSError?) -> Void in
 				// main thread

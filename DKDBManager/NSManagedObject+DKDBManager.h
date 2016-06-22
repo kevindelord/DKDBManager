@@ -89,7 +89,9 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @return A created/read/updated database entity; nil if deleted.
  */
-+ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion;
++ (instancetype _Nullable)crudEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion;
+
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext completion:(void (^ _Nullable)(id _Nullable entity, DKDBManagedObjectState status))completion DK_DEPRECATED_PLEASE_USE("crudEntityWithDictionary:inContext:completion:");
 
 /**
  *  @brief CRUD a database entity for the current class model from a NSDictionary object.
@@ -98,11 +100,13 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param context The current saving context.
  *
- *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
  *  @return A created/read/updated database entity.
  */
-+ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
++ (instancetype _Nullable)crudEntityWithDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext;
+
++ (instancetype _Nullable)createEntityFromDictionary:(NSDictionary * _Nullable)dictionary inContext:(NSManagedObjectContext * _Nonnull)savingContext DK_DEPRECATED_PLEASE_USE("crudEntityWithDictionary:inContext:");
 
 /**
  *  @brief CRUD an empty database entity for the current class model.
@@ -111,7 +115,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param context The current saving context.
  *
- *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
  *  @return A created/read/updated database entity.
  */
@@ -124,11 +128,13 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param context The current saving context.
  *
- *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
  *  @return An array of created/read/updated database entities.
  */
-+ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext;
++ (NSArray * _Nullable)crudEntitiesWithArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext;
+
++ (NSArray * _Nullable)createEntitiesFromArray:(NSArray * _Nonnull)array inContext:(NSManagedObjectContext * _Nonnull)savingContext DK_DEPRECATED_PLEASE_USE("crudEntitiesWithArray:inContext:");
 
 #pragma mark - SAVE
 
@@ -141,7 +147,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param status The CRUD status of the entity.
  *
- *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
  *  @see - (void)saveEntityAsNotDeprecated;
  *
@@ -156,7 +162,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  Override required if the current class model has some child entities (relationships).
  *
- *  This function is automatically called after '<i>CRUD</i>ing' an entity with: `createEntityFromDictionary:inContext`.
+ *  This function is automatically called after '<i>CRUD</i>ing' an entity with: `crudEntityWithDictionary:inContext`.
  *
  *  Unless the method returns `.Delete` the current/new entity will be stored as not deprecated.
  *
@@ -293,7 +299,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  Default: Returns a `false predicate`.
  *
- *  @see + (instancetype)createEntityFromDictionary:inContext:completion:;
+ *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
  *  @return A NSPredicate object to find/fetch an entity in the local database.
  */
