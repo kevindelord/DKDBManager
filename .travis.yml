@@ -17,9 +17,8 @@ before_install:
   - gem install cocoapods -v '1.0.0'
 script:
   #xctool -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManager -sdk iphonesimulator9.3 build test
-  - pod install
-  - xctool -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManager -sdk iphonesimulator build GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
-  - xctool -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManagerTests -sdk iphonesimulator test GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+  - xcodebuild -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManager -sdk iphonesimulator build GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+  #- xctool -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManagerTests -sdk iphonesimulator test GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
