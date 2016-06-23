@@ -36,10 +36,6 @@ extension Plane {
 		return "\(self.objectID.URIRepresentation().lastPathComponent ?? "") : \(self.origin ?? "") -> \(self.destination ?? ""), \(self.allPassengersCount) Passenger(s)"
 	}
 
-	override func uniqueIdentifier() -> AnyObject {
-		return self.objectID;
-	}
-
 	override func saveEntityAsNotDeprecated() {
 		super.saveEntityAsNotDeprecated()
 
@@ -55,7 +51,7 @@ extension Plane {
 		self.destination = GET_STRING(dictionary, JSON.Destination)
 
 		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
-			if let passengers = Passenger.createEntitiesFromArray(jsonArray, inContext: savingContext) {
+			if let passengers = Passenger.crudEntitiesWithArray(jsonArray, inContext: savingContext) {
 				self.mutableSetValueForKey(JSON.Passengers).addObjectsFromArray(passengers)
 			}
 		}
@@ -110,6 +106,12 @@ extension Plane {
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
-		return true
+		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
+
+			if (jsonArray.count != self.allPassengersCount) {
+				return true
+			}
+		}
+		return false
 	}
 }

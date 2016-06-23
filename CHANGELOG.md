@@ -1,10 +1,43 @@
 # DKDBManager CHANGELOG
 
-## 0.6.6
+## 0.7.0
+
+### Cocoapods
+
+- Fix `pod try` command.
 
 ### DKDBManager
 
+- Add Unit Test with test coverage superior than 98%.
+- Add `setupCoreDataStackWithName` to improve dependency injection.
+- Improve Swift compatibility for `hasValidContext`, `hasBeenDeleted`, `doesExist` and `isValidInCurrentContext` functions.
+
+#### Enhancements
+
+Add new `crud` functions:
+
+- `crudEntityWithDictionary:inContext:completion:`
+- `crudEntityWithDictionary:inContext:`
+- `crudEntityInContext:`
+- `crudEntitiesWithArray:inContext:`
+
+#### Deprecated
+
+The following functions are now deprecated:
+
+- `createEntityFromDictionary:inContext:completion:`
+- `createEntityFromDictionary:inContext:`
+- `createEntityInContext:`
+- `createEntitiesFromArray:inContext:`
+
+## 0.6.6
+
+### Carthage
+
 - Add Carthage support.
+
+### DKDBManager
+
 - Value DKDBManagerVersionNumber added.
 - Value DKDBManagerVersionString added.
 

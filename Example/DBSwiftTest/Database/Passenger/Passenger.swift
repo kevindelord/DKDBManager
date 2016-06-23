@@ -48,10 +48,6 @@ extension Passenger {
 		return description
 	}
 
-	override func uniqueIdentifier() -> AnyObject {
-		return self.objectID;
-	}
-
 	override func saveEntityAsNotDeprecated() {
 		super.saveEntityAsNotDeprecated()
 
@@ -67,7 +63,7 @@ extension Passenger {
 		self.age = GET_NUMBER(dictionary, JSON.Age)
 
 		if let jsonArray = OBJECT(dictionary, JSON.Baggages) as? [[NSObject : AnyObject]] {
-			if let passengers = Baggage.createEntitiesFromArray(jsonArray, inContext: savingContext) {
+			if let passengers = Baggage.crudEntitiesWithArray(jsonArray, inContext: savingContext) {
 				self.mutableSetValueForKey(JSON.Baggages).addObjectsFromArray(passengers)
 			}
 		}
@@ -118,6 +114,6 @@ extension Passenger {
 	}
 
 	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
-		return true
+		return super.shouldUpdateEntityWithDictionary(dictionary, inContext: savingContext)
 	}
 }

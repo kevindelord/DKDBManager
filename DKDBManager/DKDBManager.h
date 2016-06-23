@@ -38,9 +38,9 @@ FOUNDATION_EXPORT const unsigned char DKDBManagerVersionString[];
 @interface DKDBManager : MagicalRecord
 
 /**
- *  Dictionnary containing identifiers of all entities marked as not deprecated.
+ *  @brief Dictionnary containing identifiers of all entities marked as not deprecated.
  *
- *  If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
+ *  @discussion If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
  *
  *  @remark The value can not be `nil`; to reinitialise the stored identifiers, create a new NSMutableDictionary.
  */
@@ -184,6 +184,13 @@ FOUNDATION_EXPORT const unsigned char DKDBManagerVersionString[];
  *  @return A singleton instance of the manager.
  */
 + (instancetype _Nonnull)sharedInstance;
+
+/**
+ *  @brief Function to setup the Core Data stack. Override to change the default behavior of the DKDBManager.
+ *
+ *  @param databaseName The NSString object containing the name of the database. Must not be nil and can be modified on startup.
+ */
++ (void)setupCoreDataStackWithName:(NSString * _Nonnull)databaseName;
 
 /**
  *  @brief Setup, and reset if needed, the datamodel using an auto migrating system.

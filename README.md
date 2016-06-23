@@ -1,6 +1,7 @@
 # DKDBManager
 
 [![Build Status](https://travis-ci.org/kevindelord/DKDBManager.svg?branch=master)](https://travis-ci.org/kevindelord/DKDBManager)
+[![codecov.io](https://codecov.io/github/kevindelord/DKDBManager/coverage.svg?branch=master)](https://codecov.io/gh/kevindelord/DKDBManager)
 [![Cocoapods](https://img.shields.io/cocoapods/v/DKDBManager.svg?style=flat)](http://cocoadocs.org/docsets/DKDBManager)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/kevindelord/DKDBManager)
 [![License](https://img.shields.io/cocoapods/l/DKDBManager.svg?style=flat)](http://cocoadocs.org/docsets/DKDBManager)

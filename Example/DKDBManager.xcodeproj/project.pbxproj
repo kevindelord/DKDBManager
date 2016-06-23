@@ -7,7 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75157C421D193607002296DE /* DumpDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C411D193607002296DE /* DumpDBTests.swift */; };
+		75157C491D19477A002296DE /* Baggage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C481D19477A002296DE /* Baggage.swift */; };
+		75157C4B1D194953002296DE /* CreateEntitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C4A1D194953002296DE /* CreateEntitiesTests.swift */; };
+		75157C4D1D196EEC002296DE /* DeprecatedEntitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75157C4C1D196EEC002296DE /* DeprecatedEntitiesTests.swift */; };
+		75452AE81D1829C1009337A9 /* DeleteFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */; };
+		75452AEA1D182FDC009337A9 /* ValidateEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */; };
+		75452AEF1D183150009337A9 /* DKDBTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75452AEB1D183150009337A9 /* DKDBTestCase.swift */; };
 		755B11A91D11862000509694 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; };
+		756FAF351D17E7DF001D7196 /* TestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FAF341D17E7DF001D7196 /* TestDataManager.swift */; };
+		756FAF381D17ECFF001D7196 /* Passenger+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B81C5299EE00E146D0 /* Passenger+CoreDataProperties.swift */; };
+		756FAF391D17ECFF001D7196 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BA1C5299EE00E146D0 /* Passenger.swift */; };
+		756FAF3A1D17ECFF001D7196 /* Plane+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BC1C5299EE00E146D0 /* Plane+CoreDataProperties.swift */; };
+		756FAF3B1D17ECFF001D7196 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77BE1C5299EE00E146D0 /* Plane.swift */; };
+		756FAF3C1D17ED02001D7196 /* DBSwiftTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77B51C5299EE00E146D0 /* DBSwiftTest.xcdatamodeld */; };
+		756FAF3D1D17EDC6001D7196 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77AF1C5299EE00E146D0 /* Constants.swift */; };
+		756FAF3F1D17EE0E001D7196 /* SetupFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FAF3E1D17EE0E001D7196 /* SetupFunctionTests.swift */; };
 		75A303D71D1149AF009CEA34 /* DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D11D1149AF009CEA34 /* DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75A303DB1D1149AF009CEA34 /* NSManagedObject+DKDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75A303DE1D1149AF009CEA34 /* NSManagedObject+DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D41D1149AF009CEA34 /* NSManagedObject+DKDBManager.m */; };
@@ -15,7 +30,6 @@
 		75A303E21D1149AF009CEA34 /* NSManagedObject+ExistingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D61D1149AF009CEA34 /* NSManagedObject+ExistingObject.m */; };
 		75A303E31D1149B6009CEA34 /* DKDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A303D21D1149AF009CEA34 /* DKDBManager.m */; };
 		75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
-		75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16025671C5B877300A1013E /* DKDBManagerTest.swift */; };
 		75A303F81D114A4F009CEA34 /* MagicalRecord.framework in Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 75D880451D104FB20058024B /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75BF83571D1049D9005028BF /* DKDBManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; };
 		75BF83581D1049D9005028BF /* DKDBManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75BF83421D1049D9005028BF /* DKDBManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -55,6 +69,7 @@
 		75FF77F11C5299EE00E146D0 /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CA1C5299EE00E146D0 /* PassengerViewController.swift */; };
 		75FF77F31C5299EE00E146D0 /* PlaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CB1C5299EE00E146D0 /* PlaneViewController.swift */; };
 		75FF77F51C5299EE00E146D0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF77CC1C5299EE00E146D0 /* TableViewController.swift */; };
+		BE1FCE80DC5BFE3F8D6B1419 /* Pods_DKDBManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C67D9A2F4153D2495B6CD1 /* Pods_DKDBManagerTests.framework */; };
 		DD5DB451FBC244558A40B8EB /* Pods_Example_Carthage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5DEA6BD084BF143F93E9CDF /* Pods_Example_Carthage.framework */; };
 		F03DCFE5492EB7A451734233 /* Pods_Example_Cocoapods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */; };
 /* End PBXBuildFile section */
@@ -123,7 +138,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07735015401DEAFDAD2A7C71 /* Pods-DKDBManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKDBManagerTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-DKDBManagerTests/Pods-DKDBManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		52C67D9A2F4153D2495B6CD1 /* Pods_DKDBManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKDBManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E59B7EAAF48291988443113 /* Pods-Example-Carthage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Carthage.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Carthage/Pods-Example-Carthage.release.xcconfig"; sourceTree = "<group>"; };
+		75157C411D193607002296DE /* DumpDBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DumpDBTests.swift; sourceTree = "<group>"; };
+		75157C481D19477A002296DE /* Baggage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baggage.swift; sourceTree = "<group>"; };
+		75157C4A1D194953002296DE /* CreateEntitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEntitiesTests.swift; sourceTree = "<group>"; };
+		75157C4C1D196EEC002296DE /* DeprecatedEntitiesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeprecatedEntitiesTests.swift; sourceTree = "<group>"; };
+		75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteFunctionTests.swift; sourceTree = "<group>"; };
+		75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateEntityTests.swift; sourceTree = "<group>"; };
+		75452AEB1D183150009337A9 /* DKDBTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKDBTestCase.swift; sourceTree = "<group>"; };
+		756FAF341D17E7DF001D7196 /* TestDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDataManager.swift; sourceTree = "<group>"; };
+		756FAF3E1D17EE0E001D7196 /* SetupFunctionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupFunctionTests.swift; sourceTree = "<group>"; };
 		75A303D11D1149AF009CEA34 /* DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKDBManager.h; sourceTree = "<group>"; };
 		75A303D21D1149AF009CEA34 /* DKDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKDBManager.m; sourceTree = "<group>"; };
 		75A303D31D1149AF009CEA34 /* NSManagedObject+DKDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+DKDBManager.h"; sourceTree = "<group>"; };
@@ -159,7 +185,7 @@
 		9FD235B965D5CBD0F89A2C38 /* Pods-Example-Cocoapods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Cocoapods.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods.debug.xcconfig"; sourceTree = "<group>"; };
 		AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Cocoapods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B864B717B3506BF50A77D473 /* Pods-Example-Carthage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Carthage.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Carthage/Pods-Example-Carthage.debug.xcconfig"; sourceTree = "<group>"; };
-		D16025671C5B877300A1013E /* DKDBManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DKDBManagerTest.swift; path = ../DBSwiftTestTests/DKDBManagerTest.swift; sourceTree = "<group>"; };
+		D59710A9B6BCB8E686FFA81B /* Pods-DKDBManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DKDBManagerTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DKDBManagerTests/Pods-DKDBManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E5DEA6BD084BF143F93E9CDF /* Pods_Example_Carthage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Carthage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEE1FBC1EE8BAC753F15485A /* Pods-Example-Cocoapods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Cocoapods.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +197,7 @@
 			files = (
 				75A303ED1D1149FE009CEA34 /* DKDBManager.framework in Frameworks */,
 				755B11A91D11862000509694 /* MagicalRecord.framework in Frameworks */,
+				BE1FCE80DC5BFE3F8D6B1419 /* Pods_DKDBManagerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +236,8 @@
 				FEE1FBC1EE8BAC753F15485A /* Pods-Example-Cocoapods.release.xcconfig */,
 				B864B717B3506BF50A77D473 /* Pods-Example-Carthage.debug.xcconfig */,
 				6E59B7EAAF48291988443113 /* Pods-Example-Carthage.release.xcconfig */,
+				07735015401DEAFDAD2A7C71 /* Pods-DKDBManagerTests.debug.xcconfig */,
+				D59710A9B6BCB8E686FFA81B /* Pods-DKDBManagerTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -218,6 +247,7 @@
 			children = (
 				AA44441AEBFAA36EF50853C0 /* Pods_Example_Cocoapods.framework */,
 				E5DEA6BD084BF143F93E9CDF /* Pods_Example_Carthage.framework */,
+				52C67D9A2F4153D2495B6CD1 /* Pods_DKDBManagerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -247,7 +277,15 @@
 		75A303E91D1149FE009CEA34 /* DKDBManagerTests */ = {
 			isa = PBXGroup;
 			children = (
-				D16025671C5B877300A1013E /* DKDBManagerTest.swift */,
+				756FAF3E1D17EE0E001D7196 /* SetupFunctionTests.swift */,
+				75157C4C1D196EEC002296DE /* DeprecatedEntitiesTests.swift */,
+				75452AEB1D183150009337A9 /* DKDBTestCase.swift */,
+				75157C4A1D194953002296DE /* CreateEntitiesTests.swift */,
+				75452AE41D1829C1009337A9 /* DeleteFunctionTests.swift */,
+				75452AE91D182FDC009337A9 /* ValidateEntityTests.swift */,
+				75157C411D193607002296DE /* DumpDBTests.swift */,
+				756FAF341D17E7DF001D7196 /* TestDataManager.swift */,
+				75157C481D19477A002296DE /* Baggage.swift */,
 			);
 			path = DKDBManagerTests;
 			sourceTree = "<group>";
@@ -381,10 +419,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75A303F01D1149FE009CEA34 /* Build configuration list for PBXNativeTarget "DKDBManagerTests" */;
 			buildPhases = (
+				0901CC95E6CCBA2025B1EF60 /* 📦 Check Pods Manifest.lock */,
 				75A303E41D1149FE009CEA34 /* Sources */,
 				75A303E51D1149FE009CEA34 /* Frameworks */,
 				75A303E61D1149FE009CEA34 /* Resources */,
 				75A303F61D114A39009CEA34 /* Embedded Frameworks */,
+				516EA99E1F5AA50560D49AF8 /* 📦 Embed Pods Frameworks */,
+				61CCF54327E0B8544D56AE6E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -539,6 +580,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0901CC95E6CCBA2025B1EF60 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		18F9353A22367A7E4010921F /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -599,6 +655,21 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Example-Cocoapods/Pods-Example-Cocoapods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		516EA99E1F5AA50560D49AF8 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DKDBManagerTests/Pods-DKDBManagerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5A7697FFCB47DEA9675A8DB2 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -612,6 +683,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Example-Carthage/Pods-Example-Carthage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61CCF54327E0B8544D56AE6E /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DKDBManagerTests/Pods-DKDBManagerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F7ACD14B63F0B6D1D245C214 /* 📦 Embed Pods Frameworks */ = {
@@ -636,7 +722,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75A303F31D114A15009CEA34 /* DKDBManagerTest.swift in Sources */,
+				756FAF3A1D17ECFF001D7196 /* Plane+CoreDataProperties.swift in Sources */,
+				756FAF351D17E7DF001D7196 /* TestDataManager.swift in Sources */,
+				75157C4D1D196EEC002296DE /* DeprecatedEntitiesTests.swift in Sources */,
+				756FAF3F1D17EE0E001D7196 /* SetupFunctionTests.swift in Sources */,
+				75157C491D19477A002296DE /* Baggage.swift in Sources */,
+				756FAF3C1D17ED02001D7196 /* DBSwiftTest.xcdatamodeld in Sources */,
+				756FAF391D17ECFF001D7196 /* Passenger.swift in Sources */,
+				75157C421D193607002296DE /* DumpDBTests.swift in Sources */,
+				756FAF3D1D17EDC6001D7196 /* Constants.swift in Sources */,
+				75157C4B1D194953002296DE /* CreateEntitiesTests.swift in Sources */,
+				756FAF381D17ECFF001D7196 /* Passenger+CoreDataProperties.swift in Sources */,
+				75452AEF1D183150009337A9 /* DKDBTestCase.swift in Sources */,
+				756FAF3B1D17ECFF001D7196 /* Plane.swift in Sources */,
+				75452AE81D1829C1009337A9 /* DeleteFunctionTests.swift in Sources */,
+				75452AEA1D182FDC009337A9 /* ValidateEntityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,9 +829,9 @@
 /* Begin XCBuildConfiguration section */
 		75A303F11D1149FE009CEA34 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07735015401DEAFDAD2A7C71 /* Pods-DKDBManagerTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Carthage/Build/iOS/",
@@ -739,7 +839,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "PLists/DKDBManagerTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -747,10 +847,9 @@
 		};
 		75A303F21D1149FE009CEA34 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D59710A9B6BCB8E686FFA81B /* Pods-DKDBManagerTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Carthage/Build/iOS/",
@@ -758,7 +857,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "PLists/DKDBManagerTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.kevindelord.DKDBManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -768,8 +867,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				CURRENT_PROJECT_VERSION = 21;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				CURRENT_PROJECT_VERSION = 23;
 				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -794,8 +892,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 21;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CURRENT_PROJECT_VERSION = 23;
 				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -820,7 +917,7 @@
 			baseConfigurationReference = 9FD235B965D5CBD0F89A2C38 /* Pods-Example-Cocoapods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "PLists/Example-Cocoapods-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -836,7 +933,7 @@
 			baseConfigurationReference = FEE1FBC1EE8BAC753F15485A /* Pods-Example-Cocoapods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "PLists/Example-Cocoapods-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -932,7 +1029,7 @@
 			baseConfigurationReference = B864B717B3506BF50A77D473 /* Pods-Example-Carthage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -952,7 +1049,7 @@
 			baseConfigurationReference = 6E59B7EAAF48291988443113 /* Pods-Example-Carthage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -93,7 +93,7 @@ class PassengerViewController	: TableViewController {
 			// background thread
 			if let
 				plane = self.plane?.entityInContext(savingContext),
-				passengers = Passenger.createEntitiesFromArray(MockManager.randomPassengerJSON(), inContext: savingContext) {
+				passengers = Passenger.crudEntitiesWithArray(MockManager.randomPassengerJSON(), inContext: savingContext) {
 					plane.mutableSetValueForKey(JSON.Passengers).addObjectsFromArray(passengers)
 			}
 

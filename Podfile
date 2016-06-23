@@ -16,3 +16,9 @@ target 'Example-Cocoapods' do
 	pod 'DKHelper', '~> 2.1.1'
 	pod 'DKDBManager', :path => './DKDBManager.podspec'
 end
+
+target 'DKDBManagerTests' do
+	project 'Example/DKDBManager.xcodeproj'
+
+	pod 'DKHelper', '~> 2.1.1'
+end
