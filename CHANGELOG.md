@@ -209,7 +209,7 @@ The following functions are now deprecated:
 
 - Database name bug fix
 
-## 0.1.0
+## 0.1.1
 
 - Missing license fix
 
