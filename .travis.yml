@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode7.3
 xcode_workspace: DKDBManager.xcworkspace
 xcode_scheme: DKDBManager
-xcode_sdk: iphonesimulator9.3
+xcode_sdk: iphoneos9.3
 xctool_args: -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES -configuration Release
 sudo: false
 env:
@@ -14,6 +14,7 @@ before_install:
   - carthage update --platform iOS
   - gem install cocoapods -v '1.0.0'
 before_script:
+  # Manually run the tests before the `script`
   - xcodebuild -destination "platform=iOS Simulator,name=iPhone 6s,OS=9.3" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManagerTests -sdk iphonesimulator9.3 test GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
 before_deploy:
   - carthage build --no-skip-current
