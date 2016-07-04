@@ -1,5 +1,9 @@
 # DKDBManager CHANGELOG
 
+## 1.0.0
+
+- Minor README improvements.
+
 ## 0.7.0
 
 ### Cocoapods
