@@ -36,6 +36,46 @@ Checkout the example project:
 
 	$> pod try DKDBManager
 
+## Quick overview
+
+With the `DKDBManager` and `MagicalRecord` you can easily create, update or delete entities.
+
+To do so you need to 'be' in a savingContext and use the appropriate DKDBManager functions:
+
+	DKDBManager.saveWithBlock { (savingContext: NSManagedObjectContext) in
+
+        // Perform saving code here, against the `savingContext` instance.
+        // Everything done in this block will occur on a background thread.
+
+		let plane = Plane.crudEntityInContext(savingContext)
+		plane?.origin = "London"
+        plane?.destination = "Paris"
+	}
+
+At the end of this execution block, all changes will be saved ( or 'merged' ) into the default context.
+
+After that, a new `Plane` entity will be available on the main thread within the default context.
+
+Or you could _CRUD_ an entity by using a JSON structure:
+
+	let planeJSON = ["origin":"Paris", "destination":"London"]
+	Plane.crudEntityWithDictionary(planeJSON, inContext: savingContext, completion: { (entity: AnyObject?, state: DKDBManagedObjectState) in
+
+		// The CRUDed plane is referenced in the `entity`.
+		// Its actual state is described as follow:
+		switch state {
+		case .Create:	// The entity has been created, it's all fresh new.
+		case .Update:	// The entity has been updated, its attributes changed.
+		case .Save:		// The entity has been saved, nothing happened.
+		case .Delete:	// The entity has been removed.
+		}
+	})
+
+
+The `state` variable describes what happened for the entity.
+
+Read more in the [Wiki](https://github.com/kevindelord/DKDBManager/wiki)! :bowtie:
+
 ## Author
 
 kevindelord, delord.kevin@gmail.com
