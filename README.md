@@ -65,8 +65,20 @@ Or you could _CRUD_ an entity by using a JSON structure:
 		}
 	})
 
-
 The `state` variable describes what happened to the entity.
+
+The implementation of other functions is also recommended such as the one to update the current entity with a given dictionary.
+
+Without this function the attributes of the entity will never be set nor updated.
+
+The given `dictionary` object is the same one that has been used to start the [CRUD process](https://github.com/kevindelord/DKDBManager/wiki/CRUD-Entities-From-JSON).
+
+	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+		super.updateWithDictionary(dictionary, inContext: savingContext)
+		// Update attributes
+		self.origin 		= GET_STRING(dictionary, "origin")
+		self.destination 	= GET_STRING(dictionary, "destination")
+	}
 
 Read more in the [Wiki](https://github.com/kevindelord/DKDBManager/wiki)! :bowtie:
 
