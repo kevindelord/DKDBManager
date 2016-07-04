@@ -30,7 +30,59 @@ More over, the [Wiki](https://github.com/kevindelord/DKDBManager/wiki) contains 
 - [Database matching an API](https://github.com/kevindelord/dkdbmanager/wiki#database-matching-an-api)
 - [Other Resources](https://github.com/kevindelord/dkdbmanager/wiki#other-resources)
 
-## Try it!
+## Quick overview
+
+With the `DKDBManager` and `MagicalRecord` you can easily create, update or delete entities.
+
+To do so you need to _be_ in a savingContext and use the appropriate DKDBManager functions:
+
+	DKDBManager.saveWithBlock { (savingContext: NSManagedObjectContext) in
+
+        // Perform saving code here, against the `savingContext` instance.
+        // Everything done in this block will occur on a background thread.
+
+		let plane = Plane.crudEntityInContext(savingContext)
+		plane?.origin = "London"
+        plane?.destination = "Paris"
+	}
+
+At the end of this execution block, all changes will be saved ( or _merged_ ) into the default context.
+
+After that, a new `Plane` entity will be available on the main thread within the default context.
+
+Or you could _CRUD_ an entity by using a JSON structure:
+
+	let planeJSON = ["origin":"Paris", "destination":"London"]
+	Plane.crudEntityWithDictionary(planeJSON, inContext: savingContext, completion: { (entity: AnyObject?, state: DKDBManagedObjectState) in
+
+		// The CRUDed plane is referenced in the `entity`.
+		// Its actual state is described as follow:
+		switch state {
+		case .Create:	// The entity has been created, it's all fresh new.
+		case .Update:	// The entity has been updated, its attributes changed.
+		case .Save:		// The entity has been saved, nothing happened.
+		case .Delete:	// The entity has been removed.
+		}
+	})
+
+The `state` variable describes what happened to the entity.
+
+The implementation of other functions is also recommended such as the one to update the current entity with a given dictionary.
+
+Without this function the attributes of the entity will never be set nor updated.
+
+The given `dictionary` object is the same one that has been used to start the [CRUD process](https://github.com/kevindelord/DKDBManager/wiki/CRUD-Entities-From-JSON).
+
+	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
+		super.updateWithDictionary(dictionary, inContext: savingContext)
+		// Update attributes
+		self.origin 		= GET_STRING(dictionary, "origin")
+		self.destination 	= GET_STRING(dictionary, "destination")
+	}
+
+Read more in the [Wiki](https://github.com/kevindelord/DKDBManager/wiki)! :bowtie:
+
+## Try it out!
 
 Checkout the example project:
 
