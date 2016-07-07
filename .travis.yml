@@ -29,4 +29,5 @@ deploy:
     repo: kevindelord/DKDBManager
     tags: true
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://raw.githubusercontent.com/codecov/codecov-bash/54a1a14e6bad348ac09d291bedd6428c100fcafb/codecov)
+
