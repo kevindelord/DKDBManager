@@ -13,12 +13,12 @@ class PlaneViewController	: TableViewController {
 
 	// MARK: - UITableView
 
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return Plane.count()
 	}
 
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		if let plane = (Plane.all() as? [Plane])?[indexPath.row] {
 			cell.textLabel?.text = "\(plane.origin ?? "n/a") -> \(plane.destination ?? "n/a")"
 			cell.detailTextLabel?.text = "\(plane.allPassengersCount) passenger(s)"
@@ -26,32 +26,32 @@ class PlaneViewController	: TableViewController {
 		return cell
 	}
 
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		self.performSegueWithIdentifier(Segue.OpenPassengers, sender: (Plane.all() as? [Plane])?[indexPath.row])
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+		self.performSegue(withIdentifier: Segue.OpenPassengers, sender: (Plane.all() as? [Plane])?[indexPath.row])
 	}
 
-	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
-		if (editingStyle == .Delete),
+		if (editingStyle == .delete),
 			let plane = (Plane.all() as? [Plane])?[indexPath.row] {
 
-				DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
-					// Background Thread
-					plane.deleteEntityWithReason("Selective delete button pressed", inContext: savingContext)
+			DKDBManager.save({ (savingContext: NSManagedObjectContext) -> Void in
+				// Background Thread
+				plane.deleteEntity(withReason: "Selective delete button pressed", in: savingContext)
 
-					}, completion: { (didSave: Bool, error: NSError?) -> Void in
-						// Main Thread
-						self.didDeleteItemAtIndexPath(indexPath)
-				})
+			}, completion: { (didSave: Bool, error: Error?) -> Void in
+				// Main Thread
+				self.didDeleteItemAtIndexPath(indexPath)
+			})
 		}
 	}
 
 	// MARK: - Segue
 
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == Segue.OpenPassengers) {
-			let vc = segue.destinationViewController as? PassengerViewController
+			let vc = segue.destination as? PassengerViewController
 			vc?.plane = sender as? Plane
 		}
 	}
@@ -59,37 +59,37 @@ class PlaneViewController	: TableViewController {
 	// MARK: - IBAction
 
 	@IBAction func editButtonPressed() {
-		self.tableView.setEditing(!self.tableView.editing, animated: true)
+		self.tableView.setEditing(!self.tableView.isEditing, animated: true)
 	}
 
 	@IBAction func removeAllEntitiesButtonPressed() {
 
-		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		DKDBManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
 			for plane in (Plane.all() as? [Plane] ?? []) {
-				if let plane = plane.entityInContext(savingContext) {
-					plane.deleteEntityWithReason("Remove all planes button pressed", inContext: savingContext)
+				if let plane = plane.entity(in: savingContext) {
+					plane.deleteEntity(withReason: "Remove all planes button pressed", in: savingContext)
 				}
 			}
 
-			}) { (contextDidSave: Bool, error: NSError?) -> Void in
-				// main thread
-				self.tableView.reloadData()
-		}
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
+			// main thread
+			self.tableView.reloadData()
+		})
 	}
 
 	@IBAction func addEntitiesButtonPressed() {
 
 		let json = MockManager.randomPlaneJSON()
 
-		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		DKDBManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-			Plane.crudEntitiesWithArray(json, inContext: savingContext)
+			Plane.crudEntities(with: json, in: savingContext)
 
-			}) { (contextDidSave: Bool, error: NSError?) -> Void in
-				// main thread
-				self.tableView.reloadData()
-		}
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
+			// main thread
+			self.tableView.reloadData()
+		})
 	}
 }
 

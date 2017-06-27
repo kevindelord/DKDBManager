@@ -21,11 +21,11 @@ class Baggage: NSManagedObject {
 extension Baggage {
 
 	override var description : String {
-		var description = "\(self.objectID.URIRepresentation().lastPathComponent ?? "")"
+		var description = "\(self.objectID.uriRepresentation().lastPathComponent)"
 		if let w = self.weight as? Int {
 			description += ": \(w) kg"
 		}
-		if let passenger = self.passenger?.objectID.URIRepresentation().lastPathComponent {
+		if let passenger = self.passenger?.objectID.uriRepresentation().lastPathComponent {
 			description += ", passenger: \(passenger)"
 		}
 		return description
@@ -35,8 +35,8 @@ extension Baggage {
 		super.saveEntityAsNotDeprecated()
 	}
 
-	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
-		super.updateWithDictionary(dictionary, inContext: savingContext)
+	override func update(with dictionary: [AnyHashable: Any]?, in savingContext: NSManagedObjectContext) {
+		super.update(with: dictionary, in: savingContext)
 
 		self.weight = GET_NUMBER(dictionary, JSON.Weight)
 	}
@@ -47,7 +47,7 @@ extension Baggage {
 			return invalidReason
 		}
 
-		guard let weight = self.weight as? Int where (weight > 0) else {
+		guard let weight = self.weight as? Int, (weight > 0) else {
 			return "Invalid weight"
 		}
 
@@ -59,19 +59,19 @@ extension Baggage {
 		return Verbose.Model.Baggage
 	}
 
-	override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
-		super.deleteEntityWithReason(reason, inContext: savingContext)
+	override func deleteEntity(withReason reason: String?, in savingContext: NSManagedObjectContext) {
+		super.deleteEntity(withReason: reason, in: savingContext)
 	}
 
 	override class func sortingAttributeName() -> String? {
 		return JSON.Weight
 	}
 
-	override class func primaryPredicateWithDictionary(dictionary: [NSObject:AnyObject]?) -> NSPredicate? {
+	override class func primaryPredicate(with dictionary: [AnyHashable: Any]?) -> NSPredicate? {
 		return NSPredicate(format: "FALSEPREDICATE")
 	}
 
-	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
+	override func shouldUpdateEntity(with dictionary: [AnyHashable: Any]?, in savingContext: NSManagedObjectContext) -> Bool {
 		return true
 	}
 }

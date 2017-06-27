@@ -11,14 +11,14 @@ import Foundation
 
 class TableViewController : UITableViewController {
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		self.tableView.reloadData()
 	}
 
-	func didDeleteItemAtIndexPath(indexPath: NSIndexPath) {
-		self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+	func didDeleteItemAtIndexPath(_ indexPath: IndexPath) {
+		self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
 		self.tableView.setEditing(false, animated: true)
-		self.performBlockAfterDelay(0.4, block: self.tableView.reloadData)
+		self.performBlock(afterDelay: 0.4, block: self.tableView.reloadData)
 	}
 }

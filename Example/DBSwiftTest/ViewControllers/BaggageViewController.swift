@@ -16,40 +16,40 @@ class BaggageViewController		: TableViewController {
 
 	// MARK: - UITableView
 
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return (self.passenger?.allBaggagesCount ?? 0)
 	}
 
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		if let
 			baggage = self.passenger?.allBaggagesArray[indexPath.row],
-			weight = baggage.weight,
-			passenger = baggage.passenger {
+			let weight = baggage.weight,
+			let passenger = baggage.passenger {
 				cell.textLabel?.text = "Weight: \(weight)kg"
 				cell.detailTextLabel?.text = "\(passenger)"
 		}
 		return cell
 	}
 
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
-	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
-		if (editingStyle == .Delete) {
+		if (editingStyle == .delete) {
 
-			DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+			DKDBManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 				// Background Thread
-				if let passenger = self.passenger?.entityInContext(savingContext) where (passenger.allBaggagesCount > indexPath.row) {
+				if let passenger = self.passenger?.entity(in: savingContext), (passenger.allBaggagesCount > indexPath.row) {
 					let baggage = passenger.allBaggagesArray[indexPath.row]
-					baggage.deleteEntityWithReason("Selective delete button pressed", inContext: savingContext)
+					baggage.deleteEntity(withReason: "Selective delete button pressed", in: savingContext)
 				}
 
-				}, completion: { (didSave: Bool, error: NSError?) -> Void in
-					// Main Thread
-					self.didDeleteItemAtIndexPath(indexPath)
+			}, completion: { (didSave: Bool, error: Error?) -> Void in
+				// Main Thread
+				self.didDeleteItemAtIndexPath(indexPath)
 			})
 		}
 	}
@@ -57,39 +57,39 @@ class BaggageViewController		: TableViewController {
 	// MARK: - IBAction
 
 	@IBAction func editButtonPressed() {
-		self.tableView.setEditing(!self.tableView.editing, animated: true)
+		self.tableView.setEditing(!self.tableView.isEditing, animated: true)
 	}
 
 	@IBAction func removeAllEntitiesButtonPressed() {
 
-		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		DKDBManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-			if let passenger = self.passenger?.entityInContext(savingContext) {
+			if let passenger = self.passenger?.entity(in: savingContext) {
 				for baggage in passenger.allBaggagesArray {
-					baggage.deleteEntityWithReason("Remove all baggages button pressed", inContext: savingContext)
+					baggage.deleteEntity(withReason: "Remove all baggages button pressed", in: savingContext)
 				}
 			}
 
-			}) { (contextDidSave: Bool, error: NSError?) -> Void in
-				// main thread
-				self.tableView.reloadData()
-		}
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
+			// main thread
+			self.tableView.reloadData()
+		})
 	}
 
 	@IBAction func addEntitiesButtonPressed() {
 
-		DKDBManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		DKDBManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
 			if let
-				passenger = self.passenger?.entityInContext(savingContext),
-				baggages = Baggage.crudEntitiesWithArray(MockManager.randomBaggageJSON(), inContext: savingContext) {
-					passenger.mutableSetValueForKey(JSON.Baggages).addObjectsFromArray(baggages)
+				passenger = self.passenger?.entity(in: savingContext),
+				let baggages = Baggage.crudEntities(with: MockManager.randomBaggageJSON(), in: savingContext) {
+				passenger.mutableSetValue(forKey: JSON.Baggages).addObjects(from: baggages)
 			}
 
-			}) { (contextDidSave: Bool, error: NSError?) -> Void in
-				// main thread
-				self.tableView.reloadData()
-		}
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
+			// main thread
+			self.tableView.reloadData()
+		})
 	}
 }
 

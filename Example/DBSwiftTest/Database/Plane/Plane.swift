@@ -15,16 +15,16 @@ class Plane: NSManagedObject {
 // Insert code here to add functionality to your managed object subclass
 
 	var allPassengersCount : Int {
-		return self.mutableSetValueForKey(JSON.Passengers).count
+		return self.mutableSetValue(forKey: JSON.Passengers).count
 	}
 
 	var allPassengers : NSMutableSet {
-		return self.mutableSetValueForKey(JSON.Passengers)
+		return self.mutableSetValue(forKey: JSON.Passengers)
 	}
 
 	var allPassengersArray : [Passenger] {
 		let sortDescriptor = NSSortDescriptor(key: JSON.Name, ascending: true)
-		return (self.allPassengers.sortedArrayUsingDescriptors([sortDescriptor]) as? [Passenger] ?? [])
+		return (self.allPassengers.sortedArray(using: [sortDescriptor]) as? [Passenger] ?? [])
 	}
 }
 
@@ -33,7 +33,7 @@ class Plane: NSManagedObject {
 extension Plane {
 
 	override var description : String {
-		return "\(self.objectID.URIRepresentation().lastPathComponent ?? "") : \(self.origin ?? "") -> \(self.destination ?? ""), \(self.allPassengersCount) Passenger(s)"
+		return "\(self.objectID.uriRepresentation().lastPathComponent) : \(self.origin ?? "") -> \(self.destination ?? ""), \(self.allPassengersCount) Passenger(s)"
 	}
 
 	override func saveEntityAsNotDeprecated() {
@@ -44,15 +44,15 @@ extension Plane {
 		}
 	}
 
-	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
-		super.updateWithDictionary(dictionary, inContext: savingContext)
+	override func update(with dictionary: [AnyHashable: Any]?, in savingContext: NSManagedObjectContext) {
+		super.update(with: dictionary, in: savingContext)
 
 		self.origin = GET_STRING(dictionary, JSON.Origin)
 		self.destination = GET_STRING(dictionary, JSON.Destination)
 
-		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
-			if let passengers = Passenger.crudEntitiesWithArray(jsonArray, inContext: savingContext) {
-				self.mutableSetValueForKey(JSON.Passengers).addObjectsFromArray(passengers)
+		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[AnyHashable: Any]] {
+			if let passengers = Passenger.crudEntities(with: jsonArray, in: savingContext) {
+				self.mutableSetValue(forKey: JSON.Passengers).addObjects(from: passengers)
 			}
 		}
 	}
@@ -63,11 +63,11 @@ extension Plane {
 			return invalidReason
 		}
 
-		guard let origin = self.origin where (origin.characters.count > 0) else {
+		guard let origin = self.origin, (origin.characters.count > 0) else {
 			return "Invalid Origin"
 		}
 
-		guard let destination = self.destination where (destination.characters.count > 0) else {
+		guard let destination = self.destination, (destination.characters.count > 0) else {
 			return "Invalid Destination"
 		}
 
@@ -79,13 +79,13 @@ extension Plane {
 		return nil
 	}
 
-	override func deleteEntityWithReason(reason: String?, inContext savingContext: NSManagedObjectContext) {
+	override func deleteEntity(withReason reason: String?, in savingContext: NSManagedObjectContext) {
 
 		for passenger in self.allPassengersArray {
-			passenger.deleteEntityWithReason("Parent plane entity removed", inContext: savingContext)
+			passenger.deleteEntity(withReason: "Parent plane entity removed", in: savingContext)
 		}
 
-		super.deleteEntityWithReason(reason, inContext: savingContext)
+		super.deleteEntity(withReason: reason, in: savingContext)
 	}
 
 	override class func verbose() -> Bool {
@@ -96,17 +96,17 @@ extension Plane {
 		return JSON.Origin
 	}
 
-	override class func primaryPredicateWithDictionary(dictionary: [NSObject:AnyObject]?) -> NSPredicate? {
+	override class func primaryPredicate(with dictionary: [AnyHashable: Any]?) -> NSPredicate? {
 		if let
 			origin = GET_STRING(dictionary, JSON.Origin),
-			destination = GET_STRING(dictionary, JSON.Destination) {
+			let destination = GET_STRING(dictionary, JSON.Destination) {
 				return NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, origin, JSON.Destination, destination)
 		}
-		return super.primaryPredicateWithDictionary(dictionary)
+		return super.primaryPredicate(with: dictionary)
 	}
 
-	override func shouldUpdateEntityWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) -> Bool {
-		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[NSObject : AnyObject]] {
+	override func shouldUpdateEntity(with dictionary: [AnyHashable: Any]?, in savingContext: NSManagedObjectContext) -> Bool {
+		if let jsonArray = OBJECT(dictionary, JSON.Passengers) as? [[AnyHashable: Any]] {
 
 			if (jsonArray.count != self.allPassengersCount) {
 				return true
