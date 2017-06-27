@@ -1,5 +1,5 @@
 PODS:
-  - DKDBManager (0.7.0):
+  - DKDBManager (1.0.0):
     - MagicalRecord (~> 2.3.2)
   - DKHelper (2.1.1)
   - MagicalRecord (2.3.2):
@@ -12,13 +12,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   DKDBManager:
-    :path: ./DKDBManager.podspec
+    :path: "./DKDBManager.podspec"
 
 SPEC CHECKSUMS:
-  DKDBManager: 1e0fbfd7a71d38e528028512fa8e201bbb7f337c
+  DKDBManager: f81d5dacaf286e84d9b25e64ec7d77af1bc930b9
   DKHelper: f3ae720460430b472f10b7dcf72c4d97ecced2c3
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
 
 PODFILE CHECKSUM: db585ebf552501835e82ebe8b2ea013d458d127f
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.2.1
