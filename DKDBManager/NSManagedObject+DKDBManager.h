@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param dictionary The NSDictionary object used to CRUD an entity.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @param completion A completion block containing the entity and its CRUD state.
  *
@@ -98,7 +98,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param dictionary The NSDictionary object used to CRUD an entity.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
@@ -113,7 +113,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @discussion The function will use an empty dictionary to create the entity. The usual CRUD process will be used.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param array The NSArray object containing all the NSDictionary objects to CRUD the entities from.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @see + (instancetype)crudEntityWithDictionary:inContext:completion:;
  *
@@ -251,7 +251,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param dictionary A NSDictionary object containing information about the database entity to be updated with.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @discussion Depending on your app and architecture some entities should not be updated or do not need to. This function allows you to check that and avoid useless updates during the CRUD process.
  *
@@ -374,7 +374,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param dictionary A NSDictionary object containing new information about the database entity.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @discussion Use this function and the given parameter to update the attributes of the current entity.
  *
@@ -403,7 +403,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @discussion This function verifies the validity of the current entity with the function `invalidReason`.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @see - (NSString *)invalidReason;
  *
@@ -416,7 +416,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  *  @param reason A NSString object explaining why the entity is getting removed from the local database.
  *
- *  @param context The current saving context.
+ *  @param savingContext The current saving context.
  *
  *  @remark The reason will be logged only if the `verbose` function returns TRUE for the current class model.
  *
@@ -453,7 +453,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @remark The function `deleteEntityWithReason:inContext:` will NOT be called.
  *
- * @param context The current saving context.
+ * @param savingContext The current saving context.
  */
 + (void)deleteAllEntitiesInContext:(NSManagedObjectContext * _Nonnull)savingContext;
 
@@ -467,7 +467,7 @@ typedef NS_ENUM(NSInteger, DKDBManagedObjectState) {
  *
  * @param array A NSArray object containing all not deprecated entities for the current class model.
  *
- * @param context The current saving context.
+ * @param savingContext The current saving context.
  *
  * @see - (void)saveEntityAsNotDeprecated;
  */
