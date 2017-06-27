@@ -9,14 +9,14 @@ env:
   global:
     - FRAMEWORK_NAME=DKDBManager
 before_install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-  - carthage update --platform iOS
   - gem install cocoapods -v '1.2.1'
   - pod repo update
 script:
   - xcodebuild -destination "platform=iOS Simulator,name=iPhone 6s,OS=10.3.1" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManagerTests -sdk iphonesimulator10.3 test GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
 before_deploy:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - carthage update --platform iOS
   - carthage build --no-skip-current
   - carthage archive $FRAMEWORK_NAME
 deploy:
