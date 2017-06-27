@@ -42,6 +42,8 @@ FOUNDATION_EXPORT const unsigned char DKDBManagerVersionString[];
  *
  *  @discussion If the identifier of an entity is not contained in this dictionary, the entity will be considered as deprecated.
  *
+ *  @remark When accessing the stored identifiers use a thread-safe context on the related DKDBManager instance.
+ *
  *  @remark The value can not be `nil`; to reinitialise the stored identifiers, create a new NSMutableDictionary.
  */
 @property (nonnull, nonatomic, retain) NSMutableDictionary * storedIdentifiers;

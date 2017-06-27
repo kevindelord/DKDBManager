@@ -1,5 +1,11 @@
 # DKDBManager CHANGELOG
 
+## 1.1.0
+
+- Migrate to Swift 3.
+- Thread safe access to stored identifiers.
+- Minimum Deployment Target set to iOS 8.0.
+
 ## 1.0.0
 
 - Minor README improvements.

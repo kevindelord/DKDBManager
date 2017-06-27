@@ -14,6 +14,7 @@ class DeprecatedEntitiesTest: DKDBTestCase {
 
 	override func setUp() {
 		super.setUp()
+
 		self.createDefaultEntities()
 	}
 }
@@ -21,6 +22,14 @@ class DeprecatedEntitiesTest: DKDBTestCase {
 // MARK: Deprecated Entities functions
 
 extension DeprecatedEntitiesTest {
+
+	private func verifyDefaultUniqueIdentifiers() {
+		var identifiers = TestDataManager.sharedInstance().storedIdentifiers
+		XCTAssert(identifiers.allKeys.count == 3, "3 keys should be found. One per model")
+		XCTAssertEqual((identifiers[NSStringFromClass(Plane.self)] as? [AnyObject])?.count, 4, "No entity identifier found for class: Plane")
+		XCTAssertEqual((identifiers[NSStringFromClass(Passenger.self)] as? [AnyObject])?.count, 43, "No entity identifier found for class: Passenger")
+		XCTAssertEqual((identifiers[NSStringFromClass(Baggage.self)] as? [AnyObject])?.count, 134, "No entity identifier found for class: Baggage")
+	}
 
 	/**
 	Test: `removeAllStoredIdentifiers`
@@ -31,19 +40,15 @@ extension DeprecatedEntitiesTest {
 		XCTAssertNotEqual(Passenger.count(), 0, "the number of passengers should NOT be equals to 0")
 		XCTAssertNotEqual(Baggage.count(), 0, "the number of baggages should NOT be equals to 0")
 
-		var identifiers = TestDataManager.sharedInstance().storedIdentifiers
-		XCTAssert(identifiers.allKeys.count == 3, "3 keys should be found. One per model")
-		XCTAssert(identifiers[NSStringFromClass(Plane)]?.count > 0, "No entity identifier found for class: Plane")
-		XCTAssert(identifiers[NSStringFromClass(Baggage)]?.count > 0, "No entity identifier found for class: Baggage")
-		XCTAssert(identifiers[NSStringFromClass(Passenger)]?.count > 0, "No entity identifier found for class: Passenger")
+		self.verifyDefaultUniqueIdentifiers()
 
 		TestDataManager.removeAllStoredIdentifiers()
 
-		identifiers = TestDataManager.sharedInstance().storedIdentifiers
+		let identifiers = TestDataManager.sharedInstance().storedIdentifiers
 		XCTAssert(identifiers == [:], "storedIdentifiers should be empty")
-		XCTAssert((identifiers[NSStringFromClass(Plane)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Plane")
-		XCTAssert((identifiers[NSStringFromClass(Baggage)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Baggage")
-		XCTAssert((identifiers[NSStringFromClass(Passenger)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Passenger")
+		XCTAssert((identifiers[NSStringFromClass(Plane.self)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Plane")
+		XCTAssert((identifiers[NSStringFromClass(Passenger.self)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Passenger")
+		XCTAssert((identifiers[NSStringFromClass(Baggage.self)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Baggage")
 	}
 
 	/**
@@ -55,21 +60,15 @@ extension DeprecatedEntitiesTest {
 		XCTAssertNotEqual(Passenger.count(), 0, "the number of passengers should NOT be equals to 0")
 		XCTAssertNotEqual(Baggage.count(), 0, "the number of baggages should NOT be equals to 0")
 
-		var identifiers = TestDataManager.sharedInstance().storedIdentifiers
+		self.verifyDefaultUniqueIdentifiers()
 
-		XCTAssert(identifiers.allKeys.count == 3, "3 keys should be found. One per model")
+		TestDataManager.removeAllStoredIdentifiers(for: Passenger.self)
 
-		XCTAssert(identifiers[NSStringFromClass(Plane)]?.count > 0, "No entity identifier found for class: Plane")
-		XCTAssert(identifiers[NSStringFromClass(Baggage)]?.count > 0, "No entity identifier found for class: Baggage")
-		XCTAssert(identifiers[NSStringFromClass(Passenger)]?.count > 0, "No entity identifier found for class: Passenger")
-
-		TestDataManager.removeAllStoredIdentifiersForClass(Passenger)
-
-		identifiers = TestDataManager.sharedInstance().storedIdentifiers
+		let identifiers = TestDataManager.sharedInstance().storedIdentifiers
 		XCTAssert(identifiers != [:], "storedIdentifiers should not be empty")
-		XCTAssert(identifiers[NSStringFromClass(Plane)]?.count > 0, "Should find entity identifier found for class: Plane")
-		XCTAssert(identifiers[NSStringFromClass(Baggage)]?.count > 0, "Should find entity identifier found for class: Baggage")
-		XCTAssert((identifiers[NSStringFromClass(Passenger)] as? [AnyObject])?.count == nil, "Should not find entity identifier found for class: Passenger")
+		XCTAssertEqual((identifiers[NSStringFromClass(Plane.self)] as? [AnyObject])?.count, 4, "Should find entity identifier found for class: Plane")
+		XCTAssertNil(identifiers[NSStringFromClass(Passenger.self)] as? [AnyObject], "Should not find entity identifier found for class: Passenger")
+		XCTAssertEqual((identifiers[NSStringFromClass(Baggage.self)] as? [AnyObject])?.count, 134, "Should find entity identifier found for class: Baggage")
 	}
 
 	/**
@@ -84,10 +83,10 @@ extension DeprecatedEntitiesTest {
 		let deleteNumber = 2
 		var json = TestDataManager.staticPlaneJSON()
 		json.removeFirst(deleteNumber)
-		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
-			Plane.createEntitiesFromArray(json, inContext: savingContext)
-			TestDataManager.removeDeprecatedEntitiesInContext(savingContext)
-		}
+		TestDataManager.save(blockAndWait: { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.crudEntities(with: json, in: savingContext)
+			TestDataManager.removeDeprecatedEntities(in: savingContext)
+		})
 
 		XCTAssertEqual(Plane.count(), planeCount - deleteNumber)
 		XCTAssertEqual(Passenger.count(), passengerCount - (deleteNumber * 5))
@@ -106,10 +105,10 @@ extension DeprecatedEntitiesTest {
 		let deleteNumber = 2
 		var json = TestDataManager.staticPlaneJSON()
 		json.removeFirst(deleteNumber)
-		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
-			Plane.createEntitiesFromArray(json, inContext: savingContext)
-			TestDataManager.removeDeprecatedEntitiesInContext(savingContext, forClass: Baggage.self)
-		}
+		TestDataManager.save(blockAndWait: { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.crudEntities(with: json, in: savingContext)
+			TestDataManager.removeDeprecatedEntities(in: savingContext, for: Baggage.self)
+		})
 
 		XCTAssertEqual(Plane.count(), planeCount)
 		XCTAssertEqual(Passenger.count(), passengerCount)

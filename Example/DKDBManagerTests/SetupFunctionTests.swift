@@ -26,19 +26,19 @@ class LightSetupFunctionTest: DKDBTestCase {
 		// Optional: Reset the database on start to make this test app more understandable.
 		TestDataManager.setResetStoredEntities(true)
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
+		let expectation = self.expectation(description: "Wait for the Response")
 		// Setup the database.
-		TestDataManager.setupDatabaseWithName("testDB") {
+		TestDataManager.setupDatabase(withName: "testDB") {
 			expectation.fulfill()
 		}
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 
 	func testCreateValidDatabaseWithName() {
 		TestDataManager.setResetStoredEntities(true)
 
 		// Setup the database.
-		TestDataManager.setupDatabaseWithName("testDB")
+		TestDataManager.setupDatabase(withName: "testDB")
 
 		self.createEntitiesFromJSON()
 	}

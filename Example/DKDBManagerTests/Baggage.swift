@@ -30,18 +30,18 @@ extension Baggage {
 extension Baggage {
 
 	override var description : String {
-		var description = "\(self.objectID.URIRepresentation().lastPathComponent ?? "")"
+		var description = "\(self.objectID.uriRepresentation().lastPathComponent)"
 		if let w = self.weight as? Int {
 			description += ": \(w) kg"
 		}
-		if let passenger = self.passenger?.objectID.URIRepresentation().lastPathComponent {
+		if let passenger = self.passenger?.objectID.uriRepresentation().lastPathComponent {
 			description += ", passenger: \(passenger)"
 		}
 		return description
 	}
 
-	override func updateWithDictionary(dictionary: [NSObject : AnyObject]?, inContext savingContext: NSManagedObjectContext) {
-		super.updateWithDictionary(dictionary, inContext: savingContext)
+	override func update(with dictionary: [AnyHashable: Any]?, in savingContext: NSManagedObjectContext) {
+		super.update(with: dictionary, in: savingContext)
 
 		self.weight = GET_NUMBER(dictionary, JSON.Weight)
 	}
