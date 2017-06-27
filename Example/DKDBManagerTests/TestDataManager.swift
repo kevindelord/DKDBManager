@@ -15,8 +15,8 @@ class TestDataManager : DKDBManager {
 
 	// MARK: -  Static Properties of MockManager
 
-	override class func setupCoreDataStackWithName(name: String) {
-		MagicalRecord.setDefaultModelFromClass(self)
+	override class func setupCoreDataStack(withName name: String) {
+		MagicalRecord.setDefaultModelFrom(self)
 		self.setupCoreDataStackWithInMemoryStore()
 	}
 }
@@ -41,15 +41,15 @@ extension TestDataManager {
 				// baggages
 				var baggages = [[String:AnyObject]]()
 				for baggageIndex in 0..<passengerIndex {
-					baggages.append([JSON.Weight: weightOfbaggages[baggageIndex]])
+					baggages.append([JSON.Weight: weightOfbaggages[baggageIndex] as AnyObject])
 				}
 
 				let pIndex = (index * 5) + passengerIndex
-				passenger.append([JSON.Name: names[pIndex], JSON.Age: ages[passengerIndex], JSON.Baggages: baggages])
+				passenger.append([JSON.Name: names[pIndex] as AnyObject, JSON.Age: ages[passengerIndex] as AnyObject, JSON.Baggages: baggages as AnyObject])
 			}
 
 			// plane
-			data.append([JSON.Origin: cities[index], JSON.Destination: cities[index + 1], JSON.Passengers: passenger])
+			data.append([JSON.Origin: cities[index] as AnyObject, JSON.Destination: cities[index + 1] as AnyObject, JSON.Passengers: passenger as AnyObject])
 		}
 		return data
 	}

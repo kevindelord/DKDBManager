@@ -16,14 +16,14 @@ extension DKDBTestCase {
 
 	func createEntitiesFromJSON() {
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
+		let expectation = self.expectation(description: "Wait for the Response")
 
-		TestDataManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		TestDataManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
 			let json = TestDataManager.staticPlaneJSON()
-			Plane.createEntitiesFromArray(json, inContext: savingContext)
+			Plane.crudEntities(with: json, in: savingContext)
 
-		}) { (contextDidSave: Bool, error: NSError?) -> Void in
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
 			// main thread
 			XCTAssertTrue(contextDidSave)
 			XCTAssertNil(error)
@@ -31,16 +31,16 @@ extension DKDBTestCase {
 			XCTAssertEqual(Plane.count(), 4, "the number of planes should be equals to 5")
 			XCTAssertEqual(Plane.all()?.count, 4, "the number of planes should be equals to 5")
 			expectation.fulfill()
-		}
+		})
 
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 
  	func createDefaultEntities() {
 		let json = TestDataManager.staticPlaneJSON()
-		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
-			Plane.crudEntitiesWithArray(json, inContext: savingContext)
-		}
+		TestDataManager.save(blockAndWait: { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.crudEntities(with: json, in: savingContext)
+		})
 	}
 }
 
@@ -53,16 +53,16 @@ extension CreateEntitiesTestCase {
 	func testCreateEntityWithDictionary() {
 
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
+		let expectation = self.expectation(description: "Wait for the Response")
 		let weight = 254
 
-		TestDataManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		TestDataManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
 
-			let baggage = Baggage.createEntityFromDictionary(["weight":weight], inContext: savingContext)
-			XCTAssertEqual(baggage?.weight, weight, "Baggage's weight must be equals")
+			let baggage = Baggage.crudEntity(with: ["weight":weight], in: savingContext)
+			XCTAssertEqual(baggage?.weight?.intValue, weight, "Baggage's weight must be equals")
 
-		}) { (contextDidSave: Bool, error: NSError?) -> Void in
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
 			// main thread
 			XCTAssertTrue(contextDidSave)
 			XCTAssertNil(error)
@@ -70,26 +70,26 @@ extension CreateEntitiesTestCase {
 			XCTAssertEqual(Baggage.count(), 1, "the number of baggages should be equals to 1")
 			XCTAssertEqual(Baggage.all()?.count, 1, "the number of baggages should be equals to 1")
 
-			let baggage = Baggage.MR_findFirst()
+			let baggage = Baggage.mr_findFirst()
 			XCTAssertNotNil(baggage)
-			XCTAssertEqual(baggage?.weight, weight, "the baggage should weight \(weight)")
+			XCTAssertEqual(baggage?.weight?.intValue, weight, "the baggage should weight \(weight)")
 			expectation.fulfill()
-		}
+		})
 
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 
 	func testCreateEntityAndLaterSetValues() {
 
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
+		let expectation = self.expectation(description: "Wait for the Response")
 
-		TestDataManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		TestDataManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-			let baggage = Baggage.createEntityInContext(savingContext)
+			let baggage = Baggage.crudEntity(in: savingContext)
 			baggage?.weight = 65
 
-		}) { (contextDidSave: Bool, error: NSError?) -> Void in
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
 			// main thread
 			XCTAssertTrue(contextDidSave)
 			XCTAssertNil(error)
@@ -97,13 +97,13 @@ extension CreateEntitiesTestCase {
 			XCTAssertEqual(Baggage.count(), 1, "the number of baggages should be equals to 1")
 			XCTAssertEqual(Baggage.all()?.count, 1, "the number of baggages should be equals to 1")
 
-			let baggage = Baggage.MR_findFirst()
+			let baggage = Baggage.mr_findFirst()
 			XCTAssertNotNil(baggage)
 			XCTAssertEqual(baggage?.weight, 65, "the baggage should weight 65")
 			expectation.fulfill()
-		}
+		})
 
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 
 	func testUpdateFirstPlaneWithSameValues() {
@@ -111,27 +111,27 @@ extension CreateEntitiesTestCase {
 		let json = TestDataManager.staticPlaneJSON()
 		let onePlaneJson = (json.first ?? [:])
 
-		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
-			Plane.createEntitiesFromArray([onePlaneJson], inContext: savingContext)
-		}
+		TestDataManager.save(blockAndWait: { (savingContext: NSManagedObjectContext) -> Void in
+			Plane.crudEntities(with: [onePlaneJson], in: savingContext)
+		})
 
 		let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, "Paris", JSON.Destination, "London")
-		let plane = Plane.MR_findFirstWithPredicate(predicate)
+		let plane = Plane.mr_findFirst(with: predicate)
 
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
-		TestDataManager.saveWithBlockAndWait() { (savingContext: NSManagedObjectContext) -> Void in
+		let expectation = self.expectation(description: "Wait for the Response")
+		TestDataManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 
-			Plane.createEntityFromDictionary(onePlaneJson, inContext: savingContext) { (entity, status) in
+			Plane.crudEntity(with: onePlaneJson, in: savingContext) { (entity, status) in
 				XCTAssertEqual((entity as? Plane)?.objectID, plane?.objectID)
 				print(onePlaneJson)
 				print(status.rawValue)
-				XCTAssertEqual(status, DKDBManagedObjectState.Save)
+				XCTAssertEqual(status, DKDBManagedObjectState.save)
 				expectation.fulfill()
 			}
-		}
+		})
 
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 
 	func testUpdateFirstPlaneWithNewDestination() {
@@ -140,22 +140,23 @@ extension CreateEntitiesTestCase {
 		let newDestination = "Berlin"
 
 		let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, "Paris", JSON.Destination, "London")
-		let plane = Plane.MR_findFirstWithPredicate(predicate)
+		let plane = Plane.mr_findFirst(with: predicate)
 
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
+		let expectation = self.expectation(description: "Wait for the Response")
 
-		TestDataManager.saveWithBlock() { (savingContext: NSManagedObjectContext) -> Void in
-			plane?.entityInContext(savingContext)?.destination = newDestination
-		}
+		TestDataManager.save({ (savingContext: NSManagedObjectContext) -> Void in
+			plane?.entity(in: savingContext)?.destination = newDestination
 
-		self.performBlockAfterDelay(1) {
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
+
+			XCTAssertTrue(contextDidSave)
 			XCTAssertEqual(plane?.entityInDefaultContext()?.objectID, plane?.objectID, "Plane entities should have same object ID")
 			XCTAssertEqual(plane?.entityInDefaultContext()?.destination, newDestination, "Plane destination should have been updated")
 			expectation.fulfill()
-		}
+		})
 
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 
 }

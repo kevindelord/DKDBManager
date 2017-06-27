@@ -24,9 +24,9 @@ extension ValidateEntityTest {
 	func testCreatedEntityAsValid() {
 
 		let predicate = NSPredicate(format: "%K ==[c] %@ && %K ==[c] %@", JSON.Origin, "Paris", JSON.Destination, "London")
-		let plane = Plane.MR_findFirstWithPredicate(predicate)
+		let plane = Plane.mr_findFirst(with: predicate)
 
-		XCTAssertEqual(plane?.deleted, false, "plane entity shoud be not be deleted")
+		XCTAssertEqual(plane?.isDeleted, false, "plane entity shoud be not be deleted")
 		XCTAssertEqual(plane?.hasBeenDeleted, false, "plane entity shoud not have been deleted")
 		XCTAssertEqual(plane?.doesExist, true, "plane entity shoud exist")
 		XCTAssertEqual(plane?.hasValidContext, true, "plane entity shoud have valid context")
@@ -38,10 +38,10 @@ extension ValidateEntityTest {
 	func testEntityShouldNotBeWithinContext() {
 
 		var bag : Baggage? = nil
-		TestDataManager.saveWithBlockAndWait { (savingContext) in
-			bag = Baggage.createEntityInContext(savingContext)
-			bag?.deleteEntityWithReason(nil, inContext: savingContext)
-		}
+		TestDataManager.save(blockAndWait: { (savingContext) in
+			bag = Baggage.crudEntity(in: savingContext)
+			bag?.deleteEntity(withReason: nil, in: savingContext)
+		})
 
 		XCTAssert(bag?.hasValidContext == false)
 		XCTAssert(bag?.doesExist == false)
@@ -49,25 +49,25 @@ extension ValidateEntityTest {
 
 	func testDeleteEntityState() {
 
-		let plane = Plane.MR_findFirst()
+		let plane = Plane.mr_findFirst()
 		XCTAssertEqual(plane?.isValidInCurrentContext, true, "plane entity shoud be valid in context")
 
 		// set expectation
-		let expectation = self.expectationWithDescription("Wait for the Response")
+		let expectation = self.expectation(description: "Wait for the Response")
 
-		TestDataManager.saveWithBlock({ (savingContext: NSManagedObjectContext) -> Void in
+		TestDataManager.save({ (savingContext: NSManagedObjectContext) -> Void in
 			// background thread
-			Plane.deleteAllEntitiesInContext(savingContext)
+			Plane.deleteAllEntities(in: savingContext)
 
-		}) { (contextDidSave: Bool, error: NSError?) -> Void in
+		}, completion: { (contextDidSave: Bool, error: Error?) -> Void in
 			XCTAssertTrue(contextDidSave)
 			XCTAssertNil(error)
 
 			XCTAssertEqual(plane?.entityInDefaultContext()?.isValidInCurrentContext, false, "plane entity shoud be NOT valid in context")
 			XCTAssertNotEqual(plane?.doesExist, plane?.hasBeenDeleted)
 			expectation.fulfill()
-		}
+		})
 
-		self.waitForExpectationsWithTimeout(5, handler: nil)
+		self.waitForExpectations(timeout: 5, handler: nil)
 	}
 }
