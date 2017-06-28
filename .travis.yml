@@ -1,24 +1,29 @@
 language: objective-c
-osx_image: xcode8.3
-xcode_workspace: DKDBManager.xcworkspace
-xcode_sdk: iphonesimulator10.3
-xcode_scheme: DKDBManager
 sudo: false
+xcode_workspace: DKDBManager.xcworkspace
+xcode_scheme: DKDBManager
+osx_image: xcode8.3
+xcode_sdk: iphonesimulator10.3
+
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
   - carthage update --platform iOS
   - gem install cocoapods -v '1.2.1'
   - pod repo update
+
 before_script:
   - carthage bootstrap
+
 script:
   - xcodebuild -version
   - xcodebuild -showsdks
-  - xcodebuild test -destination "platform=iOS Simulator,name=iPhone 6s,OS=10.3.1" -configuration Release -workspace DKDBManager.xcworkspace -scheme DKDBManager -sdk iphonesimulator10.3 GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES | xcpretty
+  - xcodebuild test -workspace DKDBManager.xcworkspace -scheme DKDBManager -destination "platform=iOS Simulator,name=iPhone 6s,OS=10.3.1" -configuration Release -sdk iphonesimulator10.3 GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES | xcpretty
+
 before_deploy:
   - carthage build --no-skip-current
   - carthage archive DKDBManager
+
 deploy:
   provider: releases
   file: DKDBManager.framework.zip
